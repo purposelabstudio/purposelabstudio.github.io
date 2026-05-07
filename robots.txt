@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://purposelabstudio.github.io/sitemap.xml
