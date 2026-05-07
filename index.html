@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PurposeLab Studio — Android Apps That Respect You</title>
+    <meta name="description" content="PurposeLab Studio builds simple, free, ad-free Android apps. Privacy-first tools that do one thing well.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+    <style>
+        :root {
+            --primary: #1976D2;
+            --primary-dark: #1565C0;
+            --text: #1C1B1F;
+            --text-secondary: #555;
+            --text-muted: #888;
+            --bg: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --border: #E8E8E8;
+            --green: #2E7D32;
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 48px 0 32px;
+            text-align: center;
+        }
+
+        .studio-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.5px;
+        }
+
+        .studio-tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        /* About */
+        .about {
+            text-align: center;
+            padding: 24px 0 48px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .values {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .value {
+            font-size: 14px;
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        /* Apps */
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--text);
+        }
+
+        .apps {
+            padding: 32px 0 48px;
+        }
+
+        .app-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .app-icon {
+            font-size: 48px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .app-info { flex: 1; }
+
+        .app-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .app-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .app-badges {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .badge-free {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        .badge-offline {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .badge-noad {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .app-links {
+            margin-top: 14px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .app-links a {
+            font-size: 14px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .app-links a:hover { text-decoration: underline; }
+
+        /* Contact */
+        .contact {
+            text-align: center;
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        .contact a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact a:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 24px 0;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .studio-name { font-size: 28px; }
+            .app-card { flex-direction: column; gap: 12px; }
+            .values { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <header>
+            <div class="studio-name">PurposeLab Studio</div>
+            <div class="studio-tagline">Android apps that respect you</div>
+        </header>
+
+        <section class="about">
+            <p>
+                We build simple, focused Android apps. No ads, no subscriptions, no data harvesting.
+                Just tools that do one thing well — and respect your time, money, and privacy.
+            </p>
+            <div class="values">
+                <span class="value">✓ Free</span>
+                <span class="value">✓ No Ads</span>
+                <span class="value">✓ Offline-first</span>
+                <span class="value">✓ Privacy-first</span>
+            </div>
+        </section>
+
+        <section class="apps">
+            <h2 class="section-title">Our Apps</h2>
+
+            <div class="app-card">
+                <div class="app-icon">❤️‍🩹</div>
+                <div class="app-info">
+                    <div class="app-name">BP Log — Blood Pressure Tracker</div>
+                    <div class="app-desc">
+                        Log readings from your home BP monitor. See AHA-classified trends,
+                        track your 7-day average, and share PDF reports with your doctor.
+                        100% offline — your health data never leaves your phone.
+                    </div>
+                    <div class="app-badges">
+                        <span class="badge badge-free">Free</span>
+                        <span class="badge badge-noad">No Ads</span>
+                        <span class="badge badge-offline">Offline</span>
+                    </div>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/apps/details?id=com.purposelab.bplog">Google Play</a>
+                        <a href="https://purposelabstudio.github.io/privacy-policies/bplog.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon">🌙</div>
+                <div class="app-info">
+                    <div class="app-name">Hushly — Baby Sleep Sounds</div>
+                    <div class="app-desc">
+                        Soothing sounds to help your baby (and you) sleep peacefully.
+                        Curated audio, simple controls, zero distractions. No account needed.
+                    </div>
+                    <div class="app-badges">
+                        <span class="badge badge-free">Free</span>
+                        <span class="badge badge-noad">No Ads</span>
+                        <span class="badge badge-offline">Offline</span>
+                    </div>
+                    <div class="app-links">
+                        <a href="https://play.google.com/store/apps/details?id=com.purposelab.hushly">Google Play</a>
+                        <a href="https://purposelabstudio.github.io/privacy-policies/hushly.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <h2 class="section-title">Contact</h2>
+            <p>
+                Questions, feedback, or support?<br>
+                <a href="mailto:purposelab.studio@gmail.com">purposelab.studio@gmail.com</a>
+            </p>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 PurposeLab Studio. All rights reserved.</p>
+            <p style="margin-top: 8px;">
+                <a href="https://purposelabstudio.github.io/privacy-policies/">Privacy Policies</a>
+            </p>
+        </footer>
+
+    </div>
+</body>
+</html>
