@@ -1,0 +1,44 @@
+# PurposeLab Studio
+
+> PurposeLab Studio builds simple, free, ad-free Android apps for the Indian market. Privacy-first tools that do one thing well — no ads, no subscriptions, no data harvesting.
+
+## Apps
+
+- [Folio — Daily Journal & Mood Tracker](https://purposelabstudio.github.io/folio/): Write daily entries, track moods and habits, reflect monthly. Private, offline, with app lock.
+- [WaterWise — Drink Water Reminder](https://purposelabstudio.github.io/waterwise/): Stay hydrated with streaks, smart reminders, and one-tap logging. No ads, no paywall.
+- [BP Log — Blood Pressure Tracker](https://purposelabstudio.github.io/bplog/): Log readings from your home BP monitor. See AHA-classified trends, 7-day averages, and share PDF reports with your doctor. 100% offline.
+- [Hushly — Baby Sleep Sounds](https://purposelabstudio.github.io/hushly/): Soothing sounds to help your baby sleep peacefully. Curated audio, simple controls, no ads ever.
+
+## Key Facts
+
+- All apps are 100% free with no ads, no subscriptions, and no in-app purchases
+- Data never leaves the user's device (offline-first architecture)
+- Target market: India
+- Available on Google Play Store
+- Built with Kotlin, Jetpack Compose, Material 3
+- Developer: PurposeLab Studio
+
+## Blog Topics
+
+### Blood Pressure & Health
+- [How to Track Blood Pressure at Home](https://purposelabstudio.github.io/blog/how-to-track-blood-pressure-at-home/)
+- [Normal Blood Pressure by Age: Chart and What Your Numbers Mean](https://purposelabstudio.github.io/blog/normal-blood-pressure-by-age/)
+- [10 Natural Ways to Lower Blood Pressure (Backed by Research)](https://purposelabstudio.github.io/blog/how-to-lower-blood-pressure-naturally/)
+
+### Baby Sleep
+- [The Science of White Noise for Baby Sleep](https://purposelabstudio.github.io/blog/white-noise-baby-sleep-science/)
+- [Why Your Baby Won't Sleep Through the Night](https://purposelabstudio.github.io/blog/baby-wont-sleep-through-night/)
+
+### Journaling & Wellness
+- [Why Journaling Fails and How to Stick With It](https://purposelabstudio.github.io/blog/why-journaling-fails-and-how-to-stick-with-it/)
+- [Daily Journal vs Mood Tracker: Why You Need Both](https://purposelabstudio.github.io/blog/daily-journal-vs-mood-tracker-why-you-need-both/)
+
+### Hydration
+- [How Much Water Should I Drink Daily?](https://purposelabstudio.github.io/blog/how-much-water-should-i-drink-daily/)
+- [Why Water Apps Are Full of Ads](https://purposelabstudio.github.io/blog/why-water-apps-are-full-of-ads/)
+
+## Contact
+
+- Email: purposelab.studio@gmail.com
+- Support: https://purposelabstudio.github.io/support/
+- Google Play: https://play.google.com/store/apps/dev?id=PurposeLab+Studio
