@@ -275,6 +275,16 @@ a:hover { text-decoration: underline; }
 .cta h2 { font-size: 24px; margin-bottom: 12px; }
 .cta p { color: var(--text-secondary); margin-bottom: 24px; }
 
+/* App Icons */
+.hero-icon {
+    width: 72px;
+    height: 72px;
+    vertical-align: middle;
+    margin-right: 16px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .hero h1 { font-size: 28px; }
