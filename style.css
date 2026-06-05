@@ -277,12 +277,12 @@ a:hover { text-decoration: underline; }
 
 /* App Icons */
 .hero-icon {
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
     vertical-align: middle;
-    margin-right: 12px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-right: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 /* Responsive */
