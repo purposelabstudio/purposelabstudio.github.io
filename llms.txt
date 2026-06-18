@@ -21,6 +21,10 @@
 
 ## Blog Topics
 
+### Second Brain & Productivity
+- [Stop Messaging Yourself on WhatsApp: A Smarter Way to Remember Everything](https://purposelabstudio.github.io/blog/stop-messaging-yourself-on-whatsapp/)
+- [How to Build a Second Brain on WhatsApp (No New App Required)](https://purposelabstudio.github.io/blog/build-a-second-brain-on-whatsapp/)
+
 ### Blood Pressure & Health
 - [How to Track Blood Pressure at Home](https://purposelabstudio.github.io/blog/how-to-track-blood-pressure-at-home/)
 - [Normal Blood Pressure by Age: Chart and What Your Numbers Mean](https://purposelabstudio.github.io/blog/normal-blood-pressure-by-age/)

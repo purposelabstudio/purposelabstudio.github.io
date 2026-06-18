@@ -68,6 +68,22 @@
         .app-badges { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
         .app-links { margin-top: 14px; display: flex; gap: 16px; }
         .app-links a { font-size: 14px; }
+        .app-card.featured {
+            border: 2px solid var(--primary);
+            box-shadow: 0 6px 24px rgba(25, 118, 210, 0.10);
+        }
+        .app-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #fff;
+            background: var(--primary);
+            border-radius: 999px;
+            padding: 2px 10px;
+            margin-bottom: 6px;
+        }
         @media (max-width: 600px) {
             .app-card { flex-direction: column; gap: 12px; }
         }
@@ -111,9 +127,10 @@
         <section class="section">
             <h2 class="section-title">Our Apps</h2>
 
-            <div class="app-card">
+            <div class="app-card featured">
                 <img src="crumbs/icon.png" alt="Crumbs" class="app-icon">
                 <div class="app-info">
+                    <span class="app-tag">Featured</span>
                     <div class="app-name">Crumbs — Your Private Second Brain on WhatsApp</div>
                     <div class="app-desc">
                         The calmer upgrade to messaging yourself. Dump notes, ideas, todos, reminders,
@@ -221,6 +238,16 @@
         <section class="section">
             <h2 class="section-title">From the Blog</h2>
             <ul class="blog-list">
+                <li class="blog-item">
+                    <h3><a href="/blog/stop-messaging-yourself-on-whatsapp/">Stop Messaging Yourself on WhatsApp: A Smarter Way to Remember Everything</a></h3>
+                    <div class="meta">June 18, 2026 · 6 min read</div>
+                    <p>Why notes-to-self fail within a week — and how to keep the easy capture while finally fixing the memory.</p>
+                </li>
+                <li class="blog-item">
+                    <h3><a href="/blog/build-a-second-brain-on-whatsapp/">How to Build a Second Brain on WhatsApp (No New App Required)</a></h3>
+                    <div class="meta">June 18, 2026 · 7 min read</div>
+                    <p>A simple, no-setup system for capturing and recalling everything, right where you already chat.</p>
+                </li>
                 <li class="blog-item">
                     <h3><a href="/blog/how-to-lower-blood-pressure-naturally/">10 Natural Ways to Lower Blood Pressure (Backed by Research)</a></h3>
                     <div class="meta">May 7, 2026 · 8 min read</div>
