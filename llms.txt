@@ -4,6 +4,7 @@
 
 ## Apps
 
+- [Crumbs — Your Private Second Brain on WhatsApp](https://purposelabstudio.github.io/crumbs/): Dump notes, ideas, todos, reminders, links, photos and voice on WhatsApp, then ask for any of it back in plain language. Multilingual, private, and calm. Mobile apps coming soon.
 - [Folio — Daily Journal & Mood Tracker](https://purposelabstudio.github.io/folio/): Write daily entries, track moods and habits, reflect monthly. Private, offline, with app lock.
 - [WaterWise — Drink Water Reminder](https://purposelabstudio.github.io/waterwise/): Stay hydrated with streaks, smart reminders, and one-tap logging. No ads, no paywall.
 - [BP Log — Blood Pressure Tracker](https://purposelabstudio.github.io/bplog/): Log readings from your home BP monitor. See AHA-classified trends, 7-day averages, and share PDF reports with your doctor. 100% offline.
