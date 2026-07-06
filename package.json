@@ -1,0 +1,10 @@
+{
+  "name": "purposelabstudio.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PurposeLab Studio website (static site).",
+  "scripts": {
+    "test": "node scripts/test-site.mjs",
+    "audit": "node scripts/audit.mjs"
+  }
+}

@@ -16,6 +16,7 @@
     <meta name="twitter:title" content="Blog — PurposeLab Studio">
     <meta name="twitter:description" content="Health tips, app guides, and insights from PurposeLab Studio.">
     <link rel="stylesheet" href="../style.css">
+    <link rel="alternate" type="application/rss+xml" title="PurposeLab Blog" href="/blog/rss.xml">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
     <script type="application/ld+json">
     {
@@ -50,6 +51,7 @@
         </nav>
 
         <section class="hero">
+            <div class="eyebrow">~/ blog</div>
             <h1>Blog</h1>
             <p class="subtitle">Health tips, guides, and updates from PurposeLab Studio.</p>
         </section>
@@ -114,15 +116,30 @@
             </ul>
         </section>
 
+        <section class="section" style="padding-top: 0;">
+            <div class="newsletter">
+                <h3>Get occasional app news</h3>
+                <p>New posts and app updates, a few times a year. No spam, unsubscribe anytime.</p>
+                <!-- MAILERLITE FORM: paste your embed <div class="ml-embedded" data-form="..."></div> here, then delete the form below -->
+                <form class="fallback-input js-subscribe">
+                    <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                    <noscript><a class="btn btn-primary" href="mailto:purposelab.studio@gmail.com?subject=Subscribe%20to%20app%20news">Email to subscribe</a></noscript>
+                </form>
+            </div>
+        </section>
+
         <footer class="footer">
             <p>&copy; 2025 PurposeLab Studio. All rights reserved.</p>
             <div class="footer-links">
                 <a href="https://purposelabstudio.github.io/privacy-policies/">Privacy Policies</a>
                 <a href="/support/">Support</a>
                 <a href="/about/">About</a>
+                <a href="/blog/rss.xml">RSS</a>
             </div>
         </footer>
 
     </div>
+    <script src="/assets/newsletter.js" defer></script>
 </body>
 </html>
