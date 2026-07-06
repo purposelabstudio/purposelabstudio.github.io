@@ -256,10 +256,10 @@ a:hover { text-decoration: underline; }
 
 .blog-item:last-child { border-bottom: none; }
 
-.blog-item h3 { font-size: 18px; margin-bottom: 4px; }
+.blog-item h3 { font-family: var(--font-display); font-size: 20px; margin-bottom: 4px; }
 .blog-item h3 a { color: var(--text); }
 .blog-item h3 a:hover { color: var(--primary); }
-.blog-item .meta { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+.blog-item .meta { font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
 .blog-item p { font-size: 15px; color: var(--text-secondary); }
 
 /* Blog Article — reader-friendly */
