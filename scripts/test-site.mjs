@@ -23,7 +23,8 @@ const blogPosts = readdirSync(join(ROOT, 'blog'))
 
 const appPages = ['crumbs', 'folio', 'waterwise', 'bplog', 'hushly'].map((a) => `${a}/index.html`);
 const corePages = ['index.html', 'about/index.html', 'support/index.html', 'blog/index.html', '404.html'];
-const allPages = [...corePages, ...appPages, ...blogPosts];
+const DIARY = 'folio/diary/index.html';
+const allPages = [...corePages, ...appPages, ...blogPosts, DIARY];
 
 // 1. SEO invariants on every indexable page (404 is noindex, skip canonical there)
 for (const p of allPages) {
@@ -83,6 +84,19 @@ for (const p of ['index.html', 'blog/index.html']) {
   check(`${p}: loads newsletter.js`, /assets\/newsletter\.js/.test(html));
 }
 check('assets/newsletter.js exists', existsSync(join(ROOT, 'assets/newsletter.js')));
+
+// 5b. Folio Diary sales page
+{
+  const html = read(DIARY);
+  check('diary: waitlist form with custom subject', /form class="fallback-input js-subscribe"[^>]*data-subject="Folio Diary/.test(html));
+  check('diary: loads newsletter.js', /assets\/newsletter\.js/.test(html));
+  check('diary: Product JSON-LD has price 699 INR', /"price":\s*"699"[\s\S]*"priceCurrency":\s*"INR"/.test(html));
+  check('diary: PreOrder availability', /schema\.org\/PreOrder/.test(html));
+  check('diary: shows \u20b9699 price', /\u20b9699/.test(html));
+  check('diary: links back to Folio app page', /href="\/folio\/"/.test(html));
+  check('diary: has no-JS waitlist fallback', /<noscript>[\s\S]*mailto:[\s\S]*<\/noscript>/.test(html));
+  check('homepage/folio links to diary', read('folio/index.html').includes('/folio/diary/'));
+}
 
 // 6. Every blog post has the reading enhancements + correct app CTA
 const CTA_MAP = {

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Folio Diary — Everything Folio, on Paper</title>
+    <meta name="description" content="The Folio Diary is the paper twin of the Folio journaling app: memorable moments, gentle mood, a calm habit grid, and monthly reflection. Undated, dot-grid, no screen. Coming soon on Amazon & Flipkart.">
+    <meta name="keywords" content="folio diary, paper journal, dot grid journal, habit tracker notebook, undated journal, memorable moments journal, analog journaling">
+    <link rel="canonical" href="https://purposelabstudio.github.io/folio/diary/">
+    <meta property="og:title" content="The Folio Diary — Everything Folio, on Paper">
+    <meta property="og:description" content="The paper twin of the Folio app. Memorable moments, gentle mood, a calm habit grid, monthly reflection. No screen, fully yours.">
+    <meta property="og:url" content="https://purposelabstudio.github.io/folio/diary/">
+    <meta property="og:type" content="product">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="PurposeLab Studio">
+    <meta property="og:image" content="https://purposelabstudio.github.io/folio/icon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="The Folio Diary — Everything Folio, on Paper">
+    <meta name="twitter:description" content="The paper twin of the Folio journaling app. Calm, undated, dot-grid. Coming soon.">
+    <meta name="twitter:image" content="https://purposelabstudio.github.io/folio/icon.png">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="/folio/icon.png" type="image/png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "The Folio Diary",
+      "description": "The paper twin of the Folio journaling app: memorable moments, gentle mood, a calm habit grid, and monthly reflection. Undated, dot-grid, lay-flat.",
+      "brand": { "@type": "Brand", "name": "PurposeLab Studio" },
+      "image": "https://purposelabstudio.github.io/folio/icon.png",
+      "url": "https://purposelabstudio.github.io/folio/diary/",
+      "offers": {
+        "@type": "Offer",
+        "price": "699",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/PreOrder",
+        "url": "https://purposelabstudio.github.io/folio/diary/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://purposelabstudio.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Folio", "item": "https://purposelabstudio.github.io/folio/" },
+        { "@type": "ListItem", "position": 3, "name": "The Folio Diary", "item": "https://purposelabstudio.github.io/folio/diary/" }
+      ]
+    }
+    </script>
+    <style>
+      :root{ --paper:#F3ECDD; --paper-2:#E9DEC6; --ink:#4A3520; --ink-soft:#6E5A3A; --accent:#9C7A3C; --accent-dark:#7A5E2C; --accent-ink:#F3ECDD; --gold:#B8892B; }
+      /* Diary-specific */
+      .diary-hero { display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:center; padding:48px 0 24px; }
+      .diary-hero .price { font-family:var(--font-mono); font-size:14px; color:var(--ink-soft); margin-top:10px; }
+      .diary-hero .price s { opacity:.55; }
+      .stores { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+      .store { display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border:1px solid var(--border); border-radius:10px; background:var(--paper-2); color:var(--ink); font-weight:600; font-size:14px; opacity:.75; }
+      .store em { font-family:var(--font-mono); font-style:normal; font-size:10px; letter-spacing:.08em; text-transform:uppercase; background:var(--ink); color:var(--paper); border-radius:999px; padding:2px 7px; }
+      .waitlist-note { font-size:13px; color:var(--ink-soft); margin-top:10px; }
+
+      /* Book mockup */
+      .book-stage { display:flex; justify-content:center; align-items:center; padding:20px; perspective:1400px; }
+      .book { position:relative; width:250px; height:330px; transform:rotateY(-20deg) rotateX(4deg); transform-style:preserve-3d; }
+      .book .cover {
+        position:absolute; inset:0; border-radius:6px 12px 12px 6px;
+        background:
+          linear-gradient(120deg, rgba(255,255,255,.10), rgba(0,0,0,.05) 60%),
+          repeating-linear-gradient(135deg, #C9A876 0 3px, #C4A26E 3px 6px);
+        box-shadow: -14px 22px 40px rgba(74,53,32,.35), inset 0 0 0 1px rgba(0,0,0,.06);
+      }
+      .book .pages { position:absolute; top:6px; bottom:6px; right:-8px; width:12px; border-radius:0 4px 4px 0;
+        background:repeating-linear-gradient(#FBF7EE 0 2px, #EEE6D5 2px 3px); box-shadow:2px 3px 8px rgba(0,0,0,.18); }
+      .book .spine { position:absolute; top:0; bottom:0; left:0; width:20px; border-radius:6px 0 0 6px; background:linear-gradient(#8E6C34,#75551F); box-shadow:inset -3px 0 6px rgba(0,0,0,.25); }
+      .book .band { position:absolute; top:-6px; bottom:-6px; right:38px; width:15px; background:linear-gradient(90deg,#3B2E1D,#4A3A24); border-radius:3px; box-shadow:0 6px 12px rgba(0,0,0,.28); opacity:.92; }
+      .book .emboss { position:absolute; left:44px; right:52px; top:112px; text-align:center; }
+      .book .emboss .b-title { font-family:var(--font-display); font-size:38px; font-weight:700; color:#6E5223; text-shadow:0 1px 0 rgba(255,255,255,.25), 0 -1px 1px rgba(0,0,0,.25); letter-spacing:-.5px; }
+      .book .emboss .b-tag { font-family:var(--font-mono); font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:#6E5223; opacity:.75; margin-top:6px; }
+      .book .emboss .b-rule { width:56px; height:2px; background:rgba(110,82,35,.5); margin:14px auto 0; border-radius:2px; }
+
+      /* Paper page mockups (dot grid) */
+      .peek { margin:8px 0 8px; }
+      .spread { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:#D8C9A8; border-radius:14px; padding:2px; box-shadow:0 18px 40px rgba(74,53,32,.22); max-width:760px; margin:0 auto; }
+      .pg { background-color:#FBF7EE; background-image:radial-gradient(rgba(74,53,32,.20) 1.1px, transparent 1.3px); background-size:15px 15px; padding:22px 20px; min-height:300px; position:relative; }
+      .pg:first-child { border-radius:12px 4px 4px 12px; }
+      .pg:last-child { border-radius:4px 12px 12px 4px; }
+      .pg .pg-h { font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+      .pg .pg-title { font-family:var(--font-display); font-size:22px; color:var(--ink); margin-bottom:14px; display:flex; justify-content:space-between; align-items:baseline; }
+      .pg .pg-title small { font-family:var(--font-mono); font-size:11px; color:var(--ink-soft); letter-spacing:.1em; }
+      .mline { display:flex; gap:10px; align-items:flex-end; margin-bottom:12px; }
+      .mline .n { font-family:var(--font-mono); font-size:12px; color:var(--ink-soft); width:16px; }
+      .mline .l { flex:1; border-bottom:1.5px solid rgba(74,53,32,.20); height:20px; }
+      .mline .l.ink { border-bottom-color:rgba(74,53,32,.35); }
+      .mline .l span { font-family:Georgia, serif; font-style:italic; font-size:14px; color:#5B4326; }
+
+      /* Habit grid */
+      .grid-wrap { overflow:hidden; }
+      table.habits { border-collapse:collapse; width:100%; font-size:11px; }
+      table.habits th { text-align:left; font-family:var(--font-body); font-weight:600; color:var(--ink); padding:3px 6px 3px 0; white-space:nowrap; }
+      table.habits td { width:15px; height:15px; text-align:center; color:var(--accent); }
+      table.habits td .dot { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--accent); }
+      table.habits td .x { color:rgba(74,53,32,.28); }
+      table.habits thead td { font-family:var(--font-mono); font-size:9px; color:var(--ink-soft); }
+      .trend { margin-top:14px; }
+      .trend .cap { font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:4px; }
+
+      /* Small page cards */
+      .peek-row { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:26px; }
+      .peek-card { background:#FBF7EE; background-image:radial-gradient(rgba(74,53,32,.16) 1px, transparent 1.2px); background-size:14px 14px; border-radius:14px; padding:18px; box-shadow:0 10px 26px rgba(74,53,32,.16); }
+      .peek-card h4 { font-family:var(--font-display); font-size:16px; color:var(--ink); margin-bottom:4px; }
+      .peek-card .cap { font-size:12.5px; color:var(--ink-soft); }
+      .moods { display:flex; gap:8px; margin:12px 0; }
+      .mood { width:26px; height:26px; border-radius:50%; border:1.5px solid rgba(74,53,32,.3); opacity:.55; }
+      .mood.on { opacity:1; border-color:var(--accent); box-shadow:0 0 0 3px rgba(156,122,60,.18); }
+      .mini-line { border-bottom:1.5px solid rgba(74,53,32,.18); height:16px; margin:9px 0; }
+      .chk { display:flex; align-items:center; gap:8px; margin:7px 0; font-size:12.5px; color:var(--ink); }
+      .chk .box { width:13px; height:13px; border:1.5px solid var(--accent); border-radius:3px; }
+      .chk .box.on { background:var(--accent); }
+
+      /* map: app -> paper */
+      .twin { display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-top:8px; }
+      .twin .col { padding:22px 24px; }
+      .twin .col:first-child { background:var(--paper-2); border-right:1px solid var(--border); }
+      .twin .col h4 { font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+      .twin ul { list-style:none; }
+      .twin li { padding:8px 0; border-bottom:1px dashed rgba(74,53,32,.18); font-size:15px; }
+      .twin li:last-child { border-bottom:none; }
+
+      .founder { display:flex; gap:20px; align-items:flex-start; background:var(--paper-2); border:1px solid var(--border); border-radius:16px; padding:26px; margin:8px 0; }
+      .founder .mk { width:46px; height:46px; border-radius:50%; background:var(--accent); color:var(--accent-ink); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:20px; flex-shrink:0; }
+      .founder p { color:var(--ink); font-size:16px; line-height:1.7; }
+      .founder .sig { font-family:Georgia, serif; font-style:italic; color:var(--ink-soft); margin-top:8px; }
+
+      .specs { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-top:8px; }
+      .spec { background:var(--paper-2); border:1px solid var(--border); border-radius:12px; padding:16px; }
+      .spec .k { font-family:var(--font-mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
+      .spec .v { font-family:var(--font-display); font-size:19px; color:var(--ink); margin-top:2px; }
+
+      @media (max-width:760px){
+        .diary-hero { grid-template-columns:1fr; gap:24px; }
+        .spread { grid-template-columns:1fr; }
+        .pg:last-child { display:none; }
+        .peek-row { grid-template-columns:1fr; }
+        .twin { grid-template-columns:1fr; }
+        .twin .col:first-child { border-right:none; border-bottom:1px solid var(--border); }
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <nav class="nav">
+            <a href="/" class="nav-brand">PurposeLab Studio</a>
+            <ul class="nav-links">
+                <li><a href="/crumbs/">Crumbs</a></li>
+                <li><a href="/folio/" class="active">Folio</a></li>
+                <li><a href="/waterwise/">WaterWise</a></li>
+                <li><a href="/bplog/">BP Log</a></li>
+                <li><a href="/hushly/">Hushly</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/support/">Support</a></li>
+            </ul>
+        </nav>
+
+        <section class="diary-hero">
+            <div>
+                <div class="eyebrow">~/ folio · paper</div>
+                <h1 style="font-family:var(--font-display); font-size:40px; line-height:1.12; letter-spacing:-.5px; color:var(--ink);">Some days you want to type.<br>Some days you want to hold a pen.</h1>
+                <p class="subtitle" style="margin-top:14px;">The Folio Diary is the paper twin of the app — the same calm ritual, with no screen, no battery, and no notifications. Everything Folio does, now in your hands.</p>
+                <p class="price">₹699 · launching soon</p>
+                <div style="margin-top:18px;">
+                    <form class="fallback-input js-subscribe" data-subject="Folio Diary — waitlist" data-body-lead="Please add me to the Folio Diary waitlist. My email: ">
+                        <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required>
+                        <button type="submit" class="btn btn-primary">Join the waitlist</button>
+                        <noscript><a class="btn btn-primary" href="mailto:purposelab.studio@gmail.com?subject=Folio%20Diary%20waitlist">Email to join</a></noscript>
+                    </form>
+                </div>
+                <div class="stores">
+                    <span class="store">Amazon <em>soon</em></span>
+                    <span class="store">Flipkart <em>soon</em></span>
+                </div>
+                <p class="waitlist-note">No spam — one gentle email the day it goes live. That's it.</p>
+            </div>
+            <div class="book-stage">
+                <div class="book" aria-hidden="true">
+                    <div class="cover"></div>
+                    <div class="pages"></div>
+                    <div class="spine"></div>
+                    <div class="band"></div>
+                    <div class="emboss">
+                        <div class="b-title">Folio</div>
+                        <div class="b-tag">on paper</div>
+                        <div class="b-rule"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">A page from inside</h2>
+            <p style="text-align:center; color:var(--ink-soft); max-width:560px; margin:-18px auto 26px;">Undated dot-grid pages you fill at your own pace. Here's the spread the whole diary is built around.</p>
+
+            <div class="peek">
+                <div class="spread" aria-hidden="true">
+                    <div class="pg">
+                        <div class="pg-h">left page</div>
+                        <div class="pg-title">Memorable Moments <small>the month</small></div>
+                        <div class="mline"><span class="n">1</span><span class="l ink"><span>&nbsp;coffee on the balcony, no phone</span></span></div>
+                        <div class="mline"><span class="n">2</span><span class="l ink"><span>&nbsp;long walk after the rain</span></span></div>
+                        <div class="mline"><span class="n">3</span><span class="l ink"><span>&nbsp;finished the book I kept restarting</span></span></div>
+                        <div class="mline"><span class="n">4</span><span class="l"></span></div>
+                        <div class="mline"><span class="n">5</span><span class="l"></span></div>
+                        <div class="mline"><span class="n">6</span><span class="l"></span></div>
+                        <div class="mline"><span class="n">7</span><span class="l"></span></div>
+                        <div class="mline"><span class="n">8</span><span class="l"></span></div>
+                        <div class="mline"><span class="n">9</span><span class="l"></span></div>
+                    </div>
+                    <div class="pg">
+                        <div class="pg-h">right page</div>
+                        <div class="pg-title">Monthly Habits <small>gentle, no streaks</small></div>
+                        <div class="grid-wrap">
+                            <table class="habits">
+                                <thead><tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr></thead>
+                                <tbody>
+                                    <tr><th>Sleep 7h</th><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td></tr>
+                                    <tr><th>Water</th><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td></tr>
+                                    <tr><th>Walk</th><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td></tr>
+                                    <tr><th>Read</th><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td></tr>
+                                    <tr><th>Journal</th><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td></tr>
+                                    <tr><th>No phone AM</th><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="x">·</span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td><td><span class="dot"></span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="trend">
+                            <div class="cap">Weight · a soft line, not a scoreboard</div>
+                            <svg viewBox="0 0 320 70" width="100%" height="64" preserveAspectRatio="none" aria-hidden="true">
+                                <polyline points="6,20 34,24 62,18 90,30 118,26 146,38 174,34 202,46 230,42 258,52 286,48 314,58"
+                                    fill="none" stroke="#9C7A3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <g fill="#7A5E2C">
+                                    <circle cx="6" cy="20" r="2.4"/><circle cx="62" cy="18" r="2.4"/><circle cx="118" cy="26" r="2.4"/><circle cx="174" cy="34" r="2.4"/><circle cx="230" cy="42" r="2.4"/><circle cx="286" cy="48" r="2.4"/><circle cx="314" cy="58" r="2.4"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="peek-row">
+                <div class="peek-card" aria-hidden="true">
+                    <div class="pg-h" style="font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">daily page</div>
+                    <h4>Close the day</h4>
+                    <p class="cap">A date, a line or a page, and today's tiny habits.</p>
+                    <div class="mini-line"></div>
+                    <div class="mini-line"></div>
+                    <div class="mini-line" style="width:70%;"></div>
+                    <div class="chk"><span class="box on"></span> Drank water</div>
+                    <div class="chk"><span class="box on"></span> Walked</div>
+                    <div class="chk"><span class="box"></span> Read a little</div>
+                </div>
+                <div class="peek-card" aria-hidden="true">
+                    <div class="pg-h" style="font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">mood</div>
+                    <h4>Notice, don't score</h4>
+                    <p class="cap">Circle how the day felt. No numbers, no graphs to chase.</p>
+                    <div class="moods">
+                        <span class="mood"></span><span class="mood"></span><span class="mood on"></span><span class="mood"></span><span class="mood"></span>
+                    </div>
+                    <div class="mini-line"></div>
+                    <div class="mini-line" style="width:80%;"></div>
+                </div>
+                <div class="peek-card" aria-hidden="true">
+                    <div class="pg-h" style="font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;">month in review</div>
+                    <h4>Softly reflected</h4>
+                    <p class="cap">Look back gently. What mattered, what you'll carry on.</p>
+                    <div class="mini-line"></div>
+                    <div class="mini-line"></div>
+                    <div class="mini-line" style="width:60%;"></div>
+                    <div class="mini-line" style="width:85%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Everything Folio does — now on paper</h2>
+            <div class="twin">
+                <div class="col">
+                    <h4>The Folio app</h4>
+                    <ul>
+                        <li>Daily journal, focus mode</li>
+                        <li>Gentle mood, no scores</li>
+                        <li>Tiny habits, no streaks</li>
+                        <li>Monthly reflection</li>
+                        <li>Private &amp; offline, app lock</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>The Folio Diary</h4>
+                    <ul>
+                        <li>Memorable Moments &amp; daily pages</li>
+                        <li>Circle-the-feeling mood row</li>
+                        <li>A calm dot habit grid</li>
+                        <li>Month-in-review spread</li>
+                        <li>No account, no cloud — it's just yours</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align:center; color:var(--ink-soft); margin-top:18px; font-style:italic;">Nothing extra. Nothing gamified. The same quiet system, in two forms.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Why paper?</h2>
+            <div class="philosophy">
+                <div class="p-item"><h4>No screen to escape into</h4><p>Reflection without a notification pulling you somewhere else. Just you and the page.</p></div>
+                <div class="p-item"><h4>The most private journal there is</h4><p>No account, no cloud, no battery. Your thoughts live in a book only you can open.</p></div>
+                <div class="p-item"><h4>Slower on purpose</h4><p>Writing by hand makes you pause. That pause is the whole point of closing a day.</p></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">The details</h2>
+            <div class="specs">
+                <div class="spec"><div class="k">Format</div><div class="v">Undated</div></div>
+                <div class="spec"><div class="k">Pages</div><div class="v">Dot-grid</div></div>
+                <div class="spec"><div class="k">Size</div><div class="v">A5</div></div>
+                <div class="spec"><div class="k">Binding</div><div class="v">Lay-flat</div></div>
+                <div class="spec"><div class="k">Extras</div><div class="v">Elastic + ribbon</div></div>
+                <div class="spec"><div class="k">Price</div><div class="v">₹699</div></div>
+            </div>
+            <!-- Final specs (page count, GSM, exact size) confirmed at launch — tweak the values above when finalized. -->
+        </section>
+
+        <section class="section">
+            <div class="founder">
+                <div class="mk">P</div>
+                <div>
+                    <p>I didn't design this to sell a notebook. I made it because it's the exact diary I keep every day — the memorable-moments list, the little habit grid, the soft weight line. Folio the app grew out of this book. Now the book is coming back, made properly, for anyone who wants the same calm ritual off the screen.</p>
+                    <p class="sig">— the maker, PurposeLab Studio</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">App + paper, the same ritual</h2>
+            <p style="text-align:center; color:var(--ink-soft); max-width:560px; margin:-18px auto 22px;">Type on the days you're moving, write on the days you're still. Many people keep both — the app for capture, the diary for the quiet close.</p>
+            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                <a href="https://play.google.com/store/apps/details?id=com.purposelab.folio" class="btn btn-outline">▶ Get the Folio app</a>
+                <a href="/folio/" class="btn btn-outline">About Folio</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="newsletter">
+                <h3>Be first to hold one</h3>
+                <p>The Folio Diary is coming soon to Amazon &amp; Flipkart. Join the waitlist and you'll get one gentle email the day it's live — plus early-bird pricing.</p>
+                <form class="fallback-input js-subscribe" data-subject="Folio Diary — waitlist" data-body-lead="Please add me to the Folio Diary waitlist. My email: ">
+                    <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required>
+                    <button type="submit" class="btn btn-primary">Join the waitlist</button>
+                    <noscript><a class="btn btn-primary" href="mailto:purposelab.studio@gmail.com?subject=Folio%20Diary%20waitlist">Email to join</a></noscript>
+                </form>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 PurposeLab Studio. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="/folio/">Folio App</a>
+                <a href="https://purposelabstudio.github.io/privacy-policies/folio.html">Privacy Policy</a>
+                <a href="/support/">Support</a>
+                <a href="/about/">About</a>
+            </div>
+        </footer>
+
+    </div>
+    <script src="/assets/newsletter.js" defer></script>
+</body>
+</html>
