@@ -59,6 +59,8 @@
       .store { display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border:1px solid var(--border); border-radius:10px; background:var(--paper-2); color:var(--ink); font-weight:600; font-size:14px; opacity:.75; }
       .store em { font-family:var(--font-mono); font-style:normal; font-size:10px; letter-spacing:.08em; text-transform:uppercase; background:var(--ink); color:var(--paper); border-radius:999px; padding:2px 7px; }
       .waitlist-note { font-size:13px; color:var(--ink-soft); margin-top:10px; }
+      .eb-badge { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:var(--accent-ink); font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:7px 13px; border-radius:999px; margin-bottom:12px; }
+      .eb-badge b { font-weight:700; }
 
       /* Book mockup */
       .book-stage { display:flex; justify-content:center; align-items:center; padding:20px; perspective:1400px; }
@@ -169,12 +171,13 @@
                 <div class="eyebrow">~/ folio · paper</div>
                 <h1 style="font-family:var(--font-display); font-size:40px; line-height:1.12; letter-spacing:-.5px; color:var(--ink);">Some days you want to type.<br>Some days you want to hold a pen.</h1>
                 <p class="subtitle" style="margin-top:14px;">The Folio Diary is the paper twin of the app — the same calm ritual, with no screen, no battery, and no notifications. Everything Folio does, now in your hands.</p>
-                <p class="price">₹699 · launching soon</p>
+                <p class="price"><s>₹699</s> &nbsp;<strong style="color:var(--ink);">₹349</strong> early-bird · launching soon</p>
                 <div style="margin-top:18px;">
-                    <form class="fallback-input js-subscribe" data-subject="Folio Diary — waitlist" data-body-lead="Please add me to the Folio Diary waitlist. My email: ">
+                    <div class="eb-badge">Waitlist perk · <b>50% off</b> at launch</div>
+                    <form class="fallback-input js-subscribe" data-subject="Folio Diary — waitlist (50% early bird)" data-body-lead="Please add me to the Folio Diary waitlist for the 50% early-bird offer. My email: ">
                         <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required>
-                        <button type="submit" class="btn btn-primary">Join the waitlist</button>
-                        <noscript><a class="btn btn-primary" href="mailto:purposelab.studio@gmail.com?subject=Folio%20Diary%20waitlist">Email to join</a></noscript>
+                        <button type="submit" class="btn btn-primary">Get 50% off — join the waitlist</button>
+                        <noscript><a class="btn btn-primary" href="mailto:purposelab.studio@gmail.com?subject=Folio%20Diary%20waitlist%20(50%25%20early%20bird)">Email to join</a></noscript>
                     </form>
                 </div>
                 <div class="stores">
@@ -351,12 +354,13 @@
 
         <section class="section">
             <div class="newsletter">
-                <h3>Be first to hold one</h3>
-                <p>The Folio Diary is coming soon to Amazon &amp; Flipkart. Join the waitlist and you'll get one gentle email the day it's live — plus early-bird pricing.</p>
-                <form class="fallback-input js-subscribe" data-subject="Folio Diary — waitlist" data-body-lead="Please add me to the Folio Diary waitlist. My email: ">
+                <h3>Be first to hold one — at half price</h3>
+                <p>The Folio Diary is coming soon to Amazon &amp; Flipkart. Join the waitlist and you'll get one gentle email the day it's live — plus <strong>50% off as an early-bird</strong> (₹349 instead of ₹699).</p>
+                <div class="eb-badge">Waitlist perk · <b>50% off</b> at launch</div>
+                <form class="fallback-input js-subscribe" data-subject="Folio Diary — waitlist (50% early bird)" data-body-lead="Please add me to the Folio Diary waitlist for the 50% early-bird offer. My email: ">
                     <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required>
-                    <button type="submit" class="btn btn-primary">Join the waitlist</button>
-                    <noscript><a class="btn btn-primary" href="mailto:purposelab.studio@gmail.com?subject=Folio%20Diary%20waitlist">Email to join</a></noscript>
+                    <button type="submit" class="btn btn-primary">Get 50% off — join the waitlist</button>
+                    <noscript><a class="btn btn-primary" href="mailto:purposelab.studio@gmail.com?subject=Folio%20Diary%20waitlist%20(50%25%20early%20bird)">Email to join</a></noscript>
                 </form>
             </div>
         </section>
