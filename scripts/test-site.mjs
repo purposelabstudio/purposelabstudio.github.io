@@ -96,7 +96,7 @@ check('assets/newsletter.js exists', existsSync(join(ROOT, 'assets/newsletter.js
   check('diary: links back to Folio app page', /href="\/folio\/"/.test(html));
   check('diary: has no-JS waitlist fallback', /<noscript>[\s\S]*mailto:[\s\S]*<\/noscript>/.test(html));
   check('diary: advertises 50% early-bird offer', /50%\s*off/i.test(html));
-  check('diary: has Amazon & Flipkart store buttons', /class="btn btn-outline"[^>]*>Amazon</.test(html) && /class="btn btn-outline"[^>]*>Flipkart</.test(html));
+  check('diary: has Amazon & Flipkart store buttons', /<a href="#" class="btn btn-outline"[\s\S]*?Amazon\s*<\/a>/.test(html) && /<a href="#" class="btn btn-outline"[\s\S]*?Flipkart\s*<\/a>/.test(html));
   check('homepage/folio links to diary', read('folio/index.html').includes('/folio/diary/'));
 }
 
