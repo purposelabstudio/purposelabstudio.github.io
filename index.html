@@ -47,11 +47,12 @@
     </script>
     <style>
         .app-card {
-            background: var(--card-bg);
+            background: var(--paper-2);
             border: 1px solid var(--border);
+            border-left: 4px solid var(--app-accent, var(--accent));
             border-radius: var(--radius);
-            padding: 28px;
-            margin-bottom: 20px;
+            padding: 24px;
+            margin-bottom: 18px;
             display: flex;
             align-items: flex-start;
             gap: 20px;
@@ -63,14 +64,14 @@
             flex-shrink: 0; 
         }
         .app-info { flex: 1; }
-        .app-name { font-size: 20px; font-weight: 600; color: var(--text); }
+        .app-name { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--text); }
         .app-desc { font-size: 15px; color: var(--text-secondary); margin-top: 4px; }
         .app-badges { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
         .app-links { margin-top: 14px; display: flex; gap: 16px; }
         .app-links a { font-size: 14px; }
         .app-card.featured {
-            border: 2px solid var(--primary);
-            box-shadow: 0 6px 24px rgba(25, 118, 210, 0.10);
+            border-left-width: 6px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
         }
         .app-tag {
             display: inline-block;
@@ -79,7 +80,7 @@
             letter-spacing: 0.5px;
             text-transform: uppercase;
             color: #fff;
-            background: var(--primary);
+            background: var(--app-accent, var(--accent));
             border-radius: 999px;
             padding: 2px 10px;
             margin-bottom: 6px;
@@ -107,16 +108,16 @@
         </nav>
 
         <section class="hero">
-            <h1>PurposeLab Studio</h1>
-            <p class="subtitle">Android apps that respect you</p>
+            <div class="eyebrow">~/ purposelab</div>
+            <h1>I build calm Android apps that respect you.</h1>
+            <p class="subtitle">No ads. No tracking. No dark patterns. Just simple tools that do one thing well — and respect your time, money, and privacy.</p>
+            <div style="margin-top: 24px;">
+                <a class="btn btn-primary" href="#say-hi">Say hi &rarr;</a>
+            </div>
         </section>
 
         <section style="text-align: center; padding: 0 0 48px; max-width: 600px; margin: 0 auto;">
-            <p style="color: var(--text-secondary); font-size: 16px;">
-                We build simple, focused Android apps. No ads, no subscriptions, no data harvesting.
-                Just tools that do one thing well — and respect your time, money, and privacy.
-            </p>
-            <div class="badges" style="margin-top: 20px;">
+            <div class="badges">
                 <span class="badge badge-free">✓ Free</span>
                 <span class="badge badge-noad">✓ No Ads</span>
                 <span class="badge badge-offline">✓ Offline-first</span>
@@ -127,7 +128,7 @@
         <section class="section">
             <h2 class="section-title">Our Apps</h2>
 
-            <div class="app-card featured">
+            <div class="app-card featured" style="--app-accent:#2C5556">
                 <img src="crumbs/icon.png" alt="Crumbs" class="app-icon">
                 <div class="app-info">
                     <span class="app-tag">Featured</span>
@@ -149,7 +150,7 @@
                 </div>
             </div>
 
-            <div class="app-card">
+            <div class="app-card" style="--app-accent:#C9A876">
                 <img src="folio/icon.png" alt="Folio" class="app-icon">
                 <div class="app-info">
                     <div class="app-name">Folio — Daily Journal & Mood</div>
@@ -170,7 +171,7 @@
                 </div>
             </div>
 
-            <div class="app-card">
+            <div class="app-card" style="--app-accent:#29B6C8">
                 <img src="waterwise/icon.png" alt="WaterWise" class="app-icon">
                 <div class="app-info">
                     <div class="app-name">WaterWise — Drink Water Reminder</div>
@@ -191,7 +192,7 @@
                 </div>
             </div>
 
-            <div class="app-card">
+            <div class="app-card" style="--app-accent:#0D2E5C">
                 <img src="bplog/icon.png" alt="BP Log" class="app-icon">
                 <div class="app-info">
                     <div class="app-name">BP Log — Blood Pressure Tracker</div>
@@ -213,7 +214,7 @@
                 </div>
             </div>
 
-            <div class="app-card">
+            <div class="app-card" style="--app-accent:#F5B942">
                 <img src="hushly/icon.png" alt="Hushly" class="app-icon">
                 <div class="app-info">
                     <div class="app-name">Hushly — Baby Sleep Sounds</div>
@@ -232,6 +233,14 @@
                         <a href="https://purposelabstudio.github.io/privacy-policies/hushly.html">Privacy Policy</a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="philosophy">
+                <div class="p-item"><h4>One thing well</h4><p>Each app has a single clear job and does it without clutter or feature bloat.</p></div>
+                <div class="p-item"><h4>Your data stays yours</h4><p>Offline-first by default. No accounts, no harvesting, nothing sold to anyone.</p></div>
+                <div class="p-item"><h4>No dark patterns</h4><p>No nags, no fake urgency, no traps. Free means free — not free-until-you're-hooked.</p></div>
             </div>
         </section>
 
@@ -267,11 +276,25 @@
             <p style="text-align: center; margin-top: 16px;"><a href="/blog/">View all posts →</a></p>
         </section>
 
-        <section style="text-align: center; padding: 48px 0;">
-            <h2 class="section-title">Contact</h2>
+        <section class="section">
+            <div class="newsletter">
+                <h3>Get occasional app news</h3>
+                <p>New apps and the best posts, a few times a year. No spam, unsubscribe anytime.</p>
+                <!-- MAILERLITE FORM: paste your embed <div class="ml-embedded" data-form="..."></div> here, then delete the fallback below -->
+                <div class="fallback-input">
+                    <input type="email" placeholder="you@email.com" aria-label="Email address">
+                    <a class="btn btn-primary" href="mailto:purposelab.studio@gmail.com?subject=Subscribe%20to%20app%20news">Subscribe</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="say-hi" style="text-align: center; padding: 48px 0;">
+            <h2 class="section-title">Say hi</h2>
             <p style="color: var(--text-secondary);">
-                Questions, feedback, or support?<br>
+                Questions, feedback, an idea, or just want to connect?<br>
                 <a href="mailto:purposelab.studio@gmail.com">purposelab.studio@gmail.com</a>
+                &nbsp;·&nbsp;
+                <a href="https://wa.me/919063573676?text=Hi">WhatsApp</a>
             </p>
         </section>
 
