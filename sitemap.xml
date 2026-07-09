@@ -210,4 +210,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://purposelabstudio.github.io/blog/journaling-prompts-for-anxiety/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://purposelabstudio.github.io/blog/journaling-prompts-for-overthinking/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://purposelabstudio.github.io/blog/journaling-prompts-for-self-discovery/</loc>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

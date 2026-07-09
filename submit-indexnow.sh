@@ -43,6 +43,9 @@ URLS=(
   "https://${HOST}/blog/message-yourself-on-whatsapp-not-showing/"
   "https://${HOST}/blog/printable-blood-pressure-log/"
   "https://${HOST}/blog/how-to-lower-blood-pressure-immediately-at-home/"
+  "https://${HOST}/blog/journaling-prompts-for-anxiety/"
+  "https://${HOST}/blog/journaling-prompts-for-overthinking/"
+  "https://${HOST}/blog/journaling-prompts-for-self-discovery/"
   "https://${HOST}/bplog/printable-log/"
 )
 

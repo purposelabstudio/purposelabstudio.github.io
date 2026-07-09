@@ -11,9 +11,9 @@ don't have; the free Autocomplete data + synthesis is the valuable part).
 |---|----------------------------------|--------|-----|--------|
 | 1 | water reminder app without ads | Commercial | WaterWise | **DRAFTED** |
 | 2 | blood pressure log sheet printable / pdf | Tool/lead-magnet | BP Log | **DRAFTED** |
-| 3 | how to lower blood pressure instantly / immediately at home | Informational | BP Log | Backlog |
+| 3 | how to lower blood pressure instantly / immediately at home | Informational | BP Log | **SHIPPED** |
 | 4 | message yourself on whatsapp not showing | Troubleshooting | Crumbs | **DRAFTED** |
-| 5 | journaling prompts for anxiety / overthinking / self-discovery | Informational | Folio | Backlog (feeds prompt tool) |
+| 5 | journaling prompts for anxiety / overthinking / self-discovery | Informational | Folio | **SHIPPED** (3 posts) |
 | 6 | best free journal app for android (no ads) | Commercial | Folio | Backlog |
 | 7 | baby sleep sounds app free / best; do babies sleep better with sound machine | Commercial/info | Hushly | Backlog |
 | 8 | note to self app / second brain app free (Obsidian/Notion alt) | Commercial | Crumbs | Backlog |
