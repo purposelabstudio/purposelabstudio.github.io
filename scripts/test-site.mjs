@@ -327,6 +327,13 @@ for (const p of allPages) {
   check(`${p}: has author meta`, /<meta\s+name="author"/i.test(read(p)), 'missing <meta name="author">');
 }
 
+// 22. llms.txt lists every blog post (guards the manually-maintained AEO/GEO index)
+const llmsTxt = read('llms.txt');
+for (const p of blogPosts) {
+  const url = 'https://purposelabstudio.github.io/' + p.replace(/index\.html$/, '');
+  check(`llms.txt lists ${p}`, llmsTxt.includes(url), `missing ${url} in llms.txt`);
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
