@@ -273,6 +273,7 @@ a:hover { text-decoration: underline; }
 .article h2 { font-family: var(--font-display); font-size: 25px; margin-top: 1.6em; margin-bottom: 12px; color: var(--ink); }
 .article h3 { font-family: var(--font-display); font-size: 20px; margin-top: 1.3em; margin-bottom: 8px; color: var(--ink); }
 .article p { margin-bottom: 20px; color: var(--ink); font-size: 18px; line-height: 1.78; }
+.post-app-hint { background: var(--paper-2); border-left: 4px solid var(--accent); padding: 14px 18px; border-radius: var(--radius); margin: 24px 0; font-size: 16px; line-height: 1.6; color: var(--ink); }
 .article ul, .article ol { margin: 0 0 20px 24px; color: var(--ink); }
 .article li { margin-bottom: 10px; font-size: 18px; line-height: 1.78; }
 .article strong { color: var(--ink); }
