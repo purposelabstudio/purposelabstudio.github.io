@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { waterIntakeMl } from '../tools/water-intake-calculator/calc.js';
 import { bpCategory } from '../tools/blood-pressure-checker/calc.js';
+import { PROMPTS, pickPrompt } from '../tools/journal-prompt-generator/prompts.js';
 
 let passed = 0;
 function t(name, fn) { fn(); passed++; console.log('  ✓ ' + name); }
@@ -22,5 +23,11 @@ t('stage2 145/95', () => assert.equal(bpCategory(145, 95).key, 'stage2'));
 t('crisis 185/125', () => assert.equal(bpCategory(185, 125).key, 'crisis'));
 t('higher-of-two wins: 122/82 = stage1', () => assert.equal(bpCategory(122, 82).key, 'stage1'));
 t('returns a human label', () => assert.equal(typeof bpCategory(118, 78).label, 'string'));
+
+// Journaling prompts.
+t('has at least 20 prompts', () => assert.ok(PROMPTS.length >= 20));
+t('all prompts are non-empty strings', () => assert.ok(PROMPTS.every(p => typeof p === 'string' && p.trim().length > 0)));
+t('pickPrompt(0) is deterministic', () => assert.equal(pickPrompt(0), PROMPTS[0]));
+t('pickPrompt wraps with modulo', () => assert.equal(pickPrompt(PROMPTS.length), PROMPTS[0]));
 
 console.log(`\n${passed} tool checks passed ✓`);
