@@ -365,3 +365,9 @@ a:hover { text-decoration: underline; }
 .app-cta { display: flex; align-items: center; gap: 16px; background: var(--paper-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin: 32px 0; }
 .app-cta img { width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0; }
 .app-cta strong { color: var(--ink); }
+
+/* Related guides (cluster cross-linking) */
+.related-guides { margin: 40px 0 8px; padding: 20px 24px; background: var(--paper-2); border: 1px solid var(--border); border-radius: var(--radius); }
+.related-guides h2 { margin: 0 0 10px; font-size: 18px; }
+.related-guides ul { margin: 0; padding-left: 18px; }
+.related-guides li { margin: 6px 0; }

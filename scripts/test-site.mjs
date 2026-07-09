@@ -152,6 +152,25 @@ for (const p of allPages) {
   }
 }
 
+// 10. Multi-post clusters cross-link siblings via a .related-guides block
+const CLUSTERS = {
+  '/bplog/': ['how-to-track-blood-pressure-at-home', 'normal-blood-pressure-by-age', 'how-to-lower-blood-pressure-naturally'],
+  '/hushly/': ['white-noise-baby-sleep-science', 'baby-wont-sleep-through-night'],
+  '/waterwise/': ['how-much-water-should-i-drink-daily', 'why-water-apps-are-full-of-ads'],
+  '/folio/': ['why-journaling-fails-and-how-to-stick-with-it', 'daily-journal-vs-mood-tracker-why-you-need-both'],
+  '/crumbs/': ['stop-messaging-yourself-on-whatsapp', 'build-a-second-brain-on-whatsapp'],
+};
+for (const [app, slugs] of Object.entries(CLUSTERS)) {
+  for (const slug of slugs) {
+    const html = read(`blog/${slug}/index.html`);
+    check(`${slug}: has related-guides block`, /class="related-guides"/.test(html));
+    for (const sib of slugs) {
+      if (sib === slug) continue;
+      check(`${slug}: related links sibling ${sib}`, html.includes(`/blog/${sib}/`), 'sibling link missing');
+    }
+  }
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
