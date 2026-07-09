@@ -371,3 +371,9 @@ a:hover { text-decoration: underline; }
 .related-guides h2 { margin: 0 0 10px; font-size: 18px; }
 .related-guides ul { margin: 0; padding-left: 18px; }
 .related-guides li { margin: 6px 0; }
+
+/* Comparison table (commercial pages) */
+.compare { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+.compare th, .compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.compare thead th { background: var(--paper-2); }
+.compare td:nth-child(2) { font-weight: 600; color: var(--ink); }
