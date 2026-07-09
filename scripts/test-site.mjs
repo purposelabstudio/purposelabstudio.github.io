@@ -171,6 +171,13 @@ for (const [app, slugs] of Object.entries(CLUSTERS)) {
   }
 }
 
+// 11. Every blog post exposes an FAQ (FAQPage schema + visible heading) for AEO
+for (const p of blogPosts) {
+  const html = read(p);
+  check(`${p}: has FAQPage JSON-LD`, /"@type":\s*"FAQPage"/.test(html), 'no FAQPage schema');
+  check(`${p}: has visible FAQ heading`, /Frequently Asked Questions/i.test(html), 'no visible FAQ');
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
