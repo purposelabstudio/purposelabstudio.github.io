@@ -274,6 +274,25 @@ for (const p of toolPages) {
   }
 }
 
+// 19. No deprecated schema types (rich results retired by Google) — guards regressions
+const DEPRECATED_SCHEMA = ['HowTo', 'SpecialAnnouncement', 'ClaimReview'];
+for (const p of allPages) {
+  const html = read(p);
+  for (const t of DEPRECATED_SCHEMA) {
+    check(`${p}: no deprecated schema "${t}"`, !new RegExp(`"@type":\\s*"${t}"`).test(html), `found ${t}`);
+  }
+}
+
+// 20. No duplicate <title> across pages (cannibalization / copy-paste guard)
+const titleOwners = {};
+for (const p of allPages) {
+  const t = (read(p).match(/<title>([^<]*)<\/title>/) || [, ''])[1].trim();
+  if (t) (titleOwners[t] = titleOwners[t] || []).push(p);
+}
+for (const [t, owners] of Object.entries(titleOwners)) {
+  check(`title unique: "${t.slice(0, 50)}"`, owners.length === 1, `shared by ${owners.join(', ')}`);
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
