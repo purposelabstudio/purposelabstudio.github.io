@@ -141,6 +141,17 @@ const folio = read('folio/index.html');
 check('folio page has App Store button(s)', (folio.match(new RegExp(APPSTORE, 'g')) || []).length >= 2);
 check('folio JSON-LD downloadUrl includes App Store', /"downloadUrl":\s*\[[^\]]*apps\.apple\.com/.test(folio));
 
+// 9. Every page's nav links to all 5 apps + Blog/About/Support (consistent internal graph)
+const NAV_TARGETS = ['/crumbs/', '/folio/', '/waterwise/', '/bplog/', '/hushly/', '/blog/', '/about/', '/support/'];
+for (const p of allPages) {
+  if (p === '404.html') continue; // standalone page with its own minimal link block
+  const html = read(p);
+  const nav = (html.match(/<nav class="nav">([\s\S]*?)<\/nav>/) || [, ''])[1];
+  for (const t of NAV_TARGETS) {
+    check(`${p}: nav links ${t}`, nav.includes(`href="${t}"`), 'missing from nav');
+  }
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
