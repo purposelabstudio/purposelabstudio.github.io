@@ -230,6 +230,30 @@ for (const [pg, pages] of Object.entries(COMMERCIAL_BACKLINKS)) {
   for (const src of pages) check(`${src}: links ${pg}`, read(src).includes(`href="${pg}"`), 'commercial link missing');
 }
 
+// 16. Every indexable page is reachable from the homepage by following internal links (no orphans)
+function hrefToPage(href) {
+  let h = href.split('#')[0].split('?')[0];
+  if (h.startsWith('//') || /^https?:/i.test(h) || h.startsWith('mailto:')) return null;
+  if (!h.startsWith('/')) return null; // relative links vary by depth; skip
+  h = h.replace(/^\//, '');
+  if (h === '' || h.endsWith('/')) h += 'index.html';
+  else if (!/\.[a-z0-9]+$/i.test(h)) h += '/index.html';
+  return existsSync(join(ROOT, h)) ? h : null;
+}
+const reachable = new Set(['index.html']);
+const queue = ['index.html'];
+while (queue.length) {
+  const cur = queue.shift();
+  for (const m of read(cur).matchAll(/href="([^"]+)"/g)) {
+    const pg = hrefToPage(m[1]);
+    if (pg && !reachable.has(pg)) { reachable.add(pg); queue.push(pg); }
+  }
+}
+for (const p of allPages) {
+  if (p === '404.html') continue; // error page, intentionally not linked
+  check(`${p}: reachable from homepage`, reachable.has(p), 'orphaned — no internal link path from /');
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
