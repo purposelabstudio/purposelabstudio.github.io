@@ -25,7 +25,8 @@ const appPages = ['crumbs', 'folio', 'waterwise', 'bplog', 'hushly'].map((a) => 
 const corePages = ['index.html', 'about/index.html', 'support/index.html', 'blog/index.html', '404.html'];
 const DIARY = 'folio/diary/index.html';
 const toolPages = ['tools/index.html', 'tools/water-intake-calculator/index.html', 'tools/blood-pressure-checker/index.html', 'tools/journal-prompt-generator/index.html'];
-const allPages = [...corePages, ...appPages, ...blogPosts, DIARY, ...toolPages];
+const commercialPages = ['best-free-blood-pressure-app/index.html', 'best-free-water-reminder-app/index.html', 'best-free-baby-sleep-app/index.html', 'best-free-journal-app/index.html'];
+const allPages = [...corePages, ...appPages, ...blogPosts, DIARY, ...toolPages, ...commercialPages];
 
 // 1. SEO invariants on every indexable page (404 is noindex, skip canonical there)
 for (const p of allPages) {
@@ -200,6 +201,20 @@ const TOOL_BACKLINKS = {
 };
 for (const [tool, pages] of Object.entries(TOOL_BACKLINKS)) {
   for (const pg of pages) check(`${pg}: links ${tool}`, read(pg).includes(`href="${tool}"`), 'tool link missing');
+}
+
+// 14. Commercial pages link their app's Play Store listing + carry a comparison table & FAQ
+const COMMERCIAL_APP = {
+  'best-free-blood-pressure-app/index.html': 'com.purposelab.bplog',
+  'best-free-water-reminder-app/index.html': 'com.purposelab.waterwise',
+  'best-free-baby-sleep-app/index.html': 'com.purposelab.hushly',
+  'best-free-journal-app/index.html': 'com.purposelab.folio',
+};
+for (const [p, pkg] of Object.entries(COMMERCIAL_APP)) {
+  const html = read(p);
+  check(`${p}: links Play Store ${pkg}`, html.includes(`id=${pkg}`), 'no Play link');
+  check(`${p}: has comparison table`, /class="compare"/.test(html), 'no compare table');
+  check(`${p}: has FAQ`, /Frequently Asked Questions/i.test(html) && /"@type":\s*"FAQPage"/.test(html), 'no FAQ');
 }
 
 // Summary
