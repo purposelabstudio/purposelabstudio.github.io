@@ -17,7 +17,7 @@ const wantJsonld = args.includes('--jsonld');
 
 function walkHtml(dir, acc = []) {
   for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === '.git' || name === 'docs') continue;
+    if (name.startsWith('.') || name === 'node_modules' || name === 'docs') continue;
     const p = join(dir, name);
     const st = statSync(p);
     if (st.isDirectory()) walkHtml(p, acc);

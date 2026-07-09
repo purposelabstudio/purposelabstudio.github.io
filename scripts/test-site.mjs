@@ -254,6 +254,26 @@ for (const p of allPages) {
   check(`${p}: reachable from homepage`, reachable.has(p), 'orphaned — no internal link path from /');
 }
 
+// 17. Canonical is self-referential (matches the page's own path) — guards copy-paste canonicals
+const CANON_BASE = 'https://purposelabstudio.github.io/';
+for (const p of allPages) {
+  if (p === '404.html') continue;
+  const m = read(p).match(/rel="canonical" href="([^"]*)"/);
+  const expected = CANON_BASE + p.replace(/index\.html$/, '');
+  check(`${p}: canonical is self-referential`, !!m && m[1] === expected, m ? `got ${m[1]}` : 'no canonical');
+}
+
+// 18. Interactive tool pages: every #id referenced in the module script exists in the HTML
+for (const p of toolPages) {
+  if (p === 'tools/index.html') continue; // hub has no interactive script
+  const html = read(p);
+  const script = (html.match(/<script type="module">([\s\S]*?)<\/script>/) || [, ''])[1];
+  const ids = [...script.matchAll(/[$]\('#([\w-]+)'\)|querySelector\('#([\w-]+)'\)|getElementById\('([\w-]+)'\)/g)].map((m) => m[1] || m[2] || m[3]);
+  for (const id of [...new Set(ids)]) {
+    check(`${p}: element #${id} exists for its script`, new RegExp(`id="${id}"`).test(html), 'referenced id missing');
+  }
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
