@@ -192,6 +192,16 @@ for (const [p, app] of Object.entries(TOOL_APP)) {
   check(`${p}: has WebApplication schema`, /"@type":\s*"WebApplication"/.test(html));
 }
 
+// 13. Tools are internally linked from their cluster post and app page
+const TOOL_BACKLINKS = {
+  '/tools/water-intake-calculator/': ['blog/how-much-water-should-i-drink-daily/index.html', 'waterwise/index.html'],
+  '/tools/blood-pressure-checker/': ['blog/normal-blood-pressure-by-age/index.html', 'bplog/index.html'],
+  '/tools/journal-prompt-generator/': ['blog/why-journaling-fails-and-how-to-stick-with-it/index.html', 'folio/index.html'],
+};
+for (const [tool, pages] of Object.entries(TOOL_BACKLINKS)) {
+  for (const pg of pages) check(`${pg}: links ${tool}`, read(pg).includes(`href="${tool}"`), 'tool link missing');
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
