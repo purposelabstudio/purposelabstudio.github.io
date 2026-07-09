@@ -14,7 +14,7 @@
 
 These are the choices baked into this plan. Change them here first if you disagree, then the tasks follow.
 
-1. **Analytics = GoatCounter** (free, open-source, cookie-less, no consent banner needed — matches the "privacy-first" brand). Swappable for Plausible/Umami by replacing one snippet. Assumed account subdomain: `purposelab.goatcounter.com` (create at goatcounter.com; update the URL if different).
+1. **Analytics = GoatCounter** (free, open-source, cookie-less, no consent banner needed — matches the "privacy-first" brand). Swappable for Plausible/Umami by replacing one snippet. Account subdomain: `purposelabstudio.goatcounter.com`.
 2. **Final custom domain = `purposelab.studio`** (TLD matches the brand). **This is a placeholder** — if you buy a different domain, do a global find-replace of `purposelab.studio` in the migration tasks before executing them. The domain is NOT purchased yet; Phase 5 is written so it can be executed later in one pass.
 3. **Newsletter = keep the existing `mailto:` fallback for now.** Phase 4 documents the exact swap to a hosted MailerLite/Buttondown embed for when you're ready; it is optional and needs no backend.
 4. **No shared templating exists** (plain hand-maintained HTML). Snippets below must be applied to **every** page; each task ends with a `grep` count to verify no page was missed.
@@ -55,13 +55,13 @@ These are the choices baked into this plan. Change them here first if you disagr
 
 - [ ] **Step 1: Create the GoatCounter account**
 
-Sign up at https://www.goatcounter.com/ and note your subdomain (e.g. `purposelab`). Site code = `purposelab.goatcounter.com`.
+Sign up at https://www.goatcounter.com/ and note your subdomain. Site code = `purposelabstudio.goatcounter.com`.
 
 - [ ] **Step 2: Add this exact snippet before `</head>` on all 22 pages**
 
 ```html
     <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
-    <script data-goatcounter="https://purposelab.goatcounter.com/count"
+    <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
 ```
 
