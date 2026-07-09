@@ -298,6 +298,28 @@ for (const p of [...toolPages, ...commercialPages]) {
   check(`${p}: has visible breadcrumb`, /class="crumbs"/.test(read(p)), 'no visible breadcrumb');
 }
 
+// 19. Every indexable page appears in sitemap.xml (guards hand-maintained sitemap drift)
+const sitemap = read('sitemap.xml');
+const pageToPath = (p) => '/' + p.replace(/index\.html$/, '');
+for (const p of allPages) {
+  if (p === '404.html') continue; // noindex error page
+  const loc = `<loc>https://purposelabstudio.github.io${pageToPath(p)}</loc>`;
+  check(`sitemap lists ${p}`, sitemap.includes(loc), `missing ${loc}`);
+}
+
+// 20. IndexNow submission list stays in sync with the sitemap (both directions)
+const indexnow = read('submit-indexnow.sh');
+const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/purposelabstudio\.github\.io(\/[^<]*)<\/loc>/g)].map((m) => m[1]);
+for (const path of sitemapPaths) {
+  check(`IndexNow lists ${path}`, indexnow.includes('${HOST}' + path + '"'), `missing ${path} in submit-indexnow.sh`);
+}
+
+// 21. Author attribution present on every indexable page (E-E-A-T / AEO signal)
+for (const p of allPages) {
+  if (p === '404.html') continue;
+  check(`${p}: has author meta`, /<meta\s+name="author"/i.test(read(p)), 'missing <meta name="author">');
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {

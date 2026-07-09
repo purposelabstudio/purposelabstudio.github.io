@@ -39,7 +39,10 @@ function auditFile(file) {
 
   // Hard requirements
   (/name="viewport"/i.test(html) ? pass : fail)('has viewport');
-  (/rel="stylesheet"/i.test(html) || is404 ? pass : fail)('links a stylesheet');
+  // A page is "styled" if it links an external stylesheet OR ships a substantial
+  // inline <style> block (e.g. a standalone print/utility page).
+  const hasStyling = /rel="stylesheet"/i.test(html) || /<style[\s>][\s\S]{200,}?<\/style>/i.test(html);
+  (hasStyling || is404 ? pass : fail)('links a stylesheet');
   if (!is404) (/rel="canonical"/i.test(html) ? pass : fail)('has canonical');
   if (!is404) (/property="og:title"/i.test(html) ? pass : fail)('has og:title');
 
