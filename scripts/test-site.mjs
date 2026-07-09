@@ -86,6 +86,13 @@ for (const p of ['index.html', 'blog/index.html']) {
   check(`${p}: loads newsletter.js`, /assets\/newsletter\.js/.test(html));
 }
 check('assets/newsletter.js exists', existsSync(join(ROOT, 'assets/newsletter.js')));
+// 5b. newsletter.js is wired to the MailerLite form endpoint
+{
+  const nl = read('assets/newsletter.js');
+  check('newsletter.js posts to MailerLite endpoint', /assets\.mailerlite\.com\/jsonp\/2499229\/forms\/192498487000040910\/subscribe/.test(nl), 'ML endpoint missing');
+  check('newsletter.js sends fields[email]', /fields\[email\]/.test(nl), 'ML email field missing');
+  check('newsletter.js keeps mailto fallback for waitlists', /dataset\.subject/.test(nl) && /__buildSubscribeMailto/.test(nl), 'mailto fallback removed');
+}
 
 // 5b. Folio Diary sales page
 {

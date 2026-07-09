@@ -383,3 +383,6 @@ a:hover { text-decoration: underline; }
 .crumbs a { color: var(--text-secondary); }
 .crumbs a:hover { color: var(--accent); }
 .crumbs span[aria-current] { color: var(--text); }
+
+/* Newsletter subscribe confirmation */
+.js-subscribe-ok { margin: 8px 0 0; font-weight: 600; color: var(--accent); }
