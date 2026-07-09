@@ -293,6 +293,11 @@ for (const [t, owners] of Object.entries(titleOwners)) {
   check(`title unique: "${t.slice(0, 50)}"`, owners.length === 1, `shared by ${owners.join(', ')}`);
 }
 
+// 21. Tool + commercial pages show a visible breadcrumb matching their BreadcrumbList schema
+for (const p of [...toolPages, ...commercialPages]) {
+  check(`${p}: has visible breadcrumb`, /class="crumbs"/.test(read(p)), 'no visible breadcrumb');
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {

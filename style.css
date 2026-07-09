@@ -377,3 +377,9 @@ a:hover { text-decoration: underline; }
 .compare th, .compare td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
 .compare thead th { background: var(--paper-2); }
 .compare td:nth-child(2) { font-weight: 600; color: var(--ink); }
+
+/* Breadcrumb trail (tool + commercial pages) */
+.crumbs { font-size: 13px; color: var(--text-secondary); margin: 6px 0 0; }
+.crumbs a { color: var(--text-secondary); }
+.crumbs a:hover { color: var(--accent); }
+.crumbs span[aria-current] { color: var(--text); }
