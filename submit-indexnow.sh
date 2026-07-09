@@ -46,6 +46,7 @@ URLS=(
   "https://${HOST}/blog/journaling-prompts-for-anxiety/"
   "https://${HOST}/blog/journaling-prompts-for-overthinking/"
   "https://${HOST}/blog/journaling-prompts-for-self-discovery/"
+  "https://${HOST}/blog/brown-noise-vs-white-noise-vs-pink-noise/"
   "https://${HOST}/bplog/printable-log/"
 )
 

@@ -42,6 +42,8 @@ pillar, stop-messaging-yourself-on-whatsapp, build-a-second-brain-on-whatsapp.
 
 ## Backlog briefs (not yet written)
 
+- **Noise colours** `/blog/brown-noise-vs-white-noise-vs-pink-noise/` — **SHIPPED** 2026-07-09. Comparison explainer (adults + focus + babies) feeding the white-noise-player tool + Hushly; captures trending "brown noise vs white noise vs pink noise" + "no ads/free" refinements.
+
 - **BP instant** `/blog/how-to-lower-blood-pressure-immediately-at-home/` — informational, high volume;
   we cover "naturally" but not "instantly/immediately". YMYL care + AHA + "seek care" framing.
 - **Journaling prompts by theme** — `/blog/journaling-prompts-for-anxiety/`, `.../overthinking/`,
