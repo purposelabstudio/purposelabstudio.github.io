@@ -42,6 +42,7 @@ URLS=(
   "https://${HOST}/blog/water-reminder-app-without-ads/"
   "https://${HOST}/blog/message-yourself-on-whatsapp-not-showing/"
   "https://${HOST}/blog/printable-blood-pressure-log/"
+  "https://${HOST}/blog/how-to-lower-blood-pressure-immediately-at-home/"
   "https://${HOST}/bplog/printable-log/"
 )
 
