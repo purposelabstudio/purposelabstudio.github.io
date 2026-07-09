@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="PurposeLab Studio">
+    <title>Printable Blood Pressure Log (Free PDF) — BP Log</title>
+    <meta name="description" content="A free, print-ready blood pressure log sheet. Print it or save as PDF — record date, time, systolic, diastolic, and pulse, with AHA category reference.">
+    <link rel="canonical" href="https://purposelabstudio.github.io/bplog/printable-log/">
+    <meta property="og:title" content="Printable Blood Pressure Log (Free PDF)">
+    <meta property="og:description" content="A free, print-ready blood pressure log sheet with AHA category reference. Print or save as PDF.">
+    <meta property="og:url" content="https://purposelabstudio.github.io/bplog/printable-log/">
+    <meta property="og:type" content="website">
+    <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
+    <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    <style>
+        :root { --ink:#1a1a1a; --line:#c9c9c9; --muted:#666; --accent:#b3261e; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); margin: 0; background:#f4f4f5; }
+        .sheet { background:#fff; max-width: 210mm; margin: 16px auto; padding: 16mm 14mm; box-shadow: 0 1px 8px rgba(0,0,0,.12); }
+        .toolbar { max-width: 210mm; margin: 16px auto 0; display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding: 0 14mm; }
+        .btn { display:inline-block; border:0; border-radius:8px; padding:10px 16px; font-size:15px; font-weight:600; cursor:pointer; text-decoration:none; }
+        .btn-primary { background: var(--accent); color:#fff; }
+        .btn-ghost { background:#e9e9ec; color:#1a1a1a; }
+        h1 { font-size: 22px; margin: 0 0 2px; }
+        .sub { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
+        .ident { display:flex; gap:24px; font-size:13px; margin: 10px 0 16px; }
+        .ident span { border-bottom:1px solid var(--line); flex:1; padding-bottom:2px; }
+        table { width:100%; border-collapse: collapse; font-size: 13px; }
+        th, td { border:1px solid var(--line); padding:7px 6px; text-align:center; }
+        th { background:#f0f0f2; font-weight:600; }
+        td.notes, th.notes { text-align:left; width:26%; }
+        tbody tr { height: 30px; }
+        .ref { margin-top:14px; font-size:12px; color:var(--ink); }
+        .ref table { font-size:12px; }
+        .ref th, .ref td { padding:5px 6px; }
+        .foot { margin-top:12px; font-size:11px; color:var(--muted); line-height:1.5; }
+        @page { size: A4; margin: 12mm; }
+        @media print {
+            body { background:#fff; }
+            .toolbar { display:none !important; }
+            .sheet { box-shadow:none; margin:0; max-width:none; padding:0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar no-print">
+        <a href="/bplog/" class="btn btn-ghost">← BP Log</a>
+        <button class="btn btn-primary" onclick="window.print()">🖨 Print / Save as PDF</button>
+        <a href="/bplog/blood-pressure-log.pdf" class="btn btn-ghost" download>⬇ Download PDF</a>
+    </div>
+
+    <div class="sheet">
+        <h1>Blood Pressure Log</h1>
+        <p class="sub">Record readings from your home monitor. Take two readings, one minute apart, and note the average.</p>
+
+        <div class="ident">
+            <span>Name:</span>
+            <span>Month:</span>
+            <span>Target (set by your doctor):</span>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Systolic<br>(top)</th>
+                    <th>Diastolic<br>(bottom)</th>
+                    <th>Pulse</th>
+                    <th class="notes">Notes (meds, symptoms, before/after)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td class="notes"></td></tr>
+            </tbody>
+        </table>
+
+        <div class="ref">
+            <strong>Blood pressure categories (American Heart Association)</strong>
+            <table>
+                <thead>
+                    <tr><th>Category</th><th>Systolic (mmHg)</th><th></th><th>Diastolic (mmHg)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Normal</td><td>Less than 120</td><td>and</td><td>Less than 80</td></tr>
+                    <tr><td>Elevated</td><td>120–129</td><td>and</td><td>Less than 80</td></tr>
+                    <tr><td>Hypertension Stage 1</td><td>130–139</td><td>or</td><td>80–89</td></tr>
+                    <tr><td>Hypertension Stage 2</td><td>140 or higher</td><td>or</td><td>90 or higher</td></tr>
+                    <tr><td>Hypertensive Crisis</td><td>Higher than 180</td><td>and/or</td><td>Higher than 120</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="foot">
+            Reference only — not medical advice. Blood pressure categories are based on American Heart Association guidelines. A single high reading is not a diagnosis; readings vary through the day. If your reading is in the Hypertensive Crisis range (higher than 180/120) and you have symptoms such as chest pain, shortness of breath, or vision changes, seek emergency care. Share this log with your doctor and follow their guidance.
+            <br>Free printable from PurposeLab Studio · purposelabstudio.github.io
+        </p>
+    </div>
+</body>
+</html>

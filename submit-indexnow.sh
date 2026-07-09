@@ -38,6 +38,10 @@ URLS=(
   "https://${HOST}/blog/normal-blood-pressure-by-age/"
   "https://${HOST}/blog/how-to-lower-blood-pressure-naturally/"
   "https://${HOST}/blog/baby-wont-sleep-through-night/"
+  "https://${HOST}/blog/water-reminder-app-without-ads/"
+  "https://${HOST}/blog/message-yourself-on-whatsapp-not-showing/"
+  "https://${HOST}/blog/printable-blood-pressure-log/"
+  "https://${HOST}/bplog/printable-log/"
 )
 
 # Build JSON payload
