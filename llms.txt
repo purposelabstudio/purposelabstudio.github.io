@@ -16,6 +16,13 @@
 - [Blood Pressure Category Checker](https://purposelabstudio.github.io/tools/blood-pressure-checker/): Enter systolic/diastolic to see the AHA category. Educational reference. Pairs with BP Log.
 - [Journaling Prompt Generator](https://purposelabstudio.github.io/tools/journal-prompt-generator/): Free daily writing prompts to beat the blank page. Pairs with Folio.
 
+## Comparison Guides
+
+- [Best Free Blood Pressure App](https://purposelabstudio.github.io/best-free-blood-pressure-app/): What to look for in a free BP tracker and how BP Log compares — free, offline, no ads.
+- [Best Free Water Reminder App](https://purposelabstudio.github.io/best-free-water-reminder-app/): How to pick a water reminder and why WaterWise is ad-free with no paywall.
+- [Best Free Baby Sleep Sounds App](https://purposelabstudio.github.io/best-free-baby-sleep-app/): What matters in a baby sleep app and how Hushly compares — curated sounds, no ads.
+- [Best Free Journal App With Lock](https://purposelabstudio.github.io/best-free-journal-app/): Choosing a private journal app and how Folio compares — app lock, offline, no ads.
+
 ## Key Facts
 
 - All apps are 100% free with no ads, no subscriptions, and no in-app purchases

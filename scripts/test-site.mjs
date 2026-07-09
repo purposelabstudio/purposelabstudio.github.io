@@ -217,6 +217,17 @@ for (const [p, pkg] of Object.entries(COMMERCIAL_APP)) {
   check(`${p}: has FAQ`, /Frequently Asked Questions/i.test(html) && /"@type":\s*"FAQPage"/.test(html), 'no FAQ');
 }
 
+// 15. Commercial pages are internally linked from their app page and cluster posts
+const COMMERCIAL_BACKLINKS = {
+  '/best-free-blood-pressure-app/': ['bplog/index.html', 'blog/how-to-track-blood-pressure-at-home/index.html'],
+  '/best-free-water-reminder-app/': ['waterwise/index.html', 'blog/how-much-water-should-i-drink-daily/index.html'],
+  '/best-free-baby-sleep-app/': ['hushly/index.html', 'blog/white-noise-baby-sleep-science/index.html'],
+  '/best-free-journal-app/': ['folio/index.html', 'blog/why-journaling-fails-and-how-to-stick-with-it/index.html'],
+};
+for (const [pg, pages] of Object.entries(COMMERCIAL_BACKLINKS)) {
+  for (const src of pages) check(`${src}: links ${pg}`, read(src).includes(`href="${pg}"`), 'commercial link missing');
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {
