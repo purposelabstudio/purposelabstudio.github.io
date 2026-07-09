@@ -5,6 +5,7 @@
   "description": "PurposeLab Studio website (static site).",
   "scripts": {
     "test": "node scripts/test-site.mjs",
-    "audit": "node scripts/audit.mjs"
+    "audit": "node scripts/audit.mjs",
+    "check:analytics": "node scripts/check-analytics.mjs"
   }
 }
