@@ -24,7 +24,7 @@ const blogPosts = readdirSync(join(ROOT, 'blog'))
 const appPages = ['crumbs', 'folio', 'waterwise', 'bplog', 'hushly'].map((a) => `${a}/index.html`);
 const corePages = ['index.html', 'about/index.html', 'support/index.html', 'blog/index.html', '404.html'];
 const DIARY = 'folio/diary/index.html';
-const toolPages = ['tools/index.html', 'tools/water-intake-calculator/index.html', 'tools/blood-pressure-checker/index.html', 'tools/journal-prompt-generator/index.html'];
+const toolPages = ['tools/index.html', 'tools/water-intake-calculator/index.html', 'tools/blood-pressure-checker/index.html', 'tools/journal-prompt-generator/index.html', 'tools/white-noise-player/index.html'];
 const commercialPages = ['best-free-blood-pressure-app/index.html', 'best-free-water-reminder-app/index.html', 'best-free-baby-sleep-app/index.html', 'best-free-journal-app/index.html'];
 const allPages = [...corePages, ...appPages, ...blogPosts, DIARY, ...toolPages, ...commercialPages];
 
@@ -185,6 +185,7 @@ const TOOL_APP = {
   'tools/water-intake-calculator/index.html': '/waterwise/',
   'tools/blood-pressure-checker/index.html': '/bplog/',
   'tools/journal-prompt-generator/index.html': '/folio/',
+  'tools/white-noise-player/index.html': '/hushly/',
 };
 for (const [p, app] of Object.entries(TOOL_APP)) {
   const html = read(p);
@@ -198,6 +199,7 @@ const TOOL_BACKLINKS = {
   '/tools/water-intake-calculator/': ['blog/how-much-water-should-i-drink-daily/index.html', 'waterwise/index.html'],
   '/tools/blood-pressure-checker/': ['blog/normal-blood-pressure-by-age/index.html', 'bplog/index.html'],
   '/tools/journal-prompt-generator/': ['blog/why-journaling-fails-and-how-to-stick-with-it/index.html', 'folio/index.html'],
+  '/tools/white-noise-player/': ['blog/white-noise-baby-sleep-science/index.html', 'hushly/index.html'],
 };
 for (const [tool, pages] of Object.entries(TOOL_BACKLINKS)) {
   for (const pg of pages) check(`${pg}: links ${tool}`, read(pg).includes(`href="${tool}"`), 'tool link missing');

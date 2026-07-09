@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free White Noise Player — White, Pink &amp; Brown Noise for Sleep</title>
+    <meta name="description" content="A free in-browser white noise player. Play white, pink, or brown noise with a volume control and sleep timer — no downloads, no ads, no sign-up. Great for sleep and focus.">
+    <meta name="keywords" content="white noise player, free white noise, pink noise, brown noise, white noise for sleep, white noise online, baby sleep white noise">
+    <link rel="canonical" href="https://purposelabstudio.github.io/tools/white-noise-player/">
+    <meta name="author" content="PurposeLab Studio">
+    <meta property="og:title" content="Free White Noise Player — White, Pink &amp; Brown Noise">
+    <meta property="og:description" content="Play white, pink, or brown noise in your browser with a sleep timer. Free, no downloads, no ads.">
+    <meta property="og:url" content="https://purposelabstudio.github.io/tools/white-noise-player/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="PurposeLab Studio">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Free White Noise Player — White, Pink &amp; Brown Noise">
+    <meta name="twitter:description" content="Play white, pink, or brown noise in your browser with a sleep timer. Free, no ads.">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔊</text></svg>">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Free White Noise Player",
+      "url": "https://purposelabstudio.github.io/tools/white-noise-player/",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Any (web)",
+      "browserRequirements": "Requires JavaScript and the Web Audio API",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "publisher": { "@type": "Organization", "name": "PurposeLab Studio", "url": "https://purposelabstudio.github.io" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://purposelabstudio.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://purposelabstudio.github.io/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "White Noise Player", "item": "https://purposelabstudio.github.io/tools/white-noise-player/" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the difference between white, pink, and brown noise?", "acceptedAnswer": { "@type": "Answer", "text": "White noise has equal energy at every frequency and sounds like static. Pink noise lowers the higher frequencies, so it sounds softer and fuller, like steady rain. Brown noise drops the highs further, giving a deep rumble like a waterfall — many people find it the most soothing for sleep." } },
+        { "@type": "Question", "name": "Is this white noise player really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It runs entirely in your browser using the Web Audio API — nothing is downloaded, there are no ads, and there is no sign-up. The sound is generated on your device." } },
+        { "@type": "Question", "name": "Is white noise safe for babies?", "acceptedAnswer": { "@type": "Answer", "text": "At a low, safe volume it can help. Keep it around 50 decibels and place the device at least 2 metres from the crib, and use it for sleep rather than around the clock. For a dedicated baby app with curated sounds and a timer, try Hushly." } }
+      ]
+    }
+    </script>
+    <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
+    <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="nav-brand">PurposeLab Studio</a>
+            <ul class="nav-links">
+                <li><a href="/crumbs/">Crumbs</a></li>
+                <li><a href="/folio/">Folio</a></li>
+                <li><a href="/waterwise/">WaterWise</a></li>
+                <li><a href="/bplog/">BP Log</a></li>
+                <li><a href="/hushly/">Hushly</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/support/">Support</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <div class="eyebrow">~/ tools / white-noise</div>
+            <h1>Free White Noise Player</h1>
+            <p class="subtitle">Play white, pink, or brown noise right in your browser — with a volume control and sleep timer. No downloads, no ads, no sign-up. The sound is generated on your device.</p>
+        </section>
+
+        <section class="section">
+            <div class="card">
+                <p style="margin:4px 0 4px;"><strong>Sound</strong></p>
+                <label><input type="radio" name="type" value="white" checked> White — bright static, masks noise</label><br>
+                <label><input type="radio" name="type" value="pink"> Pink — softer, like steady rain</label><br>
+                <label><input type="radio" name="type" value="brown"> Brown — deep rumble, like a waterfall</label>
+
+                <p style="margin:16px 0 4px;"><strong>Volume</strong></p>
+                <input type="range" id="vol" min="0" max="100" value="40" style="width:100%;" aria-label="Volume">
+
+                <p style="margin:16px 0 4px;"><strong>Sleep timer</strong></p>
+                <label><input type="radio" name="timer" value="0" checked> Off</label>
+                <label style="margin-left:12px;"><input type="radio" name="timer" value="15"> 15 min</label>
+                <label style="margin-left:12px;"><input type="radio" name="timer" value="30"> 30 min</label>
+                <label style="margin-left:12px;"><input type="radio" name="timer" value="60"> 60 min</label>
+
+                <p style="margin-top:18px;"><button class="btn btn-primary" id="toggle">▶ Play</button></p>
+                <div id="status" role="status" aria-live="polite" style="color:var(--text-secondary);"></div>
+            </div>
+            <p style="font-size:13px;color:var(--text-secondary);">Tip: for babies, keep the volume low (around 50 dB) and the device at least 2 metres from the crib.</p>
+        </section>
+
+        <div class="app-cta">
+            <img src="/hushly/icon.png" alt="Hushly">
+            <div><strong>Hushly</strong> — a dedicated baby sleep app with curated sounds, one-handed controls, and a timer. Free, offline, no ads. <a href="/hushly/">Learn more &rarr;</a></div>
+        </div>
+
+        <aside class="related-guides">
+            <h2>Related guides</h2>
+            <ul>
+                <li><a href="/blog/white-noise-baby-sleep-science/">The Science Behind White Noise and Baby Sleep</a></li>
+                <li><a href="/blog/baby-wont-sleep-through-night/">Why Your Baby Won't Sleep Through the Night (And What Actually Helps)</a></li>
+                <li><a href="/hushly/">Hushly — soothing baby sleep sounds &rarr;</a></li>
+            </ul>
+        </aside>
+
+        <footer class="footer">
+            <p>&copy; 2025–2026 PurposeLab Studio. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://purposelabstudio.github.io/privacy-policies/">Privacy Policies</a>
+                <a href="/support/">Support</a>
+                <a href="/about/">About</a>
+                <a href="/blog/rss.xml">RSS</a>
+            </div>
+        </footer>
+    </div>
+    <script type="module">
+        import { NOISE } from './noise.js';
+        const $ = (s) => document.querySelector(s);
+        let ctx = null, src = null, gain = null, timerId = null;
+
+        const selectedType = () => document.querySelector('input[name=type]:checked').value;
+        const volume = () => Number($('#vol').value) / 100;
+
+        function buildBuffer() {
+            const seconds = 2;
+            const buf = ctx.createBuffer(1, ctx.sampleRate * seconds, ctx.sampleRate);
+            NOISE[selectedType()](buf.getChannelData(0));
+            return buf;
+        }
+
+        function stop() {
+            if (src) { try { src.stop(); } catch (e) { /* already stopped */ } src.disconnect(); src = null; }
+            if (timerId) { clearTimeout(timerId); timerId = null; }
+            $('#toggle').textContent = '▶ Play';
+            $('#status').textContent = '';
+        }
+
+        function play() {
+            if (!ctx) { ctx = new (window.AudioContext || window.webkitAudioContext)(); gain = ctx.createGain(); gain.connect(ctx.destination); }
+            if (ctx.state === 'suspended') ctx.resume();
+            gain.gain.value = volume();
+            src = ctx.createBufferSource();
+            src.buffer = buildBuffer();
+            src.loop = true;
+            src.connect(gain);
+            src.start();
+            $('#toggle').textContent = '⏸ Stop';
+            const mins = Number(document.querySelector('input[name=timer]:checked').value);
+            $('#status').textContent = mins ? `Playing ${selectedType()} noise — stops in ${mins} min.` : `Playing ${selectedType()} noise.`;
+            if (mins) timerId = setTimeout(stop, mins * 60 * 1000);
+        }
+
+        $('#toggle').addEventListener('click', () => (src ? stop() : play()));
+        $('#vol').addEventListener('input', () => { if (gain) gain.gain.value = volume(); });
+        document.querySelectorAll('input[name=type]').forEach((r) => r.addEventListener('change', () => { if (src) { stop(); play(); } }));
+    </script>
+</body>
+</html>

@@ -23,6 +23,7 @@ URLS=(
   "https://${HOST}/tools/water-intake-calculator/"
   "https://${HOST}/tools/blood-pressure-checker/"
   "https://${HOST}/tools/journal-prompt-generator/"
+  "https://${HOST}/tools/white-noise-player/"
   "https://${HOST}/best-free-blood-pressure-app/"
   "https://${HOST}/best-free-water-reminder-app/"
   "https://${HOST}/best-free-baby-sleep-app/"

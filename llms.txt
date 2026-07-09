@@ -15,6 +15,7 @@
 - [Daily Water Intake Calculator](https://purposelabstudio.github.io/tools/water-intake-calculator/): Free calculator — enter weight, activity, and climate for a personalised daily hydration target. Pairs with WaterWise.
 - [Blood Pressure Category Checker](https://purposelabstudio.github.io/tools/blood-pressure-checker/): Enter systolic/diastolic to see the AHA category. Educational reference. Pairs with BP Log.
 - [Journaling Prompt Generator](https://purposelabstudio.github.io/tools/journal-prompt-generator/): Free daily writing prompts to beat the blank page. Pairs with Folio.
+- [Free White Noise Player](https://purposelabstudio.github.io/tools/white-noise-player/): Play white, pink, or brown noise in the browser with a sleep timer. Generated on-device, no downloads. Pairs with Hushly.
 
 ## Comparison Guides
 
