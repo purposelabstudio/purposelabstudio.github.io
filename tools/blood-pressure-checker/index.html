@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Pressure Category Checker — AHA Classification</title>
+    <meta name="description" content="Free blood pressure checker. Enter your systolic and diastolic numbers to see your AHA blood pressure category — Normal, Elevated, Stage 1, Stage 2, or Crisis. Reference only.">
+    <meta name="keywords" content="blood pressure checker, bp category, what does my blood pressure mean, aha blood pressure categories, is my blood pressure high">
+    <link rel="canonical" href="https://purposelabstudio.github.io/tools/blood-pressure-checker/">
+    <meta property="og:title" content="Blood Pressure Category Checker">
+    <meta property="og:description" content="Enter your systolic and diastolic to see your AHA blood pressure category. Free reference, no sign-up.">
+    <meta property="og:url" content="https://purposelabstudio.github.io/tools/blood-pressure-checker/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="PurposeLab Studio">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Blood Pressure Category Checker">
+    <meta name="twitter:description" content="See your AHA blood pressure category from your numbers. Free reference.">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️‍🩹</text></svg>">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Blood Pressure Category Checker",
+      "url": "https://purposelabstudio.github.io/tools/blood-pressure-checker/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any (web)",
+      "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "publisher": { "@type": "Organization", "name": "PurposeLab Studio", "url": "https://purposelabstudio.github.io" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://purposelabstudio.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://purposelabstudio.github.io/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "Blood Pressure Checker", "item": "https://purposelabstudio.github.io/tools/blood-pressure-checker/" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is AHA blood pressure classification?", "acceptedAnswer": { "@type": "Answer", "text": "The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129/less than 80), High Blood Pressure Stage 1 (130-139/80-89), High Blood Pressure Stage 2 (140+/90+), and Hypertensive Crisis (180+/120+)." } },
+        { "@type": "Question", "name": "Which number matters more, systolic or diastolic?", "acceptedAnswer": { "@type": "Answer", "text": "Your category is set by whichever number falls into the higher range. If your systolic and diastolic fall in different categories, the more severe one applies." } },
+        { "@type": "Question", "name": "Can this checker replace my doctor's advice?", "acceptedAnswer": { "@type": "Answer", "text": "No. This is an informational reference using AHA cut-offs, not a medical diagnosis. Always consult your doctor for decisions about blood pressure management." } }
+      ]
+    }
+    </script>
+    <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
+    <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="nav-brand">PurposeLab Studio</a>
+            <ul class="nav-links">
+                <li><a href="/crumbs/">Crumbs</a></li>
+                <li><a href="/folio/">Folio</a></li>
+                <li><a href="/waterwise/">WaterWise</a></li>
+                <li><a href="/bplog/">BP Log</a></li>
+                <li><a href="/hushly/">Hushly</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/support/">Support</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <div class="eyebrow">~/ tools / blood-pressure</div>
+            <h1>Blood Pressure Category Checker</h1>
+            <p class="subtitle">Enter a reading to see its AHA category. Reference only — the check runs entirely in your browser, nothing is stored or sent.</p>
+        </section>
+
+        <section class="section">
+            <div class="card">
+                <form id="calc" onsubmit="return false">
+                    <label>Systolic (top)<br><input type="number" id="sys" min="60" max="260" value="118" inputmode="numeric" required></label>
+                    <label style="display:block;margin-top:10px;">Diastolic (bottom)<br><input type="number" id="dia" min="40" max="160" value="78" inputmode="numeric" required></label>
+                    <p style="margin-top:16px;"><button type="submit" class="btn btn-primary">Check category</button></p>
+                </form>
+                <div id="result" role="status" aria-live="polite" style="margin-top:8px;"></div>
+            </div>
+            <p style="font-size:13px;color:var(--text-secondary);">Based on American Heart Association (AHA) cut-offs. Educational reference only, not a diagnosis. Always confirm with your doctor.</p>
+        </section>
+
+        <div class="app-cta">
+            <img src="/bplog/icon.png" alt="BP Log">
+            <div><strong>BP Log</strong> — log readings offline, see AHA-classified trends, and share clean PDF reports with your doctor. <a href="/bplog/">Learn more &rarr;</a></div>
+        </div>
+
+        <aside class="related-guides">
+            <h2>Related guides</h2>
+            <ul>
+                <li><a href="/blog/normal-blood-pressure-by-age/">Normal Blood Pressure by Age: Chart and What Your Numbers Mean</a></li>
+                <li><a href="/blog/how-to-track-blood-pressure-at-home/">How to Track Blood Pressure at Home: A Complete Guide</a></li>
+                <li><a href="/bplog/">BP Log — free, offline blood pressure tracker &rarr;</a></li>
+            </ul>
+        </aside>
+
+        <footer class="footer">
+            <p>&copy; 2025–2026 PurposeLab Studio. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://purposelabstudio.github.io/privacy-policies/">Privacy Policies</a>
+                <a href="/support/">Support</a>
+                <a href="/about/">About</a>
+                <a href="/blog/rss.xml">RSS</a>
+            </div>
+        </footer>
+    </div>
+    <script type="module">
+        import { bpCategory } from './calc.js';
+        const $ = (s) => document.querySelector(s);
+        $('#calc').addEventListener('submit', () => {
+            const r = bpCategory($('#sys').value, $('#dia').value);
+            $('#result').innerHTML = `<p style="font-size:20px;margin:8px 0;"><strong>${r.label}</strong></p><p style="color:var(--text-secondary);">${r.note}</p><p style="font-size:13px;color:var(--text-secondary);">Reference only — not a diagnosis. Always confirm with your doctor.</p>`;
+        });
+    </script>
+</body>
+</html>

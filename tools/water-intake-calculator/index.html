@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Water Intake Calculator — How Much Water Should You Drink?</title>
+    <meta name="description" content="Free daily water intake calculator. Enter your weight, activity level, and climate to get a personalised hydration target in litres and glasses. No ads, no sign-up.">
+    <meta name="keywords" content="water intake calculator, how much water should i drink, daily water calculator, hydration calculator, water intake by weight">
+    <link rel="canonical" href="https://purposelabstudio.github.io/tools/water-intake-calculator/">
+    <meta property="og:title" content="Daily Water Intake Calculator">
+    <meta property="og:description" content="Get a personalised daily hydration target from your weight, activity, and climate. Free, no sign-up.">
+    <meta property="og:url" content="https://purposelabstudio.github.io/tools/water-intake-calculator/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:site_name" content="PurposeLab Studio">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Daily Water Intake Calculator">
+    <meta name="twitter:description" content="Personalised daily hydration target from weight, activity, and climate. Free.">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Daily Water Intake Calculator",
+      "url": "https://purposelabstudio.github.io/tools/water-intake-calculator/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any (web)",
+      "browserRequirements": "Requires JavaScript",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "publisher": { "@type": "Organization", "name": "PurposeLab Studio", "url": "https://purposelabstudio.github.io" }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://purposelabstudio.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://purposelabstudio.github.io/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "Water Intake Calculator", "item": "https://purposelabstudio.github.io/tools/water-intake-calculator/" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much water should I drink a day?", "acceptedAnswer": { "@type": "Answer", "text": "A common starting point is about 33 ml of water per kilogram of body weight, adjusted up for exercise and hot weather. This calculator estimates that target for you; individual needs vary." } },
+        { "@type": "Question", "name": "Does exercise change how much water I need?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Moderate activity adds roughly 350 ml and vigorous activity roughly 700 ml to your daily target to replace fluids lost through sweat." } },
+        { "@type": "Question", "name": "Is this calculator medical advice?", "acceptedAnswer": { "@type": "Answer", "text": "No. It is an educational estimate. If you have a heart, kidney, or other condition that affects fluid intake, follow your doctor's guidance." } }
+      ]
+    }
+    </script>
+    <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
+    <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <a href="/" class="nav-brand">PurposeLab Studio</a>
+            <ul class="nav-links">
+                <li><a href="/crumbs/">Crumbs</a></li>
+                <li><a href="/folio/">Folio</a></li>
+                <li><a href="/waterwise/">WaterWise</a></li>
+                <li><a href="/bplog/">BP Log</a></li>
+                <li><a href="/hushly/">Hushly</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/support/">Support</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <div class="eyebrow">~/ tools / water-intake</div>
+            <h1>Daily Water Intake Calculator</h1>
+            <p class="subtitle">Enter your details for a personalised daily hydration target. No sign-up, no ads — the math runs entirely in your browser.</p>
+        </section>
+
+        <section class="section">
+            <div class="card">
+                <form id="calc" onsubmit="return false">
+                    <label>Weight (kg)<br><input type="number" id="weight" min="30" max="200" value="70" inputmode="numeric" required></label>
+                    <p style="margin:14px 0 4px;"><strong>Activity level</strong></p>
+                    <label><input type="radio" name="activity" value="sedentary" checked> Sedentary</label><br>
+                    <label><input type="radio" name="activity" value="moderate"> Moderate (30–60 min/day)</label><br>
+                    <label><input type="radio" name="activity" value="active"> Active (intense/long)</label>
+                    <p style="margin:14px 0 4px;"><strong>Climate</strong></p>
+                    <label><input type="radio" name="climate" value="temperate" checked> Temperate</label><br>
+                    <label><input type="radio" name="climate" value="hot"> Hot / humid</label>
+                    <p style="margin-top:16px;"><button type="submit" class="btn btn-primary" id="go">Calculate</button></p>
+                </form>
+                <div id="result" role="status" aria-live="polite" style="margin-top:8px;"></div>
+            </div>
+            <p style="font-size:13px;color:var(--text-secondary);">Educational estimate only, not medical advice. People with heart or kidney conditions should follow their doctor's guidance.</p>
+        </section>
+
+        <div class="app-cta">
+            <img src="/waterwise/icon.png" alt="WaterWise">
+            <div><strong>WaterWise</strong> — hit your target with one-tap logging and gentle reminders, no ads. <a href="/waterwise/">Learn more &rarr;</a></div>
+        </div>
+
+        <aside class="related-guides">
+            <h2>Related guides</h2>
+            <ul>
+                <li><a href="/blog/how-much-water-should-i-drink-daily/">How Much Water Should I Actually Drink? The Science Behind Daily Hydration Goals</a></li>
+                <li><a href="/blog/why-water-apps-are-full-of-ads/">Why Water Tracking Apps Are Full of Ads (And What to Do About It)</a></li>
+                <li><a href="/waterwise/">WaterWise — ad-free water reminder &rarr;</a></li>
+            </ul>
+        </aside>
+
+        <footer class="footer">
+            <p>&copy; 2025–2026 PurposeLab Studio. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="https://purposelabstudio.github.io/privacy-policies/">Privacy Policies</a>
+                <a href="/support/">Support</a>
+                <a href="/about/">About</a>
+                <a href="/blog/rss.xml">RSS</a>
+            </div>
+        </footer>
+    </div>
+    <script type="module">
+        import { waterIntakeMl } from './calc.js';
+        const $ = (s) => document.querySelector(s);
+        $('#calc').addEventListener('submit', () => {
+            const w = $('#weight').value;
+            const a = document.querySelector('input[name=activity]:checked').value;
+            const c = document.querySelector('input[name=climate]:checked').value;
+            const ml = waterIntakeMl(w, a, c);
+            const litres = (ml / 1000).toFixed(1);
+            const glasses = Math.round(ml / 250);
+            $('#result').innerHTML = `<p style="font-size:20px;margin:8px 0;"><strong>${litres} litres/day</strong> — about ${glasses} glasses (250 ml each).</p>`;
+        });
+    </script>
+</body>
+</html>
