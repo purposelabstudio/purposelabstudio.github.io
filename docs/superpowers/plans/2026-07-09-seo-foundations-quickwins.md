@@ -16,9 +16,14 @@
 
 - ✅ All 5 app pages already have `SoftwareApplication` + `FAQPage` + `BreadcrumbList` JSON-LD. **No work needed** (strategy task B4 already done).
 - ✅ All 11 blog posts already up-link to their app via `.post-app-hint` and `.app-cta`.
-- ❌ **Nav is inconsistent.** 15 pages carry the full 8-item nav (Crumbs, Folio, WaterWise, BP Log, Hushly, Blog, About, Support). **7 pages carry a reduced nav** missing Crumbs/Folio/WaterWise: `crumbs/index.html`, `404.html`, and 5 blog posts — `how-to-track-blood-pressure-at-home`, `normal-blood-pressure-by-age`, `how-to-lower-blood-pressure-naturally`, `baby-wont-sleep-through-night`, `white-noise-baby-sleep-science`. This is a real internal-linking gap.
-- ❌ **No sibling cross-linking.** Posts link *up* to their app but not *across* to the other posts in the same cluster. No "Related guides" block exists anywhere.
-- ❌ **FAQPage present on only 4 of 11 posts.** Missing on 7: `stop-messaging-yourself-on-whatsapp`, `build-a-second-brain-on-whatsapp`, `daily-journal-vs-mood-tracker-why-you-need-both`, `why-journaling-fails-and-how-to-stick-with-it`, `how-to-lower-blood-pressure-naturally`, `baby-wont-sleep-through-night`, `white-noise-baby-sleep-science`.
+
+### Re-audit 2026-07-09 (partial progress since first audit)
+
+- ✅ **Nav fixed** on `crumbs/index.html` and `404.html` — both now carry all 5 app links.
+- ❌ **Nav STILL inconsistent on 5 blog posts** (reduced to BP Log + Hushly only, missing Crumbs/Folio/WaterWise): `how-to-track-blood-pressure-at-home`, `normal-blood-pressure-by-age`, `how-to-lower-blood-pressure-naturally`, `baby-wont-sleep-through-night`, `white-noise-baby-sleep-science`. **Task 1 remaining scope = these 5 posts.**
+- ✅ **FAQ done on 7 of 11 posts** (schema + visible), using markup `<h2 class="section-title">Frequently Asked Questions</h2>` (NOT `class="faq"` — update the Task 3 test regex accordingly): BP ×3, water ×2, WhatsApp ×2.
+- ❌ **FAQ STILL missing on 4 posts** (journaling + baby-sleep clusters): `daily-journal-vs-mood-tracker-why-you-need-both`, `why-journaling-fails-and-how-to-stick-with-it`, `baby-wont-sleep-through-night`, `white-noise-baby-sleep-science`. **Task 3 remaining scope = these 4 posts.**
+- ❌ **No sibling cross-linking anywhere** — 0 posts have a `related-guides` block. **Task 2 = unstarted.**
 
 ## Clusters (single source of truth for cross-linking)
 

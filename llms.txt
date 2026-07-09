@@ -10,6 +10,12 @@
 - [BP Log — Blood Pressure Tracker](https://purposelabstudio.github.io/bplog/): Log readings from your home BP monitor. See AHA-classified trends, 7-day averages, and share PDF reports with your doctor. 100% offline.
 - [Hushly — Baby Sleep Sounds](https://purposelabstudio.github.io/hushly/): Soothing sounds to help your baby sleep peacefully. Curated audio, simple controls, no ads ever.
 
+## Tools
+
+- [Daily Water Intake Calculator](https://purposelabstudio.github.io/tools/water-intake-calculator/): Free calculator — enter weight, activity, and climate for a personalised daily hydration target. Pairs with WaterWise.
+- [Blood Pressure Category Checker](https://purposelabstudio.github.io/tools/blood-pressure-checker/): Enter systolic/diastolic to see the AHA category. Educational reference. Pairs with BP Log.
+- [Journaling Prompt Generator](https://purposelabstudio.github.io/tools/journal-prompt-generator/): Free daily writing prompts to beat the blank page. Pairs with Folio.
+
 ## Key Facts
 
 - All apps are 100% free with no ads, no subscriptions, and no in-app purchases

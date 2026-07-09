@@ -24,7 +24,8 @@ const blogPosts = readdirSync(join(ROOT, 'blog'))
 const appPages = ['crumbs', 'folio', 'waterwise', 'bplog', 'hushly'].map((a) => `${a}/index.html`);
 const corePages = ['index.html', 'about/index.html', 'support/index.html', 'blog/index.html', '404.html'];
 const DIARY = 'folio/diary/index.html';
-const allPages = [...corePages, ...appPages, ...blogPosts, DIARY];
+const toolPages = ['tools/index.html', 'tools/water-intake-calculator/index.html', 'tools/blood-pressure-checker/index.html', 'tools/journal-prompt-generator/index.html'];
+const allPages = [...corePages, ...appPages, ...blogPosts, DIARY, ...toolPages];
 
 // 1. SEO invariants on every indexable page (404 is noindex, skip canonical there)
 for (const p of allPages) {
@@ -176,6 +177,19 @@ for (const p of blogPosts) {
   const html = read(p);
   check(`${p}: has FAQPage JSON-LD`, /"@type":\s*"FAQPage"/.test(html), 'no FAQPage schema');
   check(`${p}: has visible FAQ heading`, /Frequently Asked Questions/i.test(html), 'no visible FAQ');
+}
+
+// 12. Each interactive tool imports its module and links to its app
+const TOOL_APP = {
+  'tools/water-intake-calculator/index.html': '/waterwise/',
+  'tools/blood-pressure-checker/index.html': '/bplog/',
+  'tools/journal-prompt-generator/index.html': '/folio/',
+};
+for (const [p, app] of Object.entries(TOOL_APP)) {
+  const html = read(p);
+  check(`${p}: uses ES module`, /<script type="module">/.test(html), 'no module script');
+  check(`${p}: links its app ${app}`, html.includes(`href="${app}"`), 'no app link');
+  check(`${p}: has WebApplication schema`, /"@type":\s*"WebApplication"/.test(html));
 }
 
 // Summary
