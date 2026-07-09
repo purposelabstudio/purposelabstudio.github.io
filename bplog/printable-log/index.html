@@ -27,16 +27,18 @@
         .sub { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
         .ident { display:flex; gap:24px; font-size:13px; margin: 10px 0 16px; }
         .ident span { border-bottom:1px solid var(--line); flex:1; padding-bottom:2px; }
-        table { width:100%; border-collapse: collapse; font-size: 13px; }
-        th, td { border:1px solid var(--line); padding:7px 6px; text-align:center; }
+        table { width:100%; border-collapse: collapse; font-size: 12.5px; }
+        th, td { border:1px solid var(--line); padding:4px 6px; text-align:center; }
         th { background:#f0f0f2; font-weight:600; }
         td.notes, th.notes { text-align:left; width:26%; }
-        tbody tr { height: 30px; }
-        .ref { margin-top:14px; font-size:12px; color:var(--ink); }
+        tbody tr { height: 21px; }
+        .ref { margin-top:10px; font-size:12px; color:var(--ink); }
         .ref table { font-size:12px; }
-        .ref th, .ref td { padding:5px 6px; }
-        .foot { margin-top:12px; font-size:11px; color:var(--muted); line-height:1.5; }
-        @page { size: A4; margin: 12mm; }
+        .ref th, .ref td { padding:4px 6px; }
+        .foot { margin-top:8px; font-size:11px; color:var(--muted); line-height:1.5; }
+        .related { max-width:210mm; margin:0 auto 24px; padding:0 14mm; font-size:13px; color:var(--muted); }
+        .related a { color:var(--accent); text-decoration:none; }
+        @page { size: A4; margin: 9mm; }
         @media print {
             body { background:#fff; }
             .toolbar { display:none !important; }
@@ -125,5 +127,13 @@
             <br>Free printable from PurposeLab Studio · purposelabstudio.github.io
         </p>
     </div>
+
+    <nav class="related no-print" aria-label="Related">
+        More: <a href="/bplog/">BP Log app</a> ·
+        <a href="/blog/printable-blood-pressure-log/">How to use this log</a> ·
+        <a href="/blog/how-to-track-blood-pressure-at-home/">Track BP at home</a> ·
+        <a href="/tools/blood-pressure-checker/">BP category checker</a> ·
+        <a href="/blog/normal-blood-pressure-by-age/">Normal BP by age</a>
+    </nav>
 </body>
 </html>
