@@ -4,25 +4,25 @@
 
 ## Apps
 
-- [Crumbs — Your Private Second Brain on WhatsApp](https://purposelabstudio.github.io/crumbs/): Dump notes, ideas, todos, reminders, links, photos and voice on WhatsApp, then ask for any of it back in plain language. Multilingual, private, and calm. Mobile apps coming soon.
-- [Folio — Daily Journal & Mood Tracker](https://purposelabstudio.github.io/folio/): Calm daily journal & notebook. A page a day — no streaks, no ads, fully offline. Private, app-locked, India-first.
-- [WaterWise — Drink Water Reminder](https://purposelabstudio.github.io/waterwise/): Stay hydrated with streaks, smart reminders, and one-tap logging. No ads, no paywall.
-- [BP Log — Blood Pressure Tracker](https://purposelabstudio.github.io/bplog/): Log readings from your home BP monitor. See AHA-classified trends, 7-day averages, and share PDF reports with your doctor. 100% offline.
-- [Hushly — Baby Sleep Sounds](https://purposelabstudio.github.io/hushly/): Soothing sounds to help your baby sleep peacefully. Curated audio, simple controls, no ads ever.
+- [Crumbs — Your Private Second Brain on WhatsApp](https://purposelabstudio.com/crumbs/): Dump notes, ideas, todos, reminders, links, photos and voice on WhatsApp, then ask for any of it back in plain language. Multilingual, private, and calm. Mobile apps coming soon.
+- [Folio — Daily Journal & Mood Tracker](https://purposelabstudio.com/folio/): Calm daily journal & notebook. A page a day — no streaks, no ads, fully offline. Private, app-locked, India-first.
+- [WaterWise — Drink Water Reminder](https://purposelabstudio.com/waterwise/): Stay hydrated with streaks, smart reminders, and one-tap logging. No ads, no paywall.
+- [BP Log — Blood Pressure Tracker](https://purposelabstudio.com/bplog/): Log readings from your home BP monitor. See AHA-classified trends, 7-day averages, and share PDF reports with your doctor. 100% offline.
+- [Hushly — Baby Sleep Sounds](https://purposelabstudio.com/hushly/): Soothing sounds to help your baby sleep peacefully. Curated audio, simple controls, no ads ever.
 
 ## Tools
 
-- [Daily Water Intake Calculator](https://purposelabstudio.github.io/tools/water-intake-calculator/): Free calculator — enter weight, activity, and climate for a personalised daily hydration target. Pairs with WaterWise.
-- [Blood Pressure Category Checker](https://purposelabstudio.github.io/tools/blood-pressure-checker/): Enter systolic/diastolic to see the AHA category. Educational reference. Pairs with BP Log.
-- [Journaling Prompt Generator](https://purposelabstudio.github.io/tools/journal-prompt-generator/): Free daily writing prompts to beat the blank page. Pairs with Folio.
-- [Free White Noise Player](https://purposelabstudio.github.io/tools/white-noise-player/): Play white, pink, or brown noise in the browser with a sleep timer. Generated on-device, no downloads. Pairs with Hushly.
+- [Daily Water Intake Calculator](https://purposelabstudio.com/tools/water-intake-calculator/): Free calculator — enter weight, activity, and climate for a personalised daily hydration target. Pairs with WaterWise.
+- [Blood Pressure Category Checker](https://purposelabstudio.com/tools/blood-pressure-checker/): Enter systolic/diastolic to see the AHA category. Educational reference. Pairs with BP Log.
+- [Journaling Prompt Generator](https://purposelabstudio.com/tools/journal-prompt-generator/): Free daily writing prompts to beat the blank page. Pairs with Folio.
+- [Free White Noise Player](https://purposelabstudio.com/tools/white-noise-player/): Play white, pink, or brown noise in the browser with a sleep timer. Generated on-device, no downloads. Pairs with Hushly.
 
 ## Comparison Guides
 
-- [Best Free Blood Pressure App](https://purposelabstudio.github.io/best-free-blood-pressure-app/): What to look for in a free BP tracker and how BP Log compares — free, offline, no ads.
-- [Best Free Water Reminder App](https://purposelabstudio.github.io/best-free-water-reminder-app/): How to pick a water reminder and why WaterWise is ad-free with no paywall.
-- [Best Free Baby Sleep Sounds App](https://purposelabstudio.github.io/best-free-baby-sleep-app/): What matters in a baby sleep app and how Hushly compares — curated sounds, no ads.
-- [Best Free Journal App With Lock](https://purposelabstudio.github.io/best-free-journal-app/): Choosing a private journal app and how Folio compares — app lock, offline, no ads.
+- [Best Free Blood Pressure App](https://purposelabstudio.com/best-free-blood-pressure-app/): What to look for in a free BP tracker and how BP Log compares — free, offline, no ads.
+- [Best Free Water Reminder App](https://purposelabstudio.com/best-free-water-reminder-app/): How to pick a water reminder and why WaterWise is ad-free with no paywall.
+- [Best Free Baby Sleep Sounds App](https://purposelabstudio.com/best-free-baby-sleep-app/): What matters in a baby sleep app and how Hushly compares — curated sounds, no ads.
+- [Best Free Journal App With Lock](https://purposelabstudio.com/best-free-journal-app/): Choosing a private journal app and how Folio compares — app lock, offline, no ads.
 
 ## Key Facts
 
@@ -36,36 +36,36 @@
 ## Blog Topics
 
 ### Second Brain & Productivity
-- [Stop Messaging Yourself on WhatsApp: A Smarter Way to Remember Everything](https://purposelabstudio.github.io/blog/stop-messaging-yourself-on-whatsapp/)
-- [How to Build a Second Brain on WhatsApp (No New App Required)](https://purposelabstudio.github.io/blog/build-a-second-brain-on-whatsapp/)
-- ["Message Yourself" on WhatsApp Not Showing? Here's the Fix](https://purposelabstudio.github.io/blog/message-yourself-on-whatsapp-not-showing/)
+- [Stop Messaging Yourself on WhatsApp: A Smarter Way to Remember Everything](https://purposelabstudio.com/blog/stop-messaging-yourself-on-whatsapp/)
+- [How to Build a Second Brain on WhatsApp (No New App Required)](https://purposelabstudio.com/blog/build-a-second-brain-on-whatsapp/)
+- ["Message Yourself" on WhatsApp Not Showing? Here's the Fix](https://purposelabstudio.com/blog/message-yourself-on-whatsapp-not-showing/)
 
 ### Blood Pressure & Health
-- [How to Track Blood Pressure at Home](https://purposelabstudio.github.io/blog/how-to-track-blood-pressure-at-home/)
-- [Normal Blood Pressure by Age: Chart and What Your Numbers Mean](https://purposelabstudio.github.io/blog/normal-blood-pressure-by-age/)
-- [10 Natural Ways to Lower Blood Pressure (Backed by Research)](https://purposelabstudio.github.io/blog/how-to-lower-blood-pressure-naturally/)
-- [How to Lower Blood Pressure Immediately at Home (What Actually Helps)](https://purposelabstudio.github.io/blog/how-to-lower-blood-pressure-immediately-at-home/)
-- [Free Printable Blood Pressure Log (PDF)](https://purposelabstudio.github.io/blog/printable-blood-pressure-log/)
+- [How to Track Blood Pressure at Home](https://purposelabstudio.com/blog/how-to-track-blood-pressure-at-home/)
+- [Normal Blood Pressure by Age: Chart and What Your Numbers Mean](https://purposelabstudio.com/blog/normal-blood-pressure-by-age/)
+- [10 Natural Ways to Lower Blood Pressure (Backed by Research)](https://purposelabstudio.com/blog/how-to-lower-blood-pressure-naturally/)
+- [How to Lower Blood Pressure Immediately at Home (What Actually Helps)](https://purposelabstudio.com/blog/how-to-lower-blood-pressure-immediately-at-home/)
+- [Free Printable Blood Pressure Log (PDF)](https://purposelabstudio.com/blog/printable-blood-pressure-log/)
 
 ### Baby Sleep & Sound
-- [The Science of White Noise for Baby Sleep](https://purposelabstudio.github.io/blog/white-noise-baby-sleep-science/)
-- [Why Your Baby Won't Sleep Through the Night](https://purposelabstudio.github.io/blog/baby-wont-sleep-through-night/)
-- [Brown Noise vs White Noise vs Pink Noise: Which Is Best for Sleep?](https://purposelabstudio.github.io/blog/brown-noise-vs-white-noise-vs-pink-noise/)
+- [The Science of White Noise for Baby Sleep](https://purposelabstudio.com/blog/white-noise-baby-sleep-science/)
+- [Why Your Baby Won't Sleep Through the Night](https://purposelabstudio.com/blog/baby-wont-sleep-through-night/)
+- [Brown Noise vs White Noise vs Pink Noise: Which Is Best for Sleep?](https://purposelabstudio.com/blog/brown-noise-vs-white-noise-vs-pink-noise/)
 
 ### Journaling & Wellness
-- [Why Journaling Fails and How to Stick With It](https://purposelabstudio.github.io/blog/why-journaling-fails-and-how-to-stick-with-it/)
-- [Daily Journal vs Mood Tracker: Why You Need Both](https://purposelabstudio.github.io/blog/daily-journal-vs-mood-tracker-why-you-need-both/)
-- [30 Journaling Prompts for Anxiety (That Actually Calm the Mind)](https://purposelabstudio.github.io/blog/journaling-prompts-for-anxiety/)
-- [28 Journaling Prompts for Overthinking (Break the Loop)](https://purposelabstudio.github.io/blog/journaling-prompts-for-overthinking/)
-- [35 Journaling Prompts for Self-Discovery (Know Yourself Better)](https://purposelabstudio.github.io/blog/journaling-prompts-for-self-discovery/)
+- [Why Journaling Fails and How to Stick With It](https://purposelabstudio.com/blog/why-journaling-fails-and-how-to-stick-with-it/)
+- [Daily Journal vs Mood Tracker: Why You Need Both](https://purposelabstudio.com/blog/daily-journal-vs-mood-tracker-why-you-need-both/)
+- [30 Journaling Prompts for Anxiety (That Actually Calm the Mind)](https://purposelabstudio.com/blog/journaling-prompts-for-anxiety/)
+- [28 Journaling Prompts for Overthinking (Break the Loop)](https://purposelabstudio.com/blog/journaling-prompts-for-overthinking/)
+- [35 Journaling Prompts for Self-Discovery (Know Yourself Better)](https://purposelabstudio.com/blog/journaling-prompts-for-self-discovery/)
 
 ### Hydration
-- [How Much Water Should I Drink Daily?](https://purposelabstudio.github.io/blog/how-much-water-should-i-drink-daily/)
-- [Why Water Apps Are Full of Ads](https://purposelabstudio.github.io/blog/why-water-apps-are-full-of-ads/)
-- [The Best Water Reminder App Without Ads (or Paywalls)](https://purposelabstudio.github.io/blog/water-reminder-app-without-ads/)
+- [How Much Water Should I Drink Daily?](https://purposelabstudio.com/blog/how-much-water-should-i-drink-daily/)
+- [Why Water Apps Are Full of Ads](https://purposelabstudio.com/blog/why-water-apps-are-full-of-ads/)
+- [The Best Water Reminder App Without Ads (or Paywalls)](https://purposelabstudio.com/blog/water-reminder-app-without-ads/)
 
 ## Contact
 
 - Email: purposelab.studio@gmail.com
-- Support: https://purposelabstudio.github.io/support/
+- Support: https://purposelabstudio.com/support/
 - Google Play: https://play.google.com/store/apps/dev?id=PurposeLab+Studio

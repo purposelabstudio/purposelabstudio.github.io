@@ -4,7 +4,7 @@
 # Supported engines: Bing, Yandex, Naver, Seznam, Yep
 
 INDEXNOW_KEY="f1f454b32a9646baba021f7af031df07"
-HOST="purposelabstudio.github.io"
+HOST="purposelabstudio.com"
 KEY_LOCATION="https://${HOST}/${INDEXNOW_KEY}.txt"
 
 # All important URLs to submit

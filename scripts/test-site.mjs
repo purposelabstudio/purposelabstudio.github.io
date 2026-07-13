@@ -262,7 +262,7 @@ for (const p of allPages) {
 }
 
 // 17. Canonical is self-referential (matches the page's own path) — guards copy-paste canonicals
-const CANON_BASE = 'https://purposelabstudio.github.io/';
+const CANON_BASE = 'https://purposelabstudio.com/';
 for (const p of allPages) {
   if (p === '404.html') continue;
   const m = read(p).match(/rel="canonical" href="([^"]*)"/);
@@ -310,13 +310,13 @@ const sitemap = read('sitemap.xml');
 const pageToPath = (p) => '/' + p.replace(/index\.html$/, '');
 for (const p of allPages) {
   if (p === '404.html') continue; // noindex error page
-  const loc = `<loc>https://purposelabstudio.github.io${pageToPath(p)}</loc>`;
+  const loc = `<loc>https://purposelabstudio.com${pageToPath(p)}</loc>`;
   check(`sitemap lists ${p}`, sitemap.includes(loc), `missing ${loc}`);
 }
 
 // 20. IndexNow submission list stays in sync with the sitemap (both directions)
 const indexnow = read('submit-indexnow.sh');
-const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/purposelabstudio\.github\.io(\/[^<]*)<\/loc>/g)].map((m) => m[1]);
+const sitemapPaths = [...sitemap.matchAll(/<loc>https:\/\/purposelabstudio\.com(\/[^<]*)<\/loc>/g)].map((m) => m[1]);
 for (const path of sitemapPaths) {
   check(`IndexNow lists ${path}`, indexnow.includes('${HOST}' + path + '"'), `missing ${path} in submit-indexnow.sh`);
 }
@@ -330,7 +330,7 @@ for (const p of allPages) {
 // 22. llms.txt lists every blog post (guards the manually-maintained AEO/GEO index)
 const llmsTxt = read('llms.txt');
 for (const p of blogPosts) {
-  const url = 'https://purposelabstudio.github.io/' + p.replace(/index\.html$/, '');
+  const url = 'https://purposelabstudio.com/' + p.replace(/index\.html$/, '');
   check(`llms.txt lists ${p}`, llmsTxt.includes(url), `missing ${url} in llms.txt`);
 }
 

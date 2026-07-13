@@ -28,4 +28,4 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
-Sitemap: https://purposelabstudio.github.io/sitemap.xml
+Sitemap: https://purposelabstudio.com/sitemap.xml
