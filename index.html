@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="PurposeLab Studio">
     <link rel="alternate" type="application/rss+xml" title="PurposeLab Blog" href="/blog/rss.xml">
-    <title>PurposeLab Studio — Simple Android Apps That Respect You</title>
-    <meta name="description" content="PurposeLab Studio builds simple, free, ad-free Android apps. Privacy-first tools that do one thing well.">
+    <title>Folio — Free Private Daily Journal & Mood Tracker (Offline)</title>
+    <meta name="description" content="Folio is a free, private, offline daily journal and mood tracker. No ads, no account, no streaks. From PurposeLab Studio.">
     <meta name="google-site-verification" content="Zw8POu8GxsFqgmKz0vesrigb1LE-yv61GNvnsnmzcbA" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
     <link rel="canonical" href="https://purposelabstudio.com/">
@@ -26,6 +26,19 @@
     <meta name="twitter:title" content="PurposeLab Studio — Android Apps That Respect You">
     <meta name="twitter:description" content="Simple, free, ad-free Android apps. Privacy-first tools that do one thing well.">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .qr-bridge { display:flex; align-items:center; gap:14px; margin-top:18px; padding:14px 16px;
+            background: var(--paper-2); border:1px solid var(--border); border-radius: var(--radius); max-width:420px; }
+        .qr-bridge img { width:84px; height:84px; border-radius:8px; background:#fff; padding:4px; }
+        .qr-bridge .qr-copy { font-size:14px; color: var(--text-secondary); }
+        @media (max-width:600px){ .qr-bridge{ display:none; } }
+        .apps-strip { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; }
+        .apps-strip a { display:flex; align-items:center; gap:10px; padding:12px; border:1px solid var(--border);
+            border-radius: var(--radius); background: var(--paper-2); text-decoration:none; color: var(--text); }
+        .apps-strip img { width:32px; height:32px; border-radius:8px; }
+        .apps-strip .s-name { font-weight:600; font-size:14px; }
+        .apps-strip .s-desc { font-size:12px; color: var(--text-secondary); }
+    </style>
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -80,11 +93,16 @@
         </nav>
 
         <section class="hero">
-            <div class="eyebrow">~/ purposelab</div>
-            <h1>I build calm Android apps that respect you.</h1>
-            <p class="subtitle">No ads. No tracking. No dark patterns. Just calm, simple apps that do one thing well — and respect your time, money, and privacy.</p>
-            <div style="margin-top: 24px;">
-                <a class="btn btn-primary" href="#say-hi">Say hi &rarr;</a>
+            <div class="eyebrow">~/ folio</div>
+            <h1>A quiet notebook for closing the day.</h1>
+            <p class="subtitle">Folio is a free, private, offline daily journal &amp; mood tracker. Write a little or a lot, track moods and habits gently, and reflect on your month — no ads, no account, no streaks.</p>
+            <div style="margin-top: 24px; display:flex; gap:12px; flex-wrap:wrap;">
+                <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.purposelab.folio&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dhome%26utm_campaign%3Dhome-hero" data-goatcounter-click="ps-folio-home-hero" data-goatcounter-title="Download Folio (home hero)">Get it on Google Play</a>
+                <a class="btn" href="https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692" data-goatcounter-click="ps-folio-home-hero-ios" data-goatcounter-title="Download Folio iOS (home hero)">Download on the App Store</a>
+            </div>
+            <div class="qr-bridge">
+                <img src="/assets/qr-folio.svg" alt="QR code to install Folio on your phone">
+                <span class="qr-copy"><strong>On a computer?</strong><br>Scan to install Folio on your phone.</span>
             </div>
         </section>
 
@@ -98,115 +116,28 @@
         </section>
 
         <section class="section">
-            <h2 class="section-title">Our Apps</h2>
-
-            <div class="app-card featured" style="--app-accent:#2C5556">
-                <img src="crumbs/icon.png" alt="Crumbs" class="app-icon">
-                <div class="app-info">
-                    <span class="app-tag">Featured</span>
-                    <div class="app-name">Crumbs — Your Private Second Brain on WhatsApp</div>
-                    <div class="app-desc">
-                        The calmer upgrade to messaging yourself. Dump notes, ideas, todos, reminders,
-                        links, photos and voice on WhatsApp — then ask for any of it back in plain language.
-                    </div>
-                    <div class="app-badges">
-                        <span class="badge badge-free">Free to Capture</span>
-                        <span class="badge badge-privacy">Private &amp; Encrypted</span>
-                        <span class="badge badge-noad">No Nagging</span>
-                        <span class="badge badge-offline">Multilingual</span>
-                    </div>
-                    <div class="app-links">
-                        <a href="/crumbs/">Learn More</a>
-                        <a href="https://wa.me/919063573676?text=Hi">Chat on WhatsApp</a>
-                    </div>
-                </div>
+            <h2 class="section-title">Why people keep Folio</h2>
+            <div class="philosophy">
+                <div class="p-item"><h3>No streaks, no guilt</h3><p>Miss a day and nothing breaks. Folio is a calm ritual, not another thing to keep a streak on.</p></div>
+                <div class="p-item"><h3>Private &amp; offline</h3><p>Every entry stays on your device, with optional app lock. No cloud, no account, no data collection.</p></div>
+                <div class="p-item"><h3>Reflect, don't grind</h3><p>Gentle mood &amp; habit tracking and a monthly reflection that shows your patterns without pressure.</p></div>
             </div>
+            <p style="text-align:center; margin-top:20px;">
+                <a class="btn btn-primary" href="/folio/">Explore Folio →</a>
+                &nbsp;·&nbsp; <a href="/folio/diary/">The Folio paper diary</a>
+                &nbsp;·&nbsp; <a href="/folio/journal/">The calm guide to journaling</a>
+            </p>
+        </section>
 
-            <div class="app-card" style="--app-accent:#C9A876">
-                <img src="folio/icon.png" alt="Folio" class="app-icon">
-                <div class="app-info">
-                    <div class="app-name">Folio — Daily Journal & Mood</div>
-                    <div class="app-desc">
-                        A quiet notebook for closing the day. Write a little or a lot, track moods & habits, reflect monthly.
-                    </div>
-                    <div class="app-badges">
-                        <span class="badge badge-free">Free</span>
-                        <span class="badge badge-noad">No Ads</span>
-                        <span class="badge badge-offline">Private & Offline</span>
-                        <span class="badge badge-privacy">App Lock</span>
-                    </div>
-                    <div class="app-links">
-                        <a href="/folio/">Learn More</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.purposelab.folio">Google Play</a>
-                        <a href="https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692">App Store</a>
-                        <a href="https://purposelabstudio.com/privacy-policies/folio.html">Privacy Policy</a>
-                    </div>
-                </div>
+        <section class="section" style="padding-top:0;">
+            <h2 class="section-title">Also from PurposeLab</h2>
+            <div class="apps-strip">
+                <a href="/crumbs/"><img src="crumbs/icon.png" alt="Crumbs"><span><span class="s-name">Crumbs</span><br><span class="s-desc">Second brain on WhatsApp</span></span></a>
+                <a href="/waterwise/"><img src="waterwise/icon.png" alt="WaterWise"><span><span class="s-name">WaterWise</span><br><span class="s-desc">Water reminder, no ads</span></span></a>
+                <a href="/bplog/"><img src="bplog/icon.png" alt="BP Log"><span><span class="s-name">BP Log</span><br><span class="s-desc">Blood pressure tracker</span></span></a>
+                <a href="/hushly/"><img src="hushly/icon.png" alt="Hushly"><span><span class="s-name">Hushly</span><br><span class="s-desc">Baby sleep sounds</span></span></a>
             </div>
-
-            <div class="app-card" style="--app-accent:#29B6C8">
-                <img src="waterwise/icon.png" alt="WaterWise" class="app-icon">
-                <div class="app-info">
-                    <div class="app-name">WaterWise — Drink Water Reminder</div>
-                    <div class="app-desc">
-                        Stay hydrated with no ads. Simple water tracker with streaks, smart reminders, and one-tap logging.
-                    </div>
-                    <div class="app-badges">
-                        <span class="badge badge-free">Free</span>
-                        <span class="badge badge-noad">No Ads</span>
-                        <span class="badge badge-offline">Offline</span>
-                        <span class="badge badge-privacy">No Paywall</span>
-                    </div>
-                    <div class="app-links">
-                        <a href="/waterwise/">Learn More</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.purposelab.waterwise">Google Play</a>
-                        <a href="https://purposelabstudio.com/privacy-policies/waterwise.html">Privacy Policy</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="app-card" style="--app-accent:#0D2E5C">
-                <img src="bplog/icon.png" alt="BP Log" class="app-icon">
-                <div class="app-info">
-                    <div class="app-name">BP Log — Blood Pressure Tracker</div>
-                    <div class="app-desc">
-                        Log readings from your home BP monitor. See AHA-classified trends,
-                        track your 7-day average, and share PDF reports with your doctor.
-                        100% offline — your health data never leaves your phone.
-                    </div>
-                    <div class="app-badges">
-                        <span class="badge badge-free">Free</span>
-                        <span class="badge badge-noad">No Ads</span>
-                        <span class="badge badge-offline">Offline</span>
-                    </div>
-                    <div class="app-links">
-                        <a href="/bplog/">Learn More</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.purposelab.bplog">Google Play</a>
-                        <a href="https://purposelabstudio.com/privacy-policies/bplog.html">Privacy Policy</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="app-card" style="--app-accent:#F5B942">
-                <img src="hushly/icon.png" alt="Hushly" class="app-icon">
-                <div class="app-info">
-                    <div class="app-name">Hushly — Baby Sleep Sounds</div>
-                    <div class="app-desc">
-                        Soothing sounds to help your baby (and you) sleep peacefully.
-                        Curated audio, simple controls, zero distractions. No account needed.
-                    </div>
-                    <div class="app-badges">
-                        <span class="badge badge-free">Free</span>
-                        <span class="badge badge-noad">No Ads</span>
-                        <span class="badge badge-offline">Offline</span>
-                    </div>
-                    <div class="app-links">
-                        <a href="/hushly/">Learn More</a>
-                        <a href="https://play.google.com/store/apps/details?id=com.purposelab.hushly">Google Play</a>
-                        <a href="https://purposelabstudio.com/privacy-policies/hushly.html">Privacy Policy</a>
-                    </div>
-                </div>
-            </div>
+            <p style="text-align:center; margin-top:14px;"><a href="/apps/">See all apps →</a></p>
         </section>
 
         <section class="section" style="padding-top: 0;">
