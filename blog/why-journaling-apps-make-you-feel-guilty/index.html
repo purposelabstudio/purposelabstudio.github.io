@@ -32,9 +32,25 @@
     <meta name="twitter:description" content="Usually it is the streak, not you. How the guilt happens, and what to look for in a journal instead.">
     <link rel="stylesheet" href="../../style.css">
     <style>
+      .article p { margin-bottom: 24px; }
       .article figure { margin: 34px auto; text-align: center; }
       .article figure img { display: block; width: 100%; max-width: 300px; height: auto; margin: 0 auto; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
       .article figcaption { margin-top: 14px; font-size: 14px; color: var(--ink-soft); }
+      /* emphasised pull quotes */
+      .article blockquote.pull { border-left: none; text-align: center; font-style: normal; font-family: var(--font-display); font-size: 26px; line-height: 1.42; color: var(--ink); max-width: 560px; margin: 42px auto; padding: 0 12px; }
+      .article blockquote.pull::before { content: "\201C"; display: block; font-size: 42px; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+      /* GEO section summary */
+      .article .summary { font-size: 15px; color: var(--ink-muted); border-top: 1px solid var(--border); padding-top: 12px; margin-top: 4px; }
+      /* before / after illustration */
+      .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 30px 0; }
+      .compare .col { background: var(--paper-2); border: 1px solid var(--border); border-radius: 14px; padding: 18px; text-align: center; }
+      .compare .col-new { box-shadow: 0 0 0 2px rgba(44,85,86,.18); }
+      .compare .col-head { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--gold); margin-bottom: 12px; }
+      .compare .col-body { font-size: 20px; letter-spacing: .12em; color: var(--ink); margin-bottom: 8px; }
+      .compare .col-foot { font-size: 14px; color: var(--ink-soft); }
+      @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
+      /* CTA attribute chips */
+      .cta .attrs { margin-top: 16px; font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; color: var(--ink-soft); }
     </style>
     <link rel="alternate" type="application/rss+xml" title="PurposeLab Blog" href="/blog/rss.xml">
     <link rel="icon" href="../../folio/icon.png" type="image/png">
@@ -101,7 +117,7 @@
 
         <article class="article">
             <h1>Why your journaling app makes you feel guilty after you miss a day</h1>
-            <div class="meta">Published July 14, 2026 · 8 min read</div>
+            <div class="meta">Published July 14, 2026 · 8 minute read · Worth it if you've ever quit journaling.</div>
             <div class="toc"><strong>On this page</strong><ul></ul></div>
 
             <p>Have you ever stopped journaling because you missed a single day?</p>
@@ -152,7 +168,9 @@
 
             <p>To be fair, none of this is malicious. Product teams are usually measured on return rate, daily active users, and retention, and a streak is one of the simplest ways to move those numbers. What improves engagement doesn't always improve reflection. The guilt is not something anyone set out to create. It is just the predictable result of building a reflection tool the way you would build a game.</p>
 
-            <blockquote>A journal should remember your life, not judge it.</blockquote>
+            <blockquote class="pull">A journal should remember your life, not judge it.</blockquote>
+
+            <p class="summary"><strong>In short:</strong> streaks are retention mechanics borrowed from games; on a journal, they quietly turn a missed day into guilt.</p>
 
             <h2>Why it hurts more than it should</h2>
 
@@ -168,15 +186,24 @@
 
             <p>Here is what almost no journaling app will admit: most people don't abandon journaling because writing is hard. They abandon it because coming back feels hard.</p>
 
-            <blockquote>Missing a day isn't the opposite of journaling. Quitting is.</blockquote>
+            <blockquote class="pull">Missing a day isn't the opposite of journaling. Quitting is.</blockquote>
 
             <p>You can see the whole trap on a single page:</p>
 
-            <p><strong>A journal with a scoreboard</strong></p>
-            <blockquote>Day 1 ✅&nbsp; Day 2 ✅&nbsp; Day 3 ✅&nbsp; Day 4 ❌<br>🔥 Streak lost → feel guilty → stop writing</blockquote>
+            <div class="compare">
+                <div class="col col-old">
+                    <div class="col-head">A journal with a scoreboard</div>
+                    <div class="col-body">✅ ✅ ✅ ❌</div>
+                    <div class="col-foot">🔥 Streak lost → guilt → you stop writing</div>
+                </div>
+                <div class="col col-new">
+                    <div class="col-head">A journal without one</div>
+                    <div class="col-body">○ ○ ○ · ○</div>
+                    <div class="col-foot">Nothing broke. Life just happened.</div>
+                </div>
+            </div>
 
-            <p><strong>A journal without one</strong></p>
-            <blockquote>Day 1 ○&nbsp; Day 2 ○&nbsp; Day 3 ○&nbsp; Day 4 ·&nbsp; Day 5 ○<br>Nothing broke. Life just happened.</blockquote>
+            <p class="summary"><strong>In short:</strong> because losing hurts more than gaining, a broken streak stings most on the exact day you most needed to write.</p>
 
             <h2>The moment almost everyone recognizes</h2>
 
@@ -200,7 +227,7 @@
 
             <p>This is the part a streak gets exactly backwards. It treats those six entries as a failed run, a broken number, a habit you couldn't keep. But nobody opens an old journal and feels sad about the days they skipped. You feel grateful for the days you caught.</p>
 
-            <blockquote>A streak measures the days you missed. A journal keeps the days you didn't.</blockquote>
+            <blockquote class="pull">A streak measures the days you missed. A journal keeps the days you didn't.</blockquote>
 
             <p>Those are not the same tool, and they were never meant to be.</p>
 
@@ -214,7 +241,9 @@
 
             <p>If that feels strangely freeing, it is not because you suddenly found more discipline. It is because you took away the pressure to perform.</p>
 
-            <blockquote>Reflection isn't homework.</blockquote>
+            <blockquote class="pull">Reflection isn't homework.</blockquote>
+
+            <p class="summary"><strong>In short:</strong> the fix is not more willpower or a smarter reminder; it is removing the scoreboard so a single line always counts.</p>
 
             <h2>What the people who keep journaling actually do</h2>
 
@@ -224,7 +253,7 @@
 
             <p>That is the whole trick. Not a longer streak. Permission to return.</p>
 
-            <blockquote>The goal isn't to write every day. The goal is to always feel welcome back.</blockquote>
+            <blockquote class="pull">The goal isn't to write every day. The goal is to always feel welcome back.</blockquote>
 
             <p>Permission is the opposite of pressure. A good journal doesn't ask you to prove you're consistent. It simply leaves the page open.</p>
 
@@ -268,7 +297,7 @@
             <p>A journal should never make you earn your way back. It should simply be there when you need it.</p>
 
             <aside class="related-guides">
-                <h2>Related guides</h2>
+                <h2>Continue exploring</h2>
                 <ul>
                     <li><a href="/blog/why-journaling-fails-and-how-to-stick-with-it/">Why Most People Fail at Journaling (And How to Actually Stick With It)</a></li>
                     <li><a href="/blog/daily-journal-vs-mood-tracker-why-you-need-both/">Daily Journal vs Mood Tracker: Why You Need Both</a></li>
@@ -283,12 +312,13 @@
         </article>
 
         <div class="cta">
-            <h2>A journal that never makes you earn your way back</h2>
-            <p>Folio is a calm, private journal with no streaks and no scores. One line is a complete entry, missed days stay blank, and your month is there to remember, not to grade. Free, offline, no ads.</p>
+            <h2>You don't need more discipline</h2>
+            <p>You need a journal that welcomes you back. Folio has no streaks and no scores. One line is a complete entry, missed days stay blank, and your month is there to remember, not to grade.</p>
             <a href="https://play.google.com/store/apps/details?id=com.purposelab.folio&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dblog%26utm_campaign%3Dwhy-guilty"
                data-goatcounter-click="ps-folio-blog-why-guilty"
                data-goatcounter-title="Download Folio (blog: why-guilty)"
                class="btn btn-primary">▶ Get Folio (free)</a>
+            <div class="attrs">Free · Offline · Private · No streaks</div>
         </div>
 
         <section class="section">
