@@ -53,6 +53,11 @@
       .cta .attrs { margin-top: 16px; font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; color: var(--ink-soft); }
       .cta .store-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
       .trust-strip { max-width: 620px; margin: 18px auto 0; font-size: 14px; line-height: 1.65; color: var(--ink-soft); text-align: center; }
+      /* interactive Try-Folio embed */
+      .try-embed { margin: 42px auto; text-align: center; }
+      .try-embed .try-head { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--gold); margin-bottom: 14px; }
+      .try-embed iframe { display: block; width: 100%; max-width: 400px; height: min(788px, 86vh); margin: 0 auto; border: 0; border-radius: 24px; box-shadow: 0 14px 40px rgba(45,42,38,.16); background: #EDE7DF; }
+      .try-embed .try-cap { margin-top: 14px; font-size: 14px; color: var(--ink-soft); }
     </style>
     <link rel="alternate" type="application/rss+xml" title="PurposeLab Blog" href="/blog/rss.xml">
     <link rel="icon" href="../../folio/icon.png" type="image/png">
@@ -280,6 +285,14 @@
             <p>Maybe you'll write tonight. Maybe you won't. Either way, tomorrow is still waiting, with a blank page and no penalty for the days you missed.</p>
 
             <p>A journal should never make you earn your way back. It should simply be there when you need it.</p>
+
+            <div class="try-embed">
+                <div class="try-head">Try it here &mdash; write one line</div>
+                <iframe src="https://purposelabstudio.com/folio/try/"
+                        title="Try Folio &mdash; write one line, the calm journal you'll actually keep"
+                        loading="lazy" width="400" height="788"></iframe>
+                <p class="try-cap">No sign-up, nothing saved. Just the feel of closing a day.</p>
+            </div>
 
             <aside class="related-guides">
                 <h2>Continue exploring</h2>

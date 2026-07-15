@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Try Folio — a page a day</title>
+  <meta name="description" content="Write one line, the way Folio feels. A calm, private journal you'll actually keep.">
+
+  <!-- Open Graph / Twitter card (for Medium / Substack / Reddit link previews) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://purposelabstudio.com/folio/try/">
+  <meta property="og:title" content="Try Folio — a page a day">
+  <meta property="og:description" content="Write one line, the way Folio feels. A calm, private journal you'll actually keep. No account, no cloud.">
+  <meta property="og:image" content="https://purposelabstudio.com/folio/try/og-try-folio.png">
+  <meta property="og:image:secure_url" content="https://purposelabstudio.com/folio/try/og-try-folio.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Folio — write one line, the calm journal you'll actually keep">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Try Folio — a page a day">
+  <meta name="twitter:description" content="Write one line, the way Folio feels. A calm, private journal you'll actually keep.">
+  <meta name="twitter:image" content="https://purposelabstudio.com/folio/try/og-try-folio.png">
+  <meta name="twitter:image:src" content="https://purposelabstudio.com/folio/try/og-try-folio.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=DM+Sans:wght@500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:#FAF6F0; --ink:#2D2A26; --muted:#B5A99A; --faint:#C5BAB0;
+      --hair:#E8E2D8; --gold:#A08560; --gold-deep:#7A5C28; --sel-fill:#E8DCC8; --sel-border:#C4A87C;
+      --paper-line:#E8E2D8;
+    }
+    .stage[data-palette="rose"] {
+      --bg:#F8F5F7; --ink:#3A3238; --muted:#A89AA4; --faint:#BCAFB8;
+      --hair:#E8E2E6; --gold:#8A6A7E; --gold-deep:#6E5262; --sel-fill:#E8D4E0; --sel-border:#B08A9E;
+      --paper-line:#E8E2E6;
+    }
+    .stage[data-palette="evening"] {
+      --bg:#16141B; --ink:#ECE7DD; --muted:#8E887C; --faint:#6E685E;
+      --hair:#35323F; --gold:#D0B183; --gold-deep:#D0B183; --sel-fill:#3A3327; --sel-border:#D0B183;
+      --paper-line:#242030;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #EDE7DF;
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px; min-height: 100vh;
+    }
+    .stage {
+      width: 100%; max-width: 400px; aspect-ratio: 9 / 19;
+      max-height: 92vh;
+      background: var(--bg); border-radius: 28px;
+      box-shadow: 0 12px 40px rgba(45,42,38,0.18);
+      overflow: hidden; position: relative;
+      display: flex; flex-direction: column;
+    }
+
+    /* --- Screen 1: today page --- */
+    .today { flex: 1; display: flex; flex-direction: column;
+      background-color: var(--bg);
+      transition: opacity .5s ease, background-color .3s ease; }
+    .today[data-paper="plain"] { background-image: none; }
+    .today[data-paper="wave"] { background-image: repeating-linear-gradient(-42deg, var(--paper-line) 0, var(--paper-line) 0.6px, transparent 0.6px, transparent 26px); }
+    .today[data-paper="dots"] { background-image: radial-gradient(circle, var(--paper-line) 1.3px, transparent 1.4px); background-size: 24px 24px; }
+    .today[data-paper="aged"] { background-image:
+      radial-gradient(circle at 18% 26%, rgba(150,108,60,0.10) 0 2px, transparent 3px),
+      radial-gradient(circle at 68% 58%, rgba(150,108,60,0.09) 0 2px, transparent 3px),
+      radial-gradient(circle at 43% 82%, rgba(150,108,60,0.07) 0 2px, transparent 3px),
+      radial-gradient(circle at 85% 22%, rgba(150,108,60,0.06) 0 2px, transparent 3px),
+      radial-gradient(circle at 30% 62%, rgba(150,108,60,0.05) 0 2px, transparent 3px); }
+    .today-header { padding: 22px 20px 8px; display: flex; align-items: flex-start; justify-content: space-between; }
+    .t-day { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--ink); line-height: 1; }
+    .t-sub { font-size: 11px; color: var(--muted); margin-top: 5px; }
+    .t-controls { display: flex; align-items: center; gap: 7px; }
+    .t-ctrl { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--hair);
+      background: var(--bg); color: var(--muted); font-family: 'Caveat', cursive; font-size: 15px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+    .t-ctrl svg { color: var(--muted); }
+    .t-ctrl-dot .dot { width: 15px; height: 15px; border-radius: 50%; background: var(--sel-border);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); transition: background .2s ease; }
+    .t-close { width: 30px; height: 30px; background: var(--bg); border: 1px solid var(--hair);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 14px; }
+    .t-prompt { font-family: 'Caveat', cursive; font-size: 20px; color: var(--ink);
+      padding: 6px 20px 12px; }
+    .t-label { font-family: 'Caveat', cursive; font-size: 15px; color: var(--muted); padding: 4px 20px 6px; }
+    .t-moods { display: flex; gap: 6px; padding: 0 20px 12px; }
+    .t-mood { flex: 1; padding: 8px 2px; border: 1px solid var(--hair); border-radius: 10px;
+      text-align: center; background: transparent; cursor: pointer; transition: all .15s ease; }
+    .t-mood svg { width: 26px; height: 26px; display: block; margin: 0 auto; }
+    .t-mood .lbl { display: block; font-size: 9px; color: var(--muted); margin-top: 3px; }
+    .t-mood.sel { background: var(--sel-fill); border-color: var(--sel-border); }
+    .t-journal-wrap { flex: 1; padding: 0 20px; display: flex; }
+    .t-journal { flex: 1; width: 100%; border: none; outline: none; resize: none;
+      background: transparent; font-family: 'Caveat', cursive; font-size: 20px; color: var(--ink);
+      line-height: 1.7; padding: 4px 0; }
+    .t-journal::placeholder { color: var(--faint); }
+    .t-habits { padding: 6px 20px 2px; }
+    .t-habits-label { font-family: 'Caveat', cursive; font-size: 18px; color: var(--ink); padding-bottom: 8px; }
+    .t-habit-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .t-habit { display: inline-flex; align-items: center; gap: 4px; padding: 8px 15px;
+      border: 1.5px solid var(--hair); border-radius: 100px; background: transparent;
+      font-family: 'DM Sans', -apple-system, sans-serif; font-size: 13px; font-weight: 500;
+      color: var(--muted); cursor: pointer; transition: all .15s ease; }
+    .t-habit.done { background: var(--sel-fill); border-color: var(--sel-border); color: var(--gold-deep); font-weight: 600; }
+    .t-habit .tick { display: none; font-size: 11px; line-height: 1; }
+    .t-habit.done .tick { display: inline; }
+    .t-footer { padding: 10px 20px 18px; display: flex; flex-direction: column; gap: 8px; }
+    .t-privacy { display: flex; align-items: center; justify-content: center; gap: 5px; color: var(--faint); }
+    .t-privacy span { font-size: 10px; }
+    .t-cta { padding: 13px; background: var(--ink); color: var(--bg); border: none;
+      border-radius: 100px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; }
+
+    /* --- Screen 2: reveal --- */
+    #screen2 { position: absolute; inset: 0; background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 32px 28px; gap: 18px;
+      opacity: 0; pointer-events: none; transition: opacity .6s ease; }
+    #screen2.show { opacity: 1; pointer-events: auto; }
+    .r-glow { position: absolute; width: 280px; height: 280px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(160,133,96,0.18), transparent 70%);
+      animation: bloom 2.4s ease-in-out infinite; }
+    @keyframes bloom { 0%,100% { transform: scale(0.92); opacity: .7; } 50% { transform: scale(1.05); opacity: 1; } }
+    .r-line { font-family: 'Caveat', cursive; font-size: 22px; color: var(--ink);
+      max-width: 260px; position: relative; }
+    .r-confirm { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--ink); position: relative; }
+    .r-keep { font-size: 14px; color: var(--muted); position: relative; }
+    .r-stores { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 260px; position: relative; }
+    .r-store { display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none;
+      border: 1px solid var(--hair); color: var(--ink); background: #fff; }
+    .r-store.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .r-again { background: none; border: none; color: var(--faint); font-size: 12px; cursor: pointer;
+      text-decoration: underline; position: relative; }
+    @media (prefers-reduced-motion: reduce) {
+      .r-glow { animation: none; }
+      #screen1, #screen2 { transition: none; }
+    }
+
+    @media (max-width: 380px) {
+      body { padding: 0; }
+      .stage { max-width: 100%; max-height: 100vh; border-radius: 0; aspect-ratio: auto; height: 100vh; }
+    }
+    .t-mood:focus-visible, .t-cta:focus-visible, .r-store:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <main class="stage" id="stage">
+    <section class="today" id="screen1" data-paper="dots">
+      <div class="today-header">
+        <div>
+          <div class="t-day" id="dayNum">15</div>
+          <div class="t-sub" id="daySub">Saturday, June</div>
+        </div>
+        <div class="t-controls">
+          <button class="t-ctrl" id="fontBtn" title="Change font" aria-label="Change font"><span id="fontAa">Aa</span></button>
+          <button class="t-ctrl" id="paperBtn" title="Change paper" aria-label="Change paper"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><g stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="5" y1="8" x2="19" y2="8"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="5" y1="16" x2="19" y2="16"/></g></svg></button>
+          <button class="t-ctrl t-ctrl-dot" id="paletteBtn" title="Change colour" aria-label="Change colour"><span class="dot" id="paletteDot"></span></button>
+          <div class="t-close" aria-hidden="true">&times;</div>
+        </div>
+      </div>
+      <div class="t-prompt">How would you describe today?</div>
+
+      <div class="t-journal-wrap">
+        <textarea class="t-journal" id="journal" aria-label="Your page"
+          placeholder="Write freely — only you can read this."></textarea>
+      </div>
+
+      <div class="t-label">A feeling, if you like</div>
+      <div class="t-moods" id="moods" role="group" aria-label="Mood">
+        <button class="t-mood" data-mood="great" aria-label="Great">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.3" fill="#FFC83D"/><g stroke="#FFC83D" stroke-opacity="0.6" stroke-width="1.6" stroke-linecap="round"><line x1="18.3" y1="12" x2="20.6" y2="12"/><line x1="16.45" y1="16.45" x2="18.08" y2="18.08"/><line x1="12" y1="18.3" x2="12" y2="20.6"/><line x1="7.55" y1="16.45" x2="5.92" y2="18.08"/><line x1="5.7" y1="12" x2="3.4" y2="12"/><line x1="7.55" y1="7.55" x2="5.92" y2="5.92"/><line x1="12" y1="5.7" x2="12" y2="3.4"/><line x1="16.45" y1="7.55" x2="18.08" y2="5.92"/></g></svg>
+          <span class="lbl">Great</span>
+        </button>
+        <button class="t-mood" data-mood="good" aria-label="Good">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 C5.5 8.5, 5.5 14, 12 20 C18.5 14, 18.5 8.5, 12 4 Z" fill="#4EC44E" fill-opacity="0.78"/><path d="M12 6.5 L12 18" stroke="#4EC44E" stroke-opacity="0.45" stroke-width="1" stroke-linecap="round"/></svg>
+          <span class="lbl">Good</span>
+        </button>
+        <button class="t-mood" data-mood="okay" aria-label="Okay">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><defs><mask id="moon-mask"><rect width="24" height="24" fill="black"/><circle cx="12" cy="12" r="7" fill="white"/><circle cx="15.2" cy="10.8" r="6" fill="black"/></mask></defs><rect width="24" height="24" fill="#F5C842" fill-opacity="0.82" mask="url(#moon-mask)"/></svg>
+          <span class="lbl">Okay</span>
+        </button>
+        <button class="t-mood" data-mood="low" aria-label="Low">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="8.5" rx="6" ry="3.3" fill="#5BBFEF" fill-opacity="0.32"/><g stroke="#5BBFEF" stroke-opacity="0.6" stroke-width="1.7" stroke-linecap="round"><line x1="9" y1="13.5" x2="8.2" y2="16.8"/><line x1="12" y1="14.5" x2="11.2" y2="17.8"/><line x1="15" y1="13.5" x2="14.2" y2="16.8"/></g></svg>
+          <span class="lbl">Low</span>
+        </button>
+        <button class="t-mood" data-mood="rough" aria-label="Rough">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="16" rx="6.6" ry="2.2" fill="#B0A59C" fill-opacity="0.22"/><ellipse cx="12" cy="13.5" rx="6" ry="3.7" fill="#B0A59C" fill-opacity="0.62"/><ellipse cx="10.3" cy="11.9" rx="2.6" ry="1.3" fill="#B0A59C" fill-opacity="0.3"/></svg>
+          <span class="lbl">Rough</span>
+        </button>
+      </div>
+
+      <div class="t-habits">
+        <div class="t-habits-label">Tiny wins of the day</div>
+        <div class="t-habit-row" id="habits">
+          <button class="t-habit" data-habit="walk"><span class="tick">✓</span>Walk</button>
+          <button class="t-habit" data-habit="read"><span class="tick">✓</span>Read</button>
+          <button class="t-habit" data-habit="water"><span class="tick">✓</span>Drink water</button>
+        </div>
+      </div>
+
+      <div class="t-footer" id="footer">
+        <button class="t-cta" id="closeDay">Close the day ✦</button>
+        <div class="t-privacy">
+          <span>🔒 Stays on your device. No account, no cloud.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen2" aria-hidden="true">
+      <div class="r-glow"></div>
+      <div class="r-line" id="revealLine"></div>
+      <div class="r-confirm">That's your first page.</div>
+      <div class="r-keep">Keep your pages in the app. ✦</div>
+      <div class="r-stores">
+        <a class="r-store primary" id="playLink"
+           href="https://play.google.com/store/apps/details?id=com.purposelab.folio&referrer=utm_source%3Dweb%26utm_medium%3Ddemo%26utm_campaign%3Dweb_demo"
+           target="_blank" rel="noopener">Get it on Google Play</a>
+        <a class="r-store" id="appStoreLink"
+           href="https://apps.apple.com/app/id6781551692?ct=web_demo"
+           target="_blank" rel="noopener">Download on the App Store</a>
+      </div>
+      <button class="r-again" id="writeAgain">write another line</button>
+    </section>
+  </main>
+  <script>
+    (function setDate() {
+      const now = new Date();
+      const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('dayNum').textContent = now.getDate();
+      document.getElementById('daySub').textContent = days[now.getDay()] + ', ' + months[now.getMonth()];
+    })();
+
+    // Mood single-select (re-tap to clear)
+    document.getElementById('moods').addEventListener('click', (e) => {
+      const btn = e.target.closest('.t-mood');
+      if (!btn) return;
+      const wasSel = btn.classList.contains('sel');
+      document.querySelectorAll('.t-mood').forEach(b => b.classList.remove('sel'));
+      if (!wasSel) btn.classList.add('sel');
+    });
+
+    // Habits — independent multi-select check-off.
+    document.getElementById('habits').addEventListener('click', (e) => {
+      const btn = e.target.closest('.t-habit');
+      if (!btn) return;
+      btn.classList.toggle('done');
+    });
+
+    // Journal reference (used by the reveal handler below).
+    const journal = document.getElementById('journal');
+
+    const screen1 = document.getElementById('screen1');
+    const screen2 = document.getElementById('screen2');
+    const revealLine = document.getElementById('revealLine');
+
+    document.getElementById('closeDay').addEventListener('click', () => {
+      const text = journal.value.trim();
+      revealLine.textContent = text ? '\u201C' + text + '\u201D' : '';
+      screen1.style.opacity = '0';
+      screen2.classList.add('show');
+      screen2.setAttribute('aria-hidden', 'false');
+    });
+
+    document.getElementById('writeAgain').addEventListener('click', () => {
+      screen2.classList.remove('show');
+      screen2.setAttribute('aria-hidden', 'true');
+      screen1.style.opacity = '1';
+    });
+
+    // ── Personalization: font · paper · palette (a taste of Folio's look) ──
+    const fonts = ["'Caveat', cursive", "'Playfair Display', serif", "'DM Sans', sans-serif"];
+    let fontIdx = 0;
+    const fontAa = document.getElementById('fontAa');
+    document.getElementById('fontBtn').addEventListener('click', () => {
+      fontIdx = (fontIdx + 1) % fonts.length;
+      journal.style.fontFamily = fonts[fontIdx];
+      fontAa.style.fontFamily = fonts[fontIdx];
+    });
+
+    const papers = ['dots', 'wave', 'aged', 'plain'];
+    let paperIdx = 0;
+    document.getElementById('paperBtn').addEventListener('click', () => {
+      paperIdx = (paperIdx + 1) % papers.length;
+      screen1.setAttribute('data-paper', papers[paperIdx]);
+    });
+
+    const palettes = ['parchment', 'rose', 'evening'];
+    let palIdx = 0;
+    const stage = document.getElementById('stage');
+    document.getElementById('paletteBtn').addEventListener('click', () => {
+      palIdx = (palIdx + 1) % palettes.length;
+      if (palettes[palIdx] === 'parchment') stage.removeAttribute('data-palette');
+      else stage.setAttribute('data-palette', palettes[palIdx]);
+    });
+  </script>
+</body>
+</html>
