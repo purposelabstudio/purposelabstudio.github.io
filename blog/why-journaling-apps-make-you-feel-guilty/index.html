@@ -51,6 +51,8 @@
       @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
       /* CTA attribute chips */
       .cta .attrs { margin-top: 16px; font-family: var(--font-mono); font-size: 13px; letter-spacing: .04em; color: var(--ink-soft); }
+      .cta .store-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+      .trust-strip { max-width: 620px; margin: 18px auto 0; font-size: 14px; line-height: 1.65; color: var(--ink-soft); text-align: center; }
     </style>
     <link rel="alternate" type="application/rss+xml" title="PurposeLab Blog" href="/blog/rss.xml">
     <link rel="icon" href="../../folio/icon.png" type="image/png">
@@ -314,11 +316,18 @@
         <div class="cta">
             <h2>You don't need more discipline</h2>
             <p>You need a journal that welcomes you back. Folio has no streaks and no scores. One line is a complete entry, missed days stay blank, and your month is there to remember, not to grade.</p>
-            <a href="https://play.google.com/store/apps/details?id=com.purposelab.folio&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dblog%26utm_campaign%3Dwhy-guilty"
-               data-goatcounter-click="ps-folio-blog-why-guilty"
-               data-goatcounter-title="Download Folio (blog: why-guilty)"
-               class="btn btn-primary">▶ Get Folio (free)</a>
-            <div class="attrs">Free · Offline · Private · No streaks</div>
+            <div class="store-buttons">
+                <a href="https://play.google.com/store/apps/details?id=com.purposelab.folio&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dblog%26utm_campaign%3Dwhy-guilty"
+                   data-goatcounter-click="ps-folio-blog-why-guilty-android"
+                   data-goatcounter-title="Download Folio Android (blog: why-guilty)"
+                   class="btn btn-primary">▶ Google Play</a>
+                <a href="https://apps.apple.com/app/id6781551692?ct=blog-why-guilty"
+                   data-goatcounter-click="ps-folio-blog-why-guilty-ios"
+                   data-goatcounter-title="Download Folio iOS (blog: why-guilty)"
+                   class="btn btn-outline"> App Store</a>
+            </div>
+            <div class="attrs">Free · No account · Offline · Private · No streaks</div>
+            <p class="trust-strip">Folio is made by <a href="/about/">PurposeLab Studio</a>, a small team behind BP Log, WaterWise, and Hushly. It is free, works fully offline, and your entries never leave your device. <a href="https://purposelabstudio.com/privacy-policies/folio.html">Here is exactly how</a>.</p>
         </div>
 
         <section class="section">
