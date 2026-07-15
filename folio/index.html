@@ -25,6 +25,11 @@
     <link rel="stylesheet" href="../style.css">
     <style>
       :root{ --paper:#F3ECDD; --paper-2:#E9DEC6; --ink:#4A3520; --accent:#9C7A3C; --accent-dark:#7A5E2C; --accent-ink:#F3ECDD; --gold:#B8892B; }
+      .qr-bridge { display:flex; align-items:center; gap:14px; margin:20px auto 0; padding:14px 16px;
+          background: var(--paper-2, #E9DEC6); border:1px solid rgba(0,0,0,.1); border-radius:14px; max-width:420px; }
+      .qr-bridge img { width:84px; height:84px; border-radius:8px; background:#fff; padding:4px; }
+      .qr-bridge .qr-copy { font-size:14px; color: var(--text-secondary, #6b5d47); text-align:left; }
+      @media (max-width:600px){ .qr-bridge{ display:none; } }
     </style>
     <link rel="icon" href="icon.png?v=2" type="image/png">
     <!-- Structured Data -->
@@ -187,6 +192,17 @@
                     📔 Get it on Amazon (Physical copy)
                 </a>
             </div>
+            <div class="qr-bridge">
+                <img src="/assets/qr-folio.svg" alt="QR code to install Folio on your phone">
+                <span class="qr-copy"><strong>On a computer?</strong><br>Scan to install Folio on your phone.</span>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:0;">
+            <p style="font-size:1.1rem; line-height:1.6; max-width:720px; margin:0 auto; text-align:center; color: var(--text);">
+                <strong>Folio is a free, offline, private daily journal and mood tracker for Android and iOS.</strong> It has no ads, no account, and no streak pressure — just a quiet notebook for writing a line or a page, tracking your mood and habits, and reflecting on your month. Everything stays on your device, with optional app lock.
+            </p>
+            <p style="text-align:center; margin-top:14px;"><a href="/folio/journal/">New to journaling? Read the calm guide to daily journaling →</a></p>
         </section>
 
         <section class="section">
@@ -277,6 +293,26 @@
                     <strong>Prefer paper?</strong> Meet <strong>The Folio Diary</strong>, everything Folio does in a calm end-of-day notebook. Now on Amazon with a launch offer around <strong>50% off</strong>. <a href="/folio/diary/">See the diary &rarr;</a>
                 </div>
             </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Folio vs other journal apps</h2>
+            <table class="compare" style="width:100%; border-collapse:collapse; font-size:14px; max-width:640px; margin:0 auto;">
+                <thead><tr>
+                    <th style="text-align:left; padding:8px; border-bottom:2px solid var(--accent);">&nbsp;</th>
+                    <th style="padding:8px; border-bottom:2px solid var(--accent);">Folio</th>
+                    <th style="padding:8px; border-bottom:2px solid var(--accent);">Typical journal app</th>
+                </tr></thead>
+                <tbody>
+                    <tr><td style="padding:8px;">Price</td><td style="padding:8px; text-align:center;">Free</td><td style="padding:8px; text-align:center;">Freemium / subscription</td></tr>
+                    <tr><td style="padding:8px;">Ads</td><td style="padding:8px; text-align:center;">None</td><td style="padding:8px; text-align:center;">Often</td></tr>
+                    <tr><td style="padding:8px;">Account required</td><td style="padding:8px; text-align:center;">No</td><td style="padding:8px; text-align:center;">Usually</td></tr>
+                    <tr><td style="padding:8px;">Works offline</td><td style="padding:8px; text-align:center;">Yes</td><td style="padding:8px; text-align:center;">Sometimes</td></tr>
+                    <tr><td style="padding:8px;">Streak pressure</td><td style="padding:8px; text-align:center;">None</td><td style="padding:8px; text-align:center;">Common</td></tr>
+                    <tr><td style="padding:8px;">App lock</td><td style="padding:8px; text-align:center;">Yes</td><td style="padding:8px; text-align:center;">Rare</td></tr>
+                    <tr><td style="padding:8px;">Your data</td><td style="padding:8px; text-align:center;">On your device</td><td style="padding:8px; text-align:center;">On their cloud</td></tr>
+                </tbody>
+            </table>
         </section>
 
         <section class="section">
