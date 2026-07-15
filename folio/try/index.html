@@ -235,6 +235,21 @@
       document.getElementById('daySub').textContent = days[now.getDay()] + ', ' + months[now.getMonth()];
     })();
 
+    // Forward incoming UTM params onto the store links so external campaigns attribute correctly.
+    // No UTMs on the URL (e.g. someone opens the demo directly) keeps the default web_demo tags.
+    (function forwardUtms() {
+      const p = new URLSearchParams(location.search);
+      const utm = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']
+        .filter(k => p.get(k)).map(k => k + '=' + p.get(k));
+      if (!utm.length) return;
+      const play = document.getElementById('playLink');
+      if (play) play.href = 'https://play.google.com/store/apps/details?id=com.purposelab.folio&referrer='
+        + encodeURIComponent(utm.join('&'));
+      const ct = ((p.get('utm_source') ? p.get('utm_source') + '_' : '') + (p.get('utm_campaign') || 'demo')).slice(0, 40);
+      const appStore = document.getElementById('appStoreLink');
+      if (appStore) appStore.href = 'https://apps.apple.com/app/id6781551692?ct=' + encodeURIComponent(ct);
+    })();
+
     // Mood single-select (re-tap to clear)
     document.getElementById('moods').addEventListener('click', (e) => {
       const btn = e.target.closest('.t-mood');
