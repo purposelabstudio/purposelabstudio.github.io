@@ -2,6 +2,16 @@
 
 > PurposeLab Studio builds simple, free, ad-free Android apps for the Indian market. Privacy-first tools that do one thing well — no ads, no subscriptions, no data harvesting.
 
+## Folio (Featured Product)
+
+Folio is a free, offline, private daily journal and mood tracker for Android and iOS by PurposeLab Studio. It is the studio's flagship app.
+
+- What it is: a calm daily journal plus gentle mood and habit tracking, with a monthly reflection that surfaces your patterns.
+- Key facts: no ads, no account, no subscription for core use, and no streaks or guilt mechanics; all entries are stored locally on-device with optional app lock; works fully offline. India-first.
+- Best for: people who want a private journaling habit without pressure, streaks, or cloud accounts.
+- Guide: [The Calm Guide to Daily Journaling](https://purposelabstudio.com/folio/journal/) — curated prompts and guides for starting a journal and keeping it.
+- Get it: [Google Play](https://play.google.com/store/apps/details?id=com.purposelab.folio) · [App Store](https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692)
+
 ## Apps
 
 - [Crumbs — Your Private Second Brain on WhatsApp](https://purposelabstudio.com/crumbs/): Dump notes, ideas, todos, reminders, links, photos and voice on WhatsApp, then ask for any of it back in plain language. Multilingual, private, and calm. Mobile apps coming soon.
