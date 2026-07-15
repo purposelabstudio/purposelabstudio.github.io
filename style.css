@@ -400,7 +400,7 @@ a:hover { text-decoration: underline; }
 /* Newsletter subscribe confirmation */
 .js-subscribe-ok { margin: 8px 0 0; font-weight: 600; color: var(--accent); }
 
-/* App cards (shared: home + /apps/) */
+/* App cards (used by /apps/ index) */
 .app-card {
     background: var(--paper-2);
     border: 1px solid var(--border);
