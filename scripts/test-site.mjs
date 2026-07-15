@@ -22,7 +22,7 @@ const blogPosts = readdirSync(join(ROOT, 'blog'))
   .filter((p) => existsSync(join(ROOT, p)));
 
 const appPages = ['crumbs', 'folio', 'waterwise', 'bplog', 'hushly'].map((a) => `${a}/index.html`);
-const corePages = ['index.html', 'about/index.html', 'support/index.html', 'blog/index.html', '404.html'];
+const corePages = ['index.html', 'about/index.html', 'support/index.html', 'blog/index.html', '404.html', 'apps/index.html', 'folio/journal/index.html'];
 const DIARY = 'folio/diary/index.html';
 const toolPages = ['tools/index.html', 'tools/water-intake-calculator/index.html', 'tools/blood-pressure-checker/index.html', 'tools/journal-prompt-generator/index.html', 'tools/white-noise-player/index.html'];
 const commercialPages = ['best-free-blood-pressure-app/index.html', 'best-free-water-reminder-app/index.html', 'best-free-baby-sleep-app/index.html', 'best-free-journal-app/index.html'];
@@ -151,7 +151,7 @@ check('folio page has App Store button(s)', (folio.match(new RegExp(APPSTORE, 'g
 check('folio JSON-LD downloadUrl includes App Store', /"downloadUrl":\s*\[[^\]]*apps\.apple\.com/.test(folio));
 
 // 9. Every page's nav links to all 5 apps + Blog/About/Support (consistent internal graph)
-const NAV_TARGETS = ['/crumbs/', '/folio/', '/waterwise/', '/bplog/', '/hushly/', '/blog/', '/about/', '/support/'];
+const NAV_TARGETS = ['/folio/', '/folio/journal/', '/blog/', '/apps/', '/about/', '/support/'];
 for (const p of allPages) {
   if (p === '404.html') continue; // standalone page with its own minimal link block
   const html = read(p);
