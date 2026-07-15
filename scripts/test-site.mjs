@@ -334,6 +334,63 @@ for (const p of blogPosts) {
   check(`llms.txt lists ${p}`, llmsTxt.includes(url), `missing ${url} in llms.txt`);
 }
 
+// 23. Folio-prime redesign intent + honesty invariants (locks the 2026-07 redesign)
+{
+  const home = read('index.html');
+  check('home: Folio hero h1', /A quiet notebook for closing the day/.test(home), 'homepage h1 not Folio-forward');
+  check('home: tagged Play hero CTA', /play\.google\.com[^"]*com\.purposelab\.folio[^"]*home-hero/.test(home), 'missing tagged Play hero CTA');
+  check('home: App Store hero CTA', home.includes('apps.apple.com/us/app/folio-daily-journal-diary/id6781551692'), 'missing App Store CTA');
+  check('home: QR bridge uses home-qr asset', home.includes('/assets/qr-folio-home.svg'), 'homepage QR asset not referenced');
+  check('home: links journaling hub', home.includes('href="/folio/journal/"'), 'homepage missing /folio/journal/ link');
+  check('home: links apps index', home.includes('href="/apps/"'), 'homepage missing /apps/ link');
+  for (const app of ['crumbs', 'waterwise', 'bplog', 'hushly']) {
+    check(`home: apps-strip links /${app}/`, home.includes(`href="/${app}/"`), `homepage missing /${app}/`);
+  }
+
+  const apps = read('apps/index.html');
+  for (const app of ['crumbs', 'waterwise', 'bplog', 'hushly']) {
+    check(`apps: lists ${app} card`, apps.includes(`/${app}/icon.png`), `/apps/ missing ${app} card`);
+  }
+  check('apps: no Folio app-card', !apps.includes('folio/icon.png'), 'Folio should not appear as a card in /apps/');
+  check('apps: CollectionPage schema', /"@type":\s*"CollectionPage"/.test(apps), 'missing CollectionPage schema');
+
+  const hub = read('folio/journal/index.html');
+  const journalPosts = [
+    'why-journaling-apps-make-you-feel-guilty',
+    'why-journaling-fails-and-how-to-stick-with-it',
+    'daily-journal-vs-mood-tracker-why-you-need-both',
+    'journaling-prompts-for-anxiety',
+    'journaling-prompts-for-overthinking',
+    'journaling-prompts-for-self-discovery',
+  ];
+  for (const slug of journalPosts) {
+    check(`hub: links /blog/${slug}/`, hub.includes(`/blog/${slug}/`), `hub missing ${slug}`);
+  }
+  check('hub: ItemList schema', /"@type":\s*"ItemList"/.test(hub), 'hub missing ItemList schema');
+  check('hub: tagged Play CTA (folio-journal-hub)', /folio-journal-hub/.test(hub), 'hub missing folio-journal-hub CTA');
+
+  for (const slug of journalPosts) {
+    const post = read(`blog/${slug}/index.html`);
+    check(`post ${slug}: in-body hub back-link`, /Part of\s*<a href="\/folio\/journal\/"/.test(post), 'missing in-body /folio/journal/ back-link');
+  }
+
+  const folio = read('folio/index.html');
+  check('folio: comparison table', /<table[^>]*class="compare"/.test(folio), 'missing comparison table');
+  check('folio: GEO quotable intro', /free, offline, private daily journal and mood tracker/.test(folio), 'missing GEO intro sentence');
+  check('folio: QR bridge uses folio-qr asset', folio.includes('/assets/qr-folio.svg'), 'folio QR asset not referenced');
+  check('folio: links journaling hub', folio.includes('href="/folio/journal/"'), 'folio page missing /folio/journal/ link');
+
+  check('assets/qr-folio.svg exists', existsSync(join(ROOT, 'assets/qr-folio.svg')), 'missing folio QR');
+  check('assets/qr-folio-home.svg exists', existsSync(join(ROOT, 'assets/qr-folio-home.svg')), 'missing home QR');
+
+  check('llms.txt: Folio featured entity block', /Folio \(Featured Product\)/.test(llmsTxt), 'missing Folio featured block in llms.txt');
+
+  // HONESTY: website copy must not contradict Folio's real freemium/Plus model
+  check('folio: FAQ does not claim "no in-app purchases"', !/no in-app purchases/i.test(folio), 'false claim: Folio has Folio Plus (IAP)');
+  check('folio: acknowledges optional Folio Plus', /Folio Plus/.test(folio), 'page should acknowledge optional Folio Plus for honesty');
+  check('folio: compare price row is not a bare "Free"', !/>Price<\/td><td[^>]*>Free<\/td>/.test(folio), 'price row must reflect freemium (Free core + optional Plus)');
+}
+
 // Summary
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) {

@@ -36,7 +36,8 @@ Folio is a free, offline, private daily journal and mood tracker for Android and
 
 ## Key Facts
 
-- All apps are 100% free with no ads, no subscriptions, and no in-app purchases
+- Free to use with no ads and no account required; every app's core features are free
+- No in-app purchases in Crumbs, WaterWise, BP Log, or Hushly; Folio adds an optional Folio Plus (themes/fonts, monthly or lifetime) while its core stays free
 - Data never leaves the user's device (offline-first architecture)
 - Target market: India
 - Available on Google Play Store
