@@ -18,9 +18,18 @@
   h2 small { color: #A89F92; font-weight: 400; font-size: 13px; }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #E8E2D8; vertical-align: middle; }
-  code { background: #F0EAE0; padding: 2px 6px; border-radius: 5px; font-size: 13px; }
-  button.copy { border: 1px solid #C9BFB0; background: #fff; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 13px; }
+  code { background: #F0EAE0; padding: 2px 6px; border-radius: 5px; font-size: 13px; word-break: break-all; }
+  button.copy { border: 1px solid #C9BFB0; background: #fff; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 13px; white-space: nowrap; }
   button.copy:hover { background: #F0EAE0; }
+  .builder { background: #fff; border: 1px solid #E8E2D8; border-radius: 14px; padding: 20px; }
+  .builder .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin: 4px 0 18px; }
+  .builder label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #6E685E; }
+  .builder select, .builder input { padding: 8px 10px; border: 1px solid #C9BFB0; border-radius: 8px; font-size: 14px; background: #FAF6F0; }
+  .builder .full { grid-column: 1 / -1; }
+  .out-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid #F0EAE0; }
+  .out-row .lbl { width: 130px; flex: none; font-size: 12px; color: #A89F92; }
+  .out-row code { flex: 1; }
+  @media (max-width: 560px) { .builder .grid { grid-template-columns: 1fr; } .out-row { flex-wrap: wrap; } .out-row .lbl { width: 100%; } }
 </style>
 </head>
 <body>
@@ -29,6 +38,37 @@
     GoatCounter by placement (real-time); installs show up in Play Console /
     App Store Connect by campaign. Regenerate with
     <code>node tools/build-links.mjs</code>.</p>
+
+  <section class="builder">
+    <h2>Build a custom tracking link</h2>
+    <p class="lead" style="margin:4px 0 14px">Pick an app, then choose a ready-made
+      placement or type your own source / medium / campaign. Copy the tracking link
+      and paste it anywhere. It smart-redirects (iPhone → App Store, Android → Play,
+      desktop → both) and logs the campaign in GoatCounter.</p>
+    <div class="grid">
+      <label>App
+        <select id="b-app"><option value="folio">Folio</option><option value="bplog">BPLog</option><option value="hushly">Hushly</option><option value="waterwise">WaterWise</option><option value="crumbs">Crumbs</option></select>
+      </label>
+      <label>Placement preset
+        <select id="b-preset"><option value="">— custom —</option><option value="li">LinkedIn (generic)</option><option value="li-dm">LinkedIn — direct message</option><option value="li-post">LinkedIn — post</option><option value="li-comment">LinkedIn — comment</option><option value="li-bio">LinkedIn — profile / bio</option><option value="x">X / Twitter</option><option value="ig-bio">Instagram — bio link</option><option value="yt">YouTube</option><option value="wa">WhatsApp</option><option value="email">Email</option></select>
+      </label>
+      <label>Source <span style="color:#C0B6A6">utm_source</span>
+        <input id="b-source" placeholder="linkedin" autocomplete="off">
+      </label>
+      <label>Medium <span style="color:#C0B6A6">utm_medium</span>
+        <input id="b-medium" placeholder="social" autocomplete="off">
+      </label>
+      <label class="full">Campaign <span style="color:#C0B6A6">utm_campaign / ct</span>
+        <input id="b-campaign" placeholder="launch_july" autocomplete="off">
+      </label>
+    </div>
+    <div id="b-out">
+      <div class="out-row"><span class="lbl">Tracking link</span><code id="o-short"></code><button class="copy" data-src="o-short">Copy</button></div>
+      <div class="out-row"><span class="lbl">Play Store (raw)</span><code id="o-play"></code><button class="copy" data-src="o-play">Copy</button></div>
+      <div class="out-row" id="o-ios-row"><span class="lbl">App Store (raw)</span><code id="o-ios"></code><button class="copy" data-src="o-ios">Copy</button></div>
+    </div>
+  </section>
+
   
     <section>
       <h2>Folio</h2>
@@ -315,14 +355,68 @@
       </tr></tbody>
       </table>
     </section>
+
   <script>
+    var DATA = {"baseUrl":"https://purposelabstudio.com","apps":{"folio":{"name":"Folio","android":"com.purposelab.folio","ios":"6781551692"},"bplog":{"name":"BPLog","android":"com.purposelab.bplog","ios":null},"hushly":{"name":"Hushly","android":"com.purposelab.hushly","ios":null},"waterwise":{"name":"WaterWise","android":"com.purposelab.waterwise","ios":null},"crumbs":{"name":"Crumbs","android":"com.purposelab.crumbs","ios":null}},"placements":{"li":{"utm_source":"linkedin","utm_medium":"social","utm_campaign":"linkedin","ct":"linkedin","label":"LinkedIn (generic)"},"li-dm":{"utm_source":"linkedin","utm_medium":"social","utm_campaign":"linkedin_dm","ct":"linkedin_dm","label":"LinkedIn — direct message"},"li-post":{"utm_source":"linkedin","utm_medium":"social","utm_campaign":"linkedin_post","ct":"linkedin_post","label":"LinkedIn — post"},"li-comment":{"utm_source":"linkedin","utm_medium":"social","utm_campaign":"linkedin_comment","ct":"linkedin_comment","label":"LinkedIn — comment"},"li-bio":{"utm_source":"linkedin","utm_medium":"social","utm_campaign":"linkedin_bio","ct":"linkedin_bio","label":"LinkedIn — profile / bio"},"x":{"utm_source":"twitter","utm_medium":"social","utm_campaign":"twitter","ct":"twitter","label":"X / Twitter"},"ig-bio":{"utm_source":"instagram","utm_medium":"social","utm_campaign":"instagram_bio","ct":"instagram_bio","label":"Instagram — bio link"},"yt":{"utm_source":"youtube","utm_medium":"social","utm_campaign":"youtube","ct":"youtube","label":"YouTube"},"wa":{"utm_source":"whatsapp","utm_medium":"social","utm_campaign":"whatsapp","ct":"whatsapp","label":"WhatsApp"},"email":{"utm_source":"email","utm_medium":"email","utm_campaign":"email","ct":"email","label":"Email"}}};
+    var $ = function (id) { return document.getElementById(id); };
+    var enc = encodeURIComponent;
+
+    function buildReferrer(s, m, c) {
+      return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '']
+        .filter(Boolean).join('&');
+    }
+    function recompute() {
+      var a = $('b-app').value;
+      var preset = $('b-preset').value;
+      var s = $('b-source').value.trim();
+      var m = $('b-medium').value.trim();
+      var c = $('b-campaign').value.trim();
+      var app = DATA.apps[a];
+
+      var short;
+      if (preset) {
+        short = DATA.baseUrl + '/go/' + a + '-' + preset;   // clean static link
+      } else {
+        var qp = ['a=' + enc(a)];
+        if (s) qp.push('s=' + enc(s));
+        if (m) qp.push('m=' + enc(m));
+        if (c) qp.push('c=' + enc(c));
+        short = DATA.baseUrl + '/go/r?' + qp.join('&');
+      }
+      var ref = buildReferrer(s, m, c);
+      var play = 'https://play.google.com/store/apps/details?id=' + app.android
+        + (ref ? '&referrer=' + enc(ref) : '');
+      $('o-short').textContent = short;
+      $('o-play').textContent = play;
+      if (app.ios) {
+        $('o-ios-row').style.display = '';
+        $('o-ios').textContent = 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + enc(c) : '');
+      } else {
+        $('o-ios-row').style.display = 'none';
+      }
+    }
+    // Selecting a preset fills the fields from config; picking "custom" clears them.
+    $('b-preset').addEventListener('change', function () {
+      var p = DATA.placements[this.value];
+      if (p) { $('b-source').value = p.utm_source || ''; $('b-medium').value = p.utm_medium || ''; $('b-campaign').value = p.utm_campaign || ''; }
+      recompute();
+    });
+    // Typing a custom value means it is no longer the chosen preset.
+    ['b-source', 'b-medium', 'b-campaign'].forEach(function (id) {
+      $(id).addEventListener('input', function () { $('b-preset').value = ''; recompute(); });
+    });
+    $('b-app').addEventListener('change', recompute);
+
     document.querySelectorAll('button.copy').forEach(function (b) {
       b.addEventListener('click', function () {
-        navigator.clipboard.writeText(b.dataset.url).then(function () {
+        var text = b.dataset.url || ($(b.dataset.src) && $(b.dataset.src).textContent) || '';
+        if (!text) return;
+        navigator.clipboard.writeText(text).then(function () {
           var t = b.textContent; b.textContent = 'Copied'; setTimeout(function () { b.textContent = t; }, 1200);
         });
       });
     });
+    recompute();
   </script>
 </body>
 </html>

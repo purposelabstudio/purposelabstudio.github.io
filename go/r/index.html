@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Opening…</title>
+<script>window.goatcounter = { no_onload: true };</script>
+<script data-goatcounter="https://purposelabstudio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function () {
+  var APPS = {"folio":{"name":"Folio","tagline":"A calm, private journal. One line a day.","icon":"/folio/icon.png","accent":"#A08560","android":"com.purposelab.folio","ios":"6781551692","default":"android"},"bplog":{"name":"BPLog","tagline":"Track your blood pressure, simply.","icon":"/bplog/icon.png","accent":"#C0504D","android":"com.purposelab.bplog","ios":null,"default":"android"},"hushly":{"name":"Hushly","tagline":"White noise for better baby sleep.","icon":"/hushly/icon.png","accent":"#5B7C99","android":"com.purposelab.hushly","ios":null,"default":"android"},"waterwise":{"name":"WaterWise","tagline":"A gentle water reminder, no ads.","icon":"/waterwise/icon.png","accent":"#3E8EA0","android":"com.purposelab.waterwise","ios":null,"default":"android"},"crumbs":{"name":"Crumbs","tagline":"Your second brain on WhatsApp.","icon":"/crumbs/icon.png","accent":"#6B8E5A","android":"com.purposelab.crumbs","ios":null,"default":"android"}};
+  var GC = "https://purposelabstudio.goatcounter.com/count";
+  var q = new URLSearchParams(location.search);
+  var a = (q.get('a') || '').trim();
+  var s = (q.get('s') || '').trim();
+  var m = (q.get('m') || '').trim();
+  var c = (q.get('c') || '').trim();
+  var app = APPS[a];
+  // Synthesize a clean, per-campaign GoatCounter path so custom links are
+  // still trackable even though they share one physical page.
+  var gcPath = '/go/r/' + (a || 'unknown') + (s ? '-' + s : '') + (c ? '-' + c : '');
+  try {
+    new Image().src = GC + '?p=' + encodeURIComponent(gcPath)
+      + '&t=' + encodeURIComponent(document.title)
+      + '&r=' + encodeURIComponent(document.referrer)
+      + '&rnd=' + Math.random().toString(36).slice(2);
+  } catch (e) {}
+
+  function referrer() {
+    return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '']
+      .filter(Boolean).join('&');
+  }
+  var PLAY = null, APPSTORE = null;
+  if (app) {
+    var ref = referrer();
+    PLAY = 'https://play.google.com/store/apps/details?id=' + app.android
+      + (ref ? '&referrer=' + encodeURIComponent(ref) : '');
+    APPSTORE = app.ios
+      ? 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + encodeURIComponent(c) : '')
+      : null;
+  }
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/.test(ua);
+  var target = null;
+  if (app) {
+    if (isAndroid) target = PLAY;
+    else if (isIOS && APPSTORE) target = APPSTORE;
+  }
+  if (target) { setTimeout(function () { location.replace(target); }, 120); return; }
+
+  // Desktop / iOS-no-build / unknown app → render the landing.
+  document.addEventListener('DOMContentLoaded', function () {
+    var wrap = document.getElementById('landing');
+    if (!app) {
+      document.getElementById('name').textContent = 'App not found';
+      document.getElementById('tag').textContent = 'Check the link and try again.';
+      document.getElementById('buttons').innerHTML = '<a class="store" href="https://purposelabstudio.com/apps/">See all apps</a>';
+      wrap.style.display = 'flex';
+      return;
+    }
+    document.documentElement.style.setProperty('--accent', app.accent || '#A08560');
+    var icon = document.getElementById('icon');
+    icon.src = app.icon; icon.alt = app.name + ' icon';
+    document.getElementById('name').textContent = app.name;
+    document.getElementById('tag').textContent = app.tagline;
+    var b = '<a class="store" href="' + PLAY + '">Get it on Google Play</a>';
+    if (APPSTORE) b += '<a class="store" href="' + APPSTORE + '">Download on the App Store</a>';
+    document.getElementById('buttons').innerHTML = b;
+    wrap.style.display = 'flex';
+  });
+})();
+</script>
+<style>
+  :root { --accent: #A08560; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #FAF6F0; color: #2D2A26; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 24px; }
+  a { color: var(--accent); }
+  #landing { display: none; flex-direction: column; align-items: center; text-align: center; gap: 14px; max-width: 360px; }
+  #landing img.icon { width: 84px; height: 84px; border-radius: 20px; box-shadow: 0 6px 20px rgba(45,42,38,.16); }
+  #landing h1 { font-size: 22px; font-weight: 700; }
+  #landing p.tag { color: #6E685E; font-size: 15px; }
+  .store { display: inline-block; width: 100%; padding: 12px 18px; border-radius: 12px;
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; }
+  .store + .store { background: #2D2A26; margin-top: 10px; }
+  #buttons { display: flex; flex-direction: column; width: 100%; margin-top: 4px; }
+</style>
+</head>
+<body>
+  <main id="landing">
+    <img class="icon" id="icon" src="" alt="">
+    <h1 id="name"></h1>
+    <p class="tag" id="tag"></p>
+    <div id="buttons"></div>
+  </main>
+</body>
+</html>

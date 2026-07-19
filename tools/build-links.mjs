@@ -179,6 +179,121 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
 `;
 }
 
+// ---- dynamic redirector (/go/r/) -------------------------------------------
+// A single param-driven page powering ad-hoc custom links built on the registry
+// page: /go/r?a=<app>&s=<source>&m=<medium>&c=<campaign>. It smart-redirects
+// like the static pages and logs a synthesized GoatCounter path per campaign.
+
+function redirectorPage() {
+  const embedded = {};
+  for (const k of Object.keys(apps)) {
+    const a = apps[k];
+    embedded[k] = { name: a.name, tagline: a.tagline, icon: a.icon, accent: a.accent, android: a.android, ios: a.ios, default: a.default };
+  }
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Opening…</title>
+<script>window.goatcounter = { no_onload: true };</script>
+<script data-goatcounter="${esc(goatcounter)}" async src="//gc.zgo.at/count.js"></script>
+<script>
+(function () {
+  var APPS = ${jsLit(embedded)};
+  var GC = ${jsLit(goatcounter)};
+  var q = new URLSearchParams(location.search);
+  var a = (q.get('a') || '').trim();
+  var s = (q.get('s') || '').trim();
+  var m = (q.get('m') || '').trim();
+  var c = (q.get('c') || '').trim();
+  var app = APPS[a];
+  // Synthesize a clean, per-campaign GoatCounter path so custom links are
+  // still trackable even though they share one physical page.
+  var gcPath = '/go/r/' + (a || 'unknown') + (s ? '-' + s : '') + (c ? '-' + c : '');
+  try {
+    new Image().src = GC + '?p=' + encodeURIComponent(gcPath)
+      + '&t=' + encodeURIComponent(document.title)
+      + '&r=' + encodeURIComponent(document.referrer)
+      + '&rnd=' + Math.random().toString(36).slice(2);
+  } catch (e) {}
+
+  function referrer() {
+    return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '']
+      .filter(Boolean).join('&');
+  }
+  var PLAY = null, APPSTORE = null;
+  if (app) {
+    var ref = referrer();
+    PLAY = 'https://play.google.com/store/apps/details?id=' + app.android
+      + (ref ? '&referrer=' + encodeURIComponent(ref) : '');
+    APPSTORE = app.ios
+      ? 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + encodeURIComponent(c) : '')
+      : null;
+  }
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/.test(ua);
+  var target = null;
+  if (app) {
+    if (isAndroid) target = PLAY;
+    else if (isIOS && APPSTORE) target = APPSTORE;
+  }
+  if (target) { setTimeout(function () { location.replace(target); }, 120); return; }
+
+  // Desktop / iOS-no-build / unknown app → render the landing.
+  document.addEventListener('DOMContentLoaded', function () {
+    var wrap = document.getElementById('landing');
+    if (!app) {
+      document.getElementById('name').textContent = 'App not found';
+      document.getElementById('tag').textContent = 'Check the link and try again.';
+      document.getElementById('buttons').innerHTML = '<a class="store" href="https://purposelabstudio.com/apps/">See all apps</a>';
+      wrap.style.display = 'flex';
+      return;
+    }
+    document.documentElement.style.setProperty('--accent', app.accent || '#A08560');
+    var icon = document.getElementById('icon');
+    icon.src = app.icon; icon.alt = app.name + ' icon';
+    document.getElementById('name').textContent = app.name;
+    document.getElementById('tag').textContent = app.tagline;
+    var b = '<a class="store" href="' + PLAY + '">Get it on Google Play</a>';
+    if (APPSTORE) b += '<a class="store" href="' + APPSTORE + '">Download on the App Store</a>';
+    document.getElementById('buttons').innerHTML = b;
+    wrap.style.display = 'flex';
+  });
+})();
+</script>
+<style>
+  :root { --accent: #A08560; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #FAF6F0; color: #2D2A26; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 24px; }
+  a { color: var(--accent); }
+  #landing { display: none; flex-direction: column; align-items: center; text-align: center; gap: 14px; max-width: 360px; }
+  #landing img.icon { width: 84px; height: 84px; border-radius: 20px; box-shadow: 0 6px 20px rgba(45,42,38,.16); }
+  #landing h1 { font-size: 22px; font-weight: 700; }
+  #landing p.tag { color: #6E685E; font-size: 15px; }
+  .store { display: inline-block; width: 100%; padding: 12px 18px; border-radius: 12px;
+    background: var(--accent); color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; }
+  .store + .store { background: #2D2A26; margin-top: 10px; }
+  #buttons { display: flex; flex-direction: column; width: 100%; margin-top: 4px; }
+</style>
+</head>
+<body>
+  <main id="landing">
+    <img class="icon" id="icon" src="" alt="">
+    <h1 id="name"></h1>
+    <p class="tag" id="tag"></p>
+    <div id="buttons"></div>
+  </main>
+</body>
+</html>
+`;
+}
+
 // ---- registry page ---------------------------------------------------------
 
 function registryPage(rows) {
@@ -200,6 +315,17 @@ function registryPage(rows) {
     </section>`;
   }).join('');
 
+  // Data the client-side builder needs (store ids + presets).
+  const data = { baseUrl, apps: {}, placements };
+  for (const k of Object.keys(apps)) {
+    data.apps[k] = { name: apps[k].name, android: apps[k].android, ios: apps[k].ios };
+  }
+
+  const appOptions = Object.keys(apps)
+    .map((k) => `<option value="${esc(k)}">${esc(apps[k].name)}</option>`).join('');
+  const presetOptions = Object.keys(placements)
+    .map((k) => `<option value="${esc(k)}">${esc(placements[k].label)}</option>`).join('');
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -220,9 +346,18 @@ function registryPage(rows) {
   h2 small { color: #A89F92; font-weight: 400; font-size: 13px; }
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #E8E2D8; vertical-align: middle; }
-  code { background: #F0EAE0; padding: 2px 6px; border-radius: 5px; font-size: 13px; }
-  button.copy { border: 1px solid #C9BFB0; background: #fff; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 13px; }
+  code { background: #F0EAE0; padding: 2px 6px; border-radius: 5px; font-size: 13px; word-break: break-all; }
+  button.copy { border: 1px solid #C9BFB0; background: #fff; border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 13px; white-space: nowrap; }
   button.copy:hover { background: #F0EAE0; }
+  .builder { background: #fff; border: 1px solid #E8E2D8; border-radius: 14px; padding: 20px; }
+  .builder .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin: 4px 0 18px; }
+  .builder label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #6E685E; }
+  .builder select, .builder input { padding: 8px 10px; border: 1px solid #C9BFB0; border-radius: 8px; font-size: 14px; background: #FAF6F0; }
+  .builder .full { grid-column: 1 / -1; }
+  .out-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid #F0EAE0; }
+  .out-row .lbl { width: 130px; flex: none; font-size: 12px; color: #A89F92; }
+  .out-row code { flex: 1; }
+  @media (max-width: 560px) { .builder .grid { grid-template-columns: 1fr; } .out-row { flex-wrap: wrap; } .out-row .lbl { width: 100%; } }
 </style>
 </head>
 <body>
@@ -231,15 +366,100 @@ function registryPage(rows) {
     GoatCounter by placement (real-time); installs show up in Play Console /
     App Store Connect by campaign. Regenerate with
     <code>node tools/build-links.mjs</code>.</p>
+
+  <section class="builder">
+    <h2>Build a custom tracking link</h2>
+    <p class="lead" style="margin:4px 0 14px">Pick an app, then choose a ready-made
+      placement or type your own source / medium / campaign. Copy the tracking link
+      and paste it anywhere. It smart-redirects (iPhone → App Store, Android → Play,
+      desktop → both) and logs the campaign in GoatCounter.</p>
+    <div class="grid">
+      <label>App
+        <select id="b-app">${appOptions}</select>
+      </label>
+      <label>Placement preset
+        <select id="b-preset"><option value="">— custom —</option>${presetOptions}</select>
+      </label>
+      <label>Source <span style="color:#C0B6A6">utm_source</span>
+        <input id="b-source" placeholder="linkedin" autocomplete="off">
+      </label>
+      <label>Medium <span style="color:#C0B6A6">utm_medium</span>
+        <input id="b-medium" placeholder="social" autocomplete="off">
+      </label>
+      <label class="full">Campaign <span style="color:#C0B6A6">utm_campaign / ct</span>
+        <input id="b-campaign" placeholder="launch_july" autocomplete="off">
+      </label>
+    </div>
+    <div id="b-out">
+      <div class="out-row"><span class="lbl">Tracking link</span><code id="o-short"></code><button class="copy" data-src="o-short">Copy</button></div>
+      <div class="out-row"><span class="lbl">Play Store (raw)</span><code id="o-play"></code><button class="copy" data-src="o-play">Copy</button></div>
+      <div class="out-row" id="o-ios-row"><span class="lbl">App Store (raw)</span><code id="o-ios"></code><button class="copy" data-src="o-ios">Copy</button></div>
+    </div>
+  </section>
+
   ${appBlocks}
+
   <script>
+    var DATA = ${jsLit(data)};
+    var $ = function (id) { return document.getElementById(id); };
+    var enc = encodeURIComponent;
+
+    function buildReferrer(s, m, c) {
+      return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '']
+        .filter(Boolean).join('&');
+    }
+    function recompute() {
+      var a = $('b-app').value;
+      var preset = $('b-preset').value;
+      var s = $('b-source').value.trim();
+      var m = $('b-medium').value.trim();
+      var c = $('b-campaign').value.trim();
+      var app = DATA.apps[a];
+
+      var short;
+      if (preset) {
+        short = DATA.baseUrl + '/go/' + a + '-' + preset;   // clean static link
+      } else {
+        var qp = ['a=' + enc(a)];
+        if (s) qp.push('s=' + enc(s));
+        if (m) qp.push('m=' + enc(m));
+        if (c) qp.push('c=' + enc(c));
+        short = DATA.baseUrl + '/go/r?' + qp.join('&');
+      }
+      var ref = buildReferrer(s, m, c);
+      var play = 'https://play.google.com/store/apps/details?id=' + app.android
+        + (ref ? '&referrer=' + enc(ref) : '');
+      $('o-short').textContent = short;
+      $('o-play').textContent = play;
+      if (app.ios) {
+        $('o-ios-row').style.display = '';
+        $('o-ios').textContent = 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + enc(c) : '');
+      } else {
+        $('o-ios-row').style.display = 'none';
+      }
+    }
+    // Selecting a preset fills the fields from config; picking "custom" clears them.
+    $('b-preset').addEventListener('change', function () {
+      var p = DATA.placements[this.value];
+      if (p) { $('b-source').value = p.utm_source || ''; $('b-medium').value = p.utm_medium || ''; $('b-campaign').value = p.utm_campaign || ''; }
+      recompute();
+    });
+    // Typing a custom value means it is no longer the chosen preset.
+    ['b-source', 'b-medium', 'b-campaign'].forEach(function (id) {
+      $(id).addEventListener('input', function () { $('b-preset').value = ''; recompute(); });
+    });
+    $('b-app').addEventListener('change', recompute);
+
     document.querySelectorAll('button.copy').forEach(function (b) {
       b.addEventListener('click', function () {
-        navigator.clipboard.writeText(b.dataset.url).then(function () {
+        var text = b.dataset.url || ($(b.dataset.src) && $(b.dataset.src).textContent) || '';
+        if (!text) return;
+        navigator.clipboard.writeText(text).then(function () {
           var t = b.textContent; b.textContent = 'Copied'; setTimeout(function () { b.textContent = t; }, 1200);
         });
       });
     });
+    recompute();
   </script>
 </body>
 </html>
@@ -278,7 +498,11 @@ function build() {
 
   writeFileSync(join(OUT_DIR, 'index.html'), registryPage(rows));
 
-  console.log(`Generated ${rows.length} redirect pages + registry at /go/`);
+  // Dynamic param-driven redirector for ad-hoc custom links (/go/r/).
+  mkdirSync(join(OUT_DIR, 'r'), { recursive: true });
+  writeFileSync(join(OUT_DIR, 'r', 'index.html'), redirectorPage());
+
+  console.log(`Generated ${rows.length} redirect pages + registry + /go/r/ at /go/`);
   console.log(`QR codes: ${qrAvailable ? 'inlined (qrencode found)' : 'omitted (install qrencode to enable)'}`);
 }
 
