@@ -89,26 +89,38 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
     ? `<div class="qr" aria-label="Scan to install on your phone">${qrSvg}<span>Scan to install</span></div>`
     : '';
 
+  // Card metadata for social unfurls.
+  const availability = appStore ? 'Google Play & App Store' : 'Google Play';
+  const ogTitle = `${app.name} — ${app.tagline.split(/\.\s/)[0]}`;
+  const ogDesc = `${app.tagline} No account, no ads, works offline. Free on ${appStore ? 'Android & iPhone' : 'Android'}.`;
+  const ogImage = baseUrl + (app.ogImage || app.icon);
+
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Get ${esc(app.name)}</title>
-<!-- Open Graph / Twitter: makes a pasted link unfurl with a preview card on
-     WhatsApp, Reddit, Discord, Substack, Medium, etc. Unfurl bots read these
-     static tags; they don't run the JS redirect, so humans still get sent on. -->
+<title>${esc(ogTitle)}</title>
+<meta name="description" content="${esc(ogDesc)}">
+<!-- Open Graph / Twitter: makes a pasted link unfurl with a large preview card
+     on WhatsApp, Reddit, Discord, Substack, Medium, X, etc. Unfurl bots read
+     these static tags; they don't run the JS redirect, so humans still get sent
+     on. /go/ is intentionally NOT blocked in robots.txt (only noindex) so these
+     scrapers (facebookexternalhit etc.) can fetch the card. -->
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="PurposeLab">
 <meta property="og:url" content="${esc(shortUrl)}">
-<meta property="og:title" content="${esc(app.name)}">
-<meta property="og:description" content="${esc(app.tagline)}">
-<meta property="og:image" content="${esc(baseUrl + app.icon)}">
-<meta property="og:image:alt" content="${esc(app.name)} app icon">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="${esc(app.name)}">
-<meta name="twitter:description" content="${esc(app.tagline)}">
-<meta name="twitter:image" content="${esc(baseUrl + app.icon)}">
+<meta property="og:title" content="${esc(ogTitle)}">
+<meta property="og:description" content="${esc(ogDesc)}">
+<meta property="og:image" content="${esc(ogImage)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(app.name)} — ${esc(availability)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(ogTitle)}">
+<meta name="twitter:description" content="${esc(ogDesc)}">
+<meta name="twitter:image" content="${esc(ogImage)}">
 <!-- Privacy-friendly analytics (GoatCounter, no cookies). no_onload: we fire the
      hit manually below so it is sent before the redirect navigates away. -->
 <script>window.goatcounter = { no_onload: true };</script>
@@ -213,12 +225,15 @@ function redirectorPage() {
 <!-- Generic unfurl card (this page serves any app via query params, so it can't
      be app-specific). Per-app preset links (/go/<app>-<placement>) unfurl per app. -->
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="PurposeLab">
 <meta property="og:title" content="PurposeLab apps">
-<meta property="og:description" content="Calm, private, offline-first apps.">
+<meta property="og:description" content="Calm, private, offline-first apps. No account, no ads.">
 <meta property="og:image" content="${esc(baseUrl)}/og-default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PurposeLab apps">
-<meta name="twitter:description" content="Calm, private, offline-first apps.">
+<meta name="twitter:description" content="Calm, private, offline-first apps. No account, no ads.">
 <meta name="twitter:image" content="${esc(baseUrl)}/og-default.png">
 <script>window.goatcounter = { no_onload: true };</script>
 <script data-goatcounter="${esc(goatcounter)}" async src="//gc.zgo.at/count.js"></script>

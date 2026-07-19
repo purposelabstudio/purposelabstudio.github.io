@@ -25,6 +25,7 @@ for (const k of appKeys) {
   check(`app ${k}: has android package`, typeof a.android === 'string' && a.android.includes('.'));
   check(`app ${k}: ios is string or null`, a.ios === null || typeof a.ios === 'string');
   check(`app ${k}: icon file exists`, existsSync(join(ROOT, a.icon.replace(/^\//, ''))), a.icon);
+  check(`app ${k}: og-share card exists`, !a.ogImage || existsSync(join(ROOT, a.ogImage.replace(/^\//, ''))), a.ogImage);
   check(`app ${k}: has default store`, a.default === 'android' || a.default === 'ios');
 }
 for (const k of placementKeys) {
@@ -57,8 +58,10 @@ for (const appKey of appKeys) {
     check(`${rel}: path matches`, html.includes(`"/go/${slug}"`));
     check(`${rel}: noscript fallback`, /http-equiv="refresh"/i.test(html));
     check(`${rel}: has og:title`, /property="og:title"/.test(html));
+    check(`${rel}: has og:site_name`, /property="og:site_name"/.test(html));
     check(`${rel}: og:image is absolute`, /property="og:image" content="https?:\/\//.test(html));
-    check(`${rel}: has twitter:card`, /name="twitter:card"/.test(html));
+    check(`${rel}: og:image is 1200x630`, /property="og:image:width" content="1200"/.test(html) && /property="og:image:height" content="630"/.test(html));
+    check(`${rel}: twitter large-image card`, /name="twitter:card" content="summary_large_image"/.test(html));
     check(`${rel}: Play URL has package`, html.includes(`id=${app.android}`));
     check(`${rel}: Play URL has campaign`, html.includes(`utm_campaign%3D${p.utm_campaign}`));
     if (app.ios) {
@@ -95,8 +98,9 @@ if (existsSync(join(ROOT, 'go/r/index.html'))) {
   check('redirector: embeds app store ids', appKeys.every((k) => rp.includes(apps[k].android)));
 }
 
-// 5. robots.txt keeps /go/ out of search
-check('robots.txt disallows /go/', /Disallow:\s*\/go\//.test(read('robots.txt')));
+// 5. robots.txt must NOT block /go/ — noindex handles search; unfurl scrapers
+// (facebookexternalhit/WhatsApp, Discordbot, etc.) need to fetch the OG card.
+check('robots.txt does not block /go/', !/Disallow:\s*\/go\//.test(read('robots.txt')));
 
 // ---- report ---------------------------------------------------------------
 if (failed) {

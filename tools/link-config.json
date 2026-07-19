@@ -8,6 +8,7 @@
       "android": "com.purposelab.folio",
       "ios": "6781551692",
       "icon": "/folio/icon.png",
+      "ogImage": "/folio/og-share.png",
       "accent": "#A08560",
       "default": "android"
     },
@@ -17,6 +18,7 @@
       "android": "com.purposelab.bplog",
       "ios": null,
       "icon": "/bplog/icon.png",
+      "ogImage": "/bplog/og-share.png",
       "accent": "#C0504D",
       "default": "android"
     },
@@ -26,6 +28,7 @@
       "android": "com.purposelab.hushly",
       "ios": null,
       "icon": "/hushly/icon.png",
+      "ogImage": "/hushly/og-share.png",
       "accent": "#5B7C99",
       "default": "android"
     },
@@ -35,6 +38,7 @@
       "android": "com.purposelab.waterwise",
       "ios": null,
       "icon": "/waterwise/icon.png",
+      "ogImage": "/waterwise/og-share.png",
       "accent": "#3E8EA0",
       "default": "android"
     },
@@ -44,6 +48,7 @@
       "android": "com.purposelab.crumbs",
       "ios": null,
       "icon": "/crumbs/icon.png",
+      "ogImage": "/crumbs/og-share.png",
       "accent": "#6B8E5A",
       "default": "android"
     }
