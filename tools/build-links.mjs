@@ -35,6 +35,14 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
+/** JSON literal safe to embed inside an inline <script> (escapes `<`, U+2028/9). */
+function jsLit(v) {
+  return JSON.stringify(v)
+    .replace(/</g, '\\u003c')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
+}
+
 /** Play Store URL carrying a URL-encoded install referrer. */
 function playUrl(app, p) {
   const referrer = [
@@ -94,10 +102,10 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
 <script data-goatcounter="${esc(goatcounter)}" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function () {
-  var path = ${JSON.stringify(path)};
+  var path = ${jsLit(path)};
   // Fire the click hit immediately via a pixel so it survives the redirect.
   try {
-    new Image().src = ${JSON.stringify(goatcounter)}
+    new Image().src = ${jsLit(goatcounter)}
       + '?p=' + encodeURIComponent(path)
       + '&t=' + encodeURIComponent(document.title)
       + '&r=' + encodeURIComponent(document.referrer)
@@ -107,8 +115,8 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
   var isIOS = /iPad|iPhone|iPod/.test(ua)
     || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var isAndroid = /Android/.test(ua);
-  var PLAY = ${JSON.stringify(play)};
-  var APPSTORE = ${JSON.stringify(appStore)};
+  var PLAY = ${jsLit(play)};
+  var APPSTORE = ${jsLit(appStore)};
   var target = null;
   if (isAndroid) target = PLAY;
   else if (isIOS && APPSTORE) target = APPSTORE;
