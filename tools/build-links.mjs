@@ -244,12 +244,22 @@ function redirectorPage() {
   if (target) { setTimeout(function () { location.replace(target); }, 120); return; }
 
   // Desktop / iOS-no-build / unknown app → render the landing.
+  // Anchors are built with DOM APIs (not innerHTML) so reflected query params
+  // can never inject markup, regardless of encoding.
+  function storeLink(href, label) {
+    var el = document.createElement('a');
+    el.className = 'store';
+    el.href = href;
+    el.textContent = label;
+    return el;
+  }
   document.addEventListener('DOMContentLoaded', function () {
     var wrap = document.getElementById('landing');
+    var buttons = document.getElementById('buttons');
     if (!app) {
       document.getElementById('name').textContent = 'App not found';
       document.getElementById('tag').textContent = 'Check the link and try again.';
-      document.getElementById('buttons').innerHTML = '<a class="store" href="https://purposelabstudio.com/apps/">See all apps</a>';
+      buttons.appendChild(storeLink('https://purposelabstudio.com/apps/', 'See all apps'));
       wrap.style.display = 'flex';
       return;
     }
@@ -258,9 +268,8 @@ function redirectorPage() {
     icon.src = app.icon; icon.alt = app.name + ' icon';
     document.getElementById('name').textContent = app.name;
     document.getElementById('tag').textContent = app.tagline;
-    var b = '<a class="store" href="' + PLAY + '">Get it on Google Play</a>';
-    if (APPSTORE) b += '<a class="store" href="' + APPSTORE + '">Download on the App Store</a>';
-    document.getElementById('buttons').innerHTML = b;
+    buttons.appendChild(storeLink(PLAY, 'Get it on Google Play'));
+    if (APPSTORE) buttons.appendChild(storeLink(APPSTORE, 'Download on the App Store'));
     wrap.style.display = 'flex';
   });
 })();
