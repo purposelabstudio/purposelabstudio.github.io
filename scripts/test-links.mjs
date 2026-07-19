@@ -56,6 +56,9 @@ for (const appKey of appKeys) {
     check(`${rel}: fires tracking pixel`, /new Image\(\)\.src/.test(html));
     check(`${rel}: path matches`, html.includes(`"/go/${slug}"`));
     check(`${rel}: noscript fallback`, /http-equiv="refresh"/i.test(html));
+    check(`${rel}: has og:title`, /property="og:title"/.test(html));
+    check(`${rel}: og:image is absolute`, /property="og:image" content="https?:\/\//.test(html));
+    check(`${rel}: has twitter:card`, /name="twitter:card"/.test(html));
     check(`${rel}: Play URL has package`, html.includes(`id=${app.android}`));
     check(`${rel}: Play URL has campaign`, html.includes(`utm_campaign%3D${p.utm_campaign}`));
     if (app.ios) {

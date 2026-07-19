@@ -118,6 +118,34 @@
       "utm_campaign": "email",
       "ct": "email",
       "label": "Email"
+    },
+    "reddit": {
+      "utm_source": "reddit",
+      "utm_medium": "social",
+      "utm_campaign": "reddit",
+      "ct": "reddit",
+      "label": "Reddit"
+    },
+    "substack": {
+      "utm_source": "substack",
+      "utm_medium": "newsletter",
+      "utm_campaign": "substack",
+      "ct": "substack",
+      "label": "Substack"
+    },
+    "medium": {
+      "utm_source": "medium",
+      "utm_medium": "referral",
+      "utm_campaign": "medium",
+      "ct": "medium",
+      "label": "Medium"
+    },
+    "discord": {
+      "utm_source": "discord",
+      "utm_medium": "social",
+      "utm_campaign": "discord",
+      "ct": "discord",
+      "label": "Discord"
     }
   }
 }
