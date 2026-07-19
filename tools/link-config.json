@@ -1,0 +1,123 @@
+{
+  "baseUrl": "https://purposelabstudio.com",
+  "goatcounter": "https://purposelabstudio.goatcounter.com/count",
+  "apps": {
+    "folio": {
+      "name": "Folio",
+      "tagline": "A calm, private journal. One line a day.",
+      "android": "com.purposelab.folio",
+      "ios": "6781551692",
+      "icon": "/folio/icon.png",
+      "accent": "#A08560",
+      "default": "android"
+    },
+    "bplog": {
+      "name": "BPLog",
+      "tagline": "Track your blood pressure, simply.",
+      "android": "com.purposelab.bplog",
+      "ios": null,
+      "icon": "/bplog/icon.png",
+      "accent": "#C0504D",
+      "default": "android"
+    },
+    "hushly": {
+      "name": "Hushly",
+      "tagline": "White noise for better baby sleep.",
+      "android": "com.purposelab.hushly",
+      "ios": null,
+      "icon": "/hushly/icon.png",
+      "accent": "#5B7C99",
+      "default": "android"
+    },
+    "waterwise": {
+      "name": "WaterWise",
+      "tagline": "A gentle water reminder, no ads.",
+      "android": "com.purposelab.waterwise",
+      "ios": null,
+      "icon": "/waterwise/icon.png",
+      "accent": "#3E8EA0",
+      "default": "android"
+    },
+    "crumbs": {
+      "name": "Crumbs",
+      "tagline": "Your second brain on WhatsApp.",
+      "android": "com.purposelab.crumbs",
+      "ios": null,
+      "icon": "/crumbs/icon.png",
+      "accent": "#6B8E5A",
+      "default": "android"
+    }
+  },
+  "placements": {
+    "li": {
+      "utm_source": "linkedin",
+      "utm_medium": "social",
+      "utm_campaign": "linkedin",
+      "ct": "linkedin",
+      "label": "LinkedIn (generic)"
+    },
+    "li-dm": {
+      "utm_source": "linkedin",
+      "utm_medium": "social",
+      "utm_campaign": "linkedin_dm",
+      "ct": "linkedin_dm",
+      "label": "LinkedIn — direct message"
+    },
+    "li-post": {
+      "utm_source": "linkedin",
+      "utm_medium": "social",
+      "utm_campaign": "linkedin_post",
+      "ct": "linkedin_post",
+      "label": "LinkedIn — post"
+    },
+    "li-comment": {
+      "utm_source": "linkedin",
+      "utm_medium": "social",
+      "utm_campaign": "linkedin_comment",
+      "ct": "linkedin_comment",
+      "label": "LinkedIn — comment"
+    },
+    "li-bio": {
+      "utm_source": "linkedin",
+      "utm_medium": "social",
+      "utm_campaign": "linkedin_bio",
+      "ct": "linkedin_bio",
+      "label": "LinkedIn — profile / bio"
+    },
+    "x": {
+      "utm_source": "twitter",
+      "utm_medium": "social",
+      "utm_campaign": "twitter",
+      "ct": "twitter",
+      "label": "X / Twitter"
+    },
+    "ig-bio": {
+      "utm_source": "instagram",
+      "utm_medium": "social",
+      "utm_campaign": "instagram_bio",
+      "ct": "instagram_bio",
+      "label": "Instagram — bio link"
+    },
+    "yt": {
+      "utm_source": "youtube",
+      "utm_medium": "social",
+      "utm_campaign": "youtube",
+      "ct": "youtube",
+      "label": "YouTube"
+    },
+    "wa": {
+      "utm_source": "whatsapp",
+      "utm_medium": "social",
+      "utm_campaign": "whatsapp",
+      "ct": "whatsapp",
+      "label": "WhatsApp"
+    },
+    "email": {
+      "utm_source": "email",
+      "utm_medium": "email",
+      "utm_campaign": "email",
+      "ct": "email",
+      "label": "Email"
+    }
+  }
+}
