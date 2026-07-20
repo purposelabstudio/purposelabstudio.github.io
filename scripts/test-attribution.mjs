@@ -28,8 +28,15 @@ const script = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)]
   .find((s) => s.includes('URLSearchParams'));
 check('extracted redirect script from go/r/index.html', !!script);
 
+// The per-app minimal endpoint (/go/folio) fixes the app + defaults share/referral.
+const folioHtml = readFileSync(join(ROOT, 'go/folio/index.html'), 'utf8');
+const folioScript = [...folioHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)]
+  .map((m) => m[1])
+  .find((s) => s.includes('URLSearchParams'));
+check('extracted redirect script from go/folio/index.html', !!folioScript);
+
 /** Run the real redirect script with a mocked device + query, capture the store URL it navigates to. */
-function runRedirect({ search, ua, platform = '', maxTouchPoints = 0 }) {
+function runRedirect({ search, ua, platform = '', maxTouchPoints = 0, src = script }) {
   let navigated = null;
   const ctx = {
     location: { search, pathname: '/go/r/', replace: (u) => { navigated = u; } },
@@ -49,7 +56,7 @@ function runRedirect({ search, ua, platform = '', maxTouchPoints = 0 }) {
     Math,
   };
   vm.createContext(ctx);
-  vm.runInContext(script, ctx);
+  vm.runInContext(src, ctx);
   return navigated;
 }
 
@@ -94,6 +101,24 @@ const IOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)';
 {
   const url = runRedirect({ search: '?a=bplog&utm_source=share&utm_campaign=recap', ua: IOS });
   check('Android-only app on iOS does not navigate to App Store', url === null, String(url));
+}
+
+// --- Minimal per-app endpoint (/go/folio): app + share/referral defaulted ---
+// The short in-app link /go/folio?c=founding&ref=40 must produce IDENTICAL
+// attribution to the verbose /go/r?a=folio&utm_source=share&utm_medium=referral&utm_campaign=founding&ref=40.
+{
+  const url = runRedirect({ search: '?c=founding&ref=40', ua: ANDROID, src: folioScript });
+  const want = 'https://play.google.com/store/apps/details?id=com.purposelab.folio&referrer=utm_source%3Dshare%26utm_medium%3Dreferral%26utm_campaign%3Dfounding%26ref%3D40';
+  check('minimal /go/folio?c=founding&ref=40 == verbose form', url === want, url);
+}
+{
+  const url = runRedirect({ search: '?c=more_invite', ua: ANDROID, src: folioScript });
+  check('minimal /go/folio?c=more_invite defaults share/referral',
+    url.endsWith('referrer=utm_source%3Dshare%26utm_medium%3Dreferral%26utm_campaign%3Dmore_invite'), url);
+}
+{
+  const url = runRedirect({ search: '?c=founding', ua: IOS, src: folioScript });
+  check('minimal /go/folio on iOS → ct=share_founding', url === 'https://apps.apple.com/app/id6781551692?ct=share_founding', url);
 }
 
 if (failed) {

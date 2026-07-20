@@ -39,7 +39,7 @@ for (const k of placementKeys) {
 // 2. Every app × placement page was generated and is well-formed
 const expected = appKeys.length * placementKeys.length;
 const goDirs = existsSync(join(ROOT, 'go'))
-  ? readdirSync(join(ROOT, 'go')).filter((d) => d !== 'index.html' && d !== 'r')
+  ? readdirSync(join(ROOT, 'go')).filter((d) => d !== 'index.html' && d !== 'r' && !appKeys.includes(d))
   : [];
 check(`generated ${expected} pages (run: node tools/build-links.mjs)`, goDirs.length === expected,
   `found ${goDirs.length}, expected ${expected}`);
@@ -109,6 +109,20 @@ if (existsSync(join(ROOT, 'go/r/index.html'))) {
 // 5. robots.txt must NOT block /go/ — noindex handles search; unfurl scrapers
 // (facebookexternalhit/WhatsApp, Discordbot, etc.) need to fetch the OG card.
 check('robots.txt does not block /go/', !/Disallow:\s*\/go\//.test(read('robots.txt')));
+
+// 6. Per-app minimal share endpoints (/go/<app>): app fixed, share/referral defaulted.
+for (const appKey of appKeys) {
+  const rel = `go/${appKey}/index.html`;
+  check(`${rel}: exists`, existsSync(join(ROOT, rel)), 'missing — regenerate');
+  if (!existsSync(join(ROOT, rel))) continue;
+  const html = read(rel);
+  check(`${rel}: noindex`, /content="noindex/i.test(html));
+  check(`${rel}: defaults app in path`, html.includes(`q.get('a') || "${appKey}"`));
+  check(`${rel}: defaults utm_source=share`, /q\.get\('utm_source'\) \|\| q\.get\('s'\) \|\| "share"/.test(html));
+  check(`${rel}: defaults utm_medium=referral`, /q\.get\('utm_medium'\) \|\| q\.get\('m'\) \|\| "referral"/.test(html));
+  check(`${rel}: forwards ref`, /ref=' \+ refNum/.test(html));
+  check(`${rel}: app-specific OG card`, html.includes(`${apps[appKey].ogImage}"`));
+}
 
 // ---- report ---------------------------------------------------------------
 if (failed) {

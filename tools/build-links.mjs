@@ -209,32 +209,42 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
 // page: /go/r?a=<app>&s=<source>&m=<medium>&c=<campaign>. It smart-redirects
 // like the static pages and logs a synthesized GoatCounter path per campaign.
 
-function redirectorPage() {
+function redirectorPage(opts) {
+  opts = opts || {};
+  const defApp = opts.defApp || '';
+  const defSource = opts.defSource || '';
+  const defMedium = opts.defMedium || '';
+  const appMeta = defApp ? apps[defApp] : null;
   const embedded = {};
   for (const k of Object.keys(apps)) {
     const a = apps[k];
     embedded[k] = { name: a.name, tagline: a.tagline, icon: a.icon, accent: a.accent, android: a.android, ios: a.ios, default: a.default };
   }
+  // Unfurl card: app-specific for a per-app share endpoint (/go/<app>), else generic.
+  const ogTitle = appMeta ? `${appMeta.name} — ${appMeta.tagline.split(/\.\s/)[0]}` : 'PurposeLab apps';
+  const ogDesc = appMeta
+    ? `${appMeta.tagline} No account, no ads, works offline. Free on ${appMeta.ios ? 'Android & iPhone' : 'Android'}.`
+    : 'Calm, private, offline-first apps. No account, no ads.';
+  const ogImg = appMeta ? baseUrl + (appMeta.ogImage || appMeta.icon) : `${baseUrl}/og-default.png`;
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Opening…</title>
-<!-- Generic unfurl card (this page serves any app via query params, so it can't
-     be app-specific). Per-app preset links (/go/<app>-<placement>) unfurl per app. -->
+<title>${esc(appMeta ? ogTitle : 'Opening…')}</title>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PurposeLab">
-<meta property="og:title" content="PurposeLab apps">
-<meta property="og:description" content="Calm, private, offline-first apps. No account, no ads.">
-<meta property="og:image" content="${esc(baseUrl)}/og-default.png">
+<meta property="og:title" content="${esc(ogTitle)}">
+<meta property="og:description" content="${esc(ogDesc)}">
+<meta property="og:image" content="${esc(ogImg)}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(ogTitle)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PurposeLab apps">
-<meta name="twitter:description" content="Calm, private, offline-first apps. No account, no ads.">
-<meta name="twitter:image" content="${esc(baseUrl)}/og-default.png">
+<meta name="twitter:title" content="${esc(ogTitle)}">
+<meta name="twitter:description" content="${esc(ogDesc)}">
+<meta name="twitter:image" content="${esc(ogImg)}">
 <script>window.goatcounter = { no_onload: true };</script>
 <script data-goatcounter="${esc(goatcounter)}" async src="//gc.zgo.at/count.js"></script>
 <script>
@@ -242,11 +252,13 @@ function redirectorPage() {
   var APPS = ${jsLit(embedded)};
   var GC = ${jsLit(goatcounter)};
   var q = new URLSearchParams(location.search);
-  var a = (q.get('a') || '').trim();
-  // Attribution params. Accept the self-descriptive utm_* names (used by the
-  // Folio app's share_links builder) and the short s/m/c aliases (on-page builder).
-  var utmSource = (q.get('utm_source') || q.get('s') || '').trim();
-  var utmMedium = (q.get('utm_medium') || q.get('m') || '').trim();
+  // Per-app share endpoints (/go/<app>) fix the app and default source/medium
+  // so the shared link stays minimal: /go/folio?c=<campaign>[&ref=<n>].
+  var a = (q.get('a') || ${jsLit(defApp)}).trim();
+  // Attribution params. Accept self-descriptive utm_* names (Folio app) and the
+  // short s/m/c aliases (on-page builder); fall back to the endpoint defaults.
+  var utmSource = (q.get('utm_source') || q.get('s') || ${jsLit(defSource)}).trim();
+  var utmMedium = (q.get('utm_medium') || q.get('m') || ${jsLit(defMedium)}).trim();
   var utmCampaign = (q.get('utm_campaign') || q.get('c') || '').trim();
   var utmTerm = (q.get('utm_term') || '').trim();
   var utmContent = (q.get('utm_content') || '').trim();
@@ -574,7 +586,16 @@ function build() {
   mkdirSync(join(OUT_DIR, 'r'), { recursive: true });
   writeFileSync(join(OUT_DIR, 'r', 'index.html'), redirectorPage());
 
-  console.log(`Generated ${rows.length} redirect pages + registry + /go/r/ at /go/`);
+  // Per-app minimal share endpoints (/go/<app>): app fixed in the path, with
+  // utm_source=share & utm_medium=referral defaulted, so in-app share links stay
+  // short — e.g. /go/folio?c=founding&ref=40. These unfurl the app's own card.
+  for (const appKey of Object.keys(apps)) {
+    mkdirSync(join(OUT_DIR, appKey), { recursive: true });
+    writeFileSync(join(OUT_DIR, appKey, 'index.html'),
+      redirectorPage({ defApp: appKey, defSource: 'share', defMedium: 'referral' }));
+  }
+
+  console.log(`Generated ${rows.length} redirect pages + registry + /go/r/ + ${Object.keys(apps).length} per-app share endpoints at /go/`);
   console.log(`QR codes: ${qrAvailable ? 'inlined (qrencode found)' : 'omitted (install qrencode to enable)'}`);
 }
 

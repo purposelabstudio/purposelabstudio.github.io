@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Opening…</title>
+<title>Crumbs — Your second brain on WhatsApp.</title>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PurposeLab">
-<meta property="og:title" content="PurposeLab apps">
-<meta property="og:description" content="Calm, private, offline-first apps. No account, no ads.">
-<meta property="og:image" content="https://purposelabstudio.com/og-default.png">
+<meta property="og:title" content="Crumbs — Your second brain on WhatsApp.">
+<meta property="og:description" content="Your second brain on WhatsApp. No account, no ads, works offline. Free on Android.">
+<meta property="og:image" content="https://purposelabstudio.com/crumbs/og-share.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="PurposeLab apps">
+<meta property="og:image:alt" content="Crumbs — Your second brain on WhatsApp.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PurposeLab apps">
-<meta name="twitter:description" content="Calm, private, offline-first apps. No account, no ads.">
-<meta name="twitter:image" content="https://purposelabstudio.com/og-default.png">
+<meta name="twitter:title" content="Crumbs — Your second brain on WhatsApp.">
+<meta name="twitter:description" content="Your second brain on WhatsApp. No account, no ads, works offline. Free on Android.">
+<meta name="twitter:image" content="https://purposelabstudio.com/crumbs/og-share.png">
 <script>window.goatcounter = { no_onload: true };</script>
 <script data-goatcounter="https://purposelabstudio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
@@ -26,11 +26,11 @@
   var q = new URLSearchParams(location.search);
   // Per-app share endpoints (/go/<app>) fix the app and default source/medium
   // so the shared link stays minimal: /go/folio?c=<campaign>[&ref=<n>].
-  var a = (q.get('a') || "").trim();
+  var a = (q.get('a') || "crumbs").trim();
   // Attribution params. Accept self-descriptive utm_* names (Folio app) and the
   // short s/m/c aliases (on-page builder); fall back to the endpoint defaults.
-  var utmSource = (q.get('utm_source') || q.get('s') || "").trim();
-  var utmMedium = (q.get('utm_medium') || q.get('m') || "").trim();
+  var utmSource = (q.get('utm_source') || q.get('s') || "share").trim();
+  var utmMedium = (q.get('utm_medium') || q.get('m') || "referral").trim();
   var utmCampaign = (q.get('utm_campaign') || q.get('c') || '').trim();
   var utmTerm = (q.get('utm_term') || '').trim();
   var utmContent = (q.get('utm_content') || '').trim();
