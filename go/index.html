@@ -58,8 +58,11 @@
       <label>Medium <span style="color:#C0B6A6">utm_medium</span>
         <input id="b-medium" placeholder="social" autocomplete="off">
       </label>
-      <label class="full">Campaign <span style="color:#C0B6A6">utm_campaign / ct</span>
+      <label>Campaign <span style="color:#C0B6A6">utm_campaign / ct</span>
         <input id="b-campaign" placeholder="launch_july" autocomplete="off">
+      </label>
+      <label>Founding ref # <span style="color:#C0B6A6">ref · optional</span>
+        <input id="b-ref" placeholder="42" inputmode="numeric" autocomplete="off">
       </label>
     </div>
     <div id="b-out">
@@ -461,8 +464,8 @@
     var $ = function (id) { return document.getElementById(id); };
     var enc = encodeURIComponent;
 
-    function buildReferrer(s, m, c) {
-      return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '']
+    function buildReferrer(s, m, c, ref) {
+      return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '', ref ? 'ref=' + ref : '']
         .filter(Boolean).join('&');
     }
     function recompute() {
@@ -471,26 +474,29 @@
       var s = $('b-source').value.trim();
       var m = $('b-medium').value.trim();
       var c = $('b-campaign').value.trim();
+      var ref = ($('b-ref').value.match(/[0-9]+/) || [''])[0];  // Founding number, digits only
       var app = DATA.apps[a];
 
       var short;
-      if (preset) {
+      if (preset && !ref) {
         short = DATA.baseUrl + '/go/' + a + '-' + preset;   // clean static link
       } else {
         var qp = ['a=' + enc(a)];
-        if (s) qp.push('s=' + enc(s));
-        if (m) qp.push('m=' + enc(m));
-        if (c) qp.push('c=' + enc(c));
+        if (s) qp.push('utm_source=' + enc(s));
+        if (m) qp.push('utm_medium=' + enc(m));
+        if (c) qp.push('utm_campaign=' + enc(c));
+        if (ref) qp.push('ref=' + enc(ref));
         short = DATA.baseUrl + '/go/r?' + qp.join('&');
       }
-      var ref = buildReferrer(s, m, c);
+      var referrer = buildReferrer(s, m, c, ref);
       var play = 'https://play.google.com/store/apps/details?id=' + app.android
-        + (ref ? '&referrer=' + enc(ref) : '');
+        + (referrer ? '&referrer=' + enc(referrer) : '');
       $('o-short').textContent = short;
       $('o-play').textContent = play;
       if (app.ios) {
         $('o-ios-row').style.display = '';
-        $('o-ios').textContent = 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + enc(c) : '');
+        var ct = (s ? s + '_' + c : c).slice(0, 40);
+        $('o-ios').textContent = 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + enc(ct) : '');
       } else {
         $('o-ios-row').style.display = 'none';
       }
@@ -505,6 +511,7 @@
     ['b-source', 'b-medium', 'b-campaign'].forEach(function (id) {
       $(id).addEventListener('input', function () { $('b-preset').value = ''; recompute(); });
     });
+    $('b-ref').addEventListener('input', recompute);
     $('b-app').addEventListener('change', recompute);
 
     document.querySelectorAll('button.copy').forEach(function (b) {

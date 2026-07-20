@@ -26,13 +26,18 @@
   var GC = "https://purposelabstudio.goatcounter.com/count";
   var q = new URLSearchParams(location.search);
   var a = (q.get('a') || '').trim();
-  var s = (q.get('s') || '').trim();
-  var m = (q.get('m') || '').trim();
-  var c = (q.get('c') || '').trim();
+  // Attribution params. Accept the self-descriptive utm_* names (used by the
+  // Folio app's share_links builder) and the short s/m/c aliases (on-page builder).
+  var utmSource = (q.get('utm_source') || q.get('s') || '').trim();
+  var utmMedium = (q.get('utm_medium') || q.get('m') || '').trim();
+  var utmCampaign = (q.get('utm_campaign') || q.get('c') || '').trim();
+  var utmTerm = (q.get('utm_term') || '').trim();
+  var utmContent = (q.get('utm_content') || '').trim();
+  var refRaw = (q.get('ref') || '').trim();
+  var refNum = /^[0-9]+$/.test(refRaw) ? refRaw : '';  // Founding member number, digits only
   var app = APPS[a];
-  // Synthesize a clean, per-campaign GoatCounter path so custom links are
-  // still trackable even though they share one physical page.
-  var gcPath = '/go/r/' + (a || 'unknown') + (s ? '-' + s : '') + (c ? '-' + c : '');
+  // Synthesize a clean, per-campaign GoatCounter path (never the per-user ref).
+  var gcPath = '/go/r/' + (a || 'unknown') + (utmSource ? '-' + utmSource : '') + (utmCampaign ? '-' + utmCampaign : '');
   try {
     new Image().src = GC + '?p=' + encodeURIComponent(gcPath)
       + '&t=' + encodeURIComponent(document.title)
@@ -40,17 +45,30 @@
       + '&rnd=' + Math.random().toString(36).slice(2);
   } catch (e) {}
 
-  function referrer() {
-    return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '']
-      .filter(Boolean).join('&');
+  // Play delivers only ONE value to the installed app: the referrer param,
+  // so pack every attribution field (utm_* + Founding ref) into it, then
+  // single-encode the whole string onto the Play URL.
+  function playReferrer() {
+    return [
+      utmSource ? 'utm_source=' + utmSource : '',
+      utmMedium ? 'utm_medium=' + utmMedium : '',
+      utmCampaign ? 'utm_campaign=' + utmCampaign : '',
+      utmTerm ? 'utm_term=' + utmTerm : '',
+      utmContent ? 'utm_content=' + utmContent : '',
+      refNum ? 'ref=' + refNum : ''
+    ].filter(Boolean).join('&');
+  }
+  // Apple campaign token: a single value, <=40 chars; it cannot carry the ref.
+  function appleCt() {
+    return (utmSource ? utmSource + '_' + utmCampaign : utmCampaign).slice(0, 40);
   }
   var PLAY = null, APPSTORE = null;
   if (app) {
-    var ref = referrer();
+    var refStr = playReferrer();
     PLAY = 'https://play.google.com/store/apps/details?id=' + app.android
-      + (ref ? '&referrer=' + encodeURIComponent(ref) : '');
+      + (refStr ? '&referrer=' + encodeURIComponent(refStr) : '');
     APPSTORE = app.ios
-      ? 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + encodeURIComponent(c) : '')
+      ? 'https://apps.apple.com/app/id' + app.ios + (utmCampaign ? '?ct=' + encodeURIComponent(appleCt()) : '')
       : null;
   }
   var ua = navigator.userAgent || '';

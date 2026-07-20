@@ -82,6 +82,8 @@ if (existsSync(join(ROOT, 'go/index.html'))) {
   check('registry: has link builder', /Build a custom tracking link/.test(reg));
   check('registry: builder has app + preset selects', /id="b-app"/.test(reg) && /id="b-preset"/.test(reg));
   check('registry: builder outputs a tracking link', /id="o-short"/.test(reg));
+  check('registry: builder has Founding ref field', /id="b-ref"/.test(reg));
+  check('registry: builder emits utm_* params', /utm_source=' \+ enc|utm_campaign=' \+ enc/.test(reg));
   check('registry: builder embeds app store ids', appKeys.every((k) => reg.includes(apps[k].android)));
 }
 
@@ -95,6 +97,12 @@ if (existsSync(join(ROOT, 'go/r/index.html'))) {
   check('redirector: fires tracking pixel', /new Image\(\)\.src/.test(rp));
   check('redirector: synthesizes a GC path', /\/go\/r\//.test(rp));
   check('redirector: builds Play URL', /play\.google\.com\/store\/apps\/details\?id=/.test(rp));
+  check('redirector: accepts utm_* param names', /q\.get\('utm_source'\)/.test(rp) && /q\.get\('utm_campaign'\)/.test(rp));
+  check('redirector: accepts s/m/c aliases', /q\.get\('s'\)/.test(rp) && /q\.get\('c'\)/.test(rp));
+  check('redirector: forwards Founding ref into referrer', /q\.get\('ref'\)/.test(rp) && /ref=' \+ refNum/.test(rp));
+  check('redirector: validates ref as digits only', /\^\[0-9\]\+\$/.test(rp));
+  check('redirector: passes utm_term/content', /utm_term/.test(rp) && /utm_content/.test(rp));
+  check('redirector: ct prefixes source (share_<campaign>)', /utmSource \+ '_' \+ utmCampaign/.test(rp));
   check('redirector: embeds app store ids', appKeys.every((k) => rp.includes(apps[k].android)));
 }
 

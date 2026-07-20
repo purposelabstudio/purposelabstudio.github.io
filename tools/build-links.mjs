@@ -243,13 +243,18 @@ function redirectorPage() {
   var GC = ${jsLit(goatcounter)};
   var q = new URLSearchParams(location.search);
   var a = (q.get('a') || '').trim();
-  var s = (q.get('s') || '').trim();
-  var m = (q.get('m') || '').trim();
-  var c = (q.get('c') || '').trim();
+  // Attribution params. Accept the self-descriptive utm_* names (used by the
+  // Folio app's share_links builder) and the short s/m/c aliases (on-page builder).
+  var utmSource = (q.get('utm_source') || q.get('s') || '').trim();
+  var utmMedium = (q.get('utm_medium') || q.get('m') || '').trim();
+  var utmCampaign = (q.get('utm_campaign') || q.get('c') || '').trim();
+  var utmTerm = (q.get('utm_term') || '').trim();
+  var utmContent = (q.get('utm_content') || '').trim();
+  var refRaw = (q.get('ref') || '').trim();
+  var refNum = /^[0-9]+$/.test(refRaw) ? refRaw : '';  // Founding member number, digits only
   var app = APPS[a];
-  // Synthesize a clean, per-campaign GoatCounter path so custom links are
-  // still trackable even though they share one physical page.
-  var gcPath = '/go/r/' + (a || 'unknown') + (s ? '-' + s : '') + (c ? '-' + c : '');
+  // Synthesize a clean, per-campaign GoatCounter path (never the per-user ref).
+  var gcPath = '/go/r/' + (a || 'unknown') + (utmSource ? '-' + utmSource : '') + (utmCampaign ? '-' + utmCampaign : '');
   try {
     new Image().src = GC + '?p=' + encodeURIComponent(gcPath)
       + '&t=' + encodeURIComponent(document.title)
@@ -257,17 +262,30 @@ function redirectorPage() {
       + '&rnd=' + Math.random().toString(36).slice(2);
   } catch (e) {}
 
-  function referrer() {
-    return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '']
-      .filter(Boolean).join('&');
+  // Play delivers only ONE value to the installed app: the referrer param,
+  // so pack every attribution field (utm_* + Founding ref) into it, then
+  // single-encode the whole string onto the Play URL.
+  function playReferrer() {
+    return [
+      utmSource ? 'utm_source=' + utmSource : '',
+      utmMedium ? 'utm_medium=' + utmMedium : '',
+      utmCampaign ? 'utm_campaign=' + utmCampaign : '',
+      utmTerm ? 'utm_term=' + utmTerm : '',
+      utmContent ? 'utm_content=' + utmContent : '',
+      refNum ? 'ref=' + refNum : ''
+    ].filter(Boolean).join('&');
+  }
+  // Apple campaign token: a single value, <=40 chars; it cannot carry the ref.
+  function appleCt() {
+    return (utmSource ? utmSource + '_' + utmCampaign : utmCampaign).slice(0, 40);
   }
   var PLAY = null, APPSTORE = null;
   if (app) {
-    var ref = referrer();
+    var refStr = playReferrer();
     PLAY = 'https://play.google.com/store/apps/details?id=' + app.android
-      + (ref ? '&referrer=' + encodeURIComponent(ref) : '');
+      + (refStr ? '&referrer=' + encodeURIComponent(refStr) : '');
     APPSTORE = app.ios
-      ? 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + encodeURIComponent(c) : '')
+      ? 'https://apps.apple.com/app/id' + app.ios + (utmCampaign ? '?ct=' + encodeURIComponent(appleCt()) : '')
       : null;
   }
   var ua = navigator.userAgent || '';
@@ -433,8 +451,11 @@ function registryPage(rows) {
       <label>Medium <span style="color:#C0B6A6">utm_medium</span>
         <input id="b-medium" placeholder="social" autocomplete="off">
       </label>
-      <label class="full">Campaign <span style="color:#C0B6A6">utm_campaign / ct</span>
+      <label>Campaign <span style="color:#C0B6A6">utm_campaign / ct</span>
         <input id="b-campaign" placeholder="launch_july" autocomplete="off">
+      </label>
+      <label>Founding ref # <span style="color:#C0B6A6">ref · optional</span>
+        <input id="b-ref" placeholder="42" inputmode="numeric" autocomplete="off">
       </label>
     </div>
     <div id="b-out">
@@ -451,8 +472,8 @@ function registryPage(rows) {
     var $ = function (id) { return document.getElementById(id); };
     var enc = encodeURIComponent;
 
-    function buildReferrer(s, m, c) {
-      return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '']
+    function buildReferrer(s, m, c, ref) {
+      return [s ? 'utm_source=' + s : '', m ? 'utm_medium=' + m : '', c ? 'utm_campaign=' + c : '', ref ? 'ref=' + ref : '']
         .filter(Boolean).join('&');
     }
     function recompute() {
@@ -461,26 +482,29 @@ function registryPage(rows) {
       var s = $('b-source').value.trim();
       var m = $('b-medium').value.trim();
       var c = $('b-campaign').value.trim();
+      var ref = ($('b-ref').value.match(/[0-9]+/) || [''])[0];  // Founding number, digits only
       var app = DATA.apps[a];
 
       var short;
-      if (preset) {
+      if (preset && !ref) {
         short = DATA.baseUrl + '/go/' + a + '-' + preset;   // clean static link
       } else {
         var qp = ['a=' + enc(a)];
-        if (s) qp.push('s=' + enc(s));
-        if (m) qp.push('m=' + enc(m));
-        if (c) qp.push('c=' + enc(c));
+        if (s) qp.push('utm_source=' + enc(s));
+        if (m) qp.push('utm_medium=' + enc(m));
+        if (c) qp.push('utm_campaign=' + enc(c));
+        if (ref) qp.push('ref=' + enc(ref));
         short = DATA.baseUrl + '/go/r?' + qp.join('&');
       }
-      var ref = buildReferrer(s, m, c);
+      var referrer = buildReferrer(s, m, c, ref);
       var play = 'https://play.google.com/store/apps/details?id=' + app.android
-        + (ref ? '&referrer=' + enc(ref) : '');
+        + (referrer ? '&referrer=' + enc(referrer) : '');
       $('o-short').textContent = short;
       $('o-play').textContent = play;
       if (app.ios) {
         $('o-ios-row').style.display = '';
-        $('o-ios').textContent = 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + enc(c) : '');
+        var ct = (s ? s + '_' + c : c).slice(0, 40);
+        $('o-ios').textContent = 'https://apps.apple.com/app/id' + app.ios + (c ? '?ct=' + enc(ct) : '');
       } else {
         $('o-ios-row').style.display = 'none';
       }
@@ -495,6 +519,7 @@ function registryPage(rows) {
     ['b-source', 'b-medium', 'b-campaign'].forEach(function (id) {
       $(id).addEventListener('input', function () { $('b-preset').value = ''; recompute(); });
     });
+    $('b-ref').addEventListener('input', recompute);
     $('b-app').addEventListener('change', recompute);
 
     document.querySelectorAll('button.copy').forEach(function (b) {
