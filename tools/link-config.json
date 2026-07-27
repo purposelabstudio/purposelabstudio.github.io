@@ -152,5 +152,13 @@
       "ct": "discord",
       "label": "Discord"
     }
+  },
+  "creators": {
+    "nikita": {
+      "label": "Nikita — LinkedIn newsletter (~13k)",
+      "promos": [
+        { "app": "folio", "platform": "linkedin", "slug": "calm" }
+      ]
+    }
   }
 }

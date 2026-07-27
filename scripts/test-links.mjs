@@ -16,8 +16,27 @@ function read(p) { return readFileSync(join(ROOT, p), 'utf8'); }
 
 const config = JSON.parse(read('tools/link-config.json'));
 const { apps, placements } = config;
+const creators = config.creators || {};
 const appKeys = Object.keys(apps);
 const placementKeys = Object.keys(placements);
+
+// Expand creators into the pages the generator emits (one per creator x platform).
+const PLATFORM_ABBREV = {
+  linkedin: 'li', instagram: 'ig', youtube: 'yt', twitter: 'x', x: 'x',
+  facebook: 'fb', threads: 'th', reddit: 'rd', substack: 'ss', medium: 'md',
+  tiktok: 'tt', email: 'em', whatsapp: 'wa', discord: 'dc', newsletter: 'nl',
+};
+const creatorPages = [];
+for (const key of Object.keys(creators)) {
+  for (const promo of creators[key].promos || []) {
+    creatorPages.push({
+      appKey: promo.app,
+      slug: promo.slug,
+      utm_campaign: key,
+      ct: `${key}_${PLATFORM_ABBREV[promo.platform] || String(promo.platform).slice(0, 2)}`,
+    });
+  }
+}
 
 // 1. Config shape
 for (const k of appKeys) {
@@ -35,9 +54,19 @@ for (const k of placementKeys) {
   check(`placement ${k}: has ct`, !!p.ct);
   check(`placement ${k}: has label`, !!p.label);
 }
+for (const key of Object.keys(creators)) {
+  const c = creators[key];
+  check(`creator ${key}: has promos array`, Array.isArray(c.promos) && c.promos.length > 0);
+  for (const promo of c.promos || []) {
+    check(`creator ${key}: promo app is known`, !!apps[promo.app], promo.app);
+    check(`creator ${key}: promo has platform`, !!promo.platform);
+    check(`creator ${key}: promo has slug`, !!promo.slug);
+    check(`creator ${key}: slug not a placement`, !placements[promo.slug], promo.slug);
+  }
+}
 
-// 2. Every app × placement page was generated and is well-formed
-const expected = appKeys.length * placementKeys.length;
+// 2. Every app × placement page (plus creator pages) was generated and well-formed
+const expected = appKeys.length * placementKeys.length + creatorPages.length;
 const goDirs = existsSync(join(ROOT, 'go'))
   ? readdirSync(join(ROOT, 'go')).filter((d) => d !== 'index.html' && d !== 'r' && !appKeys.includes(d))
   : [];
@@ -70,6 +99,20 @@ for (const appKey of appKeys) {
       check(`${rel}: Android-only → no App Store link`, !html.includes('apps.apple.com'));
     }
   }
+}
+
+// 2b. Creator pages carry creator attribution (source=platform/medium=creator).
+for (const cp of creatorPages) {
+  const app = apps[cp.appKey];
+  const rel = `go/${cp.appKey}-${cp.slug}/index.html`;
+  if (!existsSync(join(ROOT, rel))) { check(`${rel}: exists`, false, 'missing — regenerate'); continue; }
+  const html = read(rel);
+  check(`${rel}: noindex`, /content="noindex/i.test(html));
+  check(`${rel}: fires tracking pixel`, /new Image\(\)\.src/.test(html));
+  check(`${rel}: path matches`, html.includes(`"/go/${cp.appKey}-${cp.slug}"`));
+  check(`${rel}: medium=creator`, html.includes('utm_medium%3Dcreator'));
+  check(`${rel}: campaign is creator`, html.includes(`utm_campaign%3D${cp.utm_campaign}`));
+  if (app.ios) check(`${rel}: App Store ct = creator_platform`, html.includes(`?ct=${cp.ct}`));
 }
 
 // 3. Registry page

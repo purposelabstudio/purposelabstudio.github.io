@@ -24,6 +24,49 @@ const OUT_DIR = join(ROOT, 'go');
 
 const config = JSON.parse(readFileSync(CONFIG_PATH, 'utf8'));
 const { baseUrl, goatcounter, apps, placements } = config;
+const creators = config.creators || {};
+
+// Short, stable abbreviation for the Apple `ct` token (one field, <=40 chars),
+// so a creator link on iOS still says who + where: `<creator>_<abbrev>`.
+const PLATFORM_ABBREV = {
+  linkedin: 'li', instagram: 'ig', youtube: 'yt', twitter: 'x', x: 'x',
+  facebook: 'fb', threads: 'th', reddit: 'rd', substack: 'ss', medium: 'md',
+  tiktok: 'tt', email: 'em', whatsapp: 'wa', discord: 'dc', newsletter: 'nl',
+};
+const platformAbbrev = (plat) => PLATFORM_ABBREV[plat] || String(plat).slice(0, 2);
+
+/** Expand config.creators into placement-shaped promo entries. One per
+ *  creator × platform, each generating a single /go/<app>-<slug> page (NOT the
+ *  full app cartesian). Public slug is an app-attribute adjective; internal
+ *  attribution is source=platform / medium=creator / campaign=<creator>. */
+function creatorPromos() {
+  const out = [];
+  const seen = new Set(); // `${app}-${slug}` collision guard
+  for (const key of Object.keys(creators)) {
+    const c = creators[key];
+    for (const promo of c.promos || []) {
+      const { app: appKey, platform, slug } = promo;
+      if (!apps[appKey]) throw new Error(`creator ${key}: unknown app "${appKey}"`);
+      if (!platform || !slug) throw new Error(`creator ${key}: promo needs platform + slug`);
+      if (placements[slug]) throw new Error(`creator ${key}: slug "${slug}" collides with a placement`);
+      const dedup = `${appKey}-${slug}`;
+      if (seen.has(dedup)) throw new Error(`duplicate creator slug ${dedup}`);
+      seen.add(dedup);
+      out.push({
+        appKey,
+        code: slug,
+        p: {
+          utm_source: platform,
+          utm_medium: 'creator',
+          utm_campaign: key,
+          ct: `${key}_${platformAbbrev(platform)}`,
+          label: `Creator: ${c.label || key} · ${platform} · slug /go/${appKey}-${slug}`,
+        },
+      });
+    }
+  }
+  return out;
+}
 
 // ---- helpers ---------------------------------------------------------------
 
@@ -378,7 +421,7 @@ function registryPage(rows) {
     const app = apps[appKey];
     const items = rows.filter((r) => r.appKey === appKey).map((r) => `
       <tr>
-        <td>${esc(placements[r.code].label)}</td>
+        <td>${esc(r.label)}</td>
         <td><code>${esc(r.shortUrl)}</code></td>
         <td><button class="copy" data-url="${esc(r.shortUrl)}">Copy</button></td>
       </tr>`).join('');
@@ -576,8 +619,23 @@ function build() {
       const dir = join(OUT_DIR, slug);
       mkdirSync(dir, { recursive: true });
       writeFileSync(join(dir, 'index.html'), html);
-      rows.push({ appKey, code, shortUrl });
+      rows.push({ appKey, code, shortUrl, label: p.label });
     }
+  }
+
+  // Creator links: one page per creator × platform at /go/<app>-<slug> (no
+  // cartesian). Same page template + tracking as placements.
+  for (const promo of creatorPromos()) {
+    const { appKey, code, p } = promo;
+    const app = apps[appKey];
+    const slug = `${appKey}-${code}`;
+    const shortUrl = `${baseUrl}/go/${slug}`;
+    const qrSvg = qrAvailable ? qrEncode(shortUrl) : null;
+    const html = redirectPage({ app, appKey, code, p, shortUrl, qrSvg });
+    const dir = join(OUT_DIR, slug);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, 'index.html'), html);
+    rows.push({ appKey, code, shortUrl, label: p.label });
   }
 
   writeFileSync(join(OUT_DIR, 'index.html'), registryPage(rows));
