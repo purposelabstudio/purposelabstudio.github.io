@@ -43,6 +43,7 @@ for (const k of appKeys) {
   const a = apps[k];
   check(`app ${k}: has android package`, typeof a.android === 'string' && a.android.includes('.'));
   check(`app ${k}: ios is string or null`, a.ios === null || typeof a.ios === 'string');
+  check(`app ${k}: pt is absent or digit string`, a.pt === undefined || /^[0-9]+$/.test(a.pt), a.pt);
   check(`app ${k}: icon file exists`, existsSync(join(ROOT, a.icon.replace(/^\//, ''))), a.icon);
   check(`app ${k}: og-share card exists`, !a.ogImage || existsSync(join(ROOT, a.ogImage.replace(/^\//, ''))), a.ogImage);
   check(`app ${k}: has default store`, a.default === 'android' || a.default === 'ios');
@@ -94,7 +95,8 @@ for (const appKey of appKeys) {
     check(`${rel}: Play URL has package`, html.includes(`id=${app.android}`));
     check(`${rel}: Play URL has campaign`, html.includes(`utm_campaign%3D${p.utm_campaign}`));
     if (app.ios) {
-      check(`${rel}: App Store URL has ct`, html.includes(`id${app.ios}?ct=${p.ct}`));
+      check(`${rel}: App Store URL has ct`, html.includes(`ct=${p.ct}`));
+      if (app.pt) check(`${rel}: App Store URL has provider token pt`, html.includes(`pt=${app.pt}`));
     } else {
       check(`${rel}: Android-only → no App Store link`, !html.includes('apps.apple.com'));
     }
@@ -112,7 +114,10 @@ for (const cp of creatorPages) {
   check(`${rel}: path matches`, html.includes(`"/go/${cp.appKey}-${cp.slug}"`));
   check(`${rel}: medium=creator`, html.includes('utm_medium%3Dcreator'));
   check(`${rel}: campaign is creator`, html.includes(`utm_campaign%3D${cp.utm_campaign}`));
-  if (app.ios) check(`${rel}: App Store ct = creator_platform`, html.includes(`?ct=${cp.ct}`));
+  if (app.ios) {
+    check(`${rel}: App Store ct = creator_platform`, html.includes(`ct=${cp.ct}`));
+    if (app.pt) check(`${rel}: App Store has provider token pt`, html.includes(`pt=${app.pt}`));
+  }
 }
 
 // 3. Registry page

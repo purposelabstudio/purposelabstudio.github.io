@@ -21,7 +21,7 @@
 <script data-goatcounter="https://purposelabstudio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function () {
-  var APPS = {"folio":{"name":"Folio","tagline":"A calm, private journal. One line a day.","icon":"/folio/icon.png","accent":"#A08560","android":"com.purposelab.folio","ios":"6781551692","default":"android"},"bplog":{"name":"BPLog","tagline":"Track your blood pressure, simply.","icon":"/bplog/icon.png","accent":"#C0504D","android":"com.purposelab.bplog","ios":null,"default":"android"},"hushly":{"name":"Hushly","tagline":"White noise for better baby sleep.","icon":"/hushly/icon.png","accent":"#5B7C99","android":"com.purposelab.hushly","ios":null,"default":"android"},"waterwise":{"name":"WaterWise","tagline":"A gentle water reminder, no ads.","icon":"/waterwise/icon.png","accent":"#3E8EA0","android":"com.purposelab.waterwise","ios":null,"default":"android"},"crumbs":{"name":"Crumbs","tagline":"Your second brain on WhatsApp.","icon":"/crumbs/icon.png","accent":"#6B8E5A","android":"com.purposelab.crumbs","ios":null,"default":"android"}};
+  var APPS = {"folio":{"name":"Folio","tagline":"A calm, private journal. One line a day.","icon":"/folio/icon.png","accent":"#A08560","android":"com.purposelab.folio","ios":"6781551692","pt":"129054116","default":"android"},"bplog":{"name":"BPLog","tagline":"Track your blood pressure, simply.","icon":"/bplog/icon.png","accent":"#C0504D","android":"com.purposelab.bplog","ios":null,"pt":null,"default":"android"},"hushly":{"name":"Hushly","tagline":"White noise for better baby sleep.","icon":"/hushly/icon.png","accent":"#5B7C99","android":"com.purposelab.hushly","ios":null,"pt":null,"default":"android"},"waterwise":{"name":"WaterWise","tagline":"A gentle water reminder, no ads.","icon":"/waterwise/icon.png","accent":"#3E8EA0","android":"com.purposelab.waterwise","ios":null,"pt":null,"default":"android"},"crumbs":{"name":"Crumbs","tagline":"Your second brain on WhatsApp.","icon":"/crumbs/icon.png","accent":"#6B8E5A","android":"com.purposelab.crumbs","ios":null,"pt":null,"default":"android"}};
   var GC = "https://purposelabstudio.goatcounter.com/count";
   var q = new URLSearchParams(location.search);
   // Per-app share endpoints (/go/<app>) fix the app and default source/medium
@@ -69,7 +69,12 @@
     PLAY = 'https://play.google.com/store/apps/details?id=' + app.android
       + (refStr ? '&referrer=' + encodeURIComponent(refStr) : '');
     APPSTORE = app.ios
-      ? 'https://apps.apple.com/app/id' + app.ios + (utmCampaign ? '?ct=' + encodeURIComponent(appleCt()) : '')
+      ? 'https://apps.apple.com/app/id' + app.ios
+          + (utmCampaign
+              ? (app.pt
+                  ? '?pt=' + encodeURIComponent(app.pt) + '&ct=' + encodeURIComponent(appleCt()) + '&mt=8'
+                  : '?ct=' + encodeURIComponent(appleCt()))
+              : '')
       : null;
   }
   var ua = navigator.userAgent || '';

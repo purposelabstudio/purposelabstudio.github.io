@@ -79,7 +79,7 @@ const IOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)';
 // AC3 — iOS: ct = share_<campaign>.
 {
   const url = runRedirect({ search: '?a=folio&utm_source=share&utm_medium=referral&utm_campaign=founding&ref=42', ua: IOS });
-  check('AC3 iOS ct = share_founding', url === 'https://apps.apple.com/app/id6781551692?ct=share_founding', url);
+  check('AC3 iOS ct = share_founding', url === 'https://apps.apple.com/app/id6781551692?pt=129054116&ct=share_founding&mt=8', url);
   check('AC3 iOS drops ref (Apple limitation)', !url.includes('42'), url);
 }
 // Robustness — non-numeric ref is rejected (injection-safe).
@@ -118,7 +118,7 @@ const IOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)';
 }
 {
   const url = runRedirect({ search: '?c=founding', ua: IOS, src: folioScript });
-  check('minimal /go/folio on iOS → ct=share_founding', url === 'https://apps.apple.com/app/id6781551692?ct=share_founding', url);
+  check('minimal /go/folio on iOS → ct=share_founding', url === 'https://apps.apple.com/app/id6781551692?pt=129054116&ct=share_founding&mt=8', url);
 }
 
 if (failed) {

@@ -96,10 +96,16 @@ function playUrl(app, p) {
   return `https://play.google.com/store/apps/details?id=${app.android}&referrer=${encodeURIComponent(referrer)}`;
 }
 
-/** App Store URL carrying Apple's single campaign token (ct). */
+/** App Store URL carrying Apple's campaign token (ct), plus the account
+ *  provider token (pt) + mt=8 when configured — both are required for the
+ *  campaign to register in App Store Connect App Analytics. */
 function appStoreUrl(app, p) {
   if (!app.ios) return null;
-  return `https://apps.apple.com/app/id${app.ios}?ct=${encodeURIComponent(p.ct)}`;
+  const params = [];
+  if (app.pt) params.push(`pt=${encodeURIComponent(app.pt)}`);
+  params.push(`ct=${encodeURIComponent(p.ct)}`);
+  if (app.pt) params.push('mt=8');
+  return `https://apps.apple.com/app/id${app.ios}?${params.join('&')}`;
 }
 
 /** Detect qrencode once; returns a fn(url) -> inline SVG string | null. */
@@ -261,7 +267,7 @@ function redirectorPage(opts) {
   const embedded = {};
   for (const k of Object.keys(apps)) {
     const a = apps[k];
-    embedded[k] = { name: a.name, tagline: a.tagline, icon: a.icon, accent: a.accent, android: a.android, ios: a.ios, default: a.default };
+    embedded[k] = { name: a.name, tagline: a.tagline, icon: a.icon, accent: a.accent, android: a.android, ios: a.ios, pt: a.pt || null, default: a.default };
   }
   // Unfurl card: app-specific for a per-app share endpoint (/go/<app>), else generic.
   const ogTitle = appMeta ? `${appMeta.name} — ${appMeta.tagline.split(/\.\s/)[0]}` : 'PurposeLab apps';
@@ -340,7 +346,12 @@ function redirectorPage(opts) {
     PLAY = 'https://play.google.com/store/apps/details?id=' + app.android
       + (refStr ? '&referrer=' + encodeURIComponent(refStr) : '');
     APPSTORE = app.ios
-      ? 'https://apps.apple.com/app/id' + app.ios + (utmCampaign ? '?ct=' + encodeURIComponent(appleCt()) : '')
+      ? 'https://apps.apple.com/app/id' + app.ios
+          + (utmCampaign
+              ? (app.pt
+                  ? '?pt=' + encodeURIComponent(app.pt) + '&ct=' + encodeURIComponent(appleCt()) + '&mt=8'
+                  : '?ct=' + encodeURIComponent(appleCt()))
+              : '')
       : null;
   }
   var ua = navigator.userAgent || '';
