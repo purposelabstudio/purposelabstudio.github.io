@@ -118,6 +118,13 @@
       "ct": "instagram_bio",
       "label": "Instagram — bio link"
     },
+    "ig": {
+      "utm_source": "instagram",
+      "utm_medium": "social",
+      "utm_campaign": "instagram",
+      "ct": "instagram",
+      "label": "Instagram"
+    },
     "yt": {
       "utm_source": "youtube",
       "utm_medium": "social",
