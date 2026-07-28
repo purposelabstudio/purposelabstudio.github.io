@@ -97,6 +97,13 @@
       "ct": "twitter",
       "label": "X / Twitter"
     },
+    "threads": {
+      "utm_source": "threads",
+      "utm_medium": "social",
+      "utm_campaign": "threads",
+      "ct": "threads",
+      "label": "Threads"
+    },
     "ig-bio": {
       "utm_source": "instagram",
       "utm_medium": "social",
