@@ -104,6 +104,13 @@
       "ct": "threads",
       "label": "Threads"
     },
+    "pinterest": {
+      "utm_source": "pinterest",
+      "utm_medium": "social",
+      "utm_campaign": "pinterest",
+      "ct": "pinterest",
+      "label": "Pinterest"
+    },
     "ig-bio": {
       "utm_source": "instagram",
       "utm_medium": "social",
