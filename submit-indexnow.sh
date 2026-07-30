@@ -32,6 +32,7 @@ URLS=(
   "https://${HOST}/best-free-journal-app/"
   "https://${HOST}/blog/stop-messaging-yourself-on-whatsapp/"
   "https://${HOST}/blog/build-a-second-brain-on-whatsapp/"
+  "https://${HOST}/blog/what-happens-if-someone-reads-your-journal/"
   "https://${HOST}/blog/why-journaling-apps-make-you-feel-guilty/"
   "https://${HOST}/blog/why-journaling-fails-and-how-to-stick-with-it/"
   "https://${HOST}/blog/daily-journal-vs-mood-tracker-why-you-need-both/"
