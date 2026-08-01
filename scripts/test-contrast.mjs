@@ -121,5 +121,54 @@ if (checks < 20) {
   process.exit(1);
 }
 
-console.log(`contrast: ${palettes.length} palettes · ${checks} pairs checked · ${failures} FAIL`);
+// ---------------------------------------------------------------------------
+// Hardcoded colours.
+//
+// The palette check above missed a real failure: the blood-pressure category
+// tables set severity labels with inline `color: #F9A825`, which is 1.78 against
+// paper. A reader with low vision could not see which category they were in.
+// Palette tokens are not the whole surface.
+//
+// Limits, stated plainly: this resolves each page's `--paper` and compares
+// author-declared text colours against it. It cannot know the true rendered
+// background of a given element, so it only flags colours DARKER than the paper.
+// A light colour is assumed to be intended for a dark surface and skipped.
+// It is also NOT size-aware: WCAG allows 3.0 for large text (>=24px, or >=18.66px
+// bold) and this holds everything to 4.5. That is deliberate — parsing font sizes
+// out of CSS is unreliable, and an exception mechanism would be abused. Being
+// stricter than required costs a slightly darker decorative colour; being wrong
+// in the other direction costs readers.
+// /go/ is excluded: 107 noindex redirectors shown for milliseconds.
+const COLOUR_DECL = /color:\s*(#[0-9a-fA-F]{6})\b/g;
+
+let hardcodedChecks = 0;
+
+for (const file of walk('.')) {
+  const rel = file.replace(/^\.\//, '');
+  if (rel.startsWith('go/')) continue;
+
+  const html = readFileSync(file, 'utf8');
+  const override = html.match(/:root\s*\{([^}]*--paper\s*:[^}]*)\}/);
+  const paper = (override ? parseTokens(override[1] + '}').paper : null) || base.paper;
+  const paperLum = luminance(paper);
+
+  const seen = new Set();
+  for (const m of html.matchAll(COLOUR_DECL)) {
+    const fg = m[1];
+    if (seen.has(fg)) continue;
+    seen.add(fg);
+    if (luminance(fg) >= paperLum) continue; // light text, meant for a dark surface
+    hardcodedChecks += 1;
+    const r = contrastRatio(fg, paper);
+    if (r < AA_NORMAL) {
+      failures += 1;
+      console.error(`FAIL  ${rel}  hardcoded ${fg} on paper ${paper}  ${r.toFixed(2)} (needs ${AA_NORMAL})`);
+    }
+  }
+}
+
+console.log(
+  `contrast: ${palettes.length} palettes · ${checks} token pairs · ` +
+  `${hardcodedChecks} hardcoded colours · ${failures} FAIL`,
+);
 process.exit(failures === 0 ? 0 : 1);
