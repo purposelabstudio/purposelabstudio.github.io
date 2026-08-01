@@ -14,6 +14,7 @@ URLS=(
   "https://${HOST}/folio/"
   "https://${HOST}/folio/diary/"
   "https://${HOST}/folio/journal/"
+  "https://${HOST}/folio/try/"
   "https://${HOST}/waterwise/"
   "https://${HOST}/bplog/"
   "https://${HOST}/hushly/"
