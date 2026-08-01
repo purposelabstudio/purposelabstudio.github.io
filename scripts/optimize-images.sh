@@ -77,10 +77,30 @@ while IFS= read -r f; do
   ok=$(awk -v d="$dssim" -v m="$MAX_DSSIM" 'BEGIN{print (d+0 <= m+0) ? 1 : 0}')
 
   if [ "$ok" -ne 1 ]; then
-    printf '  REVERT  %-52s DSSIM %s worse than %s\n' "$f" "$dssim" "$MAX_DSSIM"
-    reverted=$((reverted + 1))
-    total_before=$((total_before + before))
-    total_after=$((total_after + before))
+    # Lossy was too aggressive for this image (flat colour bands badly). Fall
+    # back to lossless, which cannot change a pixel and so needs no fidelity
+    # argument — it is usually still worth 5-15%.
+    cp "$f" "$tmp"
+    case "$f" in
+      *.png) oxipng -o max --strip safe --quiet "$tmp" 2>/dev/null || true ;;
+      *) cp "$f" "$tmp" ;;
+    esac
+    lossless=$(wc -c <"$tmp")
+    lossless_worth=$(awk -v b="$before" -v a="$lossless" 'BEGIN{print (a < b * 0.95) ? 1 : 0}')
+    if [ "$lossless_worth" -eq 1 ]; then
+      pct=$(awk -v b="$before" -v a="$lossless" 'BEGIN{printf "%.0f", (1 - a/b) * 100}')
+      printf '  lossless %-51s %6dKB -> %6dKB  (-%s%%)  DSSIM %s too high for lossy\n' \
+        "$f" $((before / 1024)) $((lossless / 1024)) "$pct" "$dssim"
+      if [ "$DRY_RUN" -eq 0 ]; then cp "$tmp" "$f"; fi
+      changed=$((changed + 1))
+      total_before=$((total_before + before))
+      total_after=$((total_after + lossless))
+    else
+      printf '  REVERT  %-52s DSSIM %s worse than %s, lossless no help\n' "$f" "$dssim" "$MAX_DSSIM"
+      reverted=$((reverted + 1))
+      total_before=$((total_before + before))
+      total_after=$((total_after + before))
+    fi
     continue
   fi
 
