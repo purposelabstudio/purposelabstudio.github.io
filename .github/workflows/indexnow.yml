@@ -1,0 +1,33 @@
+name: IndexNow submission
+
+# IndexNow asks for NEW and CHANGED URLs, not a daily resubmission of everything.
+# So: submit immediately when content actually changes, plus a weekly safety net
+# that re-announces the full list (44 URLs — small enough to be harmless, large
+# enough to recover a page an engine quietly dropped).
+#
+# Participating engines: Bing, Yandex, Naver, Seznam, Yep. Google does NOT use IndexNow.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.html'
+      - 'sitemap.xml'
+  schedule:
+    - cron: '17 3 * * 1'   # Mondays 03:17 UTC — weekly full re-announce
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Regenerate URL list from sitemap
+        run: node scripts/build-indexnow.mjs
+      - name: Fail if the generated list drifted from the committed one
+        run: git diff --exit-code submit-indexnow.sh
+      - name: Submit
+        run: bash submit-indexnow.sh
