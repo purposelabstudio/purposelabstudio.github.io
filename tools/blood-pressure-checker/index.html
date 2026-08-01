@@ -100,6 +100,32 @@
             <p style="font-size:13px;color:var(--text-secondary);">Based on American Heart Association (AHA) cut-offs. Educational reference only, not a diagnosis. Always confirm with your doctor.</p>
         </section>
 
+        <section class="section">
+            <h2>How this works</h2>
+            <p>This page does one mechanical job: it compares two numbers against a published set of cut-offs and reports which band they land in. It does not interpret the result, and it does not know anything about you. The thresholds it applies are written out in full below, and an automated test checks them on every change to this site, so the published cut-offs and the working ones cannot drift apart.</p>
+
+            <h3>Using the checker</h3>
+            <ol>
+                <li>Enter the systolic number, the higher figure on your monitor.</li>
+                <li>Enter the diastolic number, the lower figure.</li>
+                <li>Select Check category to see which band the reading falls into.</li>
+            </ol>
+
+            <h3>The cut-offs it applies</h3>
+            <p>All figures are in millimetres of mercury (mmHg), and they are the American Heart Association's published boundaries:</p>
+            <ul>
+                <li><strong>Hypertensive Crisis</strong> — systolic 180 or above, or diastolic 120 or above.</li>
+                <li><strong>High Blood Pressure (Stage 2)</strong> — systolic 140 or above, or diastolic 90 or above.</li>
+                <li><strong>High Blood Pressure (Stage 1)</strong> — systolic 130 or above, or diastolic 80 or above.</li>
+                <li><strong>Elevated</strong> — systolic 120 to 129, with diastolic below 80.</li>
+                <li><strong>Normal</strong> — anything below those lines.</li>
+            </ul>
+
+            <h3>Why the order of the checks matters</h3>
+            <p>The bands are tested from the most severe downwards, and the first one that matches is the one reported. That single rule is what produces the behaviour people find surprising: a reading of 122/82 comes back as Stage&nbsp;1, because the lower number has already crossed the Stage&nbsp;1 line even though the upper number on its own would read as Elevated. Whichever of the two figures sits in the worse band decides the result.</p>
+            <p>The comparison runs entirely in your browser. Readings are not stored, not sent anywhere, and not kept once the tab is closed. As the note above says, this is a reference for where a reading sits against a published boundary, and nothing more.</p>
+        </section>
+
         <div class="app-cta">
             <img src="/bplog/icon.png" alt="BP Log">
             <div><strong>BP Log</strong> — log readings offline, see AHA-classified trends, and share clean PDF reports with your doctor. <a href="/bplog/">Learn more &rarr;</a></div>

@@ -108,6 +108,23 @@
             <p style="font-size:13px;color:var(--text-secondary);">Tip: for babies, keep the volume low (around 50 dB) and the device at least 2 metres from the crib.</p>
         </section>
 
+        <section class="section">
+            <h2>How this works</h2>
+            <p>Nothing is streamed and nothing is downloaded. The player fills a two-second buffer with numbers, loops it through the Web Audio API, and shapes those numbers differently depending on which sound you choose. That is why it starts instantly, and why it keeps working if your connection drops after the page has loaded.</p>
+
+            <h3>How each sound is made</h3>
+            <ul>
+                <li><strong>White</strong> — every sample is an independent random value across the full range. Equal energy at every frequency, which is what makes it sound like bright static.</li>
+                <li><strong>Pink</strong> — the white signal is run through Paul Kellet's filter approximation, which rolls the level off by roughly 3&nbsp;dB per octave. The top end is pulled down, so it lands closer to steady rain.</li>
+                <li><strong>Brown</strong> — each sample is a leaky running total of the one before it, which rolls off by roughly 6&nbsp;dB per octave. Neighbouring samples stay close together, and that closeness is the deep rumble.</li>
+            </ul>
+            <p>The difference is measurable rather than a matter of description. An automated test measures the average step between neighbouring samples in each signal, and both pink and brown come out consistently smoother than white — in that order, exactly as the descriptions above claim. Every sound is also clamped to the range the audio hardware expects, so no combination of settings can produce a sudden spike.</p>
+
+            <h3>The volume slider and the timer</h3>
+            <p>The slider sets a gain the looping buffer passes through, and it takes effect immediately while the sound is playing rather than on the next loop. The sleep timer sets one delay — 15, 30, or 60 minutes — after which playback stops on its own. Switching sound while it is playing rebuilds the buffer and picks the new one up straight away.</p>
+            <p>Both settings live only in the open page. Nothing is saved between visits, so the player opens on the same defaults every time.</p>
+        </section>
+
         <div class="app-cta">
             <img src="/hushly/icon.png" alt="Hushly">
             <div><strong>Hushly</strong> — a dedicated baby sleep app with curated sounds, one-handed controls, and a timer. Free, offline, no ads. <a href="/hushly/">Learn more &rarr;</a></div>

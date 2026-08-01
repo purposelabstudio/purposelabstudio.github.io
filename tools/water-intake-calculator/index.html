@@ -106,6 +106,32 @@
             <p style="font-size:13px;color:var(--text-secondary);">Educational estimate only, not medical advice. People with heart or kidney conditions should follow their doctor's guidance.</p>
         </section>
 
+        <section class="section">
+            <h2>How this works</h2>
+            <p>There is no hidden model here and no server call. The calculator is about ten lines of arithmetic that run in your browser, and the numbers below are the numbers it uses. They are checked by an automated test on every change to this site, so what is published here and what the tool actually does cannot drift apart.</p>
+
+            <h3>Using the calculator</h3>
+            <ol>
+                <li>Enter your weight in kilograms.</li>
+                <li>Choose your activity level: sedentary, moderate, or active.</li>
+                <li>Choose your climate: temperate, or hot and humid.</li>
+                <li>Read the daily target, shown in litres and in glasses.</li>
+            </ol>
+
+            <h3>The formula</h3>
+            <p>The starting figure is <strong>33 ml per kilogram of body weight</strong>. For a 70&nbsp;kg adult that is 2,310&nbsp;ml. Two adjustments are then added on top of it:</p>
+            <ul>
+                <li><strong>Moderate activity</strong> adds <strong>350&nbsp;ml</strong>.</li>
+                <li><strong>Active</strong> adds <strong>700&nbsp;ml</strong> instead — the two are alternatives, not cumulative.</li>
+                <li>A <strong>hot or humid climate</strong> adds a further <strong>500&nbsp;ml</strong>, on top of whichever activity figure applies.</li>
+            </ul>
+            <p>So the same 70&nbsp;kg adult gets 2,310&nbsp;ml when sedentary in a temperate climate, 2,660&nbsp;ml when moderately active, and 3,510&nbsp;ml when active in a hot climate. Anything the tool does not recognise as an activity level or a climate adds nothing at all, which means an unanswered question can only ever leave the estimate lower, never inflate it.</p>
+
+            <h3>Where the maths stops</h3>
+            <p>Weight is clamped to a range of <strong>30&nbsp;kg to 200&nbsp;kg</strong> before any calculation runs. Type 10 and it is treated as 30; type 500 and it is treated as 200. A mistyped weight therefore cannot produce a target that nobody should be drinking towards.</p>
+            <p>The result is rounded to the nearest millilitre before it is displayed. Nothing you enter is stored, sent, or logged — the page keeps no record of it once you close the tab.</p>
+        </section>
+
         <div class="app-cta">
             <img src="/waterwise/icon.png" alt="WaterWise">
             <div><strong>WaterWise</strong> — hit your target with one-tap logging and gentle reminders, no ads. <a href="/waterwise/">Learn more &rarr;</a></div>
