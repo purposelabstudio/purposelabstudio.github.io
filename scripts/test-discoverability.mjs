@@ -4,6 +4,7 @@
 //  3. no indexable page is orphaned (zero inbound internal links)
 //  4. submit-indexnow.sh covers exactly the sitemap
 //  5. llms.txt covers every sitemap URL
+//  6. every indexable page carries a dateModified/datePublished signal
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 
 // Skips top-level build/vendor dirs and ANY dot-directory (.git, .github,
@@ -67,6 +68,14 @@ if (existsSync('llms.txt')) {
   const llms = readFileSync('llms.txt', 'utf8');
   for (const u of smUrls) {
     if (llms.includes(u) === false) fails.push(`in sitemap but missing from llms.txt — ${u}`);
+  }
+}
+
+// 6. date signal — every indexable page must declare when it was last updated,
+// so an assistant can judge whether a product or comparison claim is current.
+for (const p of indexable) {
+  if (/"date(Modified|Published)"\s*:/.test(p.html) === false) {
+    fails.push(`no dateModified or datePublished in JSON-LD — ${p.url}`);
   }
 }
 
