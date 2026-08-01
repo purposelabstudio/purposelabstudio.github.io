@@ -1,9 +1,11 @@
 name: IndexNow submission
 
-# IndexNow asks for NEW and CHANGED URLs, not a daily resubmission of everything.
-# So: submit immediately when content actually changes, plus a weekly safety net
-# that re-announces the full list (44 URLs — small enough to be harmless, large
-# enough to recover a page an engine quietly dropped).
+# IndexNow asks for NEW and CHANGED URLs, not a resubmission of everything.
+# Bing Webmaster Tools showed 572 submissions in 7 hours from 38 commits, because
+# every push announced all 44 URLs. So: a push announces only the pages that
+# actually changed in that push, and a weekly run re-announces the full list
+# (44 URLs — small enough to be harmless, large enough to recover a page an
+# engine quietly dropped).
 #
 # Participating engines: Bing, Yandex, Naver, Seznam, Yep. Google does NOT use IndexNow.
 
@@ -22,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # need history to diff a push against its base
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -29,5 +33,60 @@ jobs:
         run: node scripts/build-indexnow.mjs
       - name: Fail if the generated list drifted from the committed one
         run: git diff --exit-code submit-indexnow.sh
-      - name: Submit
+
+      - name: Decide what to submit
+        id: scope
+        env:
+          BASE: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+
+          # Anything that is not a push (cron, manual) re-announces everything.
+          if [ "$EVENT" != "push" ]; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # A first push or a force-push gives no usable base; fall back to full.
+          if [ -z "${BASE:-}" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ] \
+             || ! git cat-file -e "${BASE}^{commit}" 2>/dev/null; then
+            echo "mode=full" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          urls=""
+          while IFS= read -r f; do
+            case "$f" in
+              # A sitemap change can add or drop canonical URLs; announce all of them.
+              sitemap.xml) echo "mode=full" >> "$GITHUB_OUTPUT"; exit 0 ;;
+              index.html)  path="/" ;;
+              */index.html) path="/${f%index.html}" ;;
+              *) continue ;;
+            esac
+            # Only announce URLs that are actually canonical. This drops /go/
+            # redirectors, 404.html, and anything else outside the sitemap.
+            if grep -qF "\"https://\${HOST}${path}\"" submit-indexnow.sh; then
+              urls="${urls} https://purposelabstudio.com${path}"
+            fi
+          done < <(git diff --name-only "$BASE" "$HEAD_SHA")
+
+          if [ -z "$urls" ]; then
+            echo "mode=none" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=changed" >> "$GITHUB_OUTPUT"
+            echo "urls=${urls# }" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Submit changed URLs
+        if: steps.scope.outputs.mode == 'changed'
+        run: bash submit-indexnow.sh ${{ steps.scope.outputs.urls }}
+
+      - name: Submit every URL
+        if: steps.scope.outputs.mode == 'full'
         run: bash submit-indexnow.sh
+
+      - name: Nothing canonical changed
+        if: steps.scope.outputs.mode == 'none'
+        run: echo "No canonical page changed in this push; skipping IndexNow."
