@@ -79,6 +79,35 @@ for (const p of indexable) {
   }
 }
 
+// 7. the two dates must agree. The sitemap had been bulk-stamped once and left,
+// so 18 pages asserted one last-modified date in sitemap.xml and a different one
+// in their own JSON-LD. Two contradictory claims about the same fact is worse
+// than a stale one — an engine has to decide which of us to disbelieve.
+// Fix with: node scripts/sync-sitemap-lastmod.mjs
+{
+  const sm = readFileSync('sitemap.xml', 'utf8');
+  const lastmods = new Map(
+    [...sm.matchAll(/<loc>https:\/\/purposelabstudio\.com([^<]*)<\/loc>\s*<lastmod>([^<]*)<\/lastmod>/g)]
+      .map((m) => [m[1] || '/', m[2].slice(0, 10)]),
+  );
+  let compared = 0;
+  for (const p of indexable) {
+    const lastmod = lastmods.get(p.url);
+    const declared = p.html.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/);
+    if (!lastmod || !declared) continue;
+    compared += 1;
+    if (lastmod !== declared[1]) {
+      fails.push(
+        `sitemap lastmod ${lastmod} contradicts JSON-LD dateModified ${declared[1]} — ${p.url}`,
+      );
+    }
+  }
+  // A comparison that compares nothing passes forever.
+  if (compared < 20) {
+    fails.push(`only ${compared} lastmod/dateModified pairs compared — the parser is probably broken`);
+  }
+}
+
 for (const f of fails) console.log(`FAIL  ${f}`);
 console.log(`\ndiscoverability: ${indexable.length} indexable pages · ${smUrls.size} sitemap URLs · ${fails.length} FAIL`);
 if (fails.length) process.exit(1);
