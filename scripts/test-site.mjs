@@ -145,10 +145,31 @@ check(`rss.xml has an <item> per post (${itemCount} vs ${blogPosts.length})`, it
 
 // 8. Folio App Store links present everywhere expected
 const APPSTORE = 'apps.apple.com/us/app/folio-daily-journal-diary/id6781551692';
-check('homepage Folio card has App Store link', read('index.html').includes(APPSTORE));
+const GO_FOLIO = '/go/folio-web-app/';
+const stripLd = (html) => html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
+const home8 = read('index.html');
+check('homepage Folio card has App Store link', home8.includes(APPSTORE));
 const folio = read('folio/index.html');
 check('folio page has App Store button(s)', (folio.match(new RegExp(APPSTORE, 'g')) || []).length >= 2);
 check('folio JSON-LD downloadUrl includes App Store', /"downloadUrl":\s*\[[^\]]*apps\.apple\.com/.test(folio));
+// 8b. Primary CTAs are attributed through /go/, and the direct store link survives as a no-JS fallback.
+// /go/ pages redirect via JS with only a Play-targeted <noscript> refresh, so an iOS visitor
+// without JS depends on a real App Store link staying on the page itself (not just in schema).
+check('homepage primary CTA routes through /go/folio-web-app/',
+  /href="\/go\/folio-web-app\/"[^>]*data-goatcounter-click="ps-folio-home-hero"/.test(home8),
+  'homepage hero CTA is not routed through /go/ with its click id intact');
+check('folio page primary CTA routes through /go/folio-web-app/',
+  /href="\/go\/folio-web-app\/"[^>]*data-goatcounter-click="ps-folio-apppage-hero"/.test(folio),
+  'folio hero CTA is not routed through /go/ with its click id intact');
+check('homepage keeps a direct App Store link outside JSON-LD (no-JS fallback)',
+  stripLd(home8).includes(APPSTORE),
+  'homepage App Store link exists only in schema; no visible fallback');
+check('folio page keeps a direct App Store link outside JSON-LD (no-JS fallback)',
+  stripLd(folio).includes(APPSTORE),
+  'folio App Store link exists only in schema; no visible fallback');
+check('folio JSON-LD downloadUrl stays canonical, never a /go/ redirector',
+  !/"downloadUrl":\s*\[[^\]]*\/go\//.test(folio),
+  'schema downloadUrl must point at the store, not at an attribution redirector');
 
 // 9. Every page's nav links to all 5 apps + Blog/About/Support (consistent internal graph)
 const NAV_TARGETS = ['/folio/', '/folio/journal/', '/blog/', '/apps/', '/about/', '/support/'];
@@ -340,6 +361,7 @@ for (const p of blogPosts) {
   check('home: Folio hero h1', /A quiet notebook for closing the day/.test(home), 'homepage h1 not Folio-forward');
   check('home: tagged Play hero CTA', /play\.google\.com[^"]*com\.purposelab\.folio[^"]*home-hero/.test(home), 'missing tagged Play hero CTA');
   check('home: App Store hero CTA', home.includes('apps.apple.com/us/app/folio-daily-journal-diary/id6781551692'), 'missing App Store CTA');
+  check('home: hero CTA block is attributed via /go/folio-web-app/', home.includes('href="/go/folio-web-app/"'), 'homepage hero install CTA is not tracked');
   check('home: QR bridge uses home-qr asset', home.includes('/assets/qr-folio-home.svg'), 'homepage QR asset not referenced');
   check('home: links journaling hub', home.includes('href="/folio/journal/"'), 'homepage missing /folio/journal/ link');
   check('home: links apps index', home.includes('href="/apps/"'), 'homepage missing /apps/ link');
