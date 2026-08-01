@@ -1,6 +1,14 @@
 // Regenerate submit-indexnow.sh from sitemap.xml so the two can never drift.
 // Run after any sitemap change: node scripts/build-indexnow.mjs
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+
+// Both paths are CWD-relative, so running this anywhere but the repo root would
+// fail confusingly or read the wrong sitemap.
+if (existsSync('sitemap.xml') === false) {
+  console.error('sitemap.xml not found in the current directory.');
+  console.error('Run this from the repo root: node scripts/build-indexnow.mjs');
+  process.exit(1);
+}
 
 const sitemap = readFileSync('sitemap.xml', 'utf8');
 const paths = [...sitemap.matchAll(/<loc>https:\/\/purposelabstudio\.com([^<]*)<\/loc>/g)]

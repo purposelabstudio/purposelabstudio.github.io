@@ -21,6 +21,7 @@ const tighten = (s) => s.replace(/\s+([,.;:!?])/g, '$1');
 
 let checked = 0;
 const fails = [];
+const parseFailures = [];
 
 for (const file of files) {
   const html = readFileSync(file, 'utf8');
@@ -33,7 +34,7 @@ for (const file of files) {
 
   for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
     let parsed;
-    try { parsed = JSON.parse(m[1]); } catch { continue; }
+    try { parsed = JSON.parse(m[1]); } catch (err) { parseFailures.push(`${file} :: ${err.message}`); continue; }
     for (const node of Array.isArray(parsed) ? parsed : [parsed]) {
       if (node['@type'] !== 'FAQPage') continue;
       for (const q of node.mainEntity ?? []) {
@@ -49,6 +50,13 @@ for (const file of files) {
   }
 }
 
+for (const f of parseFailures) console.log(`FAIL  unparseable JSON-LD block: ${f}`);
 for (const f of fails) console.log(`FAIL  answer does not match visible text: ${f}`);
-console.log(`\nschema visibility: ${checked} FAQ answers checked · ${fails.length} FAIL`);
-if (fails.length) process.exit(1);
+console.log(`\nschema visibility: ${checked} FAQ answers checked · ${fails.length + parseFailures.length} FAIL`);
+
+// An empty loop would otherwise exit 0 having verified nothing at all.
+if (checked === 0) {
+  console.log('FAIL  no FAQPage structured data found on any page — the gate verified nothing');
+  process.exit(1);
+}
+if (fails.length || parseFailures.length) process.exit(1);
