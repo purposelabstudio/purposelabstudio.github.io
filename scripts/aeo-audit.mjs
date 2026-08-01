@@ -35,10 +35,15 @@ const AI_BOT_AGENTS = [
   "gptbot", "claudebot", "perplexitybot", "google-extended",
   "oai-searchbot", "anthropic-ai", "chatgpt-user", "bytespider", "ccbot",
 ];
+// "HowTo" is deliberately absent: test-site.mjs check 19 bans it as a deprecated
+// type whose rich results Google retired, so rewarding it here would contradict a gate.
 const RECOGNIZED_SCHEMA_TYPES = [
   "Organization", "WebSite", "WebPage", "Article", "Product", "FAQPage",
-  "BreadcrumbList", "LocalBusiness", "Person", "Event", "HowTo", "Recipe",
+  "BreadcrumbList", "LocalBusiness", "Person", "Event", "Recipe",
   "VideoObject", "SoftwareApplication",
+  // Types this site actually publishes.
+  "Blog", "CollectionPage", "ProfilePage", "WebApplication", "ItemList",
+  "ListItem", "Question", "Answer", "Offer", "Brand", "SpeakableSpecification",
 ];
 const MAX_CRAWL_LIMIT = 30;
 const MAX_HTML_BYTES = 512_000;
