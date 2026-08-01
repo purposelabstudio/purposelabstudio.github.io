@@ -5,7 +5,9 @@
 //  4. submit-indexnow.sh covers exactly the sitemap
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 
-const SKIP = /^(go|docs|node_modules|\.git|\.github)\//;
+// Skips top-level build/vendor dirs and ANY dot-directory (.git, .github,
+// .superpowers scratch) so local artifacts can never diverge results from CI.
+const SKIP = /(^|\/)\.|^(go|docs|node_modules)\//;
 const htmlFiles = readdirSync('.', { recursive: true })
   .filter((f) => typeof f === 'string' && f.endsWith('.html'))
   .filter((f) => SKIP.test(f) === false && f !== '404.html');

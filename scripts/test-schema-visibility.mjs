@@ -3,7 +3,9 @@
 // reading the rendered page never sees JSON-LD-only prose.
 import { readFileSync, readdirSync } from 'node:fs';
 
-const SKIP = /^(go|docs|node_modules|\.git|\.github)\//;
+// Skips top-level build/vendor dirs and ANY dot-directory (.git, .github,
+// .superpowers scratch) so local artifacts can never diverge results from CI.
+const SKIP = /(^|\/)\.|^(go|docs|node_modules)\//;
 const files = readdirSync('.', { recursive: true })
   .filter((f) => typeof f === 'string' && f.endsWith('.html'))
   .filter((f) => SKIP.test(f) === false && f !== '404.html');
