@@ -14,17 +14,21 @@ const words = (s) =>
   s.replace(/&[a-z]+;/gi, ' ').replace(/[^a-z0-9 ]/gi, ' ').toLowerCase()
    .split(/\s+/).filter((w) => w.length > 2);
 
+// Stripping an inline tag (<a>, <strong>) leaves a space the reader never sees:
+// "Studio</a>, the maker" becomes "Studio , the maker". Close that gap on both
+// sides so schema text can carry the punctuation a reader actually reads.
+const tighten = (s) => s.replace(/\s+([,.;:!?])/g, '$1');
+
 let checked = 0;
 const fails = [];
-const warns = [];
 
 for (const file of files) {
   const html = readFileSync(file, 'utf8');
-  const visible = html
+  const visible = tighten(html
     .replace(/<script[\s\S]*?<\/script>/g, ' ')
     .replace(/<style[\s\S]*?<\/style>/g, ' ')
     .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ');
+    .replace(/\s+/g, ' '));
   const visibleWords = new Set(words(visible));
 
   for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
@@ -34,19 +38,17 @@ for (const file of files) {
       if (node['@type'] !== 'FAQPage') continue;
       for (const q of node.mainEntity ?? []) {
         checked++;
-        const answer = q.acceptedAnswer?.text ?? '';
+        const answer = tighten(q.acceptedAnswer?.text ?? '');
         const exact = visible.includes(answer.slice(0, 45));
         if (exact) continue;
         const toks = words(answer);
         const coverage = toks.length ? toks.filter((w) => visibleWords.has(w)).length / toks.length : 0;
-        const entry = `${file} :: ${q.name} (coverage ${coverage.toFixed(2)})`;
-        if (coverage >= 0.85) warns.push(entry); else fails.push(entry);
+        fails.push(`${file} :: ${q.name} (coverage ${coverage.toFixed(2)})`);
       }
     }
   }
 }
 
-for (const w of warns) console.log(`WARN  drifted from visible text: ${w}`);
-for (const f of fails) console.log(`FAIL  answer absent from visible text: ${f}`);
-console.log(`\nschema visibility: ${checked} FAQ answers checked · ${fails.length} FAIL · ${warns.length} WARN`);
+for (const f of fails) console.log(`FAIL  answer does not match visible text: ${f}`);
+console.log(`\nschema visibility: ${checked} FAQ answers checked · ${fails.length} FAIL`);
 if (fails.length) process.exit(1);
