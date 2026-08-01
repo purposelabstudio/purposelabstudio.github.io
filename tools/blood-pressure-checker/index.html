@@ -6,8 +6,8 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="PurposeLab Studio">
     <link rel="alternate" type="application/rss+xml" title="PurposeLab Blog" href="/blog/rss.xml">
-    <title>Blood Pressure Category Checker — AHA Classification</title>
-    <meta name="description" content="Free blood pressure checker — enter your systolic and diastolic to see your AHA category: Normal, Elevated, Stage 1, Stage 2, or Crisis. Reference only.">
+    <title>Blood Pressure Category Checker | AHA Classification</title>
+    <meta name="description" content="Free blood pressure checker, enter your systolic and diastolic to see your AHA category: Normal, Elevated, Stage 1, Stage 2, or Crisis. Reference only.">
     <meta name="keywords" content="blood pressure checker, bp category, what does my blood pressure mean, aha blood pressure categories, is my blood pressure high">
     <link rel="canonical" href="https://purposelabstudio.com/tools/blood-pressure-checker/">
     <meta property="og:title" content="Blood Pressure Category Checker">
@@ -84,8 +84,8 @@
         <section class="hero">
             <div class="eyebrow">~/ tools / blood-pressure</div>
             <h1>Blood Pressure Category Checker</h1>
-            <p class="subtitle">Enter a reading to see its AHA category. Reference only — the check runs entirely in your browser, nothing is stored or sent.</p>
-            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">The American Heart Association classifies blood pressure as <strong>Normal</strong> (below 120/80&nbsp;mmHg), <strong>Elevated</strong> (120–129 and below 80), <strong>Stage&nbsp;1 Hypertension</strong> (130–139 or 80–89), <strong>Stage&nbsp;2 Hypertension</strong> (140+ or 90+), and <strong>Hypertensive Crisis</strong> (above 180/120). Enter your systolic and diastolic numbers below to see your category instantly — nothing is stored or sent.</p>
+            <p class="subtitle">Enter a reading to see its AHA category. Reference only, the check runs entirely in your browser, nothing is stored or sent.</p>
+            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">The American Heart Association classifies blood pressure as <strong>Normal</strong> (below 120/80&nbsp;mmHg), <strong>Elevated</strong> (120–129 and below 80), <strong>Stage&nbsp;1 Hypertension</strong> (130–139 or 80–89), <strong>Stage&nbsp;2 Hypertension</strong> (140+ or 90+), and <strong>Hypertensive Crisis</strong> (above 180/120). Enter your systolic and diastolic numbers below to see your category instantly. Nothing is stored or sent.</p>
         </section>
 
         <section class="section">
@@ -114,11 +114,11 @@
             <h3>The cut-offs it applies</h3>
             <p>All figures are in millimetres of mercury (mmHg), and they are the American Heart Association's published boundaries:</p>
             <ul>
-                <li><strong>Hypertensive Crisis</strong> — systolic 180 or above, or diastolic 120 or above.</li>
-                <li><strong>High Blood Pressure (Stage 2)</strong> — systolic 140 or above, or diastolic 90 or above.</li>
-                <li><strong>High Blood Pressure (Stage 1)</strong> — systolic 130 or above, or diastolic 80 or above.</li>
-                <li><strong>Elevated</strong> — systolic 120 to 129, with diastolic below 80.</li>
-                <li><strong>Normal</strong> — anything below those lines.</li>
+                <li><strong>Hypertensive Crisis</strong>: systolic 180 or above, or diastolic 120 or above.</li>
+                <li><strong>High Blood Pressure (Stage 2)</strong>: systolic 140 or above, or diastolic 90 or above.</li>
+                <li><strong>High Blood Pressure (Stage 1)</strong>: systolic 130 or above, or diastolic 80 or above.</li>
+                <li><strong>Elevated</strong>: systolic 120 to 129, with diastolic below 80.</li>
+                <li><strong>Normal</strong>: anything below those lines.</li>
             </ul>
 
             <h3>Why the order of the checks matters</h3>
@@ -128,7 +128,7 @@
 
         <div class="app-cta">
             <img src="/bplog/icon.png" alt="BP Log">
-            <div><strong>BP Log</strong> — log readings offline, see AHA-classified trends, and share clean PDF reports with your doctor. <a href="/bplog/">Learn more &rarr;</a></div>
+            <div><strong>BP Log</strong>: log readings offline, see AHA-classified trends, and share clean PDF reports with your doctor. <a href="/bplog/">Learn more &rarr;</a></div>
         </div>
 
         <div class="cta">
@@ -145,7 +145,7 @@
             <ul>
                 <li><a href="/blog/normal-blood-pressure-by-age/">Normal Blood Pressure by Age: Chart and What Your Numbers Mean</a></li>
                 <li><a href="/blog/how-to-track-blood-pressure-at-home/">How to Track Blood Pressure at Home: A Complete Guide</a></li>
-                <li><a href="/bplog/">BP Log — free, offline blood pressure tracker &rarr;</a></li>
+                <li><a href="/bplog/">BP Log, a free offline blood pressure tracker &rarr;</a></li>
             </ul>
         </aside>
 
@@ -164,7 +164,7 @@
         const $ = (s) => document.querySelector(s);
         $('#calc').addEventListener('submit', () => {
             const r = bpCategory($('#sys').value, $('#dia').value);
-            $('#result').innerHTML = `<p style="font-size:20px;margin:8px 0;"><strong>${r.label}</strong></p><p style="color:var(--text-secondary);">${r.note}</p><p style="font-size:13px;color:var(--text-secondary);">Reference only — not a diagnosis. Always confirm with your doctor.</p>`;
+            $('#result').innerHTML = `<p style="font-size:20px;margin:8px 0;"><strong>${r.label}</strong></p><p style="color:var(--text-secondary);">${r.note}</p><p style="font-size:13px;color:var(--text-secondary);">Reference only, not a diagnosis. Always confirm with your doctor.</p>`;
         });
     </script>
 </body>

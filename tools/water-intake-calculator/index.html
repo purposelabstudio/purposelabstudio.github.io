@@ -6,7 +6,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="author" content="PurposeLab Studio">
     <link rel="alternate" type="application/rss+xml" title="PurposeLab Blog" href="/blog/rss.xml">
-    <title>Daily Water Intake Calculator — How Much Water?</title>
+    <title>Daily Water Intake Calculator | How Much Water?</title>
     <meta name="description" content="Free daily water intake calculator. Enter your weight, activity level, and climate to get a personalised hydration target in litres and glasses. No ads, no sign-up.">
     <meta name="keywords" content="water intake calculator, how much water should i drink, daily water calculator, hydration calculator, water intake by weight">
     <link rel="canonical" href="https://purposelabstudio.com/tools/water-intake-calculator/">
@@ -84,8 +84,8 @@
         <section class="hero">
             <div class="eyebrow">~/ tools / water-intake</div>
             <h1>Daily Water Intake Calculator</h1>
-            <p class="subtitle">Enter your details for a personalised daily hydration target. No sign-up, no ads — the math runs entirely in your browser.</p>
-            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">A common evidence-based estimate for daily water intake is about <strong>30–35 ml per kilogram of body weight</strong> — roughly 2.1–2.5 litres for a 70&nbsp;kg adult — with more needed during exercise or in hot, humid weather. This calculator turns your weight, activity level, and climate into a personalised daily target, and every calculation runs on your device.</p>
+            <p class="subtitle">Enter your details for a personalised daily hydration target. No sign-up, no ads, the math runs entirely in your browser.</p>
+            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">A common evidence-based estimate for daily water intake is about <strong>30–35 ml per kilogram of body weight</strong>: roughly 2.1–2.5 litres for a 70&nbsp;kg adult, with more needed during exercise or in hot, humid weather. This calculator turns your weight, activity level, and climate into a personalised daily target, and every calculation runs on your device.</p>
         </section>
 
         <section class="section">
@@ -122,19 +122,19 @@
             <p>The starting figure is <strong>33 ml per kilogram of body weight</strong>. For a 70&nbsp;kg adult that is 2,310&nbsp;ml. Two adjustments are then added on top of it:</p>
             <ul>
                 <li><strong>Moderate activity</strong> adds <strong>350&nbsp;ml</strong>.</li>
-                <li><strong>Active</strong> adds <strong>700&nbsp;ml</strong> instead — the two are alternatives, not cumulative.</li>
+                <li><strong>Active</strong> adds <strong>700&nbsp;ml</strong> instead, the two are alternatives, not cumulative.</li>
                 <li>A <strong>hot or humid climate</strong> adds a further <strong>500&nbsp;ml</strong>, on top of whichever activity figure applies.</li>
             </ul>
             <p>So the same 70&nbsp;kg adult gets 2,310&nbsp;ml when sedentary in a temperate climate, 2,660&nbsp;ml when moderately active, and 3,510&nbsp;ml when active in a hot climate. Anything the tool does not recognise as an activity level or a climate adds nothing at all, which means an unanswered question can only ever leave the estimate lower, never inflate it.</p>
 
             <h3>Where the maths stops</h3>
             <p>Weight is clamped to a range of <strong>30&nbsp;kg to 200&nbsp;kg</strong> before any calculation runs. Type 10 and it is treated as 30; type 500 and it is treated as 200. A mistyped weight therefore cannot produce a target that nobody should be drinking towards.</p>
-            <p>The result is rounded to the nearest millilitre before it is displayed. Nothing you enter is stored, sent, or logged — the page keeps no record of it once you close the tab.</p>
+            <p>The result is rounded to the nearest millilitre before it is displayed. Nothing you enter is stored, sent, or logged, the page keeps no record of it once you close the tab.</p>
         </section>
 
         <div class="app-cta">
             <img src="/waterwise/icon.png" alt="WaterWise">
-            <div><strong>WaterWise</strong> — hit your target with one-tap logging and gentle reminders, no ads. <a href="/waterwise/">Learn more &rarr;</a></div>
+            <div><strong>WaterWise</strong>: hit your target with one-tap logging and gentle reminders, no ads. <a href="/waterwise/">Learn more &rarr;</a></div>
         </div>
 
         <div class="cta">
@@ -161,7 +161,7 @@
             <ul>
                 <li><a href="/blog/how-much-water-should-i-drink-daily/">How Much Water Should I Actually Drink? The Science Behind Daily Hydration Goals</a></li>
                 <li><a href="/blog/why-water-apps-are-full-of-ads/">Why Water Tracking Apps Are Full of Ads (And What to Do About It)</a></li>
-                <li><a href="/waterwise/">WaterWise — ad-free water reminder &rarr;</a></li>
+                <li><a href="/waterwise/">WaterWise, an ad-free water reminder &rarr;</a></li>
             </ul>
         </aside>
 
@@ -185,7 +185,7 @@
             const ml = waterIntakeMl(w, a, c);
             const litres = (ml / 1000).toFixed(1);
             const glasses = Math.round(ml / 250);
-            $('#result').innerHTML = `<p style="font-size:20px;margin:8px 0;"><strong>${litres} litres/day</strong> — about ${glasses} glasses (250 ml each).</p>`;
+            $('#result').innerHTML = `<p style="font-size:20px;margin:8px 0;"><strong>${litres} litres/day</strong>: about ${glasses} glasses (250 ml each).</p>`;
         });
     </script>
 </body>
