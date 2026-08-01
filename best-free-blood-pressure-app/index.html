@@ -68,19 +68,49 @@
         <section class="hero">
             <div class="eyebrow">~/ best free blood pressure app</div>
             <h1>The Best Free Blood Pressure App (No Ads, Offline)</h1>
-            <p class="subtitle">Most free BP apps bury a simple job — logging a reading — under ads, sign-ups, and cloud accounts. Here's what actually matters, and the honest case for a calmer pick.</p>
+            <p class="subtitle">Most free BP apps bury a simple job, logging a reading, under ads, sign-ups, and cloud accounts. Here's what actually matters, and the honest case for a calmer pick.</p>
+            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">A free blood pressure app should do one mechanical job well: <strong>record a reading in seconds, label it against a published set of cut-offs, keep it on your device, and produce a clean summary you can take to an appointment</strong>. Classification is a reference, not a diagnosis. Everything else is optional, and ads on a health log are not.</p>
         </section>
 
         <section class="section">
-            <h2 class="section-title">What to look for in a free BP app</h2>
+            <h2 class="section-title">What makes a free BP app worth keeping?</h2>
+            <p>A blood pressure app is a logbook with arithmetic on top. It does not measure anything, because your monitor does that. The whole job is capture and recall, and the apps that fail do it by making capture slow or recall useless.</p>
             <ul>
-                <li><strong>Fast logging</strong> — adding a reading should take seconds, not taps through menus.</li>
-                <li><strong>AHA classification</strong> — each reading labelled Normal / Elevated / Stage 1 / Stage 2 so the number means something.</li>
-                <li><strong>Works offline</strong> — your health history shouldn't depend on a connection or an account.</li>
-                <li><strong>Private by default</strong> — data stored on your device, not uploaded to a server.</li>
-                <li><strong>No ads</strong> — nothing between you and your own readings.</li>
-                <li><strong>Doctor-ready export</strong> — a clean PDF you can share at an appointment.</li>
+                <li><strong>Fast logging</strong>: adding a reading should take seconds, not taps through menus.</li>
+                <li><strong>AHA classification</strong>: each reading labelled Normal, Elevated, Stage 1 or Stage 2 so the number means something.</li>
+                <li><strong>Works offline</strong>: your health history shouldn't depend on a connection or an account.</li>
+                <li><strong>Private by default</strong>: data stored on your device, not uploaded to a server.</li>
+                <li><strong>No ads</strong>: nothing between you and your own readings.</li>
+                <li><strong>Doctor-ready export</strong>: a clean PDF you can share at an appointment.</li>
             </ul>
+            <p>Two moments decide whether an app earns its place: the fifteen seconds after a number appears on the cuff, and the minute in a waiting room when someone asks what your readings have been doing.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">What do the AHA categories actually classify?</h2>
+            <p>The labels these apps display come from the American Heart Association's published boundaries. We run a free <a href="/tools/blood-pressure-checker/">blood pressure category checker</a> on this site and publish the exact cut-offs it applies, in millimetres of mercury:</p>
+            <ul>
+                <li><strong>Hypertensive Crisis</strong>: systolic 180 or above, or diastolic 120 or above.</li>
+                <li><strong>High Blood Pressure (Stage 2)</strong>: systolic 140 or above, or diastolic 90 or above.</li>
+                <li><strong>High Blood Pressure (Stage 1)</strong>: systolic 130 or above, or diastolic 80 or above.</li>
+                <li><strong>Elevated</strong>: systolic 120 to 129, with diastolic below 80.</li>
+                <li><strong>Normal</strong>: anything below those lines.</li>
+            </ul>
+            <p>The part worth understanding is the order in which they are applied. The bands are tested from the most severe downwards and the first one that matches is the one reported. That single rule produces the behaviour people find surprising: a reading of 122/82 is reported as Stage&nbsp;1, because the lower number has already crossed the Stage&nbsp;1 line even though the upper number on its own would read as Elevated. Whichever of the two figures sits in the worse band decides the result.</p>
+            <p>It is worth checking that rule in whichever app you install, because an app that classifies on the systolic figure alone will label that same reading differently. Our cut-offs and their ordering are verified by an automated test on every change to this site, so the boundaries published here and the ones the tool applies cannot drift apart.</p>
+            <p style="font-size:13px;color:var(--text-secondary);">These are reference boundaries, not a diagnosis. Where any reading sits against them is a question for your doctor.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Why does the log matter more than any single reading?</h2>
+            <p>A reading is one point. A log is a series, and a series is the only thing an app can add that a monitor cannot. That is also why the boring fields matter more than they look: a timestamp, which arm, and a short note turn a column of numbers into something that can be read back months later without guessing.</p>
+            <p>Most free apps record the two numbers and stop there, which is enough for a display and not enough for a record. The technique that makes readings comparable to each other is a separate subject from the app, and we set it out in our guide to <a href="/blog/how-to-track-blood-pressure-at-home/">tracking blood pressure at home</a>. If you want to know what published reference ranges look like across age groups rather than what any individual reading means, that sits in <a href="/blog/normal-blood-pressure-by-age/">normal blood pressure by age</a>. Both are background, not instructions.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Where do your readings end up?</h2>
+            <p>A blood pressure history is health data, and where it is stored is a decision the app makes on your behalf on the first launch. An app that requires an account has, by construction, put your readings on a server you do not control. An offline app has not, which also means there is no account to lose access to and no sync to break when you change phones.</p>
+            <p>The practical check takes a minute: turn off mobile data and Wi-Fi, then open the app and add a reading. If it will not record one, the log was never really yours to begin with.</p>
         </section>
 
         <section class="section">

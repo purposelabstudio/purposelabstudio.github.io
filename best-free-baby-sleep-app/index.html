@@ -68,19 +68,46 @@
         <section class="hero">
             <div class="eyebrow">~/ best free baby sleep app</div>
             <h1>The Best Free Baby Sleep Sounds App (No Ads)</h1>
-            <p class="subtitle">At 2am you want soothing sound in one tap — not an ad, a sign-up, or a paywall. Here's what actually matters in a baby sleep app, and the honest case for a calmer pick.</p>
+            <p class="subtitle">At 2am you want soothing sound in one tap, not an ad, a sign-up, or a paywall. Here's what actually matters in a baby sleep app, and the honest case for a calmer pick.</p>
+            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">A baby sleep sounds app is judged at 2am, with one hand. What matters is that <strong>the sound starts in a tap, keeps playing with the screen off, runs without a connection, and never interrupts itself with an ad or a sign-up</strong>. A sleep timer and a volume control you can set precisely do the rest.</p>
         </section>
 
         <section class="section">
-            <h2 class="section-title">What to look for in a free baby sleep app</h2>
+            <h2 class="section-title">What makes a free baby sleep app worth keeping?</h2>
+            <p>This is a category where the usual review criteria are close to irrelevant. Nobody browses a sound library at 2am, and nobody reads an onboarding screen while holding a baby. The app is used in the dark, one-handed, half awake, and every feature that assumes otherwise is dead weight.</p>
             <ul>
-                <li><strong>Curated soothing sounds</strong> — white noise, rain, lullabies that actually help.</li>
-                <li><strong>One-handed controls</strong> — big, simple buttons for the middle of the night.</li>
-                <li><strong>Sleep timer</strong> — fade out after your baby settles.</li>
-                <li><strong>Background playback</strong> — keeps playing with the screen off.</li>
-                <li><strong>Works offline</strong> — a dropped connection should never wake the baby.</li>
-                <li><strong>No ads</strong> — nothing loud or bright interrupting sleep.</li>
+                <li><strong>Curated soothing sounds</strong>: white noise, rain, lullabies that actually help.</li>
+                <li><strong>One-handed controls</strong>: big, simple buttons for the middle of the night.</li>
+                <li><strong>Sleep timer</strong>: fade out after your baby settles.</li>
+                <li><strong>Background playback</strong>: keeps playing with the screen off.</li>
+                <li><strong>Works offline</strong>: a dropped connection should never wake the baby.</li>
+                <li><strong>No ads</strong>: nothing loud or bright interrupting sleep.</li>
             </ul>
+            <p>A useful way to compare two apps is to open each one in a dark room and count the taps from the app icon to sound playing. Anything above two is a design that was tested in daylight.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">What is the difference between white, pink and brown noise?</h2>
+            <p>They are not three marketing names for the same hiss. They are three different shapings of the same random signal, and the difference is measurable rather than descriptive. We publish exactly how our free <a href="/tools/white-noise-player/">white noise player</a> builds each one:</p>
+            <ul>
+                <li><strong>White</strong>: every sample is an independent random value across the full range, so there is equal energy at every frequency. That is what makes it sound like bright static.</li>
+                <li><strong>Pink</strong>: the white signal is run through Paul Kellet's filter approximation, which rolls the level off by roughly 3&nbsp;dB per octave. The top end is pulled down, landing it closer to steady rain.</li>
+                <li><strong>Brown</strong>: each sample is a leaky running total of the one before it, rolling off by roughly 6&nbsp;dB per octave. Neighbouring samples stay close together, and that closeness is the deep rumble.</li>
+            </ul>
+            <p>Those descriptions are not left on trust. An automated test measures the average step between neighbouring samples in each signal, and pink and brown come out consistently smoother than white, in that order, which is precisely what the descriptions claim. Every sound is also clamped to the range the audio hardware expects, so no combination of settings can produce a sudden spike. That last property is rarely stated in any store listing, and it is worth knowing which of the two an app has: a generated tone with a hard clamp, or a recorded loop of unknown level.</p>
+            <p>The three sit side by side in our comparison of <a href="/blog/brown-noise-vs-white-noise-vs-pink-noise/">brown noise, white noise and pink noise</a>, and the research on steady sound and infant sleep is collected in <a href="/blog/white-noise-baby-sleep-science/">the science behind white noise and baby sleep</a>.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Why does offline playback matter more than the sound library?</h2>
+            <p>An app that streams its audio has a failure mode that a generated or bundled one does not: the sound stops when the network does, at whatever hour the network chooses. A library of two hundred streamed sounds is worth less at 3am than four sounds that are already on the phone.</p>
+            <p>Our browser player fills a two-second buffer and loops it through the Web Audio API, which is why it starts instantly and keeps playing if the connection drops after the page has loaded. A native app achieves the same thing with bundled files. Either way the test is the same, and it takes thirty seconds: switch the phone to aeroplane mode, then press play.</p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">What does an ad cost in a sleep app?</h2>
+            <p>More than it does anywhere else, because the whole product is the absence of interruption. A banner is a bright rectangle in a dark room. An interstitial between selecting a sound and hearing it is a delay measured against a baby who is already awake. And an ad that plays its own audio is the one thing the app existed to prevent.</p>
+            <p>Worth checking before a night shift depends on it: whether ads appear on the player screen, whether they play sound, and whether the sleep timer is behind the paywall. None of the three is visible from a screenshot. The broader context on why these nights are hard in the first place is in <a href="/blog/baby-wont-sleep-through-night/">why your baby won't sleep through the night</a>.</p>
         </section>
 
         <section class="section">
@@ -89,7 +116,7 @@
             <table class="compare">
                 <thead><tr><th>Attribute</th><th>Hushly</th><th>Typical free baby sleep app</th></tr></thead>
                 <tbody>
-                    <tr><td>Price</td><td>Free, no IAP</td><td>Free with upsells common</td></tr>
+                    <tr><td>Price</td><td>Free, optional one-time unlock</td><td>Free with upsells common</td></tr>
                     <tr><td>Ads</td><td>None ever</td><td>Often ad-supported</td></tr>
                     <tr><td>Works offline</td><td>Yes</td><td>Varies</td></tr>
                     <tr><td>Account required</td><td>No</td><td>Sometimes yes</td></tr>
