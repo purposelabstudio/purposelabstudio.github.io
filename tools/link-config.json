@@ -209,6 +209,12 @@
       "promos": [
         { "app": "folio", "platform": "linkedin", "slug": "calm" }
       ]
+    },
+    "manisha": {
+      "label": "Manisha — Instagram creators",
+      "promos": [
+        { "app": "folio", "platform": "instagram", "slug": "aesthetic" }
+      ]
     }
   }
 }
