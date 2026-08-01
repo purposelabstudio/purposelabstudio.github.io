@@ -3,6 +3,7 @@
 //  2. sitemap.xml and the set of indexable pages on disk agree
 //  3. no indexable page is orphaned (zero inbound internal links)
 //  4. submit-indexnow.sh covers exactly the sitemap
+//  5. llms.txt covers every sitemap URL
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 
 // Skips top-level build/vendor dirs and ANY dot-directory (.git, .github,
@@ -58,6 +59,14 @@ if (existsSync('submit-indexnow.sh')) {
   for (const u of smUrls) {
     const path = u === '/' ? '/"' : u + '"';
     if (sh.includes(path) === false) fails.push(`in sitemap but missing from submit-indexnow.sh — ${u}`);
+  }
+}
+
+// 5. llms.txt parity — every sitemap URL should be discoverable in llms.txt
+if (existsSync('llms.txt')) {
+  const llms = readFileSync('llms.txt', 'utf8');
+  for (const u of smUrls) {
+    if (llms.includes(u) === false) fails.push(`in sitemap but missing from llms.txt — ${u}`);
   }
 }
 

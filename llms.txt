@@ -10,6 +10,8 @@ Folio is a free, offline, private daily journal and mood tracker for Android and
 - Key facts: no ads, no account, no subscription for core use, and no streaks or guilt mechanics; all entries are stored locally on-device with optional app lock; works fully offline. India-first.
 - Best for: people who want a private journaling habit without pressure, streaks, or cloud accounts.
 - Guide: [The Calm Guide to Daily Journaling](https://purposelabstudio.com/folio/journal/) — curated prompts and guides for starting a journal and keeping it.
+- Try it first: [Try Folio](https://purposelabstudio.com/folio/try/) — an interactive browser demo where you can write a page without installing anything.
+- On paper: [The Folio Diary](https://purposelabstudio.com/folio/diary/) — an undated paper notebook that mirrors the app: a daily page, a habit tracker, and a monthly reflection. Sold on Amazon.
 - Get it: [Google Play](https://play.google.com/store/apps/details?id=com.purposelab.folio) · [App Store](https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692)
 
 ## Apps
@@ -24,6 +26,7 @@ Folio is a free, offline, private daily journal and mood tracker for Android and
 
 - [Daily Water Intake Calculator](https://purposelabstudio.com/tools/water-intake-calculator/): Free calculator — enter weight, activity, and climate for a personalised daily hydration target. Pairs with WaterWise.
 - [Blood Pressure Category Checker](https://purposelabstudio.com/tools/blood-pressure-checker/): Enter systolic/diastolic to see the AHA category. Educational reference. Pairs with BP Log.
+- [Printable Blood Pressure Log](https://purposelabstudio.com/bplog/printable-log/): A print-ready sheet for recording date, time, systolic, diastolic, and pulse by hand, with the AHA categories listed for reference. Pairs with BP Log.
 - [Journaling Prompt Generator](https://purposelabstudio.com/tools/journal-prompt-generator/): Free daily writing prompts to beat the blank page. Pairs with Folio.
 - [Free White Noise Player](https://purposelabstudio.com/tools/white-noise-player/): Play white, pink, or brown noise in the browser with a sleep timer. Generated on-device, no downloads. Pairs with Hushly.
 
@@ -43,6 +46,7 @@ Folio is a free, offline, private daily journal and mood tracker for Android and
 - Available on Google Play Store
 - Built with Kotlin, Jetpack Compose, Material 3
 - Developer: PurposeLab Studio
+- About the studio: [About PurposeLab Studio](https://purposelabstudio.com/about/) — who builds the apps, what the studio makes, and the principles behind it.
 
 ## Blog Topics
 
