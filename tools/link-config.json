@@ -173,6 +173,34 @@
       "utm_campaign": "discord",
       "ct": "discord",
       "label": "Discord"
+    },
+    "web-app": {
+      "utm_source": "web",
+      "utm_medium": "website",
+      "utm_campaign": "app_page",
+      "ct": "web_apppage",
+      "label": "Website — app landing page"
+    },
+    "web-blog": {
+      "utm_source": "web",
+      "utm_medium": "website",
+      "utm_campaign": "blog",
+      "ct": "web_blog",
+      "label": "Website — blog post"
+    },
+    "web-compare": {
+      "utm_source": "web",
+      "utm_medium": "website",
+      "utm_campaign": "compare",
+      "ct": "web_compare",
+      "label": "Website — comparison page"
+    },
+    "web-tool": {
+      "utm_source": "web",
+      "utm_medium": "website",
+      "utm_campaign": "tool",
+      "ct": "web_tool",
+      "label": "Website — web tool"
     }
   },
   "creators": {
