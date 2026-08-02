@@ -28,10 +28,12 @@ const PLATFORM_ABBREV = {
 };
 const creatorPages = [];
 for (const key of Object.keys(creators)) {
+  const medium = creators[key].medium || 'creator';
   for (const promo of creators[key].promos || []) {
     creatorPages.push({
       appKey: promo.app,
       slug: promo.slug,
+      medium,
       utm_campaign: key,
       ct: `${key}_${PLATFORM_ABBREV[promo.platform] || String(promo.platform).slice(0, 2)}`,
     });
@@ -58,6 +60,8 @@ for (const k of placementKeys) {
 for (const key of Object.keys(creators)) {
   const c = creators[key];
   check(`creator ${key}: has promos array`, Array.isArray(c.promos) && c.promos.length > 0);
+  check(`creator ${key}: key is utm-safe`, /^[a-z0-9_]+$/.test(key), key);
+  check(`creator ${key}: medium absent or utm-safe`, c.medium === undefined || /^[a-z0-9_]+$/.test(c.medium), c.medium);
   for (const promo of c.promos || []) {
     check(`creator ${key}: promo app is known`, !!apps[promo.app], promo.app);
     check(`creator ${key}: promo has platform`, !!promo.platform);
@@ -112,7 +116,7 @@ for (const cp of creatorPages) {
   check(`${rel}: noindex`, /content="noindex/i.test(html));
   check(`${rel}: fires tracking pixel`, /new Image\(\)\.src/.test(html));
   check(`${rel}: path matches`, html.includes(`"/go/${cp.appKey}-${cp.slug}"`));
-  check(`${rel}: medium=creator`, html.includes('utm_medium%3Dcreator'));
+  check(`${rel}: medium=${cp.medium}`, html.includes(`utm_medium%3D${cp.medium}`));
   check(`${rel}: campaign is creator`, html.includes(`utm_campaign%3D${cp.utm_campaign}`));
   if (app.ios) {
     check(`${rel}: App Store ct = creator_platform`, html.includes(`ct=${cp.ct}`));
@@ -135,8 +139,28 @@ if (existsSync(join(ROOT, 'go/index.html'))) {
   check('registry: builder embeds app store ids', appKeys.every((k) => reg.includes(apps[k].android)));
 }
 
-// 4. Dynamic redirector (/go/r/)
-check('go/r/index.html exists', existsSync(join(ROOT, 'go/r/index.html')));
+// 3b. Human-readable ledger (docs/link-registry.md) — generated from the same
+// config, so it can never drift from the links that actually exist.
+const DOC = 'docs/link-registry.md';
+check(`${DOC} exists`, existsSync(join(ROOT, DOC)));
+if (existsSync(join(ROOT, DOC))) {
+  const doc = read(DOC);
+  check(`${DOC}: marked generated`, /GENERATED FILE — DO NOT EDIT BY HAND/.test(doc));
+  check(`${DOC}: points at the config`, doc.includes('tools/link-config.json'));
+  let missing = 0;
+  for (const appKey of appKeys) {
+    for (const code of placementKeys) missing += doc.includes(`/go/${appKey}-${code}\``) ? 0 : 1;
+  }
+  for (const cp of creatorPages) missing += doc.includes(`/go/${cp.appKey}-${cp.slug}\``) ? 0 : 1;
+  check(`${DOC}: lists every generated link (run: node tools/build-links.mjs)`, missing === 0, `${missing} missing`);
+  for (const cp of creatorPages) {
+    const who = creators[cp.utm_campaign].assignedTo;
+    if (who) check(`${DOC}: records who holds ${cp.slug}`, doc.includes(who), who);
+  }
+  check(`${DOC}: explains per-person install limits`, /no identity|carry no identity/i.test(doc));
+}
+
+// 4. Dynamic redirector (/go/r/)check('go/r/index.html exists', existsSync(join(ROOT, 'go/r/index.html')));
 if (existsSync(join(ROOT, 'go/r/index.html'))) {
   const rp = read('go/r/index.html');
   check('redirector: noindex', /content="noindex/i.test(rp));

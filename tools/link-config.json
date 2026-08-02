@@ -207,13 +207,235 @@
     "nikita": {
       "label": "Nikita — LinkedIn newsletter (~13k)",
       "promos": [
-        { "app": "folio", "platform": "linkedin", "slug": "calm" }
-      ]
+        {
+          "app": "folio",
+          "platform": "linkedin",
+          "slug": "calm"
+        }
+      ],
+      "assignedTo": "Nikita",
+      "assignedOn": "2026-07-20"
     },
     "manisha": {
       "label": "Manisha — Instagram creators",
       "promos": [
-        { "app": "folio", "platform": "instagram", "slug": "aesthetic" }
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "aesthetic"
+        }
+      ],
+      "assignedTo": "Manisha",
+      "assignedOn": "2026-07-20"
+    },
+    "quiet": {
+      "label": "Friend slot 1",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "quiet"
+        }
+      ]
+    },
+    "gentle": {
+      "label": "Friend slot 2",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "gentle"
+        }
+      ]
+    },
+    "cozy": {
+      "label": "Friend slot 3",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "cozy"
+        }
+      ]
+    },
+    "simple": {
+      "label": "Friend slot 4",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "simple"
+        }
+      ]
+    },
+    "slow": {
+      "label": "Friend slot 5",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "slow"
+        }
+      ]
+    },
+    "still": {
+      "label": "Friend slot 6",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "still"
+        }
+      ]
+    },
+    "mindful": {
+      "label": "Friend slot 7",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "mindful"
+        }
+      ]
+    },
+    "private": {
+      "label": "Friend slot 8",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "private"
+        }
+      ]
+    },
+    "minimal": {
+      "label": "Friend slot 9",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "minimal"
+        }
+      ]
+    },
+    "offline": {
+      "label": "Friend slot 10",
+      "medium": "friend",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "offline"
+        }
+      ]
+    },
+    "paper": {
+      "label": "Creator slot 1",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "paper"
+        }
+      ]
+    },
+    "ink": {
+      "label": "Creator slot 2",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "ink"
+        }
+      ]
+    },
+    "linen": {
+      "label": "Creator slot 3",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "linen"
+        }
+      ]
+    },
+    "parchment": {
+      "label": "Creator slot 4",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "parchment"
+        }
+      ]
+    },
+    "margin": {
+      "label": "Creator slot 5",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "margin"
+        }
+      ]
+    },
+    "notebook": {
+      "label": "Creator slot 6",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "notebook"
+        }
+      ]
+    },
+    "bookmark": {
+      "label": "Creator slot 7",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "bookmark"
+        }
+      ]
+    },
+    "lantern": {
+      "label": "Creator slot 8",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "lantern"
+        }
+      ]
+    },
+    "dusk": {
+      "label": "Creator slot 9",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "dusk"
+        }
+      ]
+    },
+    "keepsake": {
+      "label": "Creator slot 10",
+      "promos": [
+        {
+          "app": "folio",
+          "platform": "instagram",
+          "slug": "keepsake"
+        }
       ]
     }
   }
