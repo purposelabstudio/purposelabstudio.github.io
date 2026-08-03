@@ -17,7 +17,11 @@ import { readFileSync, globSync } from 'node:fs';
 const EXPECTED_CLARITY_ID = 'xjkggf7dd9';
 
 const files = globSync('**/*.html').filter(
-  (p) => !p.includes('node_modules') && !p.startsWith('docs/') && !p.includes('.superpowers/')
+  (p) =>
+    !p.includes('node_modules') &&
+    !p.startsWith('docs/') &&
+    !p.startsWith('tools/') && // build sources (e.g. PDF templates), not public pages
+    !p.includes('.superpowers/')
 );
 
 const fails = [];

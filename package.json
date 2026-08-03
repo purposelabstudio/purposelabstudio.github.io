@@ -7,7 +7,13 @@
   "scripts": {
     "test": "node scripts/test-site.mjs && node scripts/test-tools.mjs && node scripts/test-links.mjs && node scripts/test-attribution.mjs && node scripts/test-schema-visibility.mjs && node scripts/test-discoverability.mjs && node scripts/test-claims.mjs && node scripts/test-contrast.mjs && node scripts/check-analytics.mjs",
     "build:links": "node tools/build-links.mjs",
+    "pdf": "node tools/pdf/render.mjs",
+    "pdf:proof": "node tools/pdf/render.mjs tools/pdf/proof.html --profile print --paper a4 && node tools/pdf/render.mjs tools/pdf/proof.html --profile print --paper letter && node tools/pdf/render.mjs tools/pdf/proof.html --profile tablet --paper portrait",
+    "pdf:guard": "node tools/pdf/render.mjs tools/pdf/proof-overflow.html --profile print --paper a4",
     "audit": "node scripts/audit.mjs",
     "check:analytics": "node scripts/check-analytics.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.62.1"
   }
 }

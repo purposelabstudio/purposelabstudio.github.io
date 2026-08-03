@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>PDF pipeline proof sheet</title>
+<style>
+  /* ---- Fonts ----
+     Bundled locally so the PDF embeds them, never a CDN.
+     STATIC instances only: Chromium emits Type 3 fonts for variable fonts,
+     which render badly and bloat the file. See make-static-fonts.py. ---- */
+  @font-face { font-family: 'Playfair'; src: url('fonts/static/PlayfairDisplay-Regular.ttf') format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'Playfair'; src: url('fonts/static/PlayfairDisplay-Bold.ttf')    format('truetype'); font-weight: 700; }
+  @font-face { font-family: 'DMSans';   src: url('fonts/static/DMSans-Regular.ttf')          format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'DMSans';   src: url('fonts/static/DMSans-Bold.ttf')             format('truetype'); font-weight: 700; }
+  @font-face { font-family: 'Caveat';   src: url('fonts/static/Caveat-Regular.ttf')          format('truetype'); font-weight: 400; }
+
+  /* ---- Page geometry, driven by the profile the renderer declares ---- */
+  :root { --page-w: 210mm; --page-h: 297mm; }          /* default when opened in a browser */
+  html[data-profile="print"][data-paper="a4"]         { --page-w: 210mm;  --page-h: 297mm;  }
+  html[data-profile="print"][data-paper="letter"]     { --page-w: 8.5in;  --page-h: 11in;   }
+  html[data-profile="tablet"][data-paper="portrait"]  { --page-w: 1620px; --page-h: 2160px; }
+  html[data-profile="tablet"][data-paper="landscape"] { --page-w: 2160px; --page-h: 1620px; }
+
+  /* One layout at any page size: the root scale is a fraction of page width. */
+  html { font-size: calc(var(--page-w) / 65); }
+
+  :root {
+    --ink:      #2b2621;
+    --ink-soft: #6b6259;
+    --rule:     #d9d0c4;
+    --accent:   #8a5a2b;
+    --paper:    #faf6f0;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e8e3db; font-family: 'DMSans', sans-serif; color: var(--ink); }
+
+  [data-page] {
+    width: var(--page-w);
+    height: var(--page-h);
+    overflow: hidden;              /* the renderer's guard exists because of this */
+    background: var(--paper);
+    padding: 4rem 4.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+
+  h1 { font-family: 'Playfair', serif; font-size: 3.4rem; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
+  .sub { font-size: 1.15rem; color: var(--ink-soft); margin: 0.4rem 0 0; letter-spacing: 0.16em; text-transform: uppercase; }
+  h2 { font-size: 1.05rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 1rem; }
+
+  /* ---- Ruled grid. Fixed row height on purpose: `aspect-ratio` on cells
+         inside a fixed-height page overflows catastrophically. ---- */
+  .grid { display: grid; grid-template-columns: 14rem repeat(7, 1fr); row-gap: 0; }
+  .grid .rowlabel { font-size: 1.25rem; height: 3.2rem; line-height: 3.2rem; border-bottom: 1px solid var(--rule); }
+  .grid .cell { height: 3.2rem; border-bottom: 1px solid var(--rule); border-left: 1px dashed var(--rule); display: flex; align-items: center; justify-content: center; }
+  .grid .head { height: 2.2rem; font-size: 1rem; color: var(--ink-soft); text-align: center; letter-spacing: 0.1em; }
+  .ring { width: 1.5rem; height: 1.5rem; border: 1px solid var(--rule); border-radius: 50%; }
+  .ring.done { background: var(--accent); border-color: var(--accent); }
+
+  /* ---- Vector chart: proves SVG stays crisp, not rasterised ---- */
+  .chart { width: 100%; height: 12rem; }
+
+  .hand { font-family: 'Caveat', cursive; font-size: 2.4rem; line-height: 1.35; color: var(--ink-soft); }
+
+  footer { margin-top: auto; display: flex; justify-content: space-between; font-size: 0.95rem; color: var(--ink-soft); letter-spacing: 0.08em; }
+
+  /* Prove the renderer's media emulation actually switches. */
+  .only-print  { display: none; }
+  .only-tablet { display: none; }
+  @media print  { .only-print  { display: inline; } }
+  @media screen { .only-tablet { display: inline; } }
+</style>
+</head>
+<body>
+  <section data-page="proof">
+    <header>
+      <h1>Proof sheet</h1>
+      <p class="sub">PurposeLab &middot; PDF pipeline</p>
+    </header>
+
+    <div>
+      <h2>Ruled grid &amp; marks</h2>
+      <div class="grid">
+        <div class="head"></div>
+        <div class="head">Mon</div><div class="head">Tue</div><div class="head">Wed</div>
+        <div class="head">Thu</div><div class="head">Fri</div><div class="head">Sat</div><div class="head">Sun</div>
+
+        <div class="rowlabel">Walk</div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+
+        <div class="rowlabel">Read</div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+
+        <div class="rowlabel">Water</div>
+        <div class="cell"><span class="ring"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring done"></span></div>
+        <div class="cell"><span class="ring"></span></div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Vector chart</h2>
+      <svg class="chart" viewBox="0 0 700 160" preserveAspectRatio="none" role="img" aria-label="Sample trend line">
+        <line x1="0" y1="159" x2="700" y2="159" stroke="#d9d0c4" stroke-width="1.5"/>
+        <polyline points="50,120 150,90 250,100 350,55 450,70 550,30 650,45"
+                  fill="none" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="50"  cy="120" r="7" fill="#8a5a2b"/>
+        <circle cx="150" cy="90"  r="7" fill="#8a5a2b"/>
+        <circle cx="250" cy="100" r="7" fill="#8a5a2b"/>
+        <circle cx="350" cy="55"  r="7" fill="#8a5a2b"/>
+        <circle cx="450" cy="70"  r="7" fill="#8a5a2b"/>
+        <circle cx="550" cy="30"  r="7" fill="#8a5a2b"/>
+        <circle cx="650" cy="45"  r="7" fill="#8a5a2b"/>
+      </svg>
+    </div>
+
+    <p class="hand">Handwriting renders here &mdash; the quick brown fox jumps over the lazy dog, 0123456789.</p>
+
+    <footer>
+      <span>Text above must be selectable, not an image.</span>
+      <span>media: <span class="only-print">print</span><span class="only-tablet">screen</span></span>
+    </footer>
+  </section>
+</body>
+</html>

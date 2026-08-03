@@ -1,2 +1,7 @@
 .DS_Store
 .superpowers/
+
+# Build + tooling artefacts (never deploy these to Pages)
+node_modules/
+dist/
+tools/pdf/.venv/
