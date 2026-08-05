@@ -1,0 +1,63 @@
+{
+  "_comment": "Live remote config for the Folio app. Fetched by RemoteConfigService (12h TTL, falls back to the bundled assets/config/app_config.json). A successful fetch REPLACES the bundled config wholesale, so every key the app reads must be present here. Keep in sync with apps/folio/assets/config/app_config.json.",
+  "shop": {
+    "enabled": true,
+    "title": "Folio, on paper",
+    "subtitle": "The Folio diary, in your hands",
+    "url": "https://purposelabstudio.com/folio/diary/",
+    "badge": "New"
+  },
+  "features": {
+    "backupFreeForAll": false,
+    "exportFreeForAll": false,
+    "biometricFreeForAll": false
+  },
+  "founding": {
+    "enabled": true,
+    "cap": 1111,
+    "status": "auto"
+  },
+  "moreApps": [
+    {
+      "id": "crumbs",
+      "name": "Crumbs",
+      "tagline": "Your private second brain on WhatsApp",
+      "androidUrl": "",
+      "iosUrl": "",
+      "landingUrl": "https://purposelabstudio.com/crumbs/"
+    },
+    {
+      "id": "waterwise",
+      "name": "WaterWise",
+      "tagline": "A calm water reminder, no ads",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.purposelab.waterwise",
+      "iosUrl": "",
+      "landingUrl": "https://purposelabstudio.com/waterwise/"
+    },
+    {
+      "id": "bplog",
+      "name": "BP Log",
+      "tagline": "Track blood pressure, share PDF reports",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.purposelab.bplog",
+      "iosUrl": "",
+      "landingUrl": "https://purposelabstudio.com/bplog/"
+    },
+    {
+      "id": "hushly",
+      "name": "Hushly",
+      "tagline": "Soothing sounds for better baby sleep",
+      "androidUrl": "https://play.google.com/store/apps/details?id=com.purposelab.hushly",
+      "iosUrl": "",
+      "landingUrl": "https://purposelabstudio.com/hushly/"
+    }
+  ],
+  "studioUrl": "https://purposelabstudio.com/",
+  "update": {
+    "android": { "minVersion": "0.0.0", "latestVersion": "0.0.0" },
+    "ios": {
+      "minVersion": "0.0.0",
+      "latestVersion": "0.0.0",
+      "storeUrl": "https://apps.apple.com/app/id6781551692"
+    }
+  }
+}
