@@ -12,7 +12,9 @@
 //
 //   Folio      free core. Folio Plus = monthly subscription OR one-time lifetime
 //              (folio_plus_monthly / folio_plus_lifetime[_v2]). Optional Google
-//              Drive backup via google_sign_in + googleapis. Play + App Store.
+//              Drive/iCloud backup chosen by the user. Notebook content goes
+//              only to that personal account, never a Folio/PurposeLab server.
+//              Play + App Store.
 //   Hushly     free, no subscription, optional ONE-TIME premium_unlock and
 //              supporter_unlock (BillingClient ProductType.INAPP).
 //   WaterWise  genuinely free. No billing dependency, no purchase code at all.
@@ -102,6 +104,13 @@ const RULES = [
     unless: /bp ?log|hushly|water ?wise|paper|diary/i,
     why: 'Folio ships optional Google Drive backup (google_sign_in + googleapis), so "no cloud" needs qualifying.',
   },
+  {
+    id: 'folio-absolute-on-device',
+    scope: /^(folio\/index\.html|best-free-journal-app\/|index\.html|support\/)/,
+    pattern: /\b(folio|entries|journal|pages|words|what you (write|record))\b[^.]{0,100}\b(never uploaded|never leaves?|stays? on (your|this|the) (device|phone)|everything stays on (your|this|the) (device|phone))\b/i,
+    unless: /\b(by default|unless|optional|backup|export|share|choose|switch on)\b/i,
+    why: 'Folio keeps notebook content local by default, but explicit backup can copy it to the user’s personal Google Drive or iCloud account.',
+  },
 ];
 
 const visibleText = (html, file) => {
@@ -166,11 +175,13 @@ const MUST_CATCH = [
   'Hushly is 100% free with no ads, no subscriptions, and no in-app purchases.',
   'Your data stays on your device. We do not collect, store, or sell any personal data.',
   'Folio stores everything locally. There is no cloud.',
+  'Folio works offline. Your entries stay on your phone and are never uploaded anywhere.',
 ];
 const MUST_PASS = [
   'WaterWise is free with no in-app purchases at all.',
   'No subscription. Hushly is free to use, and the optional Premium unlock is one-time.',
   'Folio keeps entries on your device, with no cloud unless you switch on backup.',
+  'By default, Folio keeps entries on your device. Backup copies them only to the personal Google Drive or iCloud account you choose.',
   'BP Log has no ads and nothing to buy inside it today.',
 ];
 
