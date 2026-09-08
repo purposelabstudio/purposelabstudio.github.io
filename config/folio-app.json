@@ -1,9 +1,9 @@
 {
-  "_comment": "Live remote config for the Folio app. Fetched by RemoteConfigService (12h TTL, falls back to the bundled assets/config/app_config.json). A successful fetch REPLACES the bundled config wholesale, so every key the app reads must be present here. Keep in sync with apps/folio/assets/config/app_config.json.",
+  "_comment": "Live remote config for the Zolio app (formerly Folio). Fetched by RemoteConfigService (12h TTL, falls back to the bundled assets/config/app_config.json). A successful fetch REPLACES the bundled config wholesale, so every key the app reads must be present here. Keep in sync with apps/folio/assets/config/app_config.json. This file stays named folio-app.json: installed builds fetch that exact URL.",
   "shop": {
     "enabled": true,
-    "title": "Folio, on paper",
-    "subtitle": "The Folio diary, in your hands",
+    "title": "Zolio, on paper",
+    "subtitle": "The Zolio diary, in your hands",
     "url": "https://purposelabstudio.com/folio/diary/",
     "badge": "New"
   },
