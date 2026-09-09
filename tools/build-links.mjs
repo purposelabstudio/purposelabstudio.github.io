@@ -312,7 +312,7 @@ function redirectorPage(opts) {
   // Per-app share endpoints (/go/<app>) fix the app and default source/medium
   // so the shared link stays minimal: /go/folio?c=<campaign>[&ref=<n>].
   var a = (q.get('a') || ${jsLit(defApp)}).trim();
-  // Attribution params. Accept self-descriptive utm_* names (Folio app) and the
+  // Attribution params. Accept self-descriptive utm_* names (Zolio app) and the
   // short s/m/c aliases (on-page builder); fall back to the endpoint defaults.
   var utmSource = (q.get('utm_source') || q.get('s') || ${jsLit(defSource)}).trim();
   var utmMedium = (q.get('utm_medium') || q.get('m') || ${jsLit(defMedium)}).trim();

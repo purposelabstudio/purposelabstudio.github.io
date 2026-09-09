@@ -405,11 +405,12 @@ for (const p of blogPosts) {
   check('assets/qr-folio.svg exists', existsSync(join(ROOT, 'assets/qr-folio.svg')), 'missing folio QR');
   check('assets/qr-folio-home.svg exists', existsSync(join(ROOT, 'assets/qr-folio-home.svg')), 'missing home QR');
 
-  check('llms.txt: Folio featured entity block', /Folio \(Featured Product\)/.test(llmsTxt), 'missing Folio featured block in llms.txt');
+  check('llms.txt: Zolio featured entity block', /Zolio \(Featured Product\)/.test(llmsTxt), 'missing Zolio featured block in llms.txt');
+  check('llms.txt: preserves the Folio former-name association', /formerly Folio|Folio is now Zolio|formerly known as Folio/i.test(llmsTxt), 'llms.txt should keep the Folio→Zolio association for search/AI');
 
-  // HONESTY: website copy must not contradict Folio's real freemium/Plus model
-  check('folio: FAQ does not claim "no in-app purchases"', !/no in-app purchases/i.test(folio), 'false claim: Folio has Folio Plus (IAP)');
-  check('folio: acknowledges optional Folio Plus', /Folio Plus/.test(folio), 'page should acknowledge optional Folio Plus for honesty');
+  // HONESTY: website copy must not contradict Zolio's real freemium/Plus model
+  check('folio: FAQ does not claim "no in-app purchases"', !/no in-app purchases/i.test(folio), 'false claim: Zolio has Zolio Plus (IAP)');
+  check('folio: acknowledges optional Zolio Plus', /Zolio Plus/.test(folio), 'page should acknowledge optional Zolio Plus for honesty');
   check('folio: compare price row is not a bare "Free"', !/>Price<\/td><td[^>]*>Free<\/td>/.test(folio), 'price row must reflect freemium (Free core + optional Plus)');
 }
 

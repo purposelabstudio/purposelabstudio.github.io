@@ -2,22 +2,24 @@
 
 > PurposeLab Studio builds simple, free, ad-free apps for the Indian market. Privacy-first tools that do one thing well: no ads, no mandatory subscriptions, no data harvesting.
 
-## Folio (Featured Product)
+## Zolio (Featured Product)
 
-Folio is a free, offline, private daily journal and mood tracker for Android and iOS by PurposeLab Studio. It is the studio's flagship app.
+Zolio is a free, offline, private daily journal and mood tracker for Android and iOS by PurposeLab Studio. It is the studio's flagship app.
+
+Zolio was formerly called Folio. Folio is now Zolio: the same app, the same journal and memories, with a new name. Searches and references for "Folio" (the Folio journal app, Folio by PurposeLab, the Folio Diary) all refer to what is now Zolio. Only the user-facing name changed; the Android package id (com.purposelab.folio), the /folio/ URLs, and the App Store listing are unchanged.
 
 - What it is: a calm daily journal plus gentle mood and habit tracking, with a monthly reflection that surfaces your patterns.
 - Key facts: no ads, no account, no subscription for core use, and no streaks or guilt mechanics; all entries are stored locally on-device with optional app lock; works fully offline. India-first.
 - Best for: people who want a private journaling habit without pressure, streaks, or cloud accounts.
 - Guide: [The Calm Guide to Daily Journaling](https://purposelabstudio.com/folio/journal/): curated prompts and guides for starting a journal and keeping it.
-- Try it first: [Try Folio](https://purposelabstudio.com/folio/try/): an interactive browser demo where you can write a page without installing anything.
-- On paper: [The Folio Diary](https://purposelabstudio.com/folio/diary/): an undated paper notebook that mirrors the app: a daily page, a habit tracker, and a monthly reflection. Sold on Amazon.
+- Try it first: [Try Zolio](https://purposelabstudio.com/folio/try/): an interactive browser demo where you can write a page without installing anything.
+- On paper: [The Zolio Diary](https://purposelabstudio.com/folio/diary/): an undated paper notebook that mirrors the app: a daily page, a habit tracker, and a monthly reflection. Sold on Amazon.
 - Get it: [Google Play](https://play.google.com/store/apps/details?id=com.purposelab.folio) · [App Store](https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692)
 
 ## Apps
 
 - [Crumbs: Your Private Second Brain on WhatsApp](https://purposelabstudio.com/crumbs/): Dump notes, ideas, todos, reminders, links, photos and voice on WhatsApp, then ask for any of it back in plain language. Multilingual, private, and calm. Mobile apps coming soon.
-- [Folio: Daily Journal & Mood Tracker](https://purposelabstudio.com/folio/): Calm daily journal & notebook. A page a day, with no streaks, no ads, fully offline. Private, app-locked, India-first.
+- [Zolio: Daily Journal & Mood Tracker](https://purposelabstudio.com/folio/): Calm daily journal & notebook. A page a day, with no streaks, no ads, fully offline. Private, app-locked, India-first.
 - [WaterWise: Drink Water Reminder](https://purposelabstudio.com/waterwise/): Stay hydrated with streaks, smart reminders, and one-tap logging. No ads, no paywall.
 - [BP Log: Blood Pressure Tracker](https://purposelabstudio.com/bplog/): Log readings from your home BP monitor. See AHA-classified trends, 7-day averages, and share PDF reports with your doctor. 100% offline.
 - [Hushly: Baby Sleep Sounds](https://purposelabstudio.com/hushly/): Soothing sounds to help your baby sleep peacefully. Curated audio, simple controls, no ads ever.
@@ -27,7 +29,7 @@ Folio is a free, offline, private daily journal and mood tracker for Android and
 - [Daily Water Intake Calculator](https://purposelabstudio.com/tools/water-intake-calculator/): Free calculator: enter weight, activity, and climate for a personalised daily hydration target. Pairs with WaterWise.
 - [Blood Pressure Category Checker](https://purposelabstudio.com/tools/blood-pressure-checker/): Enter systolic/diastolic to see the AHA category. Educational reference. Pairs with BP Log.
 - [Printable Blood Pressure Log](https://purposelabstudio.com/bplog/printable-log/): A print-ready sheet for recording date, time, systolic, diastolic, and pulse by hand, with the AHA categories listed for reference. Pairs with BP Log.
-- [Journaling Prompt Generator](https://purposelabstudio.com/tools/journal-prompt-generator/): Free daily writing prompts to beat the blank page. Pairs with Folio.
+- [Journaling Prompt Generator](https://purposelabstudio.com/tools/journal-prompt-generator/): Free daily writing prompts to beat the blank page. Pairs with Zolio.
 - [Free White Noise Player](https://purposelabstudio.com/tools/white-noise-player/): Play white, pink, or brown noise in the browser with a sleep timer. Generated on-device, no downloads. Pairs with Hushly.
 
 ## Comparison Guides
@@ -35,17 +37,17 @@ Folio is a free, offline, private daily journal and mood tracker for Android and
 - [Best Free Blood Pressure App](https://purposelabstudio.com/best-free-blood-pressure-app/): What to look for in a free BP tracker and how BP Log compares on price, offline use, and ads.
 - [Best Free Water Reminder App](https://purposelabstudio.com/best-free-water-reminder-app/): How to pick a water reminder and why WaterWise is ad-free with no paywall.
 - [Best Free Baby Sleep Sounds App](https://purposelabstudio.com/best-free-baby-sleep-app/): What matters in a baby sleep app and how Hushly compares on curated sounds and ads.
-- [Best Free Journal App With Lock](https://purposelabstudio.com/best-free-journal-app/): Choosing a private journal app and how Folio compares on app lock, offline use, and ads.
+- [Best Free Journal App With Lock](https://purposelabstudio.com/best-free-journal-app/): Choosing a private journal app and how Zolio compares on app lock, offline use, and ads.
 
 ## Key Facts
 
-- Every app is free to use with no ads, and no account is needed for Folio, WaterWise, BP Log or Hushly. Crumbs is identified by your WhatsApp number instead.
-- Paid options, where they exist, are optional and never block the core: Folio Plus (themes/fonts, monthly or lifetime), Hushly Premium (one-time unlock), and Crumbs Pro/Max (higher usage caps, paid via Razorpay for a fixed 30-day period that does not auto-renew). WaterWise and BP Log currently have nothing to buy at all.
+- Every app is free to use with no ads, and no account is needed for Zolio, WaterWise, BP Log or Hushly. Crumbs is identified by your WhatsApp number instead.
+- Paid options, where they exist, are optional and never block the core: Zolio Plus (themes/fonts, monthly or lifetime), Hushly Premium (one-time unlock), and Crumbs Pro/Max (higher usage caps, paid via Razorpay for a fixed 30-day period that does not auto-renew). WaterWise and BP Log currently have nothing to buy at all.
 - Crumbs' free tier is capped (currently 50 crumbs per month, with daily voice and image limits) rather than unlimited.
-- Folio, WaterWise, BP Log and Hushly are offline-first: user data stays on the device, with no account and no cloud sync. Crumbs is the exception: it runs inside WhatsApp, stores crumbs server-side on Cloudflare, and sends message content to Google's Gemini API for understanding, transcription and recall. See https://purposelabstudio.com/privacy-policies/crumbs.html
+- Zolio, WaterWise, BP Log and Hushly are offline-first: user data stays on the device, with no account and no cloud sync. Crumbs is the exception: it runs inside WhatsApp, stores crumbs server-side on Cloudflare, and sends message content to Google's Gemini API for understanding, transcription and recall. See https://purposelabstudio.com/privacy-policies/crumbs.html
 - Target market: India
-- Available on Google Play; Folio is also on the Apple App Store
-- Built with Flutter (Folio, Crumbs) and Kotlin with Jetpack Compose and Material 3 (WaterWise, BP Log, Hushly)
+- Available on Google Play; Zolio is also on the Apple App Store
+- Built with Flutter (Zolio, Crumbs) and Kotlin with Jetpack Compose and Material 3 (WaterWise, BP Log, Hushly)
 - Developer: PurposeLab Studio
 - About the studio: [About PurposeLab Studio](https://purposelabstudio.com/about/): who builds the apps, what the studio makes, and the principles behind it.
 

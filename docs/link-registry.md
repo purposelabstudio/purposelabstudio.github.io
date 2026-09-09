@@ -8,7 +8,7 @@
 Every trackable short link, what it is for, and who has it.
 127 links · 22 held by people (2 given out,
 20 free) · 105 for our own channels.
-Generated 2026-08-02.
+Generated 2026-09-09.
 
 Every link device-detects: Android → Play Store, iPhone → App Store, desktop →
 a landing page with both buttons and a QR code.
@@ -17,37 +17,37 @@ a landing page with both buttons and a QR code.
 
 | Link | Purpose | Given to | On | Notes |
 | --- | --- | --- | --- | --- |
-| `purposelabstudio.com/go/folio-quiet` | Folio · instagram friend · Friend slot 1 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-gentle` | Folio · instagram friend · Friend slot 2 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-cozy` | Folio · instagram friend · Friend slot 3 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-simple` | Folio · instagram friend · Friend slot 4 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-slow` | Folio · instagram friend · Friend slot 5 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-still` | Folio · instagram friend · Friend slot 6 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-mindful` | Folio · instagram friend · Friend slot 7 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-private` | Folio · instagram friend · Friend slot 8 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-minimal` | Folio · instagram friend · Friend slot 9 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-offline` | Folio · instagram friend · Friend slot 10 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-quiet` | Zolio · instagram friend · Friend slot 1 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-gentle` | Zolio · instagram friend · Friend slot 2 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-cozy` | Zolio · instagram friend · Friend slot 3 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-simple` | Zolio · instagram friend · Friend slot 4 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-slow` | Zolio · instagram friend · Friend slot 5 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-still` | Zolio · instagram friend · Friend slot 6 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-mindful` | Zolio · instagram friend · Friend slot 7 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-private` | Zolio · instagram friend · Friend slot 8 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-minimal` | Zolio · instagram friend · Friend slot 9 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-offline` | Zolio · instagram friend · Friend slot 10 | _free_ | — |  |
 
 ## Links given to creators
 
 | Link | Purpose | Given to | On | Notes |
 | --- | --- | --- | --- | --- |
-| `purposelabstudio.com/go/folio-calm` | Folio · linkedin collab · Nikita — LinkedIn newsletter (~13k) | **Nikita** | 2026-07-20 |  |
-| `purposelabstudio.com/go/folio-aesthetic` | Folio · instagram collab · Manisha — Instagram creators | **Manisha** | 2026-07-20 |  |
-| `purposelabstudio.com/go/folio-paper` | Folio · instagram collab · Creator slot 1 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-ink` | Folio · instagram collab · Creator slot 2 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-linen` | Folio · instagram collab · Creator slot 3 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-parchment` | Folio · instagram collab · Creator slot 4 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-margin` | Folio · instagram collab · Creator slot 5 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-notebook` | Folio · instagram collab · Creator slot 6 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-bookmark` | Folio · instagram collab · Creator slot 7 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-lantern` | Folio · instagram collab · Creator slot 8 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-dusk` | Folio · instagram collab · Creator slot 9 | _free_ | — |  |
-| `purposelabstudio.com/go/folio-keepsake` | Folio · instagram collab · Creator slot 10 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-calm` | Zolio · linkedin collab · Nikita — LinkedIn newsletter (~13k) | **Nikita** | 2026-07-20 |  |
+| `purposelabstudio.com/go/folio-aesthetic` | Zolio · instagram collab · Manisha — Instagram creators | **Manisha** | 2026-07-20 |  |
+| `purposelabstudio.com/go/folio-paper` | Zolio · instagram collab · Creator slot 1 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-ink` | Zolio · instagram collab · Creator slot 2 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-linen` | Zolio · instagram collab · Creator slot 3 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-parchment` | Zolio · instagram collab · Creator slot 4 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-margin` | Zolio · instagram collab · Creator slot 5 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-notebook` | Zolio · instagram collab · Creator slot 6 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-bookmark` | Zolio · instagram collab · Creator slot 7 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-lantern` | Zolio · instagram collab · Creator slot 8 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-dusk` | Zolio · instagram collab · Creator slot 9 | _free_ | — |  |
+| `purposelabstudio.com/go/folio-keepsake` | Zolio · instagram collab · Creator slot 10 | _free_ | — |  |
 
 ## Links for our own channels
 
-### Folio
+### Zolio
 
 | Link | Purpose |
 | --- | --- |
@@ -182,7 +182,7 @@ a landing page with both buttons and a QR code.
 | Link | Purpose |
 | --- | --- |
 | `purposelabstudio.com/go/r?a=<app>&utm_source=…&utm_campaign=…` | Build any one-off tracked link without adding it to the config. |
-| `purposelabstudio.com/go/folio?c=<campaign>` | Short endpoint used by Folio's own in-app share buttons. |
+| `purposelabstudio.com/go/folio?c=<campaign>` | Short endpoint used by Zolio's own in-app share buttons. |
 | `purposelabstudio.com/go/bplog?c=<campaign>` | Short endpoint used by BPLog's own in-app share buttons. |
 | `purposelabstudio.com/go/hushly?c=<campaign>` | Short endpoint used by Hushly's own in-app share buttons. |
 | `purposelabstudio.com/go/waterwise?c=<campaign>` | Short endpoint used by WaterWise's own in-app share buttons. |
