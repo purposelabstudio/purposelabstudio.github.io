@@ -13,7 +13,7 @@
     "biometricFreeForAll": false
   },
   "founding": {
-    "_comment": "status: auto|open|closing|closed. 'closed' is a hard stop — every upsell routes to the paid paywall (/plus). Reopen by setting status back to 'auto' (honours cap) or 'open' (ignores cap). Keep in sync with the bundled asset.",
+    "_comment": "To REOPEN the Circle set BOTH enabled:true AND status to 'open' (ignores cap) or 'auto' (offer until the live count hits cap). status 'closed' or enabled:false is a hard stop — every upsell routes to the paid paywall (/plus). The app fails closed: a dropped/partial founding block is treated as closed, never reopened. Keep in sync with the bundled asset.",
     "enabled": false,
     "cap": 1111,
     "status": "closed"
