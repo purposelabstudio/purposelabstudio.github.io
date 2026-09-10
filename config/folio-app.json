@@ -1,5 +1,5 @@
 {
-  "_comment": "Live remote config for the Zolio app (formerly Folio). Fetched by RemoteConfigService (12h TTL, falls back to the bundled assets/config/app_config.json). A successful fetch REPLACES the bundled config wholesale, so every key the app reads must be present here. Keep in sync with apps/folio/assets/config/app_config.json. This file stays named folio-app.json: installed builds fetch that exact URL.",
+  "_comment": "Live remote config for the Zolio app (formerly Folio). Fetched by RemoteConfigService once per launch, throttled by a 1h cache TTL (internal builds bypass it); falls back to the bundled assets/config/app_config.json. A successful fetch REPLACES the bundled config wholesale, so every key the app reads must be present here. Keep in sync with apps/folio/assets/config/app_config.json. This file stays named folio-app.json: installed builds fetch that exact URL.",
   "shop": {
     "enabled": true,
     "title": "Zolio, on paper",
@@ -13,9 +13,10 @@
     "biometricFreeForAll": false
   },
   "founding": {
-    "enabled": true,
+    "_comment": "status: auto|open|closing|closed. 'closed' is a hard stop — every upsell routes to the paid paywall (/plus). Reopen by setting status back to 'auto' (honours cap) or 'open' (ignores cap). Keep in sync with the bundled asset.",
+    "enabled": false,
     "cap": 1111,
-    "status": "auto"
+    "status": "closed"
   },
   "moreApps": [
     {
