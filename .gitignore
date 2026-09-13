@@ -1,7 +1,24 @@
 .DS_Store
 .superpowers/
+.purposelab/
+.vscode/mcp.json
+.gemini/settings.json
 
 # Build + tooling artefacts (never deploy these to Pages)
 node_modules/
 dist/
 tools/pdf/.venv/
+
+# Local credentials and secrets
+.env
+.env.*
+!.env.example
+.secrets/
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+*service-account*.json
+credentials*.json

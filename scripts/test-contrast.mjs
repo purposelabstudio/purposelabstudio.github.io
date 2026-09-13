@@ -51,6 +51,22 @@ function parseTokens(css) {
   return out;
 }
 
+let failures = 0;
+let checks = 0;
+let selfChecks = 0;
+
+function checkContrastFixture(name, foreground, background, expected) {
+  selfChecks += 1;
+  const passes = contrastRatio(foreground, background) >= AA_NORMAL;
+  if (passes !== expected) {
+    failures += 1;
+    console.error(`FAIL  contrast self-test: ${name}`);
+  }
+}
+
+checkContrastFixture('rejects normal text just below AA', '#777777', '#ffffff', false);
+checkContrastFixture('accepts normal text just above AA', '#767676', '#ffffff', true);
+
 function walk(dir, acc = []) {
   for (const entry of readdirSync(dir)) {
     if (entry.startsWith('.') || entry === 'node_modules') continue;
@@ -84,9 +100,6 @@ for (const file of walk('.')) {
     palettes.push({ name: file.replace(/^\.\//, ''), tokens });
   }
 }
-
-let failures = 0;
-let checks = 0;
 
 for (const { name, tokens } of palettes) {
   const paper = tokens.paper;
@@ -168,7 +181,7 @@ for (const file of walk('.')) {
 }
 
 console.log(
-  `contrast: ${palettes.length} palettes · ${checks} token pairs · ` +
+  `contrast: ${selfChecks} self-tests · ${palettes.length} palettes · ${checks} token pairs · ` +
   `${hardcodedChecks} hardcoded colours · ${failures} FAIL`,
 );
 process.exit(failures === 0 ? 0 : 1);

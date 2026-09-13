@@ -1,0 +1,28 @@
+$schema: https://purposelab.dev/schemas/repository-manifest-v1.schema.json
+schemaVersion: 1
+repository:
+  id: purposelabstudio-github-io
+  kind: website
+  description: Static public website for PurposeLab Studio
+  paths:
+    source: .
+    public: .
+harness:
+  defaultProfile: core
+  allowedProfiles:
+    - core
+    - website-maintenance
+    - website-growth
+    - studio-research
+    - content-production
+    - legal-publishing
+  clients:
+    - github-copilot
+    - claude-code
+    - codex
+    - cursor
+    - gemini-cli
+    - antigravity
+    - agents
+  contextBudget: standard
+
