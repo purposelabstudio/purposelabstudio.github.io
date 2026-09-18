@@ -27,7 +27,18 @@
     <link rel="preload" href="/assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
     <style>
-      :root{ --paper:#211C33; --paper-2:#2A2440; --ink:#EDE7F2; --ink-soft:#B7AECB; --ink-muted:#9C93B2; --accent:#F5B942; --accent-dark:#D89E2E; --accent-ink:#211C33; --gold:#F5B942; --border:rgba(255,255,255,.12); }
+      :root{ --paper:#181B2D; --paper-2:#242940; --ink:#F3F0FF; --ink-soft:#CAC7DC; --ink-muted:#A9A5C1; --accent:#E8BD69; --accent-dark:#D09C3D; --accent-ink:#1A1D30; --gold:#E8BD69; --border:rgba(238,235,255,.16); --surface-raised:#2B304A; --focus-ring:#F2D587; }
+      .product-context { margin: var(--space-3) 0 0; font-size: var(--text-sm); color: var(--text-secondary); }
+      .product-context a { color: inherit; }
+      .product-facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(12rem,1fr)); gap:var(--space-3); margin:var(--space-5) 0; }
+      .product-facts .card { margin:0; padding:var(--space-3); border-top:4px solid var(--accent); background:#20263B; }
+      .product-facts h2 { font-family:var(--font-display); font-size:var(--text-lg); line-height:1.3; }
+      .product-facts p, .safety-boundary p { color:var(--text-secondary); font-size:var(--text-sm); line-height:1.6; }
+      .safety-boundary { background:#302C42; border-left:4px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0; padding:var(--space-4); }
+      .safety-boundary h2 { font-family:var(--font-display); font-size:var(--text-xl); margin-bottom:var(--space-1); }
+      .feature { text-align:left; background:#20263B; }
+      .feature-icon { font-size:1.65rem; }
+      @media (max-width:600px) { .product-facts { grid-template-columns:1fr; } }
     </style>
     <link rel="icon" href="icon.png" type="image/png">
     <!-- Structured Data -->
@@ -40,7 +51,7 @@
       "operatingSystem": "Android",
       "applicationCategory": "LifestyleApplication",
       "url": "https://purposelabstudio.com/hushly/",
-      "dateModified": "2026-07-09",
+      "dateModified": "2026-09-18",
       "downloadUrl": "https://play.google.com/store/apps/details?id=com.purposelab.hushly",
       "author": {
         "@type": "Organization",
@@ -166,11 +177,12 @@
 
         <main>
 
+        <p class="product-context"><a href="/apps/">PurposeLab apps</a> / <span aria-current="page">Hushly</span></p>
         <section class="hero">
-            <div class="eyebrow">~/ hushly</div>
-            <h1><img src="icon.png" alt="Hushly" class="hero-icon">Hushly: Baby Sleep Sounds</h1>
+            <div class="eyebrow">Quiet support for overnight care</div>
+            <h1><img src="icon.png" alt="Hushly app icon" class="hero-icon">Start a familiar sound with one hand</h1>
             <p class="subtitle">
-                Soothing sounds to help your baby (and you) sleep peacefully. One-handed, dark-room friendly. Built for exhausted parents at 2am.
+                Hushly keeps a small sound library, simple timer, and large controls close at hand for dim, interrupted nights.
             </p>
             <div class="badges">
                 <span class="badge badge-free">Free</span>
@@ -188,6 +200,28 @@
             </div>
         </section>
 
+        <section class="section" aria-labelledby="hushly-before-install">
+            <h2 class="section-title" id="hushly-before-install">Designed for the next quiet moment</h2>
+            <div class="product-facts">
+                <article class="card">
+                    <h2>Simple in low light</h2>
+                    <p>Large controls, a night-friendly interface, and lock-screen playback help when one hand is occupied.</p>
+                </article>
+                <article class="card">
+                    <h2>Sounds stay available</h2>
+                    <p>Bundled sounds work offline, with a timer and background playback for the routine you choose.</p>
+                </article>
+                <article class="card">
+                    <h2>No account required</h2>
+                    <p>Open Hushly and choose a sound without creating an account.</p>
+                </article>
+            </div>
+            <div class="safety-boundary">
+                <h2>A sound tool, not sleep or safety advice</h2>
+                <p>Hushly plays sounds; it does not promise a sleep outcome or replace caregiver judgment. Follow the safe-use guidance in the FAQ and speak with a qualified professional about questions specific to your child.</p>
+            </div>
+        </section>
+
         <section class="section">
             <h2 class="section-title">Screenshots</h2>
             <div class="screenshots">
@@ -202,63 +236,59 @@
         </section>
 
         <section class="section">
-            <h2 class="section-title">Why Parents Love Hushly</h2>
-            <p class="post-app-hint">🌙 Comparing baby sleep apps? See <a href="/best-free-baby-sleep-app/">the best free baby sleep sounds app guide</a>.</p>
-            <p class="post-app-hint">🔊 Want to try it now? Use our free <a href="/tools/white-noise-player/">White Noise Player</a> in the browser.</p>
+            <h2 class="section-title">A calmer overnight flow</h2>
+            <p class="post-app-hint">🌙 Comparing options? Read <a href="/best-free-baby-sleep-app/">the baby sleep sounds app guide</a>.</p>
+            <p class="post-app-hint">🔊 Want to hear a sound before installing? Use the browser <a href="/tools/white-noise-player/">White Noise Player</a>.</p>
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">🎵</div>
-                    <h3>Curated Sound Library</h3>
-                    <p>White noise, rain, ocean waves, lullabies, and more. Every sound carefully selected to help babies sleep.</p>
+                    <h3>Choose a familiar sound</h3>
+                    <p>White noise, rain, ocean waves, lullabies, and more are ready without a search or stream.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🇮🇳</div>
-                    <h3>Indian Lullabies</h3>
-                    <p>The only baby sleep app with regional Indian lullabies. No other competitor offers this.</p>
+                    <h3>Indian lullabies</h3>
+                    <p>Keep regional Indian lullabies alongside the rest of the sound library.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🌙</div>
-                    <h3>Night Light</h3>
-                    <p>Built-in soft night light for late-night feeding or diaper changes. No need to turn on harsh room lights.</p>
+                    <h3>A softer night light</h3>
+                    <p>Use the built-in night light for late-night feeding or diaper changes without reaching for harsh room lights.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">⏱️</div>
-                    <h3>Sleep Timer</h3>
-                    <p>Set a timer and fall asleep with your baby. Sounds fade out gently so nobody wakes up.</p>
+                    <h3>Set a timer, then step away</h3>
+                    <p>Choose 15, 30, 45, or 60 minutes, or let a sound continue until you stop it.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🤚</div>
-                    <h3>One-Handed Use</h3>
-                    <p>Designed for parents holding a baby. Large tap targets, simple gestures, no fiddly menus.</p>
+                    <h3>Use it with one hand</h3>
+                    <p>Large tap targets and simple controls reduce the number of decisions at an awkward moment.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🔄</div>
-                    <h3>Auto-Resume Last Session</h3>
-                    <p>Open the app and your last sound starts playing instantly. No browsing needed at 2am.</p>
+                    <h3>Return to the last sound</h3>
+                    <p>Open the app and resume the sound you used last, without browsing the library again.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🔋</div>
-                    <h3>Battery Optimized</h3>
-                    <p>Smart handling of battery optimization on Samsung, Xiaomi, OnePlus, and other Android phones.</p>
+                    <h3>Keep playback practical</h3>
+                    <p>Find battery optimisation guidance for Samsung, Xiaomi, OnePlus, and other Android phones.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🚫</div>
-                    <h3>Zero Ads, Ever</h3>
-                    <p>No ads interrupting your baby's sleep. No banner at the bottom. No video to watch. No tricks.</p>
+                    <h3>No ads in the moment</h3>
+                    <p>No banner, video, or other ad interruption appears while you are choosing or playing a sound.</p>
                 </div>
             </div>
         </section>
 
         <section class="cta">
-            <h2>Help Your Baby Sleep Better Tonight</h2>
-            <p>Free to download. No ads. No subscriptions. Just peaceful sleep.</p>
-            <a href="/go/hushly-web-app/"
+            <h2>A familiar control when the room is dark</h2>
+            <p>Hushly is for playing sounds and managing a simple routine—not for guaranteeing sleep.</p>
+            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.purposelab.hushly&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dhushly-cta"
                data-goatcounter-click="ps-hushly-apppage-cta"
-               data-goatcounter-title="Download Hushly (app page: cta)"
-               class="btn btn-primary">
-                ▶ Download Hushly
-            </a>
-            <p style="margin-top:12px;font-size:13px;color:var(--text-secondary);">Or <a href="https://play.google.com/store/apps/details?id=com.purposelab.hushly&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dhushly-cta">open the Google Play listing directly</a>.</p>
+               data-goatcounter-title="Open Hushly on Google Play (bottom CTA)">Open Hushly on Google Play</a>
         </section>
 
         <section class="section">

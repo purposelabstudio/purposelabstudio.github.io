@@ -93,12 +93,21 @@ for (const p of indexable) {
   let compared = 0;
   for (const p of indexable) {
     const lastmod = lastmods.get(p.url);
-    const declared = p.html.match(/"dateModified"\s*:\s*"(\d{4}-\d{2}-\d{2})/);
-    if (!lastmod || !declared) continue;
+    const declaredValue = p.html.match(/"dateModified"\s*:\s*"([^"]+)"/)?.[1];
+    if (!lastmod || !declaredValue) continue;
+    const validDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(declaredValue);
+    const validDateTime =
+      /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(declaredValue) &&
+      Number.isNaN(Date.parse(declaredValue)) === false;
+    if (!validDateOnly && !validDateTime) {
+      fails.push(`invalid JSON-LD dateModified ${declaredValue} — ${p.url}`);
+      continue;
+    }
+    const declared = declaredValue.slice(0, 10);
     compared += 1;
-    if (lastmod !== declared[1]) {
+    if (lastmod !== declared) {
       fails.push(
-        `sitemap lastmod ${lastmod} contradicts JSON-LD dateModified ${declared[1]} — ${p.url}`,
+        `sitemap lastmod ${lastmod} contradicts JSON-LD dateModified ${declared} — ${p.url}`,
       );
     }
   }

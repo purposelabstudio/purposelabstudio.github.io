@@ -9,7 +9,7 @@ export function bpCategory(systolic, diastolic) {
     elevated: { key: 'elevated', label: 'Elevated',                      note: 'A good time to build healthier habits before it rises further.' },
     normal:   { key: 'normal',   label: 'Normal',                        note: 'Keep up the healthy habits and re-check periodically.' },
   };
-  if (s >= 180 || d >= 120) return CATS.crisis;
+  if (s > 180 || d > 120)   return CATS.crisis;
   if (s >= 140 || d >= 90)  return CATS.stage2;
   if (s >= 130 || d >= 80)  return CATS.stage1;
   if (s >= 120 && d < 80)   return CATS.elevated;

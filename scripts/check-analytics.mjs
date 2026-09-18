@@ -15,12 +15,19 @@
 import { readFileSync, globSync } from 'node:fs';
 
 const EXPECTED_CLARITY_ID = 'xjkggf7dd9';
+// The journal trial accepts free-text input. Keep aggregate GoatCounter events,
+// but do not load session replay on a page where visitors may type private text.
+const CLARITY_EXEMPT = new Set([
+  'folio/try/index.html',
+  'tools/blood-pressure-checker/index.html',
+  'tools/water-intake-calculator/index.html',
+]);
 
 const files = globSync('**/*.html').filter(
   (p) =>
     !p.includes('node_modules') &&
     !p.startsWith('docs/') &&
-    !p.startsWith('tools/') && // build sources (e.g. PDF templates), not public pages
+    !p.startsWith('tools/pdf/') && // proof/build sources, not public browser tools
     !p.includes('.superpowers/')
 );
 
@@ -32,11 +39,18 @@ if (missingGoat.length) {
 }
 
 // /go/ redirectors bounce in milliseconds and are noindex; measuring them with
-// a session-replay tool would be pure noise.
-const clarityScope = files.filter((f) => !f.startsWith('go/'));
+// a session-replay tool would be pure noise. Privacy-sensitive input surfaces
+// must also be listed explicitly rather than silently omitting the snippet.
+const clarityScope = files.filter((f) => !f.startsWith('go/') && !CLARITY_EXEMPT.has(f));
 const missingClarity = clarityScope.filter((f) => !readFileSync(f, 'utf8').includes('clarity.ms/tag'));
 if (missingClarity.length) {
   fails.push('missing Clarity:\n' + missingClarity.map((m) => '  - ' + m).join('\n'));
+}
+const clarityOnExemptPages = [...CLARITY_EXEMPT].filter((f) =>
+  files.includes(f) && readFileSync(f, 'utf8').includes('clarity.ms/tag')
+);
+if (clarityOnExemptPages.length) {
+  fails.push('Clarity present on privacy-sensitive pages:\n' + clarityOnExemptPages.map((m) => '  - ' + m).join('\n'));
 }
 
 const ids = new Set();

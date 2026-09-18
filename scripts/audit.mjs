@@ -20,6 +20,8 @@ function walkHtml(dir, acc = []) {
     if (name.startsWith('.') || name === 'node_modules' || name === 'docs' || name === 'go') continue;
     const p = join(dir, name);
     const st = statSync(p);
+    const relative = p.replace(ROOT + '/', '');
+    if (st.isDirectory() && relative === 'tools/pdf') continue;
     if (st.isDirectory()) walkHtml(p, acc);
     else if (name.endsWith('.html')) acc.push(p.replace(ROOT + '/', ''));
   }
@@ -36,6 +38,7 @@ function auditFile(file) {
   const warn = (n) => results.push(['WARN', n]);
 
   const is404 = file.endsWith('404.html');
+  const isNoindex = /<meta[^>]+name="robots"[^>]+content="[^"]*\bnoindex\b/i.test(html);
 
   // Hard requirements
   (/name="viewport"/i.test(html) ? pass : fail)('has viewport');
@@ -43,8 +46,8 @@ function auditFile(file) {
   // inline <style> block (e.g. a standalone print/utility page).
   const hasStyling = /rel="stylesheet"/i.test(html) || /<style[\s>][\s\S]{200,}?<\/style>/i.test(html);
   (hasStyling || is404 ? pass : fail)('links a stylesheet');
-  if (!is404) (/rel="canonical"/i.test(html) ? pass : fail)('has canonical');
-  if (!is404) (/property="og:title"/i.test(html) ? pass : fail)('has og:title');
+  if (!is404 && !isNoindex) (/rel="canonical"/i.test(html) ? pass : fail)('has canonical');
+  if (!is404 && !isNoindex) (/property="og:title"/i.test(html) ? pass : fail)('has og:title');
 
   // Exactly one <h1>
   const h1s = html.match(/<h1[\s>]/gi) || [];
@@ -66,12 +69,12 @@ function auditFile(file) {
   // Advisory: title length (30–60 chars is a common sweet spot)
   const title = text((html.match(/<title>([\s\S]*?)<\/title>/i) || [, ''])[1]);
   if (!title) { if (!is404) fail('missing <title>'); }
-  else if (title.length < 30 || title.length > 62) warn(`title length ${title.length} (aim 30–60): "${title.slice(0, 70)}"`);
+  else if (!isNoindex && (title.length < 30 || title.length > 62)) warn(`title length ${title.length} (aim 30–60): "${title.slice(0, 70)}"`);
   else pass(`title length ${title.length}`);
 
   // Advisory: meta description length (~110–160 chars)
   const desc = text((html.match(/<meta[^>]+name="description"[^>]+content="([^"]*)"/i) || [, ''])[1]);
-  if (!desc) { if (!is404) warn('missing meta description'); }
+  if (!desc) { if (!is404 && !isNoindex) warn('missing meta description'); }
   else if (desc.length < 70 || desc.length > 165) warn(`description length ${desc.length} (aim 110–160)`);
   else pass(`description length ${desc.length}`);
 
@@ -90,8 +93,8 @@ function auditFile(file) {
       .map((m) => m[1])
       .filter((h) => !h.startsWith('//') && !/\.(png|jpg|jpeg|svg|webp|pdf|xml|css|js|ico)$/i.test(h))
   );
-  if (!is404 && internal.size < 5) warn(`only ${internal.size} internal links`);
-  else if (!is404) pass(`${internal.size} internal links`);
+  if (!is404 && !isNoindex && internal.size < 5) warn(`only ${internal.size} internal links`);
+  else if (!is404 && !isNoindex) pass(`${internal.size} internal links`);
 
   // Advisory: thin content (visible text words)
   const visible = html
@@ -100,7 +103,7 @@ function auditFile(file) {
     .replace(/<[^>]+>/g, ' ');
   const words = text(visible).split(' ').filter(Boolean).length;
   const isArticle = file.startsWith('blog/') && file !== 'blog/index.html';
-  if (isArticle && words < 600) warn(`thin content: ~${words} words (aim 800+ for articles)`);
+  if (isArticle && !isNoindex && words < 600) warn(`thin content: ~${words} words (aim 800+ for articles)`);
 
   if (wantJsonld) results.push(['INFO', `json-ld blocks: ${blocks.length}`]);
   return results;

@@ -14,6 +14,20 @@ function check(name, cond, detail) {
 }
 
 function read(p) { return readFileSync(join(ROOT, p), 'utf8'); }
+function activeMarkup(html) {
+  return html
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ');
+}
+function openingTags(html, tag) {
+  return [...activeMarkup(html).matchAll(new RegExp(`<${tag}\\b[^>]*>`, 'gi'))].map((m) => m[0]);
+}
+function hasAnchor(html, hrefPattern, eventName) {
+  return openingTags(html, 'a').some((tag) =>
+    hrefPattern.test(tag) && tag.includes(`data-goatcounter-click="${eventName}"`)
+  );
+}
 
 // Discover all HTML pages
 const blogPosts = readdirSync(join(ROOT, 'blog'))
@@ -92,6 +106,11 @@ check('assets/newsletter.js exists', existsSync(join(ROOT, 'assets/newsletter.js
   check('newsletter.js posts to MailerLite endpoint', /assets\.mailerlite\.com\/jsonp\/2499229\/forms\/192498487000040910\/subscribe/.test(nl), 'ML endpoint missing');
   check('newsletter.js sends fields[email]', /fields\[email\]/.test(nl), 'ML email field missing');
   check('newsletter.js keeps mailto fallback for waitlists', /dataset\.subject/.test(nl) && /__buildSubscribeMailto/.test(nl), 'mailto fallback removed');
+  check('newsletter.js does not claim an opaque request succeeded',
+    /Request sent\. Please check your inbox/.test(nl) &&
+      /request could not be sent/.test(nl) &&
+      !/Thanks! Please check your inbox/.test(nl),
+    'no-cors submission must distinguish request sent from confirmed subscription');
 }
 
 // 5b. Folio Diary sales page
@@ -170,13 +189,43 @@ check('folio page keeps a direct App Store link outside JSON-LD (no-JS fallback)
 check('folio JSON-LD downloadUrl stays canonical, never a /go/ redirector',
   !/"downloadUrl":\s*\[[^\]]*\/go\//.test(folio),
   'schema downloadUrl must point at the store, not at an attribution redirector');
+check('homepage direct Play fallback has distinct GoatCounter attribution',
+  /href="https:\/\/play\.google\.com\/store\/apps\/details\?id=com\.purposelab\.folio[^"]*home-hero"[^>]*data-goatcounter-click="ps-folio-home-hero-play"/.test(home8),
+  'homepage direct Play link needs its own click id');
+check('homepage direct App Store fallback has provider and campaign attribution',
+  home8.includes('id6781551692?pt=129054116&amp;ct=website_home_hero&amp;mt=8') &&
+    /ct=website_home_hero[^"]*"[^>]*data-goatcounter-click="ps-folio-home-hero-ios"/.test(home8),
+  'homepage App Store link needs pt, ct, mt, and its own click id');
+check('folio hero direct Play fallback has distinct GoatCounter attribution',
+  /utm_campaign%3Dfolio-hero"[^>]*data-goatcounter-click="ps-folio-apppage-hero-play"/.test(folio),
+  'folio hero direct Play link needs its own click id');
+check('folio hero direct App Store fallback has provider and campaign attribution',
+  folio.includes('id6781551692?pt=129054116&amp;ct=website_folio_hero&amp;mt=8') &&
+    /ct=website_folio_hero[^"]*"[^>]*data-goatcounter-click="ps-folio-apppage-hero-ios"/.test(folio),
+  'folio hero App Store link needs pt, ct, mt, and its own click id');
+check('folio bottom direct Play fallback has distinct GoatCounter attribution',
+  hasAnchor(folio, /utm_campaign%3Dfolio-cta/, 'ps-folio-apppage-cta-play'),
+  'folio bottom direct Play link needs its own click id');
+check('folio bottom direct App Store fallback has provider and campaign attribution',
+  folio.includes('id6781551692?pt=129054116&amp;ct=website_folio_cta&amp;mt=8') &&
+    hasAnchor(folio, /ct=website_folio_cta/, 'ps-folio-apppage-cta-ios'),
+  'folio bottom App Store link needs pt, ct, mt, and its own click id');
+{
+  const campaignTokens = [...folio.matchAll(/apps\.apple\.com\/us\/app\/folio-daily-journal-diary\/id6781551692\?pt=129054116&amp;ct=([^&"]+)&amp;mt=8/g)]
+    .map((m) => m[1]);
+  campaignTokens.push(...[...home8.matchAll(/apps\.apple\.com\/us\/app\/folio-daily-journal-diary\/id6781551692\?pt=129054116&amp;ct=([^&"]+)&amp;mt=8/g)]
+    .map((m) => m[1]));
+  check('surfaced direct App Store links use distinct campaign tokens',
+    campaignTokens.length === 3 && new Set(campaignTokens).size === 3,
+    `expected 3 distinct ct tokens, got ${campaignTokens.join(', ')}`);
+}
 
 // 9. Every page's nav links to all 5 apps + Blog/About/Support (consistent internal graph)
 const NAV_TARGETS = ['/folio/', '/folio/journal/', '/blog/', '/apps/', '/about/', '/support/'];
 for (const p of allPages) {
   if (p === '404.html') continue; // standalone page with its own minimal link block
   const html = read(p);
-  const nav = (html.match(/<nav class="nav">([\s\S]*?)<\/nav>/) || [, ''])[1];
+  const nav = (html.match(/<nav class="nav"[^>]*>([\s\S]*?)<\/nav>/) || [, ''])[1];
   for (const t of NAV_TARGETS) {
     check(`${p}: nav links ${t}`, nav.includes(`href="${t}"`), 'missing from nav');
   }
@@ -242,9 +291,97 @@ const COMMERCIAL_APP = {
 };
 for (const [p, pkg] of Object.entries(COMMERCIAL_APP)) {
   const html = read(p);
+  const active = activeMarkup(html);
   check(`${p}: links Play Store ${pkg}`, html.includes(`id=${pkg}`), 'no Play link');
   check(`${p}: has comparison table`, /class="compare"/.test(html), 'no compare table');
   check(`${p}: has FAQ`, /Frequently Asked Questions/i.test(html) && /"@type":\s*"FAQPage"/.test(html), 'no FAQ');
+  check(`${p}: discloses PurposeLab ownership and conflict`,
+    /Ownership and conflict disclosure:[\s\S]*PurposeLab Studio publishes this page and makes/i.test(active) &&
+      /not an independent ranking/i.test(active),
+    'comparison ownership or conflict disclosure missing');
+  check(`${p}: publishes a dated evaluation method`,
+    /Method, reviewed 18 September 2026:/i.test(active),
+    'dated method missing');
+  check(`${p}: labels product evidence and competitor limits`,
+    /first-party product information/i.test(active) &&
+      /Unknown(?:—|\/)not verified/i.test(active) &&
+      /There is no independently verified single best app in this guide/i.test(active),
+    'first-party or competitor evidence limits missing');
+}
+
+// 14b. The browser trial remains crawlable, local-font, private, and measurable.
+{
+  const trial = read('folio/try/index.html');
+  check('folio trial: preserves canonical URL', /rel="canonical" href="https:\/\/purposelabstudio\.com\/folio\/try\/"/.test(trial));
+  check('folio trial: uses local font assets only',
+    /\/assets\/fonts\/fraunces-700\.woff2/.test(trial) &&
+      !/fonts\.(?:googleapis|gstatic)\.com/.test(trial),
+    'remote font dependency found');
+  check('folio trial: excludes session-replay analytics',
+    !/clarity\.ms|xjkggf7dd9/i.test(trial),
+    'Clarity must not observe the journal trial');
+  check('folio trial: explains browser-local handling',
+    /does not save or submit it, and reloading clears it/i.test(trial),
+    'visible privacy explanation missing');
+  check('folio trial: completion and store transitions are measurable',
+    /data-goatcounter-click="folio-try-complete"/.test(trial) &&
+      /data-goatcounter-click="folio-try-store-android"/.test(trial) &&
+      /data-goatcounter-click="folio-try-store-ios"/.test(trial),
+    'distinct fixed events missing');
+  check('folio trial: selectable controls expose pressed state',
+    /data-mood="great"[^>]*aria-pressed="false"/.test(trial) &&
+      /data-habit="walk"[^>]*aria-pressed="false"/.test(trial) &&
+      /setAttribute\('aria-pressed'/.test(trial),
+    'aria-pressed state missing');
+  check('folio trial: heading precedes the interactive main',
+    trial.indexOf('<h1 id="trial-title">') < trial.indexOf('<main class="stage"'),
+    'page title must precede interactive controls');
+}
+
+// 14c. Safety-sensitive editorial pages retain explicit evidence and care boundaries.
+{
+  const immediate = read('blog/how-to-lower-blood-pressure-immediately-at-home/index.html');
+  const byAge = read('blog/normal-blood-pressure-by-age/index.html');
+  const natural = read('blog/how-to-lower-blood-pressure-naturally/index.html');
+  const anxiety = read('blog/journaling-prompts-for-anxiety/index.html');
+  const whiteNoise = read('blog/white-noise-baby-sleep-science/index.html');
+  const babySleep = read('blog/baby-wont-sleep-through-night/index.html');
+  const noiseColours = read('blog/brown-noise-vs-white-noise-vs-pink-noise/index.html');
+  const healthPages = [immediate, byAge, natural, anxiety, whiteNoise, babySleep, noiseColours];
+  const visibleText = (html) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+
+  for (const [index, html] of healthPages.entries()) {
+    const active = activeMarkup(html);
+    const sourceAside = active.match(/<aside class="[^"]*\bsources\b[^"]*">([\s\S]*?)<\/aside>/i)?.[1] || '';
+    check(`health editorial ${index + 1}: discloses non-clinician review`,
+      /Not (?:reviewed by a mental health clinician|clinician reviewed)/i.test(active),
+      'review boundary missing');
+    check(`health editorial ${index + 1}: cites visible sources`,
+      /<h2>Sources<\/h2>/i.test(sourceAside) &&
+        /<li>[\s\S]*?<a href="https?:\/\//i.test(sourceAside),
+      'source section or citation link missing');
+  }
+  for (const [name, html] of [['immediate BP', immediate], ['BP by age', byAge], ['natural BP', natural]]) {
+    check(`${name}: states the severe threshold without slash ambiguity`,
+      /systolic (?:reading )?is higher than 180 mmHg and\/or the diastolic (?:reading )?is higher than 120 mmHg/i.test(visibleText(html)),
+      'must distinguish systolic and diastolic thresholds');
+  }
+  check('BP by age: rejects unsupported adult age bands',
+    /does not set separate blood pressure ranges by age for adults/i.test(byAge),
+    'adult age-specific range caveat missing');
+  check('anxiety prompts: includes crisis and professional-help boundaries',
+    /Journaling is not crisis care/i.test(anxiety) &&
+      /qualified mental health professional/i.test(anxiety),
+    'mental-health safety boundary missing');
+  check('baby sleep: avoids unsupported routine guarantees',
+    !/Warm bath \(optional but effective\)|mimics the constant noise of the womb, which is comforting/i.test(babySleep) &&
+      /no method guarantees longer sleep/i.test(babySleep),
+    'unsupported sleep-effect claim found');
+  check('infant noise pages: preserve safe-sleep and hearing boundaries',
+    /Sound does not make an unsafe sleep space safe/i.test(whiteNoise) &&
+      /Protect your hearing/i.test(noiseColours) &&
+      /firm, flat, separate surface/i.test(babySleep),
+    'infant sleep or hearing boundary missing');
 }
 
 // 15. Commercial pages are internally linked from their app page and cluster posts
@@ -355,10 +492,10 @@ for (const p of blogPosts) {
   check(`llms.txt lists ${p}`, llmsTxt.includes(url), `missing ${url} in llms.txt`);
 }
 
-// 23. Folio-prime redesign intent + honesty invariants (locks the 2026-07 redesign)
+// 23. Studio-hub redesign + Zolio conversion and honesty invariants
 {
   const home = read('index.html');
-  check('home: Folio hero h1', /A quiet notebook for closing the day/.test(home), 'homepage h1 not Folio-forward');
+  check('home: Studio hero h1', /Small tools for everyday moments/.test(home), 'homepage h1 not Studio-forward');
   check('home: tagged Play hero CTA', /play\.google\.com[^"]*com\.purposelab\.folio[^"]*home-hero/.test(home), 'missing tagged Play hero CTA');
   check('home: App Store hero CTA', home.includes('apps.apple.com/us/app/folio-daily-journal-diary/id6781551692'), 'missing App Store CTA');
   check('home: hero CTA block is attributed via /go/folio-web-app/', home.includes('href="/go/folio-web-app/"'), 'homepage hero install CTA is not tracked');
@@ -370,10 +507,11 @@ for (const p of blogPosts) {
   }
 
   const apps = read('apps/index.html');
-  for (const app of ['crumbs', 'waterwise', 'bplog', 'hushly']) {
+  for (const app of ['folio', 'crumbs', 'waterwise', 'bplog', 'hushly']) {
     check(`apps: lists ${app} card`, apps.includes(`/${app}/icon.png`), `/apps/ missing ${app} card`);
   }
-  check('apps: no Folio app-card', !apps.includes('folio/icon.png'), 'Folio should not appear as a card in /apps/');
+  check('apps: explains Zolio’s backup boundary', /personal Google Drive or iCloud account is optional/.test(apps), 'apps must qualify Zolio backup');
+  check('apps: explains BP Log boundary', /does not measure blood pressure and is not a medical device/.test(apps), 'apps must retain BP Log boundary');
   check('apps: CollectionPage schema', /"@type":\s*"CollectionPage"/.test(apps), 'missing CollectionPage schema');
 
   const hub = read('folio/journal/index.html');
@@ -412,6 +550,156 @@ for (const p of blogPosts) {
   check('folio: FAQ does not claim "no in-app purchases"', !/no in-app purchases/i.test(folio), 'false claim: Zolio has Zolio Plus (IAP)');
   check('folio: acknowledges optional Zolio Plus', /Zolio Plus/.test(folio), 'page should acknowledge optional Zolio Plus for honesty');
   check('folio: compare price row is not a bare "Free"', !/>Price<\/td><td[^>]*>Free<\/td>/.test(folio), 'price row must reflect freemium (Free core + optional Plus)');
+
+  const about = read('about/index.html');
+  check('about: metadata represents apps, tools, and supported contexts',
+    /<title>About PurposeLab Studio \| Privacy-First Apps &amp; Tools<\/title>/.test(about) &&
+      /og:description" content="[^"]*apps and browser tools for Android, iOS, and WhatsApp/.test(about) &&
+      /twitter:description" content="[^"]*apps and browser tools for Android, iOS, and WhatsApp/.test(about) &&
+      /"description": "PurposeLab Studio builds simple, privacy-first apps and browser tools for Android, iOS, and WhatsApp/.test(about),
+    'About metadata must reflect the current cross-platform portfolio');
+  check('about: qualifies Zolio device storage with optional personal-cloud backup',
+    /Zolio stores your notebook on your device by default[^.]*personal Google Drive or iCloud account/.test(about),
+    'About must state both the on-device default and optional personal backup');
+  check('about: does not claim the portfolio avoids recurring billing',
+    !/none of them[^.]*recurring|no products?[^.]*recurring|never[^.]*recurring billing/i.test(about),
+    'Zolio Plus has a monthly option');
+  check('about: pricing names current conservative product boundaries',
+    /Zolio Plus offers monthly or lifetime choices/.test(about) &&
+      /Crumbs offers optional Pro and Max tiers/.test(about) &&
+      /Hushly Premium is a one-time unlock/.test(about) &&
+      /BP Log has nothing to buy inside it today/.test(about),
+    'About pricing must match current product/support wording');
+
+  for (const [page, product] of [
+    ['waterwise/index.html', 'WaterWise'],
+    ['bplog/index.html', 'BP Log'],
+    ['hushly/index.html', 'Hushly'],
+  ]) {
+    const html = read(page);
+    const nav = (html.match(/<nav class="nav">([\s\S]*?)<\/nav>/) || [, ''])[1];
+    check(`${page}: parent Apps nav is not aria-current`,
+      !/<a href="\/apps\/"[^>]*aria-current="page"/.test(nav),
+      `${product} is the current page, not /apps/`);
+  }
+
+  for (const [page, product, expectedAlt] of [
+    ['folio/index.html', 'Zolio', 'Zolio app icon'],
+    ['crumbs/index.html', 'Crumbs', 'Crumbs product icon'],
+  ]) {
+    const html = read(page);
+    const h1 = (html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i) || [, ''])[1];
+    const textualHeading = h1.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    check(`${page}: h1 text includes product identity`, textualHeading.includes(product), `text-only h1 is "${textualHeading}"`);
+    check(`${page}: hero icon has audit-safe alt`, h1.includes(`alt="${expectedAlt}"`), 'hero icon alt is missing or empty');
+  }
+
+  const rewrittenDates = new Map([
+    ['index.html', '2026-09-18'],
+    ['about/index.html', '2026-09-18T00:00:00+05:30'],
+    ['apps/index.html', '2026-09-18'],
+    ['blog/index.html', '2026-09-18'],
+    ['bplog/index.html', '2026-09-18'],
+    ['crumbs/index.html', '2026-09-18'],
+    ['folio/index.html', '2026-09-18'],
+    ['hushly/index.html', '2026-09-18'],
+    ['support/index.html', '2026-09-18'],
+    ['tools/index.html', '2026-09-18'],
+    ['waterwise/index.html', '2026-09-18'],
+  ]);
+  for (const [page, date] of rewrittenDates) {
+    check(`${page}: rewritten dateModified is current`,
+      read(page).includes(`"dateModified": "${date}"`),
+      `expected ${date}`);
+  }
+  check('about: ProfilePage preserves full ISO 8601 dateModified',
+    /"@type": "ProfilePage",[\s\S]*?"dateModified": "2026-09-18T00:00:00\+05:30"/.test(about),
+    'ProfilePage dateModified must retain time and timezone');
+
+  const whatsappFix = read('blog/message-yourself-on-whatsapp-not-showing/index.html');
+  const whatsappNotes = read('blog/stop-messaging-yourself-on-whatsapp/index.html');
+  const waterGuide = read('blog/water-reminder-app-without-ads/index.html');
+  const waterComparison = read('best-free-water-reminder-app/index.html');
+  const journalHub = read('folio/journal/index.html');
+  const printableLog = read('bplog/printable-log/index.html');
+  check('search intent: WhatsApp troubleshooting covers rename/profile-name intent',
+    /cannot be renamed separately/.test(whatsappFix) && /Can You Rename "Message Yourself"\?/.test(whatsappFix),
+    'troubleshooting page must answer the visible rename/profile query cluster');
+  check('search intent: WhatsApp notes article is distinct from troubleshooting',
+    /<title>Stop Using WhatsApp as a Notes-to-Self App<\/title>/.test(whatsappNotes),
+    'notes workflow page title must not compete with the missing-chat fix');
+  check('search intent: water guide and comparison have distinct roles',
+    /<title>Water Reminder App Without Ads: What to Look For<\/title>/.test(waterGuide) &&
+      /<title>How to Choose the Best Free Water Reminder App<\/title>/.test(waterComparison),
+    'water information and commercial pages need distinct SERP propositions');
+  check('AI discovery: journal hub explicitly covers generic prompt intent',
+    /<h1>Journaling prompts and a calm daily journal guide<\/h1>/.test(journalHub) &&
+      /journaling prompts for self-discovery, anxiety, overthinking, and reflection/i.test(journalHub),
+    'journal collection must serve the generic prompts cluster');
+  check('index discovery: hubs link directly to reported utility URLs',
+    /href="\/folio\/try\/"/.test(read('blog/index.html')) &&
+      /href="\/bplog\/printable-log\/"/.test(read('blog/index.html')) &&
+      /href="\/bplog\/printable-log\/"/.test(read('bplog/index.html')),
+    'reported discovered-not-indexed utilities need contextual internal links');
+  check('conversion measurement: printable BP actions have explicit events',
+    /data-goatcounter-click="bplog-printable-print"/.test(printableLog) &&
+      /data-goatcounter-click="bplog-printable-pdf-download"/.test(printableLog) &&
+      /data-goatcounter-click="bplog-printable-open-app"/.test(printableLog),
+    'print, download, and app-page transitions must be separately measurable');
+  for (const [page, eventName, marker] of [
+    ['tools/blood-pressure-checker/index.html', 'tool-bp-checker-complete', `track('tool-bp-checker-complete'`],
+    ['tools/water-intake-calculator/index.html', 'tool-water-calculator-complete', `track('tool-water-calculator-complete'`],
+    ['tools/journal-prompt-generator/index.html', 'tool-journal-prompt-generate', 'data-goatcounter-click="tool-journal-prompt-generate"'],
+    ['tools/white-noise-player/index.html', 'tool-white-noise-toggle', 'data-goatcounter-click="tool-white-noise-toggle"'],
+  ]) {
+    check(`${page}: tool action is measurable without input values`,
+      activeMarkup(read(page)).includes(marker) || read(page).includes(marker),
+      `expected ${eventName}`);
+  }
+  for (const page of [
+    'folio/try/index.html',
+    'tools/blood-pressure-checker/index.html',
+    'tools/water-intake-calculator/index.html',
+  ]) {
+    check(`${page}: sensitive inputs exclude session replay`,
+      !/clarity\.ms|xjkggf7dd9/i.test(read(page)),
+      'Clarity must not load on sensitive input surfaces');
+  }
+
+  for (const [page, campaign, eventName] of [
+    ['bplog/index.html', 'bplog-cta', 'ps-bplog-apppage-cta'],
+    ['waterwise/index.html', 'waterwise-cta', 'ps-waterwise-apppage-cta'],
+    ['hushly/index.html', 'hushly-cta', 'ps-hushly-apppage-cta'],
+  ]) {
+    check(`${page}: bottom install CTA keeps campaign and event on one link`,
+      hasAnchor(read(page), new RegExp(`utm_campaign%3D${campaign}`), eventName),
+      'bottom CTA attribution missing or split across elements');
+  }
+
+  const readingSection = folio.match(/<section class="section" aria-labelledby="reading-title">([\s\S]*?)<\/section>/)?.[1] || '';
+  const readingHrefs = [...readingSection.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+  check('folio: keep-exploring links are unique',
+    readingHrefs.length > 0 && new Set(readingHrefs).size === readingHrefs.length,
+    `duplicate links: ${readingHrefs.filter((href, i) => readingHrefs.indexOf(href) !== i).join(', ')}`);
+
+  const support = read('support/index.html');
+  for (const product of ['Zolio', 'Crumbs', 'WaterWise', 'BP Log', 'Hushly']) {
+    const metadata = support.slice(0, support.indexOf('</head>'));
+    check(`support metadata: includes ${product}`, metadata.includes(product), `${product} missing from support metadata`);
+  }
+  check('blog index: navigation landmarks are named',
+    /<nav class="nav" aria-label="Primary">/.test(read('blog/index.html')) &&
+      /<nav class="card" aria-label="Browse guide topics">/.test(read('blog/index.html')),
+    'both navigation landmarks need distinct names');
+  check('homepage: desktop-only QR bridge is scoped and responsive',
+    /class="card qr-bridge"/.test(read('index.html')) &&
+      /\.qr-bridge[\s\S]*max-width:\s*26rem/.test(read('style.css')) &&
+      /@media \(max-width: 600px\)[\s\S]*\.qr-bridge[\s\S]*display:\s*none/.test(read('style.css')),
+    'QR bridge needs a desktop cap and mobile hide rule');
+  check('shared cards: paragraphs and disclosure summaries retain readable spacing',
+    /\.card > :where\(p, ul, ol\) \+ :where\(p, ul, ol\)[\s\S]*margin-top:\s*var\(--space-3\)/.test(read('style.css')) &&
+      /\.card summary[\s\S]*min-height:\s*var\(--control-min-height\)/.test(read('style.css')),
+    'card flow or 44px summary target missing');
 }
 
 // Summary

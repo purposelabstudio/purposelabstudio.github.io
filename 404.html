@@ -9,54 +9,56 @@
     <meta name="description" content="This page doesn't exist. Find our apps, blog, or support page instead.">
     <meta name="robots" content="noindex">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: #F7F3EA;
-            color: #2B2A26;
-            text-align: center;
-            padding: 24px;
-        }
-        h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 72px; color: #7B6D4C; }
-        p { margin-top: 12px; color: #5A574E; font-size: 18px; }
-        a { color: #2C5556; text-decoration: none; font-weight: 500; }
-        a:hover { text-decoration: underline; }
-        .links { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
-        .links a { padding: 8px 16px; border: 1px solid rgba(0,0,0,.12); border-radius: 8px; font-size: 15px; }
-        .links a:hover { background: #F1EADB; }
-    </style>
+    <link rel="stylesheet" href="/style.css">
     <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
-    <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+    <script data-goatcounter="https://purposelabstudio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "xjkggf7dd9");
+        (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "xjkggf7dd9");
     </script>
 </head>
 <body>
-    <main>
-        <h1>404</h1>
-        <p>This page doesn't exist.</p>
-        <p style="margin-top: 8px; font-size: 15px; color: #888;">Try one of these instead:</p>
-        <div class="links">
-            <a href="/">Home</a>
-            <a href="/crumbs/">Crumbs</a>
-            <a href="/folio/">Zolio</a>
-            <a href="/waterwise/">WaterWise</a>
-            <a href="/bplog/">BP Log</a>
-            <a href="/hushly/">Hushly</a>
-            <a href="/blog/">Blog</a>
-            <a href="/support/">Support</a>
-        </div>
-    </main>
+    <div class="container">
+        <header>
+            <nav class="nav" aria-label="Primary">
+                <a href="/" class="nav-brand">PurposeLab Studio</a>
+                <ul class="nav-links">
+                    <li><a href="/apps/">Apps</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/support/">Support</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="hero">
+                <p class="eyebrow">Error 404</p>
+                <h1>That page is not here.</h1>
+                <p class="subtitle">The link may be old, or the address may have a typo. Pick a useful next step.</p>
+                <p><a class="btn btn-primary" href="/">Go to the homepage</a></p>
+            </section>
+            <section class="section" aria-labelledby="recovery-heading">
+                <h2 id="recovery-heading" class="section-title">Find what you need</h2>
+                <div class="product-grid">
+                    <article class="product-card">
+                        <h3>Use an app</h3>
+                        <ul>
+                            <li><a href="/crumbs/">Crumbs</a></li>
+                            <li><a href="/folio/">Zolio</a></li>
+                            <li><a href="/waterwise/">WaterWise</a></li>
+                            <li><a href="/bplog/">BP Log</a></li>
+                            <li><a href="/hushly/">Hushly</a></li>
+                        </ul>
+                        <a href="/apps/">Browse all apps</a>
+                    </article>
+                    <article class="product-card">
+                        <h3>Read or get help</h3>
+                        <p>Find practical guides, answers for a product, or a way to contact the studio.</p>
+                        <p><a href="/blog/">Browse the blog</a></p>
+                        <p><a href="/support/">Visit support</a></p>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>

@@ -7,7 +7,8 @@
 // and link tests cannot catch this, because the markup is perfectly valid — the
 // sentence is just untrue.
 //
-// GROUND TRUTH (verified 2026-08-01 against each app's source; re-verify before
+// GROUND TRUTH (verified 2026-09-18 against each app's current product/support
+// copy; re-verify before
 // relaxing any rule, and update the date):
 //
 //   Folio      free core. Folio Plus = monthly subscription OR one-time lifetime
@@ -48,7 +49,7 @@ const STUDIO_WIDE = /^(index\.html|llms\.txt|about\/|support\/|apps\/)/;
 // A sentence that names one app, or one app's data, is making a scoped claim and
 // is judged against that app, not the portfolio. "Your readings never leave your
 // phone" on the BP Log card is true and must not trip the studio-wide rules.
-const APP_SCOPED = /\b(folio|crumbs|waterwise|water ?wise|bp ?log|blood pressure|hushly|readings?|journal|entries|health data|hydration|sleep sounds)\b/i;
+const APP_SCOPED = /\b(folio|zolio|crumbs|waterwise|water ?wise|bp ?log|blood pressure|hushly|readings?|journal|entries|health data|hydration|sleep sounds)\b/i;
 
 const RULES = [
   {
@@ -68,7 +69,7 @@ const RULES = [
     id: 'no-iap-for-apps-that-have-it',
     // Scoped by SUBJECT, not filename: a false claim about Folio is just as bad
     // on support/ or index.html as it is on folio/.
-    subject: /folio|hushly|crumbs/i,
+    subject: /folio|zolio|hushly|crumbs/i,
     pattern: /\bno (in-app purchases?|iap)\b/i,
     why: 'Folio (Plus), Hushly (premium_unlock) and Crumbs (Razorpay Pro/Max) all have paid tiers.',
   },
@@ -80,6 +81,12 @@ const RULES = [
     pattern: /\b(never|no)\b[^.]{0,30}\bsubscriptions?\b/i,
     unless: new RegExp(`core|mandatory|folio plus|monthly|recurring|${APP_SCOPED.source}`, 'i'),
     why: 'Folio Plus has a monthly subscription tier, so a studio-wide "never a subscription" is false.',
+  },
+  {
+    id: 'blanket-no-recurring-billing',
+    scope: STUDIO_WIDE,
+    pattern: /\b(none of them|none of our products?|no products?|our products? (?:do not|don't|never))\b[^.]{0,80}\b(recurring|renewing)\b/i,
+    why: 'Folio Plus has a monthly subscription tier, so the portfolio cannot promise that no product uses recurring billing.',
   },
   {
     id: 'bplog-free-forever',
@@ -107,7 +114,7 @@ const RULES = [
   {
     id: 'folio-absolute-on-device',
     scope: /^(folio\/index\.html|best-free-journal-app\/|index\.html|support\/)/,
-    pattern: /\b(folio|entries|journal|pages|words|what you (write|record))\b[^.]{0,100}\b(never uploaded|never leaves?|stays? on (your|this|the) (device|phone)|everything stays on (your|this|the) (device|phone))\b/i,
+    pattern: /\b(folio|zolio|entries|journal|pages|words|what you (write|record))\b[^.]{0,100}\b(never uploaded|never leaves?|stays? on (your|this|the) (device|phone)|everything stays on (your|this|the) (device|phone))\b/i,
     unless: /\b(by default|unless|optional|backup|export|share|choose|switch on)\b/i,
     why: 'Folio keeps notebook content local by default, but explicit backup can copy it to the user’s personal Google Drive or iCloud account.',
   },
@@ -168,35 +175,44 @@ for (const f of fails) console.log(`FAIL  claim not supported by the product: ${
 // genuinely live on this site and genuinely false; the matcher must still catch
 // every one of them, and must not flag the true statements underneath.
 const MUST_CATCH = [
-  'All our apps keep your data on your device.',
-  'BP Log is free forever.',
-  'Folio is free with no in-app purchases.',
-  'Crumbs is end-to-end encrypted.',
-  'Hushly is 100% free with no ads, no subscriptions, and no in-app purchases.',
-  'Your data stays on your device. We do not collect, store, or sell any personal data.',
-  'Folio stores everything locally. There is no cloud.',
-  'Folio works offline. Your entries stay on your phone and are never uploaded anywhere.',
+  { file: 'about/index.html', text: 'All our apps keep your data on your device.' },
+  { file: 'bplog/index.html', text: 'BP Log is free forever.' },
+  { file: 'about/index.html', text: 'Folio is free with no in-app purchases.' },
+  { file: 'support/index.html', text: 'Zolio is free with no in-app purchases.' },
+  { file: 'crumbs/index.html', text: 'Crumbs is end-to-end encrypted.' },
+  { file: 'hushly/index.html', text: 'Hushly is 100% free with no ads, no subscriptions, and no in-app purchases.' },
+  { file: 'about/index.html', text: 'Optional paid tiers add extras, and none of them charge you on a recurring basis.' },
+  { file: 'index.html', text: 'Your data stays on your device. We do not collect, store, or sell any personal data.' },
+  { file: 'folio/index.html', text: 'Folio stores everything locally. There is no cloud.' },
+  { file: 'support/index.html', text: 'Zolio works offline. Your entries stay on your phone and are never uploaded anywhere.' },
 ];
 const MUST_PASS = [
-  'WaterWise is free with no in-app purchases at all.',
-  'No subscription. Hushly is free to use, and the optional Premium unlock is one-time.',
-  'Folio keeps entries on your device, with no cloud unless you switch on backup.',
-  'By default, Folio keeps entries on your device. Backup copies them only to the personal Google Drive or iCloud account you choose.',
-  'BP Log has no ads and nothing to buy inside it today.',
+  { file: 'waterwise/index.html', text: 'WaterWise is free with no in-app purchases at all.' },
+  { file: 'hushly/index.html', text: 'No subscription. Hushly is free to use, and the optional Premium unlock is one-time.' },
+  { file: 'folio/index.html', text: 'Folio keeps entries on your device, with no cloud unless you switch on backup.' },
+  { file: 'folio/index.html', text: 'By default, Folio keeps entries on your device. Backup copies them only to the personal Google Drive or iCloud account you choose.' },
+  { file: 'bplog/index.html', text: 'BP Log has no ads and nothing to buy inside it today.' },
+  { file: 'about/index.html', text: 'All products clearly document recurring billing.' },
 ];
 
-const catches = (text) =>
-  RULES.some((r) => {
-    if (r.pattern.test(text) === false) return false;
-    if (r.subject && !r.subject.test(text)) return false;
-    if (r.unless && r.unless.test(text)) return false;
-    return true;
+const catches = ({ file, text }) => {
+  const sentences = text.split(/(?<=[.!?])\s+|\n+/);
+  return RULES.some((rule) => {
+    if (rule.scope && rule.scope.test(file) === false) return false;
+    return sentences.some((sentence, index) => {
+      if (rule.pattern.test(sentence) === false) return false;
+      const context = sentences.slice(Math.max(0, index - 1), index + 2).join(' ');
+      if (rule.subject && !rule.subject.test(context) && !rule.subject.test(file)) return false;
+      if (rule.unless && rule.unless.test(context)) return false;
+      return true;
+    });
   });
+};
 
 const missed = MUST_CATCH.filter((s) => !catches(s));
 const overCaught = MUST_PASS.filter((s) => catches(s));
-for (const s of missed) console.log(`FAIL  self-test: a known-false claim is no longer caught: "${s}"`);
-for (const s of overCaught) console.log(`FAIL  self-test: a true statement is being flagged: "${s}"`);
+for (const s of missed) console.log(`FAIL  self-test: a known-false claim is no longer caught in ${s.file}: "${s.text}"`);
+for (const s of overCaught) console.log(`FAIL  self-test: a true statement is being flagged in ${s.file}: "${s.text}"`);
 
 console.log(`\nclaims: ${files.length} pages · ${checked} sentence checks · ${fails.length} FAIL · self-test ${MUST_CATCH.length - missed.length}/${MUST_CATCH.length} caught, ${MUST_PASS.length - overCaught.length}/${MUST_PASS.length} allowed`);
 

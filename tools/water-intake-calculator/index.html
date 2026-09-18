@@ -66,14 +66,6 @@
     <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
     <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
-    <!-- Microsoft Clarity -->
-    <script>
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "xjkggf7dd9");
-    </script>
 </head>
 <body>
     <div class="container">
@@ -191,6 +183,11 @@
     <script type="module">
         import { waterIntakeMl } from './calc.js';
         const $ = (s) => document.querySelector(s);
+        const track = (path, title) => {
+            if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+                window.goatcounter.count({ path, title, event: true });
+            }
+        };
         $('#calc').addEventListener('submit', () => {
             const w = $('#weight').value;
             const a = document.querySelector('input[name=activity]:checked').value;
@@ -199,6 +196,7 @@
             const litres = (ml / 1000).toFixed(1);
             const glasses = Math.round(ml / 250);
             $('#result').innerHTML = `<p style="font-size:20px;margin:8px 0;"><strong>${litres} litres/day</strong>: about ${glasses} glasses (250 ml each).</p>`;
+            track('tool-water-calculator-complete', 'Complete water intake calculation');
         });
     </script>
 </body>

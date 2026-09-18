@@ -27,7 +27,25 @@
     <link rel="preload" href="/assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
     <style>
-      :root{ --paper:#F5F1E8; --paper-2:#ECE5D6; --ink:#243534; --accent:#2C5556; --accent-dark:#21403F; --accent-ink:#F5F1E8; --gold:#8B6720; }
+      :root{ --paper:#f4f4ed; --paper-2:#e7efea; --ink:#173b35; --ink-soft:#48635d; --ink-muted:#536b64; --accent:#176b59; --accent-dark:#0e5143; --accent-ink:#f5faf6; --gold:#8a6829; }
+      .crumbs-page .nav { border-color:rgba(23,59,53,.15); }
+      .crumbs-page .product-hero { max-width:48rem; margin:0 auto; padding-bottom:var(--space-5); }
+      .crumbs-page .hero h1 { line-height:1.12; }
+      .crumbs-page .hero-icon { width:56px; height:56px; margin-right:12px; vertical-align:-12px; }
+      .product-nav { display:flex; justify-content:center; gap:var(--space-3); flex-wrap:wrap; margin:0 auto var(--space-5); font-size:var(--text-sm); }
+      .product-nav a { color:var(--text-secondary); text-decoration:underline; }
+      .crumbs-page .journey { max-width:64rem; margin:0 auto; }
+      .crumbs-page .journey-step { position:relative; text-align:left; }
+      .crumbs-page .journey-step .eyebrow { margin-bottom:var(--space-1); }
+      .crumbs-page .journey-step h3 { font-family:var(--font-display); font-size:var(--text-xl); }
+      .crumbs-page .journey-step p { color:var(--text-secondary); }
+      .crumbs-page .trust-facts { max-width:48rem; margin:0 auto; background:var(--surface-subtle); border:1px solid var(--border); border-top:4px solid var(--accent); border-radius:var(--radius); padding:var(--space-5); }
+      .crumbs-page .trust-facts h2 { font-family:var(--font-display); font-size:var(--text-xl); margin-bottom:var(--space-2); }
+      .crumbs-page .trust-facts p + p { margin-top:var(--space-3); }
+      .crumbs-page .trust-facts .fact-label { font-family:var(--font-mono); font-size:var(--text-xs); letter-spacing:.08em; text-transform:uppercase; color:var(--gold); }
+      .crumbs-page .contextual-paths { max-width:48rem; margin:0 auto; }
+      .crumbs-page .contextual-paths .card { margin-bottom:0; }
+      @media (max-width:600px){ .product-nav{justify-content:flex-start;} }
     </style>
     <link rel="icon" href="icon.png" type="image/png">
     <!-- Structured Data -->
@@ -41,7 +59,7 @@
       "operatingSystem": "WhatsApp, Android, iOS",
       "applicationCategory": "ProductivityApplication",
       "url": "https://purposelabstudio.com/crumbs/",
-      "dateModified": "2026-07-09",
+      "dateModified": "2026-09-18",
       "author": {
         "@type": "Organization",
         "name": "PurposeLab Studio",
@@ -125,9 +143,9 @@
         })(window, document, "clarity", "script", "xjkggf7dd9");
     </script>
 </head>
-<body>
+<body class="crumbs-page">
     <div class="container">
-
+        <header>
         <nav class="nav">
             <a href="/" class="nav-brand">PurposeLab Studio</a>
             <ul class="nav-links">
@@ -139,19 +157,20 @@
                 <li><a href="/support/">Support</a></li>
             </ul>
         </nav>
+        </header>
 
         <main>
 
-        <section class="hero">
+        <section class="hero product-hero" aria-labelledby="crumbs-title">
             <div class="eyebrow">~/ crumbs</div>
-            <h1><img src="icon.png" alt="Crumbs" class="hero-icon">Crumbs: Your Private Second Brain on WhatsApp</h1>
+            <h1 id="crumbs-title"><img src="icon.png" alt="Crumbs product icon" class="hero-icon">Crumbs — Capture now. Find it when it matters.</h1>
             <p class="subtitle">
-                The calmer upgrade to messaging yourself. Dump notes, ideas, todos, reminders, links, photos and voice, then ask for any of it back in plain language.
+                A private second brain in WhatsApp: send notes, ideas, todos, reminders, links, photos or voice, then ask for what you saved in plain language.
             </p>
             <div class="badges">
-                <span class="badge badge-privacy">Private & Encrypted</span>
-                <span class="badge badge-free">Free to Capture</span>
-                <span class="badge badge-noad">No Nagging</span>
+                <span class="badge badge-privacy">Encrypted storage</span>
+                <span class="badge badge-free">Free tier: 50 crumbs/month</span>
+                <span class="badge badge-noad">No ads</span>
                 <span class="badge badge-offline">Multilingual</span>
             </div>
             <div style="margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
@@ -164,8 +183,46 @@
             </p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">One Place for Everything You'd Otherwise Forget</h2>
+        <nav class="product-nav" aria-label="Crumbs page">
+            <a href="#how-crumbs-works">How it works</a>
+            <a href="#before-you-message">Data and limits</a>
+            <a href="#crumbs-features">What you can save</a>
+            <a href="#crumbs-faq">Questions</a>
+        </nav>
+
+        <section id="how-crumbs-works" class="section journey" aria-labelledby="journey-title">
+            <h2 id="journey-title" class="section-title">From a thought to a useful memory</h2>
+            <div class="product-grid">
+                <article class="product-card journey-step">
+                    <p class="eyebrow">01 / capture</p>
+                    <h3>Send it where you already are</h3>
+                    <p>Message a thought, task, reminder, link, photo or voice note in WhatsApp. There is no separate app or form to open.</p>
+                </article>
+                <article class="product-card journey-step">
+                    <p class="eyebrow">02 / organise</p>
+                    <h3>Let the detail stay connected</h3>
+                    <p>Crumbs understands the message, transcribes voice notes, and keeps the item available for a later question or reminder.</p>
+                </article>
+                <article class="product-card journey-step">
+                    <p class="eyebrow">03 / ask</p>
+                    <h3>Retrieve what you actually saved</h3>
+                    <p>Ask naturally: “What was that restaurant Priya mentioned?” Recall is grounded in your saved crumbs, not a made-up memory.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="before-you-message" class="section" aria-labelledby="before-title">
+            <div class="trust-facts">
+                <h2 id="before-title">Before you message Crumbs</h2>
+                <p><span class="fact-label">Where it runs</span><br>Crumbs runs on servers, not on your phone, so it can receive a message and return it later. Your saved crumbs are stored encrypted.</p>
+                <p><span class="fact-label">How it understands</span><br>Your content is sent to Google’s Gemini API to understand messages, transcribe voice notes, and find what you ask for.</p>
+                <p><span class="fact-label">Your choices</span><br>Crumbs does not sell your content or use it for ads. Your data is exportable and deletable at any time. Read the <a href="https://purposelabstudio.com/privacy-policies/crumbs.html">privacy policy</a> and <a href="https://purposelabstudio.com/privacy-policies/crumbs-terms.html">terms</a>.</p>
+                <p><span class="fact-label">Free tier and limits</span><br>The free tier includes up to 50 crumbs each month. Paid plans are available if you outgrow that limit.</p>
+            </div>
+        </section>
+
+        <section id="crumbs-features" class="section" aria-labelledby="features-title">
+            <h2 id="features-title" class="section-title">Give everyday details a place to land</h2>
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">📝</div>
@@ -199,8 +256,8 @@
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🔒</div>
-                    <h3>Private by Design</h3>
-                    <p>Your words stay yours, and we are upfront about how: Crumbs runs on servers, not on your phone, and sends your content to Google Gemini to understand it. Stored encrypted, never sold, exportable and deletable whenever you want. <a href="https://purposelabstudio.com/privacy-policies/crumbs.html">Read the privacy policy</a> or the <a href="https://purposelabstudio.com/privacy-policies/crumbs-terms.html">terms</a>.</p>
+                    <h3>Clear About Data</h3>
+                    <p>Crumbs runs on servers and sends content to Google Gemini to understand it. Saved crumbs are encrypted, never sold, exportable and deletable. See the details above before you message.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🍞</div>
@@ -211,15 +268,13 @@
         </section>
 
         <section class="cta">
-            <h2>Start Dropping Crumbs Today</h2>
-            <p>Free to start and free to keep using, with a monthly limit and paid plans if you outgrow it. Open WhatsApp and send your first crumb, Crumbs catches the rest.</p>
-            <a href="https://wa.me/919063573676?text=Hi" class="btn btn-primary">
-                💬 Chat with Crumbs
-            </a>
+            <h2>Your first crumb can be one message</h2>
+            <p>Crumbs works in WhatsApp. The free tier includes 50 crumbs a month; paid plans are there only if you outgrow that limit.</p>
+            <p><a href="https://wa.me/919063573676?text=Hi">Open WhatsApp to message Crumbs →</a></p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">Frequently Asked Questions</h2>
+        <section id="crumbs-faq" class="section" aria-labelledby="faq-title">
+            <h2 id="faq-title" class="section-title">Frequently Asked Questions</h2>
 
             <div class="card">
                 <h3 style="margin-bottom: 8px;">What is Crumbs?</h3>
@@ -247,25 +302,11 @@
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">Read More</h2>
+        <section class="section" aria-labelledby="reading-title">
+            <h2 id="reading-title" class="section-title">Learn the capture habit</h2>
             <ul class="blog-list">
-                <li class="blog-item">
-                    <h3><a href="/blog/stop-messaging-yourself-on-whatsapp/">Stop Messaging Yourself on WhatsApp: A Smarter Way to Remember Everything</a></h3>
-                    <p>Why notes-to-self fail, and how to keep the easy capture while finally fixing the memory.</p>
-                </li>
-                <li class="blog-item">
-                    <h3><a href="/blog/build-a-second-brain-on-whatsapp/">How to Build a Second Brain on WhatsApp (No New App Required)</a></h3>
-                    <p>A simple, no-setup system for capturing and recalling everything, right where you already chat.</p>
-                </li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2 class="section-title">From the blog</h2>
-            <ul class="blog-list">
-                <li class="blog-item"><h3><a href="/blog/stop-messaging-yourself-on-whatsapp/">Stop Messaging Yourself on WhatsApp</a></h3><p>A smarter way to remember everything you send to yourself.</p></li>
-                <li class="blog-item"><h3><a href="/blog/build-a-second-brain-on-whatsapp/">How to Build a Second Brain on WhatsApp</a></h3><p>A simple capture-and-recall system, no new app required.</p></li>
+                <li class="blog-item"><h3><a href="/blog/stop-messaging-yourself-on-whatsapp/">Stop Messaging Yourself on WhatsApp: A Smarter Way to Remember Everything</a></h3><p>Why notes-to-self fail, and how to keep the easy capture while finally fixing the memory.</p></li>
+                <li class="blog-item"><h3><a href="/blog/build-a-second-brain-on-whatsapp/">How to Build a Second Brain on WhatsApp (No New App Required)</a></h3><p>A simple, no-setup system for capturing and recalling everything, right where you already chat.</p></li>
                 <li class="blog-item"><h3><a href="/blog/message-yourself-on-whatsapp-not-showing/">"Message Yourself" Not Showing? Here's the Fix</a></h3><p>Get the self-chat back on Android, Samsung, and iPhone, then tame it.</p></li>
             </ul>
         </section>

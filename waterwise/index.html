@@ -27,7 +27,16 @@
     <link rel="preload" href="/assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
     <style>
-      :root{ --paper:#F2FBFC; --paper-2:#DFF4F7; --ink:#0E3A42; --accent:#137D8D; --accent-dark:#127484; --accent-ink:#F2FBFC; --gold:#C04F19; }
+      :root{ --paper:#F3FBFC; --paper-2:#E0F4F6; --ink:#123A43; --ink-soft:#41666D; --ink-muted:#4E6F76; --accent:#167D8D; --accent-dark:#105E6B; --accent-ink:#F5FCFD; --gold:#3A7A87; --border:rgba(18,92,105,.15); --surface-raised:#FCFEFE; --focus-ring:#9A4A22; }
+      .product-context { margin: var(--space-3) 0 0; font-size: var(--text-sm); color: var(--text-secondary); }
+      .product-context a { color: inherit; }
+      .product-facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(12rem,1fr)); gap:var(--space-3); margin:var(--space-5) 0; }
+      .product-facts .card { margin:0; padding:var(--space-3); border-top:4px solid var(--accent); }
+      .product-facts h2 { font-family:var(--font-display); font-size:var(--text-lg); line-height:1.3; }
+      .product-facts p { color:var(--text-secondary); font-size:var(--text-sm); line-height:1.6; }
+      .feature { text-align:left; }
+      .feature-icon { font-size:1.65rem; }
+      @media (max-width:600px) { .product-facts { grid-template-columns:1fr; } }
     </style>
     <link rel="icon" href="icon.png" type="image/png">
     <!-- Structured Data -->
@@ -40,7 +49,7 @@
       "operatingSystem": "Android",
       "applicationCategory": "HealthApplication",
       "url": "https://purposelabstudio.com/waterwise/",
-      "dateModified": "2026-07-09",
+      "dateModified": "2026-09-18",
       "downloadUrl": "https://play.google.com/store/apps/details?id=com.purposelab.waterwise",
       "author": {
         "@type": "Organization",
@@ -166,11 +175,12 @@
 
         <main>
 
+        <p class="product-context"><a href="/apps/">PurposeLab apps</a> / <span aria-current="page">WaterWise</span></p>
         <section class="hero">
-            <div class="eyebrow">~/ waterwise</div>
-            <h1><img src="icon.png" alt="WaterWise" class="hero-icon">WaterWise: Stay Hydrated</h1>
+            <div class="eyebrow">A gentler water log</div>
+            <h1><img src="icon.png" alt="WaterWise app icon" class="hero-icon">A small water habit, without the pressure</h1>
             <p class="subtitle">
-                The water tracker that respects your time. One-tap logging, smart reminders, and zero ads on the logging screen. No tricks, no bloat, just hydration.
+                Log a drink in one tap, choose quiet reminders, and pick up where you left off—no streak to protect and no judgment when life gets busy.
             </p>
             <div class="badges">
                 <span class="badge badge-free">Free</span>
@@ -185,6 +195,24 @@
                    class="btn btn-primary">
                     ▶ Get it on Google Play
                 </a>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="waterwise-before-install">
+            <h2 class="section-title" id="waterwise-before-install">Made for ordinary days</h2>
+            <div class="product-facts">
+                <article class="card">
+                    <h2>One tap is enough</h2>
+                    <p>Keep familiar cup sizes ready so a quick log does not become another task.</p>
+                </article>
+                <article class="card">
+                    <h2>Reminders on your terms</h2>
+                    <p>Choose an interval and sleep hours; reminders pause at night and stop when you reach the goal you set.</p>
+                </article>
+                <article class="card">
+                    <h2>Keep it local</h2>
+                    <p>Works offline with no account needed. Your water log is stored on your device.</p>
+                </article>
             </div>
         </section>
 
@@ -203,78 +231,74 @@
         </section>
 
         <section class="section">
-            <p class="post-app-hint">💧 Not sure how much to aim for? Try our free <a href="/tools/water-intake-calculator/">Daily Water Intake Calculator</a>.</p>
-            <p class="post-app-hint">📊 Comparing water apps? See <a href="/best-free-water-reminder-app/">the best free water reminder app guide</a>.</p>
-            <h2 class="section-title">Features</h2>
+            <p class="post-app-hint">Want a starting point to consider? Try the <a href="/tools/water-intake-calculator/">Daily Water Intake Calculator</a>.</p>
+            <p class="post-app-hint">Comparing water apps? Read <a href="/best-free-water-reminder-app/">the water reminder app guide</a>.</p>
+            <h2 class="section-title">A low-friction rhythm</h2>
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">⚡</div>
-                    <h3>One-Tap Logging</h3>
-                    <p>Tap and it's logged. No extra steps, no forms, no ads interrupting you. Your custom cup sizes are ready to go.</p>
+                    <h3>Log the drink, carry on</h3>
+                    <p>Tap a saved cup size and get back to your day. There are no forms or ads in the logging flow.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🚫</div>
-                    <h3>Zero Ads on Logging Screen</h3>
-                    <p>The one thing you do 8+ times a day should never have ads. Log water freely, no banner, no video, no paywall.</p>
+                    <h3>A clear logging screen</h3>
+                    <p>The moment you log stays focused: no banner, video, or paywall interruption.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🎯</div>
-                    <h3>Personalized Daily Goal</h3>
-                    <p>Weight-based goal calculator with manual override. Your goal, your way. No "smart" algorithm forcing recommendations.</p>
+                    <h3>Choose or adjust a goal</h3>
+                    <p>Use the weight-based estimate as a starting point, or set a goal that makes sense for you.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🔔</div>
-                    <h3>Smart Reminders</h3>
-                    <p>Set custom intervals, mute during sleep hours, and reminders auto-dismiss when you hit your goal. No midnight notifications.</p>
+                    <h3>Let reminders be gentle</h3>
+                    <p>Set an interval, quiet hours, and sounds. Reminders pause during sleep time and stop at your chosen goal.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">📊</div>
-                    <h3>Progress Ring & Streak</h3>
-                    <p>See your daily progress at a glance. Build your streak day by day. Visual motivation without gamification gimmicks.</p>
+                    <h3>See today at a glance</h3>
+                    <p>A progress ring shows what you have logged today. Missed days are simply missed days—not a score to recover.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🏠</div>
-                    <h3>Home Screen Widget</h3>
-                    <p>Quick-log button and progress ring right on your home screen. No need to open the app every time.</p>
+                    <h3>Keep the next action nearby</h3>
+                    <p>The home-screen widget offers a quick log button and progress ring without opening the app.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🔋</div>
-                    <h3>Battery Optimization Guidance</h3>
-                    <p>Step-by-step guides for Samsung, Xiaomi, OnePlus, and all major Android OEMs so reminders never stop working.</p>
+                    <h3>Help reminders stay available</h3>
+                    <p>Find battery optimisation guidance for Samsung, Xiaomi, OnePlus, and other Android phones.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">✏️</div>
-                    <h3>Edit Past Entries</h3>
-                    <p>Logged by mistake? Need to add a late entry? Edit or delete any log to keep your data accurate.</p>
+                    <h3>Correct the record with ease</h3>
+                    <p>Edit or delete a mistaken entry, or add a late one, without turning the day into a failure.</p>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="section-title">Why WaterWise?</h2>
+            <h2 class="section-title">Support, not a scorecard</h2>
             <div class="card">
                 <p style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                    Every other water tracker ruins the experience with ads on the logging screen. You open the app 8 times a day to log water, and every time you see a banner, video, or paywall popup.
+                    WaterWise is for the small moments when you want to remember a drink—not for managing another project.
                 </p>
                 <p style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                    <strong>WaterWise is different.</strong> No ads on the logging screen. No subscriptions. No tricks. Just a simple tool that respects your time and helps you build a healthy habit.
+                    <strong>WaterWise keeps the routine light.</strong> Log what you want, adjust the reminder schedule, and return tomorrow without a streak or a scolding.
                 </p>
                 <p style="font-size: 16px; line-height: 1.6;">
-                    Built for people who want to drink more water, not manage another app.
+                    The goal is a useful record and a gentle prompt, not a health prescription.
                 </p>
             </div>
         </section>
 
         <section class="cta">
-            <h2>Start Your Hydration Habit Today</h2>
-            <p>Free forever. No ads on the logging screen. No paywall. Just hydration.</p>
-            <a href="/go/waterwise-web-app/"
+            <h2>Return when it is useful</h2>
+            <p>WaterWise is a simple water logging and reminder tool. Your settings and goal remain yours to adjust.</p>
+            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.purposelab.waterwise&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dwaterwise-cta"
                data-goatcounter-click="ps-waterwise-apppage-cta"
-               data-goatcounter-title="Download WaterWise (app page: cta)"
-               class="btn btn-primary">
-                ▶ Download WaterWise
-            </a>
-            <p style="margin-top:12px;font-size:13px;color:var(--text-secondary);">Or <a href="https://play.google.com/store/apps/details?id=com.purposelab.waterwise&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dwaterwise-cta">open the Google Play listing directly</a>.</p>
+               data-goatcounter-title="Open WaterWise on Google Play (bottom CTA)">Open WaterWise on Google Play</a>
         </section>
 
         <section class="section">
@@ -340,7 +364,7 @@
             <ul class="blog-list">
                 <li class="blog-item"><h3><a href="/blog/how-much-water-should-i-drink-daily/">How Much Water Should I Drink Daily?</a></h3><p>What the science actually says about your daily target.</p></li>
                 <li class="blog-item"><h3><a href="/blog/why-water-apps-are-full-of-ads/">Why Water Apps Are Full of Ads</a></h3><p>The economics behind free hydration apps, and how to avoid them.</p></li>
-                <li class="blog-item"><h3><a href="/blog/water-reminder-app-without-ads/">The Best Water Reminder App Without Ads</a></h3><p>What ad-free should mean, one-tap logging, a widget, gentle reminders.</p></li>
+                <li class="blog-item"><h3><a href="/blog/water-reminder-app-without-ads/">Water Reminder App Without Ads: What to Look For</a></h3><p>What ad-free should mean, one-tap logging, a widget, gentle reminders.</p></li>
             </ul>
         </section>
 

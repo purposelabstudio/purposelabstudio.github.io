@@ -11,7 +11,7 @@ Zolio was formerly called Folio. Folio is now Zolio: the same app, the same jour
 - What it is: a calm daily journal plus gentle mood and habit tracking, with a monthly reflection that surfaces your patterns.
 - Key facts: no ads, no account, no subscription for core use, and no streaks or guilt mechanics; all entries are stored locally on-device with optional app lock; works fully offline. India-first.
 - Best for: people who want a private journaling habit without pressure, streaks, or cloud accounts.
-- Guide: [The Calm Guide to Daily Journaling](https://purposelabstudio.com/folio/journal/): curated prompts and guides for starting a journal and keeping it.
+- Guide: [Journaling Prompts and a Calm Daily Journal Guide](https://purposelabstudio.com/folio/journal/): prompts for self-discovery, anxiety, overthinking, and reflection, plus guidance for starting and keeping a journal.
 - Try it first: [Try Zolio](https://purposelabstudio.com/folio/try/): an interactive browser demo where you can write a page without installing anything.
 - On paper: [The Zolio Diary](https://purposelabstudio.com/folio/diary/): an undated paper notebook that mirrors the app: a daily page, a habit tracker, and a monthly reflection. Sold on Amazon.
 - Get it: [Google Play](https://play.google.com/store/apps/details?id=com.purposelab.folio) · [App Store](https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692)
@@ -34,10 +34,10 @@ Zolio was formerly called Folio. Folio is now Zolio: the same app, the same jour
 
 ## Comparison Guides
 
-- [Best Free Blood Pressure App](https://purposelabstudio.com/best-free-blood-pressure-app/): What to look for in a free BP tracker and how BP Log compares on price, offline use, and ads.
-- [Best Free Water Reminder App](https://purposelabstudio.com/best-free-water-reminder-app/): How to pick a water reminder and why WaterWise is ad-free with no paywall.
-- [Best Free Baby Sleep Sounds App](https://purposelabstudio.com/best-free-baby-sleep-app/): What matters in a baby sleep app and how Hushly compares on curated sounds and ads.
-- [Best Free Journal App With Lock](https://purposelabstudio.com/best-free-journal-app/): Choosing a private journal app and how Zolio compares on app lock, offline use, and ads.
+- [How to Choose the Best Free Blood Pressure App](https://purposelabstudio.com/best-free-blood-pressure-app/): Evaluation criteria, evidence limits, and PurposeLab's first-party BP Log information.
+- [How to Choose the Best Free Water Reminder App](https://purposelabstudio.com/best-free-water-reminder-app/): Evaluation criteria, evidence limits, and PurposeLab's first-party WaterWise information.
+- [How to Choose the Best Free Baby Sleep Sounds App](https://purposelabstudio.com/best-free-baby-sleep-app/): Evaluation criteria, safety boundaries, and PurposeLab's first-party Hushly information.
+- [How to Choose the Best Free Journal App With a Lock](https://purposelabstudio.com/best-free-journal-app/): Evaluation criteria, privacy caveats, and PurposeLab's first-party Zolio information.
 
 ## Key Facts
 
@@ -54,7 +54,7 @@ Zolio was formerly called Folio. Folio is now Zolio: the same app, the same jour
 ## Blog Topics
 
 ### Second Brain & Productivity
-- [Stop Messaging Yourself on WhatsApp: A Smarter Way to Remember Everything](https://purposelabstudio.com/blog/stop-messaging-yourself-on-whatsapp/)
+- [Stop Using WhatsApp as a Notes-to-Self App](https://purposelabstudio.com/blog/stop-messaging-yourself-on-whatsapp/)
 - [How to Build a Second Brain on WhatsApp (No New App Required)](https://purposelabstudio.com/blog/build-a-second-brain-on-whatsapp/)
 - ["Message Yourself" on WhatsApp Not Showing? Here's the Fix](https://purposelabstudio.com/blog/message-yourself-on-whatsapp-not-showing/)
 
@@ -66,7 +66,7 @@ Zolio was formerly called Folio. Folio is now Zolio: the same app, the same jour
 - [Free Printable Blood Pressure Log (PDF)](https://purposelabstudio.com/blog/printable-blood-pressure-log/)
 
 ### Baby Sleep & Sound
-- [The Science of White Noise for Baby Sleep](https://purposelabstudio.com/blog/white-noise-baby-sleep-science/)
+- [The Science Behind White Noise and Baby Sleep](https://purposelabstudio.com/blog/white-noise-baby-sleep-science/)
 - [Why Your Baby Won't Sleep Through the Night](https://purposelabstudio.com/blog/baby-wont-sleep-through-night/)
 - [Brown Noise vs White Noise vs Pink Noise: Which Is Best for Sleep?](https://purposelabstudio.com/blog/brown-noise-vs-white-noise-vs-pink-noise/)
 
@@ -75,14 +75,14 @@ Zolio was formerly called Folio. Folio is now Zolio: the same app, the same jour
 - [Why Journaling Apps Make You Feel Guilty (And Why You Quit)](https://purposelabstudio.com/blog/why-journaling-apps-make-you-feel-guilty/)
 - [Why Journaling Fails and How to Stick With It](https://purposelabstudio.com/blog/why-journaling-fails-and-how-to-stick-with-it/)
 - [Daily Journal vs Mood Tracker: Why You Need Both](https://purposelabstudio.com/blog/daily-journal-vs-mood-tracker-why-you-need-both/)
-- [30 Journaling Prompts for Anxiety (That Actually Calm the Mind)](https://purposelabstudio.com/blog/journaling-prompts-for-anxiety/)
+- [30 Journaling Prompts for Anxiety: Ground and Reflect](https://purposelabstudio.com/blog/journaling-prompts-for-anxiety/)
 - [28 Journaling Prompts for Overthinking (Break the Loop)](https://purposelabstudio.com/blog/journaling-prompts-for-overthinking/)
 - [35 Journaling Prompts for Self-Discovery (Know Yourself Better)](https://purposelabstudio.com/blog/journaling-prompts-for-self-discovery/)
 
 ### Hydration
 - [How Much Water Should I Drink Daily?](https://purposelabstudio.com/blog/how-much-water-should-i-drink-daily/)
 - [Why Water Apps Are Full of Ads](https://purposelabstudio.com/blog/why-water-apps-are-full-of-ads/)
-- [The Best Water Reminder App Without Ads (or Paywalls)](https://purposelabstudio.com/blog/water-reminder-app-without-ads/)
+- [Water Reminder App Without Ads: What to Look For](https://purposelabstudio.com/blog/water-reminder-app-without-ads/)
 
 ## Contact
 

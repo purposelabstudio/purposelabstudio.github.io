@@ -28,7 +28,7 @@
       "name": "Printable Blood Pressure Log (Free PDF)",
       "url": "https://purposelabstudio.com/bplog/printable-log/",
       "description": "A free, print-ready blood pressure log sheet. Print it or save as PDF, record date, time, systolic, diastolic, and pulse, with AHA category reference.",
-      "dateModified": "2026-08-01",
+      "dateModified": "2026-09-18",
       "isPartOf": { "@type": "WebSite", "name": "PurposeLab Studio", "url": "https://purposelabstudio.com" }
     }
     </script>
@@ -87,9 +87,15 @@
 </head>
 <body>
     <div class="toolbar no-print">
-        <a href="/bplog/" class="btn btn-ghost">← BP Log</a>
-        <button class="btn btn-primary" onclick="window.print()">🖨 Print / Save as PDF</button>
-        <a href="/bplog/blood-pressure-log.pdf" class="btn btn-ghost" download>⬇ Download PDF</a>
+        <a href="/bplog/" class="btn btn-ghost"
+           data-goatcounter-click="bplog-printable-open-app"
+           data-goatcounter-title="Open BP Log app page (printable)">← BP Log</a>
+        <button class="btn btn-primary" onclick="window.print()"
+                data-goatcounter-click="bplog-printable-print"
+                data-goatcounter-title="Print or save blood pressure log">🖨 Print / Save as PDF</button>
+        <a href="/bplog/blood-pressure-log.pdf" class="btn btn-ghost" download
+           data-goatcounter-click="bplog-printable-pdf-download"
+           data-goatcounter-title="Download blood pressure log PDF (printable)">⬇ Download PDF</a>
     </div>
 
     <main class="sheet">

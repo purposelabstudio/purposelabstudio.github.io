@@ -27,7 +27,18 @@
     <link rel="preload" href="/assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
     <style>
-      :root{ --paper:#F4F7FB; --paper-2:#E5EDF5; --ink:#0D2E5C; --accent:#134A87; --accent-dark:#0D2E5C; --accent-ink:#F4F7FB; --gold:#497973; }
+      :root{ --paper:#FCF8F7; --paper-2:#F6ECE9; --ink:#302322; --ink-soft:#685957; --ink-muted:#806E6B; --accent:#9C3C3A; --accent-dark:#762D2C; --accent-ink:#FFF9F7; --gold:#7B5550; --border:rgba(70,36,34,.14); --surface-raised:#FFFDFC; --focus-ring:#9C3C3A; }
+      .product-context { margin: var(--space-3) 0 0; font-size: var(--text-sm); color: var(--text-secondary); }
+      .product-context a { color: inherit; }
+      .product-facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(12rem,1fr)); gap:var(--space-3); margin:var(--space-5) 0; }
+      .product-facts .card { margin:0; padding:var(--space-3); border-top:4px solid var(--accent); }
+      .product-facts h2 { font-family:var(--font-display); font-size:var(--text-lg); line-height:1.3; }
+      .product-facts p, .safety-boundary p { color:var(--text-secondary); font-size:var(--text-sm); line-height:1.6; }
+      .safety-boundary { background:#FBEDEC; border-left:4px solid var(--accent); border-radius:0 var(--radius) var(--radius) 0; padding:var(--space-4); }
+      .safety-boundary h2 { font-family:var(--font-display); font-size:var(--text-xl); margin-bottom:var(--space-1); }
+      .feature { text-align:left; }
+      .feature-icon { font-size:1.65rem; }
+      @media (max-width:600px) { .product-facts { grid-template-columns:1fr; } }
     </style>
     <link rel="icon" href="icon.png" type="image/png">
     <!-- Structured Data -->
@@ -40,7 +51,7 @@
       "operatingSystem": "Android",
       "applicationCategory": "HealthApplication",
       "url": "https://purposelabstudio.com/bplog/",
-      "dateModified": "2026-07-09",
+      "dateModified": "2026-09-18",
       "downloadUrl": "https://play.google.com/store/apps/details?id=com.purposelab.bplog",
       "softwareVersion": "1.0",
       "author": {
@@ -92,7 +103,7 @@
           "name": "What is AHA blood pressure classification?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129/less than 80), High Blood Pressure Stage 1 (130-139/80-89), High Blood Pressure Stage 2 (140+/90+), and Hypertensive Crisis (180+/120+). BP Log automatically classifies each reading using these guidelines."
+            "text": "The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129 with diastolic below 80), High Blood Pressure Stage 1 (130-139 or 80-89), High Blood Pressure Stage 2 (140 or higher, or 90 or higher), and Hypertensive Crisis (systolic higher than 180 and/or diastolic higher than 120). BP Log automatically classifies each reading using these guidelines."
           }
         },
         {
@@ -167,11 +178,12 @@
 
         <main>
 
+        <p class="product-context"><a href="/apps/">PurposeLab apps</a> / <span aria-current="page">BP Log</span></p>
         <section class="hero">
-            <div class="eyebrow">~/ bplog</div>
-            <h1><img src="icon.png" alt="BP Log" class="hero-icon">BP Log: Blood Pressure Tracker</h1>
+            <div class="eyebrow">Home-monitor reading log</div>
+            <h1><img src="icon.png" alt="BP Log app icon" class="hero-icon">Keep home BP readings ready for your next appointment</h1>
             <p class="subtitle">
-                Log readings from your home BP monitor. See trends, track your progress, and share reports with your doctor, all for free.
+                Record readings from a cuff, review reference categories and trends, then export a clear PDF to discuss with your doctor.
             </p>
             <div class="badges">
                 <span class="badge badge-free">100% Free</span>
@@ -186,6 +198,28 @@
                    class="btn btn-primary">
                     ▶ Get it on Google Play
                 </a>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="bplog-before-install">
+            <h2 class="section-title" id="bplog-before-install">Before you install</h2>
+            <div class="product-facts">
+                <article class="card">
+                    <h2>You bring the reading</h2>
+                    <p>BP Log records numbers from a home blood pressure monitor. It does not measure blood pressure.</p>
+                </article>
+                <article class="card">
+                    <h2>Keep a usable record</h2>
+                    <p>Log readings, review the history and trends, and generate a PDF report for a clinician conversation.</p>
+                </article>
+                <article class="card">
+                    <h2>Use on your phone</h2>
+                    <p>Works offline with no account needed; readings are stored on your device.</p>
+                </article>
+            </div>
+            <div class="safety-boundary">
+                <h2>Reference, not diagnosis</h2>
+                <p>Categories and trends organise what you record; they are not medical advice or a diagnosis. For decisions about your blood pressure, bring the report and your questions to your doctor or healthcare provider.</p>
             </div>
         </section>
 
@@ -204,57 +238,59 @@
         </section>
 
         <section class="section">
-            <p class="post-app-hint">❤️‍🩹 Want to understand a reading? Try our free <a href="/tools/blood-pressure-checker/">Blood Pressure Category Checker</a>.</p>
-            <p class="post-app-hint">📊 Comparing options? See <a href="/best-free-blood-pressure-app/">the best free blood pressure app guide</a>.</p>
-            <h2 class="section-title">Features</h2>
+            <p class="post-app-hint">Need a quick reference while you are logging? Try the <a href="/tools/blood-pressure-checker/">Blood Pressure Category Checker</a>; it is also reference-only.</p>
+            <p class="post-app-hint">Prefer paper first? <a href="/bplog/printable-log/">Open the free printable blood pressure log</a> or <a href="/blog/printable-blood-pressure-log/">learn how to use it</a>.</p>
+            <p class="post-app-hint">Considering options? Read <a href="/best-free-blood-pressure-app/">the blood pressure app comparison guide</a>.</p>
+            <h2 class="section-title">A clear record, step by step</h2>
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">⚡</div>
-                    <h3>Log in Seconds</h3>
-                    <p>Enter systolic, diastolic, and pulse, done. No 30-question onboarding.</p>
+                    <h3>Start with one reading</h3>
+                    <p>Enter systolic, diastolic, and pulse from your home monitor without a long setup flow.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🎨</div>
-                    <h3>AHA Color Coding</h3>
-                    <p>Every reading auto-classified as Normal, Elevated, Stage 1, Stage 2, or Crisis using American Heart Association guidelines.</p>
+                    <h3>See the reference category</h3>
+                    <p>Each recorded reading is classified as Normal, Elevated, Stage 1, Stage 2, or Crisis using American Heart Association guidelines.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">📈</div>
-                    <h3>Trend Charts</h3>
-                    <p>See your systolic and diastolic trends over time. Track by week, month, 3 months, 6 months, or all time.</p>
+                    <h3>Review the record over time</h3>
+                    <p>See systolic and diastolic trends by week, month, three months, six months, or all time.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">📊</div>
-                    <h3>Distribution Analysis</h3>
-                    <p>What percentage of readings are Normal vs Stage 1? See the full picture in one chart.</p>
+                    <h3>Spot the pattern</h3>
+                    <p>View the distribution of your recorded categories in one chart before a conversation with your doctor.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">📄</div>
-                    <h3>PDF Reports</h3>
-                    <p>Generate a clean PDF of your readings. Share directly with your doctor at your next visit.</p>
+                    <h3>Prepare a doctor handoff</h3>
+                    <p>Generate a clean PDF of your readings to share at your next appointment.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">⏰</div>
-                    <h3>Reminders</h3>
-                    <p>Set morning and evening reminders so you never miss a reading. The AHA recommends measuring at the same time daily.</p>
+                    <h3>Set your own reminder</h3>
+                    <p>Choose morning and evening reminders that fit the measurement plan you and your clinician use.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">💡</div>
-                    <h3>Daily Health Tips</h3>
-                    <p>Expert-backed tips to help manage your blood pressure naturally, from diet to exercise to stress management.</p>
+                    <h3>Keep the focus on your record</h3>
+                    <p>Use the history and report as a factual starting point, not as a replacement for clinical guidance.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🔒</div>
-                    <h3>100% Offline</h3>
-                    <p>Your data stays on your phone. No account needed. No internet required. Your health data is yours alone.</p>
+                    <h3>Private by design</h3>
+                    <p>Readings stay on your phone. No account or internet connection is needed for the core record.</p>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="section-title">Blood Pressure Categories (AHA 2017)</h2>
+            <h2 class="section-title">Blood pressure reference categories (AHA 2017)</h2>
             <div class="card">
                 <table style="width: 100%; border-collapse: collapse;">
+                    <caption style="text-align:left; padding-bottom:12px; color:var(--text-secondary);">Reference categories used to label readings you enter. They do not provide a diagnosis.</caption>
                     <thead>
                         <tr>
                             <th style="padding: 10px 14px; border: 1px solid #E8E8E8; background: #F5F5F5; text-align: left;">Category</th>
@@ -294,15 +330,11 @@
         </section>
 
         <section class="cta">
-            <h2>Start Tracking Your Blood Pressure Today</h2>
-            <p>Free to use. No ads. No subscriptions. Just a simple tool that works.</p>
-            <a href="/go/bplog-web-app/"
+            <h2>One place for the readings you already take</h2>
+            <p>BP Log is a home-monitor log and doctor-handoff helper—not a measuring device or medical service.</p>
+            <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.purposelab.bplog&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dbplog-cta"
                data-goatcounter-click="ps-bplog-apppage-cta"
-               data-goatcounter-title="Download BP Log (app page: cta)"
-               class="btn btn-primary">
-                ▶ Download BP Log
-            </a>
-            <p style="margin-top:12px;font-size:13px;color:var(--text-secondary);">Or <a href="https://play.google.com/store/apps/details?id=com.purposelab.bplog&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dbplog-cta">open the Google Play listing directly</a>.</p>
+               data-goatcounter-title="Open BP Log on Google Play (bottom CTA)">Open BP Log on Google Play</a>
         </section>
 
         <section class="section">
@@ -320,7 +352,7 @@
 
             <div class="card">
                 <h3 style="margin-bottom: 8px;">What is AHA blood pressure classification?</h3>
-                <p style="color: var(--text-secondary);">The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129/less than 80), High Blood Pressure Stage 1 (130-139/80-89), High Blood Pressure Stage 2 (140+/90+), and Hypertensive Crisis (180+/120+). BP Log automatically classifies each reading.</p>
+                <p style="color: var(--text-secondary);">The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129 with diastolic below 80), High Blood Pressure Stage 1 (130-139 or 80-89), High Blood Pressure Stage 2 (140 or higher, or 90 or higher), and Hypertensive Crisis (systolic higher than 180 and/or diastolic higher than 120). BP Log automatically classifies each reading.</p>
             </div>
 
             <div class="card">
@@ -366,10 +398,6 @@
                 </li>
             </ul>
         </section>
-
-        <div class="card" style="margin-top: 32px; font-size: 14px; color: var(--text-muted);">
-            <strong>⚠️ Important:</strong> BP Log is a companion app for recording readings from your home blood pressure monitor (cuff device). BP Log does NOT measure blood pressure. It is not a medical device and does not diagnose, treat, cure, or prevent any medical condition. Always consult your healthcare provider for medical advice.
-        </div>
 
         <section class="section">
             <h2 class="section-title">From the blog</h2>

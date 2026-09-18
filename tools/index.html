@@ -44,7 +44,7 @@
       "name": "PurposeLab Studio Free Tools",
       "url": "https://purposelabstudio.com/tools/",
       "description": "Four free web tools that run entirely in the browser: a water intake calculator, a blood pressure category checker, a journaling prompt generator, and a white noise player.",
-      "dateModified": "2026-08-01",
+      "dateModified": "2026-09-18",
       "mainEntity": {
         "@type": "ItemList",
         "name": "PurposeLab Studio Free Tools",
@@ -89,37 +89,50 @@
 
         <section class="hero">
             <div class="eyebrow">~/ tools</div>
-            <h1>Free Tools</h1>
-            <p class="subtitle">Small, private, genuinely useful tools. No ads, no sign-up. Everything runs in your browser.</p>
-            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">PurposeLab Studio publishes four free web tools: a water intake calculator, a blood pressure category checker, a journaling prompt generator, and a white noise player. All four are free, run entirely in your browser, need no account, and store nothing on a server. There is no paid tier and no trial.</p>
+            <h1>Free tools for one small task</h1>
+            <p class="subtitle">Get a result now, see how it was made, and decide whether you need anything more.</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">Available tools</h2>
-            <div class="card" style="margin-bottom:16px;">
-                <h3 style="margin-bottom:6px;"><a href="/tools/water-intake-calculator/">💧 Daily Water Intake Calculator</a></h3>
-                <p style="color:var(--text-secondary);">The <a href="/tools/water-intake-calculator/">water intake calculator</a> turns your weight, activity level, and climate into a daily target in litres, using the common 30–35&nbsp;ml per kilogram estimate. It gives you a starting number and nothing more. It does not account for pregnancy, kidney or heart conditions, or medication that changes fluid balance, and it does not log what you actually drink through the day. If you want the tracking part, that lives in our <a href="/waterwise/">WaterWise app</a>.</p>
-            </div>
-            <div class="card" style="margin-bottom:16px;">
-                <h3 style="margin-bottom:6px;"><a href="/tools/blood-pressure-checker/">❤️‍🩹 Blood Pressure Category Checker</a></h3>
-                <p style="color:var(--text-secondary);">The <a href="/tools/blood-pressure-checker/">blood pressure checker</a> takes a systolic and a diastolic reading and reports which American Heart Association category those two numbers fall into. That is the whole operation: it compares your numbers against published cut-offs and names the band. It does not interpret the result, does not store or chart readings over time, and is not a diagnosis. For a log you keep yourself, see the <a href="/bplog/">BPLog app</a>.</p>
-            </div>
-            <div class="card">
-                <h3 style="margin-bottom:6px;"><a href="/tools/journal-prompt-generator/">📝 Journaling Prompt Generator</a></h3>
-                <p style="color:var(--text-secondary);">The <a href="/tools/journal-prompt-generator/">journaling prompt generator</a> hands you one writing prompt at a time from a fixed set, so a blank page has somewhere to start. Tap again for a different one. It does not save what you write, does not know anything about you, and does not arrange prompts into a course or a thirty-day programme. It is a way in, not a journal. The writing itself belongs somewhere private, which is what <a href="/folio/">Zolio</a> is for.</p>
-            </div>
-            <div class="card" style="margin-top:16px;">
-                <h3 style="margin-bottom:6px;"><a href="/tools/white-noise-player/">🔊 Free White Noise Player</a></h3>
-                <p style="color:var(--text-secondary);">The <a href="/tools/white-noise-player/">white noise player</a> generates white, pink, or brown noise in the browser and includes a sleep timer. Nothing is downloaded and no audio file is streamed; the sound is synthesised as it plays, which is why the page stays small. It does not offer rain loops, curated soundscapes, or a library to browse, and it stops when you close the tab.</p>
+        <section class="section" aria-labelledby="tools-title">
+            <h2 class="section-title" id="tools-title">Choose a task</h2>
+            <div class="article-grid">
+                <article class="article-card">
+                    <h3><a href="/tools/water-intake-calculator/">💧 Daily Water Intake Calculator</a></h3>
+                    <p>Get a starting daily-water estimate from weight, activity, and climate.</p>
+                    <p><strong>Method:</strong> 33 ml per kg, with fixed additions for activity and hot weather.</p>
+                    <p><strong>Limits:</strong> Educational estimate only; it does not account for individual health conditions or medication.</p>
+                    <p><a href="/waterwise/">Optional next step: WaterWise for day-to-day logging →</a></p>
+                </article>
+                <article class="article-card">
+                    <h3><a href="/tools/blood-pressure-checker/">❤️‍🩹 Blood Pressure Category Checker</a></h3>
+                    <p>See which published AHA category a pair of blood-pressure numbers falls into.</p>
+                    <p><strong>Method:</strong> Compares systolic and diastolic values against AHA cut-offs; the higher category wins.</p>
+                    <p><strong>Limits:</strong> Reference only, not a diagnosis, interpretation, or medical advice.</p>
+                    <p><a href="/bplog/">Optional next step: BP Log for an ongoing record →</a></p>
+                </article>
+                <article class="article-card">
+                    <h3><a href="/tools/journal-prompt-generator/">📝 Journaling Prompt Generator</a></h3>
+                    <p>Start writing with one prompt when a blank page feels like too much.</p>
+                    <p><strong>Method:</strong> Selects one question from a fixed, hand-written prompt set.</p>
+                    <p><strong>Limits:</strong> It does not save writing, learn about you, or create a programme.</p>
+                    <p><a href="/folio/">Optional next step: Zolio for private journal entries →</a></p>
+                </article>
+                <article class="article-card">
+                    <h3><a href="/tools/white-noise-player/">🔊 Free White Noise Player</a></h3>
+                    <p>Play white, pink, or brown noise with a volume control and sleep timer.</p>
+                    <p><strong>Method:</strong> Generates sound in the browser with the Web Audio API.</p>
+                    <p><strong>Limits:</strong> No sound library or offline app controls; playback ends when the tab closes.</p>
+                    <p><a href="/hushly/">Optional next step: Hushly for dedicated sleep sounds →</a></p>
+                </article>
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">What they cost and what they collect</h2>
+        <section class="section" aria-labelledby="tool-basics-title">
+            <h2 class="section-title" id="tool-basics-title">Before you use one</h2>
             <div class="card">
-                <p style="color:var(--text-secondary);">All four are free. There is no paid version, no trial that expires, no advertising, and no account to create. We do not ask for an email address to use any of them.</p>
-                <p style="color:var(--text-secondary);margin-top:12px;">They also run entirely on your device. Your weight, your blood pressure numbers, and anything you type are handled by JavaScript in the page and are never sent to us or to anyone else. Close the tab and the numbers are gone. The only thing the site records is a page view, through a cookie-less analytics counter that cannot identify you.</p>
-                <p style="color:var(--text-secondary);margin-top:12px;">These tools are the smallest things we build. If one of them is useful and you want it to remember something between visits, that is usually the point where an app makes more sense than a web page, and our <a href="/apps/">apps</a> follow the same rules: offline first, no account, nothing leaving the device.</p>
+                <p><strong>Instant and free:</strong> no account, trial, or payment is needed to use these four browser tools.</p>
+                <p style="margin-top:12px;"><strong>Your task inputs stay in the page:</strong> the calculator and checker work in browser JavaScript; the prompt tool has nowhere to enter an answer; and the player generates audio in the browser. They do not create a saved task history.</p>
+                <p style="margin-top:12px;"><strong>Know the boundary:</strong> health-related outputs are educational references, not personal medical guidance. The tool page explains its specific method and limit before you use it.</p>
             </div>
         </section>
         </main>

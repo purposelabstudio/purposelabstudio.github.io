@@ -21,6 +21,11 @@ t('normal 118/78', () => assert.equal(bpCategory(118, 78).key, 'normal'));
 t('elevated 125/78', () => assert.equal(bpCategory(125, 78).key, 'elevated'));
 t('stage1 132/85', () => assert.equal(bpCategory(132, 85).key, 'stage1'));
 t('stage2 145/95', () => assert.equal(bpCategory(145, 95).key, 'stage2'));
+t('exactly 180/120 remains stage2', () => assert.equal(bpCategory(180, 120).key, 'stage2'));
+t('crisis begins above either threshold', () => {
+  assert.equal(bpCategory(181, 80).key, 'crisis');
+  assert.equal(bpCategory(120, 121).key, 'crisis');
+});
 t('crisis 185/125', () => assert.equal(bpCategory(185, 125).key, 'crisis'));
 t('higher-of-two wins: 122/82 = stage1', () => assert.equal(bpCategory(122, 82).key, 'stage1'));
 t('returns a human label', () => assert.equal(typeof bpCategory(118, 78).label, 'string'));

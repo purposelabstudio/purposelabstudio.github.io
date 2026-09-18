@@ -27,12 +27,29 @@
     <link rel="preload" href="/assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../style.css">
     <style>
-      :root{ --paper:#F3ECDD; --paper-2:#E9DEC6; --ink:#4A3520; --ink-muted:#6E6A62; --accent:#836632; --accent-dark:#7A5E2C; --accent-ink:#F3ECDD; --gold:#876520; }
-      .qr-bridge { display:flex; align-items:center; gap:14px; margin:20px auto 0; padding:14px 16px;
-          background: var(--paper-2, #E9DEC6); border:1px solid rgba(0,0,0,.1); border-radius:14px; max-width:420px; }
+      :root{ --paper:#f4f1eb; --paper-2:#e6edf0; --ink:#27383c; --ink-soft:#506368; --ink-muted:#58676b; --accent:#426b75; --accent-dark:#2e535c; --accent-ink:#f8fbfb; --gold:#77633e; }
+      .zolio-page .nav { border-color:rgba(39,56,60,.14); }
+      .zolio-page .product-hero { max-width:46rem; margin:0 auto; padding-bottom:var(--space-5); }
+      .zolio-page .hero h1 { line-height:1.12; }
+      .zolio-page .hero-icon { width:56px; height:56px; margin-right:12px; vertical-align:-12px; }
+      .product-nav { display:flex; justify-content:center; gap:var(--space-3); flex-wrap:wrap; margin:0 auto var(--space-5); font-size:var(--text-sm); }
+      .product-nav a { color:var(--text-secondary); text-decoration:underline; }
+      .zolio-page .trust-facts { max-width:46rem; margin:0 auto; border-left:4px solid var(--accent); background:var(--surface-subtle); border-radius:0 var(--radius) var(--radius) 0; padding:var(--space-4); }
+      .zolio-page .trust-facts h2 { font-family:var(--font-display); font-size:var(--text-xl); margin-bottom:var(--space-2); }
+      .zolio-page .trust-facts ul { padding-left:1.2rem; color:var(--text-secondary); }
+      .zolio-page .trust-facts li + li { margin-top:var(--space-1); }
+      .zolio-page .journey { max-width:62rem; margin:0 auto; }
+      .zolio-page .journey-step { text-align:left; }
+      .zolio-page .journey-step .eyebrow { margin-bottom:var(--space-1); }
+      .zolio-page .journey-step h3 { font-family:var(--font-display); font-size:var(--text-xl); }
+      .zolio-page .journey-step p { color:var(--text-secondary); }
+      .zolio-page .contextual-paths { max-width:46rem; margin:0 auto; }
+      .zolio-page .contextual-paths .post-app-hint { margin:var(--space-2) 0; }
+      .zolio-page .cta .btn-outline { background:var(--surface-raised); }
+      .qr-bridge { display:flex; align-items:center; gap:14px; margin:20px auto 0; padding:14px 16px; background:var(--paper-2); border:1px solid var(--border); border-radius:14px; max-width:420px; }
       .qr-bridge img { width:84px; height:84px; border-radius:8px; background:#fff; padding:4px; }
-      .qr-bridge .qr-copy { font-size:14px; color: var(--text-secondary, #6b5d47); text-align:left; }
-      @media (max-width:600px){ .qr-bridge{ display:none; } }
+      .qr-bridge .qr-copy { font-size:14px; color:var(--text-secondary); text-align:left; }
+      @media (max-width:600px){ .qr-bridge{ display:none; } .product-nav{justify-content:flex-start;} }
     </style>
     <link rel="icon" href="icon.png?v=2" type="image/png">
     <!-- Structured Data -->
@@ -46,7 +63,7 @@
       "operatingSystem": "Android, iOS",
       "applicationCategory": "LifestyleApplication",
       "url": "https://purposelabstudio.com/folio/",
-      "dateModified": "2026-07-09",
+      "dateModified": "2026-09-18",
       "downloadUrl": ["https://play.google.com/store/apps/details?id=com.purposelab.folio", "https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692"],
       "author": {
         "@type": "Organization",
@@ -163,13 +180,13 @@
         })(window, document, "clarity", "script", "xjkggf7dd9");
     </script>
 </head>
-<body>
+<body class="zolio-page">
     <div class="container">
-
+        <header>
         <nav class="nav">
             <a href="/" class="nav-brand">PurposeLab Studio</a>
             <ul class="nav-links">
-                <li><a href="/folio/" class="active">Zolio</a></li>
+                <li><a href="/folio/" class="active" aria-current="page">Zolio</a></li>
                 <li><a href="/folio/journal/">Journal</a></li>
                 <li><a href="/blog/">Blog</a></li>
                 <li><a href="/apps/">More apps</a></li>
@@ -177,12 +194,13 @@
                 <li><a href="/support/">Support</a></li>
             </ul>
         </nav>
+        </header>
 
         <main>
 
-        <section class="hero">
+        <section class="hero product-hero" aria-labelledby="zolio-title">
             <div class="eyebrow">~/ zolio</div>
-            <h1><img src="icon.png?v=2" alt="Zolio" class="hero-icon">Zolio: A Quiet Notebook for Closing the Day</h1>
+            <h1 id="zolio-title"><img src="icon.png?v=2" alt="Zolio app icon" class="hero-icon">Zolio — A quiet notebook for closing the day</h1>
             <p class="subtitle">
                 A few lines at the end of the day is plenty. Zolio is a private daily journal that skips the scores and streaks, so missing a day never counts against you.
             </p>
@@ -202,42 +220,63 @@
                    class="btn btn-primary">
                     Get Zolio free
                 </a>
-                <a href="/folio/diary/" class="btn btn-outline">
-                    📔 Get it on Amazon (Physical copy)
-                </a>
             </div>
-            <p style="margin-top:12px;font-size:13px;color:var(--text-secondary);">Or open the <a href="https://play.google.com/store/apps/details?id=com.purposelab.folio&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dfolio-hero">Google Play</a> or <a href="https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692">App Store</a> listing directly.</p>
+            <p style="margin-top:12px;font-size:13px;color:var(--text-secondary);">Prefer a store listing? Open <a href="https://play.google.com/store/apps/details?id=com.purposelab.folio&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dfolio-hero" data-goatcounter-click="ps-folio-apppage-hero-play" data-goatcounter-title="Open Zolio on Google Play (app page hero)">Google Play</a> or the <a href="https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692?pt=129054116&amp;ct=website_folio_hero&amp;mt=8" data-goatcounter-click="ps-folio-apppage-hero-ios" data-goatcounter-title="Open Zolio on the App Store (app page hero)">App Store</a>.</p>
             <div class="qr-bridge">
                 <img src="/assets/qr-folio.svg" alt="QR code to install Zolio on your phone">
                 <span class="qr-copy"><strong>On a computer?</strong><br>Scan to install Zolio on your phone.</span>
             </div>
         </section>
 
-        <section class="section" style="padding-top:0;">
+        <nav class="product-nav" aria-label="Zolio page">
+            <a href="#a-gentle-rhythm">How Zolio feels</a>
+            <a href="#before-you-install">Before you install</a>
+            <a href="#zolio-features">What it holds</a>
+            <a href="#zolio-faq">Questions</a>
+        </nav>
+
+        <section class="section" style="padding-top:0;" aria-labelledby="zolio-summary">
+            <h2 id="zolio-summary" class="visually-hidden">What Zolio is</h2>
             <p style="font-size:1.1rem; line-height:1.6; max-width:720px; margin:0 auto; text-align:center; color: var(--text);">
                 <strong>Zolio is a free, offline, private daily journal and mood tracker for Android and iOS.</strong> It has no ads, no Zolio account, and no streak pressure, just a quiet notebook for writing a line or a page, keeping photographs, voice notes and things to do, and reflecting on your month. Your notebook stays on your device by default, with optional app lock. If you enable backup, Zolio copies it only to the personal Google Drive or iCloud account you choose.
             </p>
-            <p style="text-align:center; margin-top:14px;"><a href="/folio/journal/">New to journaling? Read the calm guide to daily journaling →</a></p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">Screenshots</h2>
-            <div class="screenshots">
-                <img src="screenshots/slide-01.png" alt="Zolio daily journal timeline on a phone" loading="lazy">
-                <img src="screenshots/slide-02.png" alt="Quick journal entry with mood in about two minutes" loading="lazy">
-                <img src="screenshots/slide-03.png" alt="Paper textures, color palettes, and light and dark themes" loading="lazy">
-                <img src="screenshots/slide-04.png" alt="Private, offline journal with fingerprint app lock" loading="lazy">
-                <img src="screenshots/slide-05.png" alt="Gentle monthly rhythm with no streaks or guilt" loading="lazy">
-                <img src="screenshots/slide-06.png" alt="Past entries organized by mood" loading="lazy">
-                <img src="screenshots/slide-07.png" alt="Home screen widgets for writing at a glance" loading="lazy">
-                <img src="screenshots/slide-08.png" alt="Google Drive backup and PDF export" loading="lazy">
+        <section id="a-gentle-rhythm" class="section journey" aria-labelledby="journey-title">
+            <h2 id="journey-title" class="section-title">A gentle rhythm, not a streak</h2>
+            <div class="product-grid">
+                <article class="product-card journey-step">
+                    <p class="eyebrow">01 / arrive</p>
+                    <h3>Write the amount you have</h3>
+                    <p>A sentence is enough. Focus mode leaves room for your words; a longer page is there when you want it.</p>
+                </article>
+                <article class="product-card journey-step">
+                    <p class="eyebrow">02 / notice</p>
+                    <h3>Keep the small context</h3>
+                    <p>Log a mood or a few habits beside the entry. Miss a day and nothing breaks or counts against you.</p>
+                </article>
+                <article class="product-card journey-step">
+                    <p class="eyebrow">03 / return</p>
+                    <h3>See what kept returning</h3>
+                    <p>Search when you need a moment back, then use monthly reflections to notice recurring themes at your own pace.</p>
+                </article>
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">A Gentle Space for Your Thoughts</h2>
-            <p class="post-app-hint">📝 Not sure what to write? Try our free <a href="/tools/journal-prompt-generator/">Journaling Prompt Generator</a>.</p>
-            <p class="post-app-hint">📓 Comparing journal apps? See <a href="/best-free-journal-app/">the best free journal app guide</a>.</p>
+        <section id="before-you-install" class="section" aria-labelledby="before-title">
+            <div class="trust-facts">
+                <h2 id="before-title">Before you install</h2>
+                <ul>
+                    <li><strong>Start quietly:</strong> free core journaling, mood, habits, and monthly reflections; no ads or Zolio account required.</li>
+                    <li><strong>Keep the notebook close:</strong> entries stay on your device by default; biometric or PIN app lock is available.</li>
+                    <li><strong>Choose backup deliberately:</strong> if enabled, a copy goes only to your personal Google Drive or iCloud account, not Zolio or PurposeLab servers.</li>
+                    <li><strong>Know the name:</strong> Folio is now Zolio. Existing entries and backups carry over with the update; nothing needs reinstalling or migrating.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="zolio-features" class="section" aria-labelledby="features-title">
+            <h2 id="features-title" class="section-title">A private place for the details</h2>
             <div class="features">
                 <div class="feature">
                     <div class="feature-icon">✍️</div>
@@ -282,18 +321,44 @@
             </div>
         </section>
 
+        <section class="section" aria-labelledby="zolio-context-title">
+            <div class="contextual-paths">
+                <h2 id="zolio-context-title" class="section-title">Find your next quiet step</h2>
+                <p class="post-app-hint">📝 Not sure what to write? Try the free <a href="/tools/journal-prompt-generator/">Journaling Prompt Generator</a>.</p>
+                <p class="post-app-hint">🌿 New to journaling? Read the <a href="/folio/journal/">calm guide to daily journaling</a>.</p>
+                <p class="post-app-hint">📓 Comparing journal apps? See <a href="/best-free-journal-app/">the best free journal app guide</a>.</p>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="screenshots-title">
+            <h2 id="screenshots-title" class="section-title">A look inside</h2>
+            <div class="screenshots">
+                <img src="screenshots/slide-01.png" alt="Zolio daily journal timeline on a phone" loading="lazy">
+                <img src="screenshots/slide-02.png" alt="Quick journal entry with mood in about two minutes" loading="lazy">
+                <img src="screenshots/slide-03.png" alt="Paper textures, color palettes, and light and dark themes" loading="lazy">
+                <img src="screenshots/slide-04.png" alt="Private, offline journal with fingerprint app lock" loading="lazy">
+                <img src="screenshots/slide-05.png" alt="Gentle monthly rhythm with no streaks or guilt" loading="lazy">
+                <img src="screenshots/slide-06.png" alt="Past entries organized by mood" loading="lazy">
+                <img src="screenshots/slide-07.png" alt="Home screen widgets for writing at a glance" loading="lazy">
+                <img src="screenshots/slide-08.png" alt="Google Drive backup and PDF export" loading="lazy">
+            </div>
+        </section>
+
         <section class="cta">
-            <h2>Start Your Quiet Ritual Tonight</h2>
+            <h2>Start with a page, when you are ready</h2>
             <p>Journaling is free to start, with premium features when you want to go deeper. No ads, and no feed to perform for. If you'd rather see how it feels first, you can <a href="/folio/try/">write a page right here in your browser</a> before you install anything.</p>
             <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
                 <a href="https://play.google.com/store/apps/details?id=com.purposelab.folio&amp;referrer=utm_source%3Dwebsite%26utm_medium%3Dapppage%26utm_campaign%3Dfolio-cta"
-                   data-goatcounter-click="ps-folio-apppage-cta"
+                   data-goatcounter-click="ps-folio-apppage-cta-play"
                    data-goatcounter-title="Download Zolio (app page: cta)"
-                   class="btn btn-primary">
-                    Get it on Google Play
+                   class="btn btn-outline">
+                    View on Google Play
                 </a>
-                <a href="https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692" class="btn btn-primary">
-                    Get it on App Store
+                <a href="https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692?pt=129054116&amp;ct=website_folio_cta&amp;mt=8"
+                   data-goatcounter-click="ps-folio-apppage-cta-ios"
+                   data-goatcounter-title="Open Zolio on the App Store (app page cta)"
+                   class="btn btn-outline">
+                    View on the App Store
                 </a>
                 <a href="/folio/diary/" class="btn btn-outline">
                     📔 The Zolio Diary on Amazon
@@ -332,8 +397,8 @@
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">Frequently Asked Questions</h2>
+        <section id="zolio-faq" class="section" aria-labelledby="faq-title">
+            <h2 id="faq-title" class="section-title">Frequently Asked Questions</h2>
 
             <div class="card">
                 <h3 style="margin-bottom: 8px;">Is Zolio free?</h3>
@@ -381,8 +446,8 @@
             </div>
         </section>
 
-        <section class="section">
-            <h2 class="section-title">Related Articles</h2>
+        <section class="section" aria-labelledby="reading-title">
+            <h2 id="reading-title" class="section-title">Keep exploring</h2>
             <ul class="blog-list">
                 <li class="blog-item">
                     <h3><a href="/blog/why-journaling-fails-and-how-to-stick-with-it/">Why Most People Fail at Journaling (And How to Stick With It)</a></h3>
@@ -392,15 +457,7 @@
                     <h3><a href="/blog/daily-journal-vs-mood-tracker-why-you-need-both/">Daily Journal vs Mood Tracker: Why You Need Both</a></h3>
                     <p>How combining journals and mood tracking reveals insights neither can show alone.</p>
                 </li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2 class="section-title">From the blog</h2>
-            <ul class="blog-list">
                 <li class="blog-item"><h3><a href="/blog/what-happens-if-someone-reads-your-journal/">What Happens If Someone Reads Your Journal?</a></h3><p>Where your entries actually go, and how to keep a journal only you can read.</p></li>
-                <li class="blog-item"><h3><a href="/blog/why-journaling-fails-and-how-to-stick-with-it/">Why Journaling Fails and How to Stick With It</a></h3><p>The 5 reasons journaling fails, and the science-backed fix.</p></li>
-                <li class="blog-item"><h3><a href="/blog/daily-journal-vs-mood-tracker-why-you-need-both/">Daily Journal vs Mood Tracker: Why You Need Both</a></h3><p>How combining the two gives you the full picture.</p></li>
                 <li class="blog-item"><h3><a href="/blog/journaling-prompts-for-anxiety/">30 Journaling Prompts for Anxiety</a></h3><p>Ground, untangle, and reframe anxious thoughts.</p></li>
                 <li class="blog-item"><h3><a href="/blog/journaling-prompts-for-self-discovery/">35 Journaling Prompts for Self-Discovery</a></h3><p>Explore your values, patterns, and what you really want.</p></li>
             </ul>

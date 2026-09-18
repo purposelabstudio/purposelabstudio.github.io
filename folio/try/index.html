@@ -4,35 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <title>Try Zolio | a calm, private journal you'll actually keep</title>
-  <meta name="description" content="Write one line, the way Zolio feels. A calm, private journal you'll actually keep.">
+  <title>Try Zolio in your browser | Private one-page journal trial</title>
+  <meta name="description" content="Try Zolio's calm daily journal in your browser: write a line, choose a mood, mark tiny wins, and close your first page without creating an account.">
   <link rel="canonical" href="https://purposelabstudio.com/folio/try/">
 
   <!-- Open Graph / Twitter card (for Medium / Substack / Reddit link previews) -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://purposelabstudio.com/folio/try/">
-  <meta property="og:title" content="Try Zolio | a page a day">
-  <meta property="og:description" content="Write one line, the way Zolio feels. A calm, private journal you'll actually keep. No account, no cloud.">
+  <meta property="og:title" content="Try Zolio in your browser">
+  <meta property="og:description" content="Write one private page, choose a mood, and see how Zolio's calm daily journal feels before you install it.">
   <meta property="og:image" content="https://purposelabstudio.com/folio/try/og-try-folio.png">
   <meta property="og:image:secure_url" content="https://purposelabstudio.com/folio/try/og-try-folio.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Zolio, write one line, the calm journal you'll actually keep">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Try Zolio | a page a day">
-  <meta name="twitter:description" content="Write one line, the way Zolio feels. A calm, private journal you'll actually keep.">
+  <meta name="twitter:title" content="Try Zolio in your browser">
+  <meta name="twitter:description" content="Write one private page and see how Zolio's calm daily journal feels before you install it.">
   <meta name="twitter:image" content="https://purposelabstudio.com/folio/try/og-try-folio.png">
   <meta name="twitter:image:src" content="https://purposelabstudio.com/folio/try/og-try-folio.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=DM+Sans:wght@500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="/assets/fonts/fraunces-700.woff2" as="font" type="font/woff2" crossorigin>
 
   <style>
+    @font-face {
+      font-family: 'Fraunces';
+      font-style: normal;
+      font-weight: 700;
+      src: url('/assets/fonts/fraunces-700.woff2') format('woff2');
+      font-display: swap;
+    }
     :root {
       --bg:#FAF6F0; --ink:#2D2A26; --muted:#B5A99A; --faint:#C5BAB0;
       --hair:#E8E2D8; --gold:#A08560; --gold-deep:#7A5C28; --sel-fill:#E8DCC8; --sel-border:#C4A87C;
       --paper-line:#E8E2D8;
+      --font-body:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      --font-display:'Fraunces', Georgia, "Times New Roman", serif;
+      --font-hand:'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
     }
     .stage[data-palette="rose"] {
       --bg:#F8F5F7; --ink:#3A3238; --muted:#A89AA4; --faint:#BCAFB8;
@@ -47,7 +55,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: var(--font-body);
       background: #EDE7DF;
       display: flex; flex-direction: column; align-items: center;
       padding: 16px; min-height: 100vh;
@@ -58,6 +66,10 @@
       display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; justify-content: center; }
     .try-footer a { color: #756D63; text-decoration: none; font-size: 13px; }
     .try-footer a:hover { color: #5A5148; text-decoration: underline; }
+    .try-context { width: 100%; max-width: 640px; margin: 18px auto 4px; text-align: center; color: #5A5148; }
+    .try-context h1 { color: #2D2A26; font-family: var(--font-display); font-size: 22px; line-height: 1.25; }
+    .try-context p { margin-top: 6px; font-size: 13px; line-height: 1.55; }
+    .try-context a { color: #684F27; text-underline-offset: 2px; }
     .stage {
       width: 100%; max-width: 400px; aspect-ratio: 9 / 19;
       max-height: 92vh;
@@ -81,20 +93,20 @@
       radial-gradient(circle at 85% 22%, rgba(150,108,60,0.06) 0 2px, transparent 3px),
       radial-gradient(circle at 30% 62%, rgba(150,108,60,0.05) 0 2px, transparent 3px); }
     .today-header { padding: 22px 20px 8px; display: flex; align-items: flex-start; justify-content: space-between; }
-    .t-day { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; color: var(--ink); line-height: 1; }
+    .t-day { font-family: var(--font-display); font-size: 38px; font-weight: 700; color: var(--ink); line-height: 1; }
     .t-sub { font-size: 11px; color: var(--muted); margin-top: 5px; }
     .t-controls { display: flex; align-items: center; gap: 7px; }
     .t-ctrl { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--hair);
-      background: var(--bg); color: var(--muted); font-family: 'Caveat', cursive; font-size: 15px;
+      background: var(--bg); color: var(--muted); font-family: var(--font-hand); font-size: 15px;
       display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
     .t-ctrl svg { color: var(--muted); }
     .t-ctrl-dot .dot { width: 15px; height: 15px; border-radius: 50%; background: var(--sel-border);
       box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); transition: background .2s ease; }
     .t-close { width: 30px; height: 30px; background: var(--bg); border: 1px solid var(--hair);
       border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 14px; }
-    .t-prompt { font-family: 'Caveat', cursive; font-size: 20px; color: var(--ink);
+    .t-prompt { font-family: var(--font-hand); font-size: 20px; color: var(--ink);
       padding: 6px 20px 12px; }
-    .t-label { font-family: 'Caveat', cursive; font-size: 15px; color: var(--muted); padding: 4px 20px 6px; }
+    .t-label { font-family: var(--font-hand); font-size: 15px; color: var(--muted); padding: 4px 20px 6px; }
     .t-moods { display: flex; gap: 6px; padding: 0 20px 12px; }
     .t-mood { flex: 1; padding: 8px 2px; border: 1px solid var(--hair); border-radius: 10px;
       text-align: center; background: transparent; cursor: pointer; transition: all .15s ease; }
@@ -103,15 +115,15 @@
     .t-mood.sel { background: var(--sel-fill); border-color: var(--sel-border); }
     .t-journal-wrap { flex: 1; padding: 0 20px; display: flex; }
     .t-journal { flex: 1; width: 100%; border: none; outline: none; resize: none;
-      background: transparent; font-family: 'Caveat', cursive; font-size: 20px; color: var(--ink);
+      background: transparent; font-family: var(--font-hand); font-size: 20px; color: var(--ink);
       line-height: 1.7; padding: 4px 0; }
     .t-journal::placeholder { color: var(--faint); }
     .t-habits { padding: 6px 20px 2px; }
-    .t-habits-label { font-family: 'Caveat', cursive; font-size: 18px; color: var(--ink); padding-bottom: 8px; }
+    .t-habits-label { font-family: var(--font-hand); font-size: 18px; color: var(--ink); padding-bottom: 8px; }
     .t-habit-row { display: flex; flex-wrap: wrap; gap: 8px; }
     .t-habit { display: inline-flex; align-items: center; gap: 4px; padding: 8px 15px;
       border: 1.5px solid var(--hair); border-radius: 100px; background: transparent;
-      font-family: 'DM Sans', -apple-system, sans-serif; font-size: 13px; font-weight: 500;
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
       color: var(--muted); cursor: pointer; transition: all .15s ease; }
     .t-habit.done { background: var(--sel-fill); border-color: var(--sel-border); color: var(--gold-deep); font-weight: 600; }
     .t-habit .tick { display: none; font-size: 11px; line-height: 1; }
@@ -132,9 +144,9 @@
       background: radial-gradient(circle, rgba(160,133,96,0.18), transparent 70%);
       animation: bloom 2.4s ease-in-out infinite; }
     @keyframes bloom { 0%,100% { transform: scale(0.92); opacity: .7; } 50% { transform: scale(1.05); opacity: 1; } }
-    .r-line { font-family: 'Caveat', cursive; font-size: 22px; color: var(--ink);
+    .r-line { font-family: var(--font-hand); font-size: 22px; color: var(--ink);
       max-width: 260px; position: relative; }
-    .r-confirm { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--ink); position: relative; }
+    .r-confirm { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--ink); position: relative; }
     .r-keep { font-size: 14px; color: var(--muted); position: relative; }
     .r-stores { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 260px; position: relative; }
     .r-store { display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -152,7 +164,10 @@
       body { padding: 0; }
       .stage { max-width: 100%; max-height: 100vh; border-radius: 0; aspect-ratio: auto; height: 100vh; }
     }
-    .t-mood:focus-visible, .t-cta:focus-visible, .r-store:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .t-ctrl:focus-visible, .t-mood:focus-visible, .t-habit:focus-visible, .t-cta:focus-visible,
+    .r-store:focus-visible, .r-again:focus-visible, .try-context a:focus-visible, .try-footer a:focus-visible {
+      outline: 2px solid var(--gold); outline-offset: 2px;
+    }
   </style>
   <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
   <script type="application/ld+json">
@@ -161,25 +176,28 @@
     "@type": "WebPage",
     "name": "Try Zolio",
     "url": "https://purposelabstudio.com/folio/try/",
-    "description": "Write one line, the way Zolio feels. A calm, private journal you'll actually keep.",
-    "dateModified": "2026-08-01",
-    "isPartOf": { "@type": "WebSite", "name": "PurposeLab Studio", "url": "https://purposelabstudio.com" }
+    "description": "An interactive browser trial of Zolio's daily journal: write a line, choose a mood, mark tiny wins, and close a first page without creating an account.",
+    "dateModified": "2026-09-18",
+    "isPartOf": { "@type": "WebSite", "name": "PurposeLab Studio", "url": "https://purposelabstudio.com" },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "Zolio",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Android, iOS",
+      "url": "https://purposelabstudio.com/folio/"
+    }
   }
   </script>
   <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
           async src="//gc.zgo.at/count.js"></script>
-    <!-- Microsoft Clarity -->
-    <script>
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "xjkggf7dd9");
-    </script>
 </head>
 <body>
-  <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0">Try Zolio: a calm, private journal you'll actually keep</h1>
   <div class="stage-wrap">
+  <section class="try-context" aria-labelledby="trial-title">
+    <h1 id="trial-title">Try one page of Zolio</h1>
+    <p>Write a line, choose a mood, and mark a few tiny wins to see how Zolio closes a daily journal page.</p>
+    <p>What you type stays only in this open browser page: the trial does not save or submit it, and reloading clears it. Explore the <a href="/folio/journal/">journal hub</a> or learn more <a href="/folio/">about Zolio</a>.</p>
+  </section>
   <main class="stage" id="stage">
     <section class="today" id="screen1" data-paper="dots">
       <div class="today-header">
@@ -203,23 +221,23 @@
 
       <div class="t-label">A feeling, if you like</div>
       <div class="t-moods" id="moods" role="group" aria-label="Mood">
-        <button class="t-mood" data-mood="great" aria-label="Great">
+        <button class="t-mood" data-mood="great" aria-label="Great" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.3" fill="#FFC83D"/><g stroke="#FFC83D" stroke-opacity="0.6" stroke-width="1.6" stroke-linecap="round"><line x1="18.3" y1="12" x2="20.6" y2="12"/><line x1="16.45" y1="16.45" x2="18.08" y2="18.08"/><line x1="12" y1="18.3" x2="12" y2="20.6"/><line x1="7.55" y1="16.45" x2="5.92" y2="18.08"/><line x1="5.7" y1="12" x2="3.4" y2="12"/><line x1="7.55" y1="7.55" x2="5.92" y2="5.92"/><line x1="12" y1="5.7" x2="12" y2="3.4"/><line x1="16.45" y1="7.55" x2="18.08" y2="5.92"/></g></svg>
           <span class="lbl">Great</span>
         </button>
-        <button class="t-mood" data-mood="good" aria-label="Good">
+        <button class="t-mood" data-mood="good" aria-label="Good" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 C5.5 8.5, 5.5 14, 12 20 C18.5 14, 18.5 8.5, 12 4 Z" fill="#4EC44E" fill-opacity="0.78"/><path d="M12 6.5 L12 18" stroke="#4EC44E" stroke-opacity="0.45" stroke-width="1" stroke-linecap="round"/></svg>
           <span class="lbl">Good</span>
         </button>
-        <button class="t-mood" data-mood="okay" aria-label="Okay">
+        <button class="t-mood" data-mood="okay" aria-label="Okay" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><defs><mask id="moon-mask"><rect width="24" height="24" fill="black"/><circle cx="12" cy="12" r="7" fill="white"/><circle cx="15.2" cy="10.8" r="6" fill="black"/></mask></defs><rect width="24" height="24" fill="#F5C842" fill-opacity="0.82" mask="url(#moon-mask)"/></svg>
           <span class="lbl">Okay</span>
         </button>
-        <button class="t-mood" data-mood="low" aria-label="Low">
+        <button class="t-mood" data-mood="low" aria-label="Low" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="8.5" rx="6" ry="3.3" fill="#5BBFEF" fill-opacity="0.32"/><g stroke="#5BBFEF" stroke-opacity="0.6" stroke-width="1.7" stroke-linecap="round"><line x1="9" y1="13.5" x2="8.2" y2="16.8"/><line x1="12" y1="14.5" x2="11.2" y2="17.8"/><line x1="15" y1="13.5" x2="14.2" y2="16.8"/></g></svg>
           <span class="lbl">Low</span>
         </button>
-        <button class="t-mood" data-mood="rough" aria-label="Rough">
+        <button class="t-mood" data-mood="rough" aria-label="Rough" aria-pressed="false">
           <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="16" rx="6.6" ry="2.2" fill="#B0A59C" fill-opacity="0.22"/><ellipse cx="12" cy="13.5" rx="6" ry="3.7" fill="#B0A59C" fill-opacity="0.62"/><ellipse cx="10.3" cy="11.9" rx="2.6" ry="1.3" fill="#B0A59C" fill-opacity="0.3"/></svg>
           <span class="lbl">Rough</span>
         </button>
@@ -228,14 +246,16 @@
       <div class="t-habits">
         <div class="t-habits-label">Tiny wins of the day</div>
         <div class="t-habit-row" id="habits">
-          <button class="t-habit" data-habit="walk"><span class="tick">✓</span>Walk</button>
-          <button class="t-habit" data-habit="read"><span class="tick">✓</span>Read</button>
-          <button class="t-habit" data-habit="water"><span class="tick">✓</span>Drink water</button>
+          <button class="t-habit" data-habit="walk" aria-pressed="false"><span class="tick">✓</span>Walk</button>
+          <button class="t-habit" data-habit="read" aria-pressed="false"><span class="tick">✓</span>Read</button>
+          <button class="t-habit" data-habit="water" aria-pressed="false"><span class="tick">✓</span>Drink water</button>
         </div>
       </div>
 
       <div class="t-footer" id="footer">
-        <button class="t-cta" id="closeDay">Close the day ✦</button>
+        <button class="t-cta" id="closeDay"
+                data-goatcounter-click="folio-try-complete"
+                data-goatcounter-title="Complete Zolio browser trial">Close the day ✦</button>
         <div class="t-privacy">
           <span>🔒 Stays on your device. No account, no cloud.</span>
         </div>
@@ -250,9 +270,13 @@
       <div class="r-stores">
         <a class="r-store primary" id="playLink"
            href="https://play.google.com/store/apps/details?id=com.purposelab.folio&referrer=utm_source%3Dweb%26utm_medium%3Ddemo%26utm_campaign%3Dweb_demo"
+           data-goatcounter-click="folio-try-store-android"
+           data-goatcounter-title="Open Zolio on Google Play (browser trial)"
            target="_blank" rel="noopener">Get it on Google Play</a>
         <a class="r-store" id="appStoreLink"
            href="https://apps.apple.com/app/id6781551692?ct=web_demo"
+           data-goatcounter-click="folio-try-store-ios"
+           data-goatcounter-title="Open Zolio on the App Store (browser trial)"
            target="_blank" rel="noopener">Download on the App Store</a>
       </div>
       <button class="r-again" id="writeAgain">write another line</button>
@@ -296,8 +320,14 @@
       const btn = e.target.closest('.t-mood');
       if (!btn) return;
       const wasSel = btn.classList.contains('sel');
-      document.querySelectorAll('.t-mood').forEach(b => b.classList.remove('sel'));
-      if (!wasSel) btn.classList.add('sel');
+      document.querySelectorAll('.t-mood').forEach(b => {
+        b.classList.remove('sel');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      if (!wasSel) {
+        btn.classList.add('sel');
+        btn.setAttribute('aria-pressed', 'true');
+      }
     });
 
     // Habits — independent multi-select check-off.
@@ -305,6 +335,7 @@
       const btn = e.target.closest('.t-habit');
       if (!btn) return;
       btn.classList.toggle('done');
+      btn.setAttribute('aria-pressed', String(btn.classList.contains('done')));
     });
 
     // Journal reference (used by the reveal handler below).
@@ -335,7 +366,11 @@
     });
 
     // ── Personalization: font · paper · palette (a taste of Zolio's look) ──
-    const fonts = ["'Caveat', cursive", "'Playfair Display', serif", "'DM Sans', sans-serif"];
+    const fonts = [
+      "var(--font-hand)",
+      "var(--font-display)",
+      "var(--font-body)"
+    ];
     let fontIdx = 0;
     const fontAa = document.getElementById('fontAa');
     document.getElementById('fontBtn').addEventListener('click', () => {

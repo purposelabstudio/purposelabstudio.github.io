@@ -33,7 +33,7 @@
       "@type": "WebApplication",
       "name": "Blood Pressure Category Checker",
       "url": "https://purposelabstudio.com/tools/blood-pressure-checker/",
-      "dateModified": "2026-07-09",
+      "dateModified": "2026-09-18",
       "applicationCategory": "HealthApplication",
       "operatingSystem": "Any (web)",
       "browserRequirements": "Requires JavaScript",
@@ -57,7 +57,7 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "What is AHA blood pressure classification?", "acceptedAnswer": { "@type": "Answer", "text": "The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129/less than 80), High Blood Pressure Stage 1 (130-139/80-89), High Blood Pressure Stage 2 (140+/90+), and Hypertensive Crisis (180+/120+)." } },
+        { "@type": "Question", "name": "What is AHA blood pressure classification?", "acceptedAnswer": { "@type": "Answer", "text": "The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129/less than 80), High Blood Pressure Stage 1 (130-139 or 80-89), High Blood Pressure Stage 2 (140 or higher, or 90 or higher), and Hypertensive Crisis (higher than 180 and/or higher than 120)." } },
         { "@type": "Question", "name": "Which number matters more, systolic or diastolic?", "acceptedAnswer": { "@type": "Answer", "text": "Your category is set by whichever number falls into the higher range. If your systolic and diastolic fall in different categories, the more severe one applies." } },
         { "@type": "Question", "name": "Can this checker replace my doctor's advice?", "acceptedAnswer": { "@type": "Answer", "text": "No. This is an informational reference using AHA cut-offs, not a medical diagnosis. Always consult your doctor for decisions about blood pressure management." } }
       ]
@@ -66,14 +66,6 @@
     <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
     <script data-goatcounter="https://purposelabstudio.goatcounter.com/count"
             async src="//gc.zgo.at/count.js"></script>
-    <!-- Microsoft Clarity -->
-    <script>
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "xjkggf7dd9");
-    </script>
 </head>
 <body>
     <div class="container">
@@ -96,8 +88,8 @@
         <section class="hero">
             <div class="eyebrow">~/ tools / blood-pressure</div>
             <h1>Blood Pressure Category Checker</h1>
-            <p class="subtitle">Enter a reading to see its AHA category. Reference only, the check runs entirely in your browser, nothing is stored or sent.</p>
-            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">The American Heart Association classifies blood pressure as <strong>Normal</strong> (below 120/80&nbsp;mmHg), <strong>Elevated</strong> (120–129 and below 80), <strong>Stage&nbsp;1 Hypertension</strong> (130–139 or 80–89), <strong>Stage&nbsp;2 Hypertension</strong> (140+ or 90+), and <strong>Hypertensive Crisis</strong> (above 180/120). Enter your systolic and diastolic numbers below to see your category instantly. Nothing is stored or sent.</p>
+            <p class="subtitle">Enter a reading to see its AHA category. Reference only: the check runs entirely in your browser, and the numbers are not stored or sent.</p>
+            <p class="answer-lead" style="max-width:660px;margin:14px auto 0;font-size:16px;line-height:1.65;color:var(--text-secondary);">The American Heart Association classifies blood pressure as <strong>Normal</strong> (below 120/80&nbsp;mmHg), <strong>Elevated</strong> (120–129 and below 80), <strong>Stage&nbsp;1 Hypertension</strong> (130–139 or 80–89), <strong>Stage&nbsp;2 Hypertension</strong> (140 or higher, or 90 or higher), and <strong>Hypertensive Crisis</strong> (systolic higher than 180 and/or diastolic higher than 120). Enter your systolic and diastolic numbers below to see your category instantly. Nothing is stored or sent.</p>
         </section>
 
         <section class="section">
@@ -126,7 +118,7 @@
             <h3>The cut-offs it applies</h3>
             <p>All figures are in millimetres of mercury (mmHg), and they are the American Heart Association's published boundaries:</p>
             <ul>
-                <li><strong>Hypertensive Crisis</strong>: systolic 180 or above, or diastolic 120 or above.</li>
+                <li><strong>Hypertensive Crisis</strong>: systolic higher than 180, and/or diastolic higher than 120.</li>
                 <li><strong>High Blood Pressure (Stage 2)</strong>: systolic 140 or above, or diastolic 90 or above.</li>
                 <li><strong>High Blood Pressure (Stage 1)</strong>: systolic 130 or above, or diastolic 80 or above.</li>
                 <li><strong>Elevated</strong>: systolic 120 to 129, with diastolic below 80.</li>
@@ -142,7 +134,7 @@
             <h2>Frequently asked questions</h2>
 
             <h3>What is AHA blood pressure classification?</h3>
-            <p>The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129/less than 80), High Blood Pressure Stage 1 (130-139/80-89), High Blood Pressure Stage 2 (140+/90+), and Hypertensive Crisis (180+/120+).</p>
+            <p>The American Heart Association (AHA) classifies blood pressure into categories: Normal (less than 120/80), Elevated (120-129 with diastolic below 80), High Blood Pressure Stage 1 (130-139 or 80-89), High Blood Pressure Stage 2 (140 or higher, or 90 or higher), and Hypertensive Crisis (systolic higher than 180 and/or diastolic higher than 120).</p>
 
             <h3>Which number matters more, systolic or diastolic?</h3>
             <p>Your category is set by whichever number falls into the higher range. If your systolic and diastolic fall in different categories, the more severe one applies.</p>
@@ -188,9 +180,15 @@
     <script type="module">
         import { bpCategory } from './calc.js';
         const $ = (s) => document.querySelector(s);
+        const track = (path, title) => {
+            if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+                window.goatcounter.count({ path, title, event: true });
+            }
+        };
         $('#calc').addEventListener('submit', () => {
             const r = bpCategory($('#sys').value, $('#dia').value);
             $('#result').innerHTML = `<p style="font-size:20px;margin:8px 0;"><strong>${r.label}</strong></p><p style="color:var(--text-secondary);">${r.note}</p><p style="font-size:13px;color:var(--text-secondary);">Reference only, not a diagnosis. Always confirm with your doctor.</p>`;
+            track('tool-bp-checker-complete', 'Complete blood pressure category check');
         });
     </script>
 </body>
