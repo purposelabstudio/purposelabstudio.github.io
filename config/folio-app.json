@@ -12,6 +12,9 @@
     "exportFreeForAll": false,
     "biometricFreeForAll": false
   },
+  "clarity": {
+    "enabled": true
+  },
   "founding": {
     "_comment": "To REOPEN the Circle set BOTH enabled:true AND status to 'open' (ignores cap) or 'auto' (offer until the live count hits cap). status 'closed' or enabled:false is a hard stop — every upsell routes to the paid paywall (/plus). The app fails closed: a dropped/partial founding block is treated as closed, never reopened. Keep in sync with the bundled asset.",
     "enabled": false,
