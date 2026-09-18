@@ -1,4 +1,4 @@
-// tools/build-links.mjs — generate trackable short-link redirect pages under /go/.
+// tools/build-links.mjs - generate trackable short-link redirect pages under /go/.
 //
 // Reads tools/link-config.json and writes one smart redirect page per
 // app × placement to go/<app>-<placement>/index.html, plus a registry page at
@@ -116,7 +116,7 @@ function webUrl(app, p) {
 }
 
 /** App Store URL carrying Apple's campaign token (ct), plus the account
- *  provider token (pt) + mt=8 when configured — both are required for the
+ *  provider token (pt) + mt=8 when configured - both are required for the
  *  campaign to register in App Store Connect App Analytics. */
 function appStoreUrl(app, p) {
   if (!app.ios) return null;
@@ -166,7 +166,7 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
 
   // Card metadata for social unfurls.
   const availability = app.availability || (appStore ? 'Google Play & App Store' : 'Google Play');
-  const ogTitle = `${app.name} — ${app.tagline.split(/\.\s/)[0]}`;
+  const ogTitle = `${app.name} - ${app.tagline.split(/\.\s/)[0]}`;
   const ogDesc = web
     ? `${app.tagline} ${availability}.`
     : `${app.tagline} No account, no ads, works offline. Free on ${appStore ? 'Android & iPhone' : 'Android'}.`;
@@ -193,7 +193,7 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
 <meta property="og:image" content="${esc(ogImage)}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="${esc(app.name)} — ${esc(availability)}">
+<meta property="og:image:alt" content="${esc(app.name)} - ${esc(availability)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(ogTitle)}">
 <meta name="twitter:description" content="${esc(ogDesc)}">
@@ -310,7 +310,7 @@ function redirectorPage(opts) {
     };
   }
   // Unfurl card: app-specific for a per-app share endpoint (/go/<app>), else generic.
-  const ogTitle = appMeta ? `${appMeta.name} — ${appMeta.tagline.split(/\.\s/)[0]}` : 'PurposeLab apps';
+  const ogTitle = appMeta ? `${appMeta.name} - ${appMeta.tagline.split(/\.\s/)[0]}` : 'PurposeLab apps';
   const ogDesc = appMeta
     ? appMeta.web
       ? `${appMeta.tagline} ${appMeta.availability || 'Open it on the web'}.`
@@ -519,7 +519,7 @@ function registryPage(rows) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Share links — PurposeLab</title>
+<title>Share links - PurposeLab</title>
 <!-- Privacy-friendly analytics (GoatCounter, no cookies) -->
 <script data-goatcounter="${esc(goatcounter)}" async src="//gc.zgo.at/count.js"></script>
 <style>
@@ -565,7 +565,7 @@ function registryPage(rows) {
         <select id="b-app">${appOptions}</select>
       </label>
       <label>Placement preset
-        <select id="b-preset"><option value="">— custom —</option>${presetOptions}</select>
+        <select id="b-preset"><option value=""> - custom - </option>${presetOptions}</select>
       </label>
       <label>Source <span style="color:#C0B6A6">utm_source</span>
         <input id="b-source" placeholder="linkedin" autocomplete="off">
@@ -697,7 +697,7 @@ function registryDoc(rows) {
         `\`${md(short(r.shortUrl))}\``,
         `${md(apps[r.appKey].name)} · ${md(r.p.utm_source)} ${verb} · ${md(r.entry.label || r.p.utm_campaign)}`,
         r.entry.assignedTo ? `**${md(r.entry.assignedTo)}**` : '_free_',
-        md(r.entry.assignedOn || '—'),
+        md(r.entry.assignedOn || ' - '),
         md(r.entry.notes || ''),
       ].join(' | ')).map((row) => `| ${row} |`),
       '',
@@ -714,7 +714,7 @@ function registryDoc(rows) {
     '',
   ].join('\n')).join('\n');
 
-  return `<!-- GENERATED FILE — DO NOT EDIT BY HAND.
+  return `<!-- GENERATED FILE - DO NOT EDIT BY HAND.
      Source of truth: tools/link-config.json
      Regenerate:      node tools/build-links.mjs && npm test
 -->
@@ -766,7 +766,7 @@ last word of the link (\`.../go/folio-quiet\` → the \`"quiet"\` entry):
 \`\`\`
 
 - \`assignedTo\` / \`assignedOn\` / \`notes\` are free text, safe to change anytime.
-- **Never rename a key or slug once the link has been shared** — the key is the
+- **Never rename a key or slug once the link has been shared** - the key is the
   \`utm_campaign\`, so renaming orphans every install already credited to it.
 - To retire a link, leave the entry and write \`"retired"\` in \`notes\`. Deleting it
   deletes the page, and anyone holding the old URL gets a 404.
@@ -779,12 +779,12 @@ last word of the link (\`.../go/folio-quiet\` → the \`"quiet"\` entry):
 | How many people tapped this link? | GoatCounter → path \`/go/<app>-<slug>\` | Yes, per link, realtime |
 | How many Android installs did it cause? | Play Console → Acquisition reports → filter by campaign | Yes, per link |
 | How many iPhone installs did it cause? | App Store Connect → Analytics → Acquisition → Campaigns | Only past ~5 installs per campaign, and the \`ct\` must be registered in ASC first |
-| Did **one specific person** install? | — | No. Store installs carry no identity. The honest proxy is "clicked, but no install shows on that campaign." |
+| Did **one specific person** install? | - | No. Store installs carry no identity. The honest proxy is "clicked, but no install shows on that campaign." |
 
 Groups roll up by \`utm_medium\`: \`friend\`, \`creator\`, and \`social\` (our own posts)
 are three separate buckets in Play Console and GA.
 
-A person's name never appears in a URL — a link with someone's name in it reads
+A person's name never appears in a URL - a link with someone's name in it reads
 like a tracker and gets fewer taps. The names live only in this file.
 `;
 }
@@ -795,7 +795,7 @@ function build() {
   const qrEncode = makeQrEncoder();
   const qrAvailable = qrEncode('probe') !== null;
 
-  // Clean previously generated pages (but keep nothing else — /go/ is generated).
+  // Clean previously generated pages (but keep nothing else - /go/ is generated).
   if (existsSync(OUT_DIR)) {
     for (const entry of readdirSync(OUT_DIR)) {
       rmSync(join(OUT_DIR, entry), { recursive: true, force: true });
@@ -844,7 +844,7 @@ function build() {
 
   // Per-app minimal share endpoints (/go/<app>): app fixed in the path, with
   // utm_source=share & utm_medium=referral defaulted, so in-app share links stay
-  // short — e.g. /go/folio?c=founding&ref=40. These unfurl the app's own card.
+  // short - e.g. /go/folio?c=founding&ref=40. These unfurl the app's own card.
   for (const appKey of Object.keys(apps)) {
     mkdirSync(join(OUT_DIR, appKey), { recursive: true });
     writeFileSync(join(OUT_DIR, appKey, 'index.html'),

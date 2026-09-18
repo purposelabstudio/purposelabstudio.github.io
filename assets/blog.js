@@ -1,4 +1,4 @@
-// assets/blog.js — reading progress + auto TOC. No-op if elements absent.
+// assets/blog.js - reading progress + auto TOC. No-op if elements absent.
 (function () {
   var bar = document.querySelector('.progress-bar');
   if (bar) {

@@ -1,4 +1,4 @@
-// assets/newsletter.js — connects the site-styled newsletter form to MailerLite
+// assets/newsletter.js - connects the site-styled newsletter form to MailerLite
 // without loading MailerLite's own markup/CSS (keeps our design). The email value
 // is posted to MailerLite's form endpoint (no-cors) and an inline status replaces
 // the form after the browser sends the request. Product-waitlist forms opt out via data-subject and

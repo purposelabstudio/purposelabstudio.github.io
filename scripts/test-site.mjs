@@ -47,11 +47,13 @@ for (const p of allPages) {
   const html = read(p);
   check(`${p}: has viewport`, /name="viewport"/i.test(html));
   check(`${p}: links a stylesheet`, /rel="stylesheet"/i.test(html) || p === '404.html');
+  check(`${p}: contains no em dashes`, !/(?:—|&mdash;|&#8212;|&#x2014;)/i.test(html));
   if (p !== '404.html') {
     check(`${p}: has canonical`, /rel="canonical"/i.test(html));
     check(`${p}: has og:title`, /property="og:title"/i.test(html));
   }
 }
+check('blog/rss.xml: contains no em dashes', !/(?:—|&mdash;|&#8212;|&#x2014;)/i.test(read('blog/rss.xml')));
 
 // 2. Every JSON-LD block parses as valid JSON
 for (const p of allPages) {
@@ -501,6 +503,14 @@ for (const p of blogPosts) {
   check('home: App Store hero CTA', home.includes('apps.apple.com/app/zolio-journal-diary-log/id6781551692'), 'missing App Store CTA');
   check('home: hero CTA block is attributed via /go/folio-web-app/', home.includes('href="/go/folio-web-app/"'), 'homepage hero install CTA is not tracked');
   check('home: QR bridge uses home-qr asset', home.includes('/assets/qr-folio-home.svg'), 'homepage QR asset not referenced');
+  check('home: featured app actions are grouped',
+    /class="hero-feature"/.test(home) && /class="hero-actions"/.test(home),
+    'homepage Zolio actions should be contained in one featured-app panel');
+  check('home: tools and guides destinations are paired',
+    /class="section explore-more"/.test(home) &&
+      /class="explore-card" href="\/tools\/"/.test(home) &&
+      /class="explore-card" href="\/blog\/"/.test(home),
+    'homepage tools and guides links should share the Explore more component');
   check('home: links journaling hub', home.includes('href="/folio/journal/"'), 'homepage missing /folio/journal/ link');
   check('home: links apps index', home.includes('href="/apps/"'), 'homepage missing /apps/ link');
   for (const app of ['crumbs', 'waterwise', 'bplog', 'hushly']) {
@@ -770,11 +780,10 @@ for (const p of blogPosts) {
     /<nav class="nav" aria-label="Primary">/.test(read('blog/index.html')) &&
       /<nav class="card" aria-label="Browse guide topics">/.test(read('blog/index.html')),
     'both navigation landmarks need distinct names');
-  check('homepage: desktop-only QR bridge is scoped and responsive',
-    /class="card qr-bridge"/.test(read('index.html')) &&
-      /\.qr-bridge[\s\S]*max-width:\s*26rem/.test(read('style.css')) &&
-      /@media \(max-width: 600px\)[\s\S]*\.qr-bridge[\s\S]*display:\s*none/.test(read('style.css')),
-    'QR bridge needs a desktop cap and mobile hide rule');
+  check('homepage: featured QR is desktop-only and responsive',
+    /class="hero-feature-qr"/.test(read('index.html')) &&
+      /@media \(max-width: 600px\)[\s\S]*\.hero-feature-qr[\s\S]*display:\s*none/.test(read('style.css')),
+    'featured QR needs a mobile hide rule');
   check('shared cards: paragraphs and disclosure summaries retain readable spacing',
     /\.card > :where\(p, ul, ol\) \+ :where\(p, ul, ol\)[\s\S]*margin-top:\s*var\(--space-3\)/.test(read('style.css')) &&
       /\.card summary[\s\S]*min-height:\s*var\(--control-min-height\)/.test(read('style.css')),

@@ -70,28 +70,28 @@
       "utm_medium": "social",
       "utm_campaign": "linkedin_dm",
       "ct": "linkedin_dm",
-      "label": "LinkedIn — direct message"
+      "label": "LinkedIn - direct message"
     },
     "li-post": {
       "utm_source": "linkedin",
       "utm_medium": "social",
       "utm_campaign": "linkedin_post",
       "ct": "linkedin_post",
-      "label": "LinkedIn — post"
+      "label": "LinkedIn - post"
     },
     "li-comment": {
       "utm_source": "linkedin",
       "utm_medium": "social",
       "utm_campaign": "linkedin_comment",
       "ct": "linkedin_comment",
-      "label": "LinkedIn — comment"
+      "label": "LinkedIn - comment"
     },
     "li-bio": {
       "utm_source": "linkedin",
       "utm_medium": "social",
       "utm_campaign": "linkedin_bio",
       "ct": "linkedin_bio",
-      "label": "LinkedIn — profile / bio"
+      "label": "LinkedIn - profile / bio"
     },
     "x": {
       "utm_source": "twitter",
@@ -119,7 +119,7 @@
       "utm_medium": "social",
       "utm_campaign": "instagram_bio",
       "ct": "instagram_bio",
-      "label": "Instagram — bio link"
+      "label": "Instagram - bio link"
     },
     "ig": {
       "utm_source": "instagram",
@@ -182,33 +182,33 @@
       "utm_medium": "website",
       "utm_campaign": "app_page",
       "ct": "web_apppage",
-      "label": "Website — app landing page"
+      "label": "Website - app landing page"
     },
     "web-blog": {
       "utm_source": "web",
       "utm_medium": "website",
       "utm_campaign": "blog",
       "ct": "web_blog",
-      "label": "Website — blog post"
+      "label": "Website - blog post"
     },
     "web-compare": {
       "utm_source": "web",
       "utm_medium": "website",
       "utm_campaign": "compare",
       "ct": "web_compare",
-      "label": "Website — comparison page"
+      "label": "Website - comparison page"
     },
     "web-tool": {
       "utm_source": "web",
       "utm_medium": "website",
       "utm_campaign": "tool",
       "ct": "web_tool",
-      "label": "Website — web tool"
+      "label": "Website - web tool"
     }
   },
   "creators": {
     "nikita": {
-      "label": "Nikita — LinkedIn newsletter (~13k)",
+      "label": "Nikita - LinkedIn newsletter (~13k)",
       "promos": [
         {
           "app": "folio",
@@ -220,7 +220,7 @@
       "assignedOn": "2026-07-20"
     },
     "manisha": {
-      "label": "Manisha — Instagram creators",
+      "label": "Manisha - Instagram creators",
       "promos": [
         {
           "app": "folio",

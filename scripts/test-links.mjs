@@ -98,6 +98,7 @@ for (const appKey of appKeys) {
     check(`${rel}: og:image is absolute`, /property="og:image" content="https?:\/\//.test(html));
     check(`${rel}: og:image is 1200x630`, /property="og:image:width" content="1200"/.test(html) && /property="og:image:height" content="630"/.test(html));
     check(`${rel}: twitter large-image card`, /name="twitter:card" content="summary_large_image"/.test(html));
+    check(`${rel}: contains no em dashes`, !/(?:—|&mdash;|&#8212;|&#x2014;)/i.test(html));
     if (app.android) {
       check(`${rel}: Play URL has package`, html.includes(`id=${app.android}`));
       check(`${rel}: Play URL has campaign`, html.includes(`utm_campaign%3D${p.utm_campaign}`));
@@ -155,7 +156,7 @@ const DOC = 'docs/link-registry.md';
 check(`${DOC} exists`, existsSync(join(ROOT, DOC)));
 if (existsSync(join(ROOT, DOC))) {
   const doc = read(DOC);
-  check(`${DOC}: marked generated`, /GENERATED FILE — DO NOT EDIT BY HAND/.test(doc));
+  check(`${DOC}: marked generated`, /GENERATED FILE - DO NOT EDIT BY HAND/.test(doc));
   check(`${DOC}: points at the config`, doc.includes('tools/link-config.json'));
   let missing = 0;
   for (const appKey of appKeys) {
