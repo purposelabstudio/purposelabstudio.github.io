@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Crumbs — Your second brain on WhatsApp.</title>
-<meta name="description" content="Your second brain on WhatsApp. No account, no ads, works offline. Free on Android.">
+<meta name="description" content="Your second brain on WhatsApp. Available on WhatsApp.">
 <!-- Open Graph / Twitter: makes a pasted link unfurl with a large preview card
      on WhatsApp, Reddit, Discord, Substack, Medium, X, etc. Unfurl bots read
      these static tags; they don't run the JS redirect, so humans still get sent
@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="PurposeLab">
 <meta property="og:url" content="https://purposelabstudio.com/go/crumbs-web-tool">
 <meta property="og:title" content="Crumbs — Your second brain on WhatsApp.">
-<meta property="og:description" content="Your second brain on WhatsApp. No account, no ads, works offline. Free on Android.">
+<meta property="og:description" content="Your second brain on WhatsApp. Available on WhatsApp.">
 <meta property="og:image" content="https://purposelabstudio.com/crumbs/og-share.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Crumbs — Google Play">
+<meta property="og:image:alt" content="Crumbs — Available on WhatsApp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Crumbs — Your second brain on WhatsApp.">
-<meta name="twitter:description" content="Your second brain on WhatsApp. No account, no ads, works offline. Free on Android.">
+<meta name="twitter:description" content="Your second brain on WhatsApp. Available on WhatsApp.">
 <meta name="twitter:image" content="https://purposelabstudio.com/crumbs/og-share.png">
 <!-- Privacy-friendly analytics (GoatCounter, no cookies). no_onload: we fire the
      hit manually below so it is sent before the redirect navigates away. -->
@@ -43,20 +43,22 @@
   var isIOS = /iPad|iPhone|iPod/.test(ua)
     || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var isAndroid = /Android/.test(ua);
-  var PLAY = "https://play.google.com/store/apps/details?id=com.purposelab.crumbs&referrer=utm_source%3Dweb%26utm_medium%3Dwebsite%26utm_campaign%3Dtool";
+  var WEB = "https://purposelabstudio.com/crumbs/?utm_source=web&utm_medium=website&utm_campaign=tool";
+  var PLAY = null;
   var APPSTORE = null;
   var target = null;
-  if (isAndroid) target = PLAY;
+  if (WEB) target = WEB;
+  else if (isAndroid) target = PLAY;
   else if (isIOS && APPSTORE) target = APPSTORE;
   if (target) {
     setTimeout(function () { location.replace(target); }, 120);
   } else {
-    // Desktop, or iPhone when this app has no iOS build → show the landing.
+    // Desktop, or iPhone when this store app has no iOS build → show the landing.
     document.documentElement.setAttribute('data-mode', 'landing');
   }
 })();
 </script>
-<noscript><meta http-equiv="refresh" content="0;url=https://play.google.com/store/apps/details?id=com.purposelab.crumbs&amp;referrer=utm_source%3Dweb%26utm_medium%3Dwebsite%26utm_campaign%3Dtool"></noscript>
+<noscript><meta http-equiv="refresh" content="0;url=https://purposelabstudio.com/crumbs/?utm_source=web&amp;utm_medium=website&amp;utm_campaign=tool"></noscript>
 <style>
   :root { --accent: #6B8E5A; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -91,7 +93,7 @@
 <body>
   <div class="redirecting">
     Opening Crumbs…
-    <br><a href="https://play.google.com/store/apps/details?id=com.purposelab.crumbs&amp;referrer=utm_source%3Dweb%26utm_medium%3Dwebsite%26utm_campaign%3Dtool">Tap here if it doesn't open.</a>
+    <br><a href="https://purposelabstudio.com/crumbs/?utm_source=web&amp;utm_medium=website&amp;utm_campaign=tool">Tap here if it doesn't open.</a>
   </div>
   <main class="landing">
     <img class="icon" src="/crumbs/icon.png" alt="Crumbs icon">
@@ -553,7 +555,7 @@
 	</g>
 </svg><span>Scan to install</span></div>
     <div class="buttons">
-        <a class="store" href="https://play.google.com/store/apps/details?id=com.purposelab.crumbs&amp;referrer=utm_source%3Dweb%26utm_medium%3Dwebsite%26utm_campaign%3Dtool">Get it on Google Play</a>
+        <a class="store" href="https://purposelabstudio.com/crumbs/?utm_source=web&amp;utm_medium=website&amp;utm_campaign=tool">Open Crumbs</a>
     </div>
   </main>
 </body>

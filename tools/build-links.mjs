@@ -5,8 +5,8 @@
 // go/index.html.
 //
 // Each page: fires a GoatCounter hit for its own path, then redirects the
-// visitor to the right store (Android → Play w/ referrer, iOS → App Store w/ ct)
-// or shows a desktop landing (icon + both store buttons + optional QR).
+// visitor to the configured web destination or the right store (Android → Play
+// w/ referrer, iOS → App Store w/ ct). Store apps show a desktop landing.
 //
 // QR codes are inlined only when `qrencode` is on PATH (brew install qrencode);
 // otherwise the desktop landing shows buttons only. No third-party runtime deps.
@@ -96,12 +96,23 @@ function jsLit(v) {
 
 /** Play Store URL carrying a URL-encoded install referrer. */
 function playUrl(app, p) {
+  if (!app.android) return null;
   const referrer = [
     `utm_source=${p.utm_source}`,
     `utm_medium=${p.utm_medium}`,
     `utm_campaign=${p.utm_campaign}`,
   ].join('&');
   return `https://play.google.com/store/apps/details?id=${app.android}&referrer=${encodeURIComponent(referrer)}`;
+}
+
+/** Web destination carrying ordinary UTM query parameters. */
+function webUrl(app, p) {
+  if (!app.web) return null;
+  const url = new URL(app.web);
+  url.searchParams.set('utm_source', p.utm_source);
+  url.searchParams.set('utm_medium', p.utm_medium);
+  url.searchParams.set('utm_campaign', p.utm_campaign);
+  return url.toString();
 }
 
 /** App Store URL carrying Apple's campaign token (ct), plus the account
@@ -133,12 +144,19 @@ function makeQrEncoder() {
 function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
   const play = playUrl(app, p);
   const appStore = appStoreUrl(app, p);
+  const web = webUrl(app, p);
   const path = `/go/${appKey}-${code}`;
-  const defaultUrl = app.default === 'ios' && appStore ? appStore : play;
+  const defaultUrl = app.default === 'web' && web
+    ? web
+    : app.default === 'ios' && appStore
+      ? appStore
+      : play || web;
+  if (!defaultUrl) throw new Error(`${appKey}: no valid redirect destination`);
   const accent = app.accent || '#A08560';
 
   const storeButtons = [
-    `<a class="store" href="${esc(play)}">Get it on Google Play</a>`,
+    web ? `<a class="store" href="${esc(web)}">${esc(app.webLabel || `Open ${app.name}`)}</a>` : '',
+    play ? `<a class="store" href="${esc(play)}">Get it on Google Play</a>` : '',
     appStore ? `<a class="store" href="${esc(appStore)}">Download on the App Store</a>` : '',
   ].filter(Boolean).join('\n        ');
 
@@ -147,9 +165,11 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
     : '';
 
   // Card metadata for social unfurls.
-  const availability = appStore ? 'Google Play & App Store' : 'Google Play';
+  const availability = app.availability || (appStore ? 'Google Play & App Store' : 'Google Play');
   const ogTitle = `${app.name} — ${app.tagline.split(/\.\s/)[0]}`;
-  const ogDesc = `${app.tagline} No account, no ads, works offline. Free on ${appStore ? 'Android & iPhone' : 'Android'}.`;
+  const ogDesc = web
+    ? `${app.tagline} ${availability}.`
+    : `${app.tagline} No account, no ads, works offline. Free on ${appStore ? 'Android & iPhone' : 'Android'}.`;
   const ogImage = baseUrl + (app.ogImage || app.icon);
 
   return `<!doctype html>
@@ -197,15 +217,17 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
   var isIOS = /iPad|iPhone|iPod/.test(ua)
     || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var isAndroid = /Android/.test(ua);
+  var WEB = ${jsLit(web)};
   var PLAY = ${jsLit(play)};
   var APPSTORE = ${jsLit(appStore)};
   var target = null;
-  if (isAndroid) target = PLAY;
+  if (WEB) target = WEB;
+  else if (isAndroid) target = PLAY;
   else if (isIOS && APPSTORE) target = APPSTORE;
   if (target) {
     setTimeout(function () { location.replace(target); }, 120);
   } else {
-    // Desktop, or iPhone when this app has no iOS build → show the landing.
+    // Desktop, or iPhone when this store app has no iOS build → show the landing.
     document.documentElement.setAttribute('data-mode', 'landing');
   }
 })();
@@ -251,8 +273,7 @@ function redirectPage({ app, appKey, code, p, shortUrl, qrSvg }) {
     <img class="icon" src="${esc(app.icon)}" alt="${esc(app.name)} icon">
     <h1>${esc(app.name)}</h1>
     <p class="tag">${esc(app.tagline)}</p>
-    ${qrBlock}
-    <div class="buttons">
+${qrBlock ? `    ${qrBlock}\n` : ''}    <div class="buttons">
         ${storeButtons}
     </div>
   </main>
@@ -275,12 +296,25 @@ function redirectorPage(opts) {
   const embedded = {};
   for (const k of Object.keys(apps)) {
     const a = apps[k];
-    embedded[k] = { name: a.name, tagline: a.tagline, icon: a.icon, accent: a.accent, android: a.android, ios: a.ios, pt: a.pt || null, default: a.default };
+    embedded[k] = {
+      name: a.name,
+      tagline: a.tagline,
+      icon: a.icon,
+      accent: a.accent,
+      android: a.android,
+      ios: a.ios,
+      pt: a.pt || null,
+      web: a.web || null,
+      webLabel: a.webLabel || null,
+      default: a.default,
+    };
   }
   // Unfurl card: app-specific for a per-app share endpoint (/go/<app>), else generic.
   const ogTitle = appMeta ? `${appMeta.name} — ${appMeta.tagline.split(/\.\s/)[0]}` : 'PurposeLab apps';
   const ogDesc = appMeta
-    ? `${appMeta.tagline} No account, no ads, works offline. Free on ${appMeta.ios ? 'Android & iPhone' : 'Android'}.`
+    ? appMeta.web
+      ? `${appMeta.tagline} ${appMeta.availability || 'Open it on the web'}.`
+      : `${appMeta.tagline} No account, no ads, works offline. Free on ${appMeta.ios ? 'Android & iPhone' : 'Android'}.`
     : 'Calm, private, offline-first apps. No account, no ads.';
   const ogImg = appMeta ? baseUrl + (appMeta.ogImage || appMeta.icon) : `${baseUrl}/og-default.png`;
   return `<!doctype html>
@@ -348,11 +382,23 @@ function redirectorPage(opts) {
   function appleCt() {
     return (utmSource ? utmSource + '_' + utmCampaign : utmCampaign).slice(0, 40);
   }
-  var PLAY = null, APPSTORE = null;
+  var WEB = null, PLAY = null, APPSTORE = null;
   if (app) {
     var refStr = playReferrer();
-    PLAY = 'https://play.google.com/store/apps/details?id=' + app.android
-      + (refStr ? '&referrer=' + encodeURIComponent(refStr) : '');
+    if (app.web) {
+      var webTarget = new URL(app.web);
+      if (utmSource) webTarget.searchParams.set('utm_source', utmSource);
+      if (utmMedium) webTarget.searchParams.set('utm_medium', utmMedium);
+      if (utmCampaign) webTarget.searchParams.set('utm_campaign', utmCampaign);
+      if (utmTerm) webTarget.searchParams.set('utm_term', utmTerm);
+      if (utmContent) webTarget.searchParams.set('utm_content', utmContent);
+      if (refNum) webTarget.searchParams.set('ref', refNum);
+      WEB = webTarget.toString();
+    }
+    PLAY = app.android
+      ? 'https://play.google.com/store/apps/details?id=' + app.android
+          + (refStr ? '&referrer=' + encodeURIComponent(refStr) : '')
+      : null;
     APPSTORE = app.ios
       ? 'https://apps.apple.com/app/id' + app.ios
           + (utmCampaign
@@ -368,7 +414,8 @@ function redirectorPage(opts) {
   var isAndroid = /Android/.test(ua);
   var target = null;
   if (app) {
-    if (isAndroid) target = PLAY;
+    if (WEB) target = WEB;
+    else if (isAndroid) target = PLAY;
     else if (isIOS && APPSTORE) target = APPSTORE;
   }
   if (target) { setTimeout(function () { location.replace(target); }, 120); return; }
@@ -398,7 +445,8 @@ function redirectorPage(opts) {
     icon.src = app.icon; icon.alt = app.name + ' icon';
     document.getElementById('name').textContent = app.name;
     document.getElementById('tag').textContent = app.tagline;
-    buttons.appendChild(storeLink(PLAY, 'Get it on Google Play'));
+    if (WEB) buttons.appendChild(storeLink(WEB, app.webLabel || ('Open ' + app.name)));
+    if (PLAY) buttons.appendChild(storeLink(PLAY, 'Get it on Google Play'));
     if (APPSTORE) buttons.appendChild(storeLink(APPSTORE, 'Download on the App Store'));
     wrap.style.display = 'flex';
   });
@@ -446,7 +494,7 @@ function registryPage(rows) {
       </tr>`).join('');
     return `
     <section>
-      <h2>${esc(app.name)}${app.ios ? '' : ' <small>(Android only)</small>'}</h2>
+      <h2>${esc(app.name)}${app.web ? ' <small>(web)</small>' : app.ios ? '' : ' <small>(Android only)</small>'}</h2>
       <table>
         <thead><tr><th>Placement</th><th>Short link</th><th></th></tr></thead>
         <tbody>${items}</tbody>
@@ -457,7 +505,7 @@ function registryPage(rows) {
   // Data the client-side builder needs (store ids + presets).
   const data = { baseUrl, apps: {}, placements };
   for (const k of Object.keys(apps)) {
-    data.apps[k] = { name: apps[k].name, android: apps[k].android, ios: apps[k].ios };
+    data.apps[k] = { name: apps[k].name, android: apps[k].android, ios: apps[k].ios, web: apps[k].web || null };
   }
 
   const appOptions = Object.keys(apps)
@@ -510,8 +558,8 @@ function registryPage(rows) {
     <h2>Build a custom tracking link</h2>
     <p class="lead" style="margin:4px 0 14px">Pick an app, then choose a ready-made
       placement or type your own source / medium / campaign. Copy the tracking link
-      and paste it anywhere. It smart-redirects (iPhone → App Store, Android → Play,
-      desktop → both) and logs the campaign in GoatCounter.</p>
+      and paste it anywhere. Store apps smart-redirect by device; web products open
+      their current web experience. Every route logs the campaign in GoatCounter.</p>
     <div class="grid">
       <label>App
         <select id="b-app">${appOptions}</select>
@@ -534,7 +582,8 @@ function registryPage(rows) {
     </div>
     <div id="b-out">
       <div class="out-row"><span class="lbl">Tracking link</span><code id="o-short"></code><button class="copy" data-src="o-short">Copy</button></div>
-      <div class="out-row"><span class="lbl">Play Store (raw)</span><code id="o-play"></code><button class="copy" data-src="o-play">Copy</button></div>
+      <div class="out-row" id="o-web-row"><span class="lbl">Web destination</span><code id="o-web"></code><button class="copy" data-src="o-web">Copy</button></div>
+      <div class="out-row" id="o-play-row"><span class="lbl">Play Store (raw)</span><code id="o-play"></code><button class="copy" data-src="o-play">Copy</button></div>
       <div class="out-row" id="o-ios-row"><span class="lbl">App Store (raw)</span><code id="o-ios"></code><button class="copy" data-src="o-ios">Copy</button></div>
     </div>
   </section>
@@ -571,9 +620,23 @@ function registryPage(rows) {
         short = DATA.baseUrl + '/go/r?' + qp.join('&');
       }
       var referrer = buildReferrer(s, m, c, ref);
-      var play = 'https://play.google.com/store/apps/details?id=' + app.android
-        + (referrer ? '&referrer=' + enc(referrer) : '');
+      var play = app.android
+        ? 'https://play.google.com/store/apps/details?id=' + app.android
+            + (referrer ? '&referrer=' + enc(referrer) : '')
+        : '';
+      var web = '';
+      if (app.web) {
+        var webTarget = new URL(app.web);
+        if (s) webTarget.searchParams.set('utm_source', s);
+        if (m) webTarget.searchParams.set('utm_medium', m);
+        if (c) webTarget.searchParams.set('utm_campaign', c);
+        if (ref) webTarget.searchParams.set('ref', ref);
+        web = webTarget.toString();
+      }
       $('o-short').textContent = short;
+      $('o-web-row').style.display = web ? '' : 'none';
+      $('o-web').textContent = web;
+      $('o-play-row').style.display = play ? '' : 'none';
       $('o-play').textContent = play;
       if (app.ios) {
         $('o-ios-row').style.display = '';
@@ -663,8 +726,9 @@ ${rows.length} links · ${individuals.length} held by people (${assigned.length}
 ${individuals.length - assigned.length} free) · ${channels.length} for our own channels.
 Generated ${new Date().toISOString().slice(0, 10)}.
 
-Every link device-detects: Android → Play Store, iPhone → App Store, desktop →
-a landing page with both buttons and a QR code.
+Store links device-detect: Android → Play Store, iPhone → App Store, desktop →
+a landing page with both buttons and a QR code. Web products keep the same
+public short URLs and open their current web experience with UTM attribution.
 
 ## Links given to friends
 

@@ -1,6 +1,6 @@
 # PurposeLab Studio
 
-> PurposeLab Studio builds simple, free, ad-free apps for the Indian market. Privacy-first tools that do one thing well: no ads, no mandatory subscriptions, no data harvesting.
+> PurposeLab Studio is an independent studio in India building simple, free, ad-free apps for people worldwide. Privacy-first tools that do one thing well: no ads, no mandatory subscriptions, no data harvesting.
 
 ## Zolio (Featured Product)
 
@@ -9,17 +9,17 @@ Zolio is a free, offline, private daily journal and mood tracker for Android and
 Zolio was formerly called Folio. Folio is now Zolio: the same app, the same journal and memories, with a new name. Searches and references for "Folio" (the Folio journal app, Folio by PurposeLab, the Folio Diary) all refer to what is now Zolio. Only the user-facing name changed; the Android package id (com.purposelab.folio), the /folio/ URLs, and the App Store listing are unchanged.
 
 - What it is: a calm daily journal plus gentle mood and habit tracking, with a monthly reflection that surfaces your patterns.
-- Key facts: no ads, no account, no subscription for core use, and no streaks or guilt mechanics; all entries are stored locally on-device with optional app lock; works fully offline. India-first.
+- Key facts: no ads, no account, no subscription for core use, and no streaks or guilt mechanics; all entries are stored locally on-device with optional app lock; works fully offline. Available globally, with English and Hindi localization.
 - Best for: people who want a private journaling habit without pressure, streaks, or cloud accounts.
 - Guide: [Journaling Prompts and a Calm Daily Journal Guide](https://purposelabstudio.com/folio/journal/): prompts for self-discovery, anxiety, overthinking, and reflection, plus guidance for starting and keeping a journal.
 - Try it first: [Try Zolio](https://purposelabstudio.com/folio/try/): an interactive browser demo where you can write a page without installing anything.
 - On paper: [The Zolio Diary](https://purposelabstudio.com/folio/diary/): an undated paper notebook that mirrors the app: a daily page, a habit tracker, and a monthly reflection. Sold on Amazon.
-- Get it: [Google Play](https://play.google.com/store/apps/details?id=com.purposelab.folio) · [App Store](https://apps.apple.com/us/app/folio-daily-journal-diary/id6781551692)
+- Get it: [Google Play](https://play.google.com/store/apps/details?id=com.purposelab.folio) · [App Store](https://apps.apple.com/app/zolio-journal-diary-log/id6781551692)
 
 ## Apps
 
 - [Crumbs: Your Private Second Brain on WhatsApp](https://purposelabstudio.com/crumbs/): Dump notes, ideas, todos, reminders, links, photos and voice on WhatsApp, then ask for any of it back in plain language. Multilingual, private, and calm. Mobile apps coming soon.
-- [Zolio: Daily Journal & Mood Tracker](https://purposelabstudio.com/folio/): Calm daily journal & notebook. A page a day, with no streaks, no ads, fully offline. Private, app-locked, India-first.
+- [Zolio: Daily Journal & Mood Tracker](https://purposelabstudio.com/folio/): Calm daily journal & notebook. A page a day, with no streaks, no ads, fully offline. Private, app-locked, and available globally.
 - [WaterWise: Drink Water Reminder](https://purposelabstudio.com/waterwise/): Stay hydrated with streaks, smart reminders, and one-tap logging. No ads, no paywall.
 - [BP Log: Blood Pressure Tracker](https://purposelabstudio.com/bplog/): Log readings from your home BP monitor. See AHA-classified trends, 7-day averages, and share PDF reports with your doctor. 100% offline.
 - [Hushly: Baby Sleep Sounds](https://purposelabstudio.com/hushly/): Soothing sounds to help your baby sleep peacefully. Curated audio, simple controls, no ads ever.
@@ -45,7 +45,7 @@ Zolio was formerly called Folio. Folio is now Zolio: the same app, the same jour
 - Paid options, where they exist, are optional and never block the core: Zolio Plus (themes/fonts, monthly or lifetime), Hushly Premium (one-time unlock), and Crumbs Pro/Max (higher usage caps, paid via Razorpay for a fixed 30-day period that does not auto-renew). WaterWise and BP Log currently have nothing to buy at all.
 - Crumbs' free tier is capped (currently 50 crumbs per month, with daily voice and image limits) rather than unlimited.
 - Zolio, WaterWise, BP Log and Hushly are offline-first: user data stays on the device, with no account and no cloud sync. Crumbs is the exception: it runs inside WhatsApp, stores crumbs server-side on Cloudflare, and sends message content to Google's Gemini API for understanding, transcription and recall. See https://purposelabstudio.com/privacy-policies/crumbs.html
-- Target market: India
+- Studio base: India; products are available to a global audience, with localization varying by app
 - Available on Google Play; Zolio is also on the Apple App Store
 - Built with Flutter (Zolio, Crumbs) and Kotlin with Jetpack Compose and Material 3 (WaterWise, BP Log, Hushly)
 - Developer: PurposeLab Studio

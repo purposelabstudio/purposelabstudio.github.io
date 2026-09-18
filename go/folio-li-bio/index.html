@@ -43,15 +43,17 @@
   var isIOS = /iPad|iPhone|iPod/.test(ua)
     || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   var isAndroid = /Android/.test(ua);
+  var WEB = null;
   var PLAY = "https://play.google.com/store/apps/details?id=com.purposelab.folio&referrer=utm_source%3Dlinkedin%26utm_medium%3Dsocial%26utm_campaign%3Dlinkedin_bio";
   var APPSTORE = "https://apps.apple.com/app/id6781551692?pt=129054116&ct=linkedin_bio&mt=8";
   var target = null;
-  if (isAndroid) target = PLAY;
+  if (WEB) target = WEB;
+  else if (isAndroid) target = PLAY;
   else if (isIOS && APPSTORE) target = APPSTORE;
   if (target) {
     setTimeout(function () { location.replace(target); }, 120);
   } else {
-    // Desktop, or iPhone when this app has no iOS build → show the landing.
+    // Desktop, or iPhone when this store app has no iOS build → show the landing.
     document.documentElement.setAttribute('data-mode', 'landing');
   }
 })();

@@ -8,20 +8,20 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PurposeLab">
 <meta property="og:title" content="Crumbs — Your second brain on WhatsApp.">
-<meta property="og:description" content="Your second brain on WhatsApp. No account, no ads, works offline. Free on Android.">
+<meta property="og:description" content="Your second brain on WhatsApp. Available on WhatsApp.">
 <meta property="og:image" content="https://purposelabstudio.com/crumbs/og-share.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Crumbs — Your second brain on WhatsApp.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Crumbs — Your second brain on WhatsApp.">
-<meta name="twitter:description" content="Your second brain on WhatsApp. No account, no ads, works offline. Free on Android.">
+<meta name="twitter:description" content="Your second brain on WhatsApp. Available on WhatsApp.">
 <meta name="twitter:image" content="https://purposelabstudio.com/crumbs/og-share.png">
 <script>window.goatcounter = { no_onload: true };</script>
 <script data-goatcounter="https://purposelabstudio.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function () {
-  var APPS = {"folio":{"name":"Zolio","tagline":"A calm, private journal. One line a day.","icon":"/folio/icon.png","accent":"#A08560","android":"com.purposelab.folio","ios":"6781551692","pt":"129054116","default":"android"},"bplog":{"name":"BPLog","tagline":"Track your blood pressure, simply.","icon":"/bplog/icon.png","accent":"#C0504D","android":"com.purposelab.bplog","ios":null,"pt":null,"default":"android"},"hushly":{"name":"Hushly","tagline":"White noise for better baby sleep.","icon":"/hushly/icon.png","accent":"#5B7C99","android":"com.purposelab.hushly","ios":null,"pt":null,"default":"android"},"waterwise":{"name":"WaterWise","tagline":"A gentle water reminder, no ads.","icon":"/waterwise/icon.png","accent":"#3E8EA0","android":"com.purposelab.waterwise","ios":null,"pt":null,"default":"android"},"crumbs":{"name":"Crumbs","tagline":"Your second brain on WhatsApp.","icon":"/crumbs/icon.png","accent":"#6B8E5A","android":"com.purposelab.crumbs","ios":null,"pt":null,"default":"android"}};
+  var APPS = {"folio":{"name":"Zolio","tagline":"A calm, private journal. One line a day.","icon":"/folio/icon.png","accent":"#A08560","android":"com.purposelab.folio","ios":"6781551692","pt":"129054116","web":null,"webLabel":null,"default":"android"},"bplog":{"name":"BP Log","tagline":"Track your blood pressure, simply.","icon":"/bplog/icon.png","accent":"#C0504D","android":"com.purposelab.bplog","ios":null,"pt":null,"web":null,"webLabel":null,"default":"android"},"hushly":{"name":"Hushly","tagline":"White noise for better baby sleep.","icon":"/hushly/icon.png","accent":"#5B7C99","android":"com.purposelab.hushly","ios":null,"pt":null,"web":null,"webLabel":null,"default":"android"},"waterwise":{"name":"WaterWise","tagline":"A gentle water reminder, no ads.","icon":"/waterwise/icon.png","accent":"#3E8EA0","android":"com.purposelab.waterwise","ios":null,"pt":null,"web":null,"webLabel":null,"default":"android"},"crumbs":{"name":"Crumbs","tagline":"Your second brain on WhatsApp.","icon":"/crumbs/icon.png","accent":"#6B8E5A","android":null,"ios":null,"pt":null,"web":"https://purposelabstudio.com/crumbs/","webLabel":"Open Crumbs","default":"web"}};
   var GC = "https://purposelabstudio.goatcounter.com/count";
   var q = new URLSearchParams(location.search);
   // Per-app share endpoints (/go/<app>) fix the app and default source/medium
@@ -63,11 +63,23 @@
   function appleCt() {
     return (utmSource ? utmSource + '_' + utmCampaign : utmCampaign).slice(0, 40);
   }
-  var PLAY = null, APPSTORE = null;
+  var WEB = null, PLAY = null, APPSTORE = null;
   if (app) {
     var refStr = playReferrer();
-    PLAY = 'https://play.google.com/store/apps/details?id=' + app.android
-      + (refStr ? '&referrer=' + encodeURIComponent(refStr) : '');
+    if (app.web) {
+      var webTarget = new URL(app.web);
+      if (utmSource) webTarget.searchParams.set('utm_source', utmSource);
+      if (utmMedium) webTarget.searchParams.set('utm_medium', utmMedium);
+      if (utmCampaign) webTarget.searchParams.set('utm_campaign', utmCampaign);
+      if (utmTerm) webTarget.searchParams.set('utm_term', utmTerm);
+      if (utmContent) webTarget.searchParams.set('utm_content', utmContent);
+      if (refNum) webTarget.searchParams.set('ref', refNum);
+      WEB = webTarget.toString();
+    }
+    PLAY = app.android
+      ? 'https://play.google.com/store/apps/details?id=' + app.android
+          + (refStr ? '&referrer=' + encodeURIComponent(refStr) : '')
+      : null;
     APPSTORE = app.ios
       ? 'https://apps.apple.com/app/id' + app.ios
           + (utmCampaign
@@ -83,7 +95,8 @@
   var isAndroid = /Android/.test(ua);
   var target = null;
   if (app) {
-    if (isAndroid) target = PLAY;
+    if (WEB) target = WEB;
+    else if (isAndroid) target = PLAY;
     else if (isIOS && APPSTORE) target = APPSTORE;
   }
   if (target) { setTimeout(function () { location.replace(target); }, 120); return; }
@@ -113,7 +126,8 @@
     icon.src = app.icon; icon.alt = app.name + ' icon';
     document.getElementById('name').textContent = app.name;
     document.getElementById('tag').textContent = app.tagline;
-    buttons.appendChild(storeLink(PLAY, 'Get it on Google Play'));
+    if (WEB) buttons.appendChild(storeLink(WEB, app.webLabel || ('Open ' + app.name)));
+    if (PLAY) buttons.appendChild(storeLink(PLAY, 'Get it on Google Play'));
     if (APPSTORE) buttons.appendChild(storeLink(APPSTORE, 'Download on the App Store'));
     wrap.style.display = 'flex';
   });

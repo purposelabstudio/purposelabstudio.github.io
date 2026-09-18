@@ -43,12 +43,14 @@ for (const key of Object.keys(creators)) {
 // 1. Config shape
 for (const k of appKeys) {
   const a = apps[k];
-  check(`app ${k}: has android package`, typeof a.android === 'string' && a.android.includes('.'));
+  check(`app ${k}: android is package or null`, a.android === null || (typeof a.android === 'string' && a.android.includes('.')));
   check(`app ${k}: ios is string or null`, a.ios === null || typeof a.ios === 'string');
+  check(`app ${k}: has a destination`, !!a.android || !!a.ios || !!a.web);
+  check(`app ${k}: web is absent or absolute URL`, a.web === undefined || /^https:\/\//.test(a.web), a.web);
   check(`app ${k}: pt is absent or digit string`, a.pt === undefined || /^[0-9]+$/.test(a.pt), a.pt);
   check(`app ${k}: icon file exists`, existsSync(join(ROOT, a.icon.replace(/^\//, ''))), a.icon);
   check(`app ${k}: og-share card exists`, !a.ogImage || existsSync(join(ROOT, a.ogImage.replace(/^\//, ''))), a.ogImage);
-  check(`app ${k}: has default store`, a.default === 'android' || a.default === 'ios');
+  check(`app ${k}: has valid default destination`, ['android', 'ios', 'web'].includes(a.default) && !!a[a.default]);
 }
 for (const k of placementKeys) {
   const p = placements[k];
@@ -96,8 +98,16 @@ for (const appKey of appKeys) {
     check(`${rel}: og:image is absolute`, /property="og:image" content="https?:\/\//.test(html));
     check(`${rel}: og:image is 1200x630`, /property="og:image:width" content="1200"/.test(html) && /property="og:image:height" content="630"/.test(html));
     check(`${rel}: twitter large-image card`, /name="twitter:card" content="summary_large_image"/.test(html));
-    check(`${rel}: Play URL has package`, html.includes(`id=${app.android}`));
-    check(`${rel}: Play URL has campaign`, html.includes(`utm_campaign%3D${p.utm_campaign}`));
+    if (app.android) {
+      check(`${rel}: Play URL has package`, html.includes(`id=${app.android}`));
+      check(`${rel}: Play URL has campaign`, html.includes(`utm_campaign%3D${p.utm_campaign}`));
+    } else {
+      check(`${rel}: no invalid Play package`, !html.includes('id=null') && !html.includes('id=undefined'));
+    }
+    if (app.web) {
+      check(`${rel}: web URL has destination`, html.includes(app.web));
+      check(`${rel}: web URL has campaign`, html.includes(`utm_campaign=${p.utm_campaign}`) || html.includes(`utm_campaign%3D${p.utm_campaign}`));
+    }
     if (app.ios) {
       check(`${rel}: App Store URL has ct`, html.includes(`ct=${p.ct}`));
       if (app.pt) check(`${rel}: App Store URL has provider token pt`, html.includes(`pt=${app.pt}`));
@@ -136,7 +146,7 @@ if (existsSync(join(ROOT, 'go/index.html'))) {
   check('registry: builder outputs a tracking link', /id="o-short"/.test(reg));
   check('registry: builder has Founding ref field', /id="b-ref"/.test(reg));
   check('registry: builder emits utm_* params', /utm_source=' \+ enc|utm_campaign=' \+ enc/.test(reg));
-  check('registry: builder embeds app store ids', appKeys.every((k) => reg.includes(apps[k].android)));
+  check('registry: builder embeds every app destination', appKeys.every((k) => reg.includes(apps[k].android || apps[k].web)));
 }
 
 // 3b. Human-readable ledger (docs/link-registry.md) — generated from the same
@@ -160,7 +170,8 @@ if (existsSync(join(ROOT, DOC))) {
   check(`${DOC}: explains per-person install limits`, /no identity|carry no identity/i.test(doc));
 }
 
-// 4. Dynamic redirector (/go/r/)check('go/r/index.html exists', existsSync(join(ROOT, 'go/r/index.html')));
+// 4. Dynamic redirector (/go/r/)
+check('go/r/index.html exists', existsSync(join(ROOT, 'go/r/index.html')));
 if (existsSync(join(ROOT, 'go/r/index.html'))) {
   const rp = read('go/r/index.html');
   check('redirector: noindex', /content="noindex/i.test(rp));
@@ -175,7 +186,7 @@ if (existsSync(join(ROOT, 'go/r/index.html'))) {
   check('redirector: validates ref as digits only', /\^\[0-9\]\+\$/.test(rp));
   check('redirector: passes utm_term/content', /utm_term/.test(rp) && /utm_content/.test(rp));
   check('redirector: ct prefixes source (share_<campaign>)', /utmSource \+ '_' \+ utmCampaign/.test(rp));
-  check('redirector: embeds app store ids', appKeys.every((k) => rp.includes(apps[k].android)));
+  check('redirector: embeds every app destination', appKeys.every((k) => rp.includes(apps[k].android || apps[k].web)));
 }
 
 // 5. robots.txt must NOT block /go/ — noindex handles search; unfurl scrapers

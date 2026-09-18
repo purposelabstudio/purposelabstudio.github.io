@@ -8,10 +8,11 @@
 Every trackable short link, what it is for, and who has it.
 127 links · 22 held by people (2 given out,
 20 free) · 105 for our own channels.
-Generated 2026-09-09.
+Generated 2026-09-18.
 
-Every link device-detects: Android → Play Store, iPhone → App Store, desktop →
-a landing page with both buttons and a QR code.
+Store links device-detect: Android → Play Store, iPhone → App Store, desktop →
+a landing page with both buttons and a QR code. Web products keep the same
+public short URLs and open their current web experience with UTM attribution.
 
 ## Links given to friends
 
@@ -73,7 +74,7 @@ a landing page with both buttons and a QR code.
 | `purposelabstudio.com/go/folio-web-compare` | Website — comparison page |
 | `purposelabstudio.com/go/folio-web-tool` | Website — web tool |
 
-### BPLog
+### BP Log
 
 | Link | Purpose |
 | --- | --- |
@@ -183,7 +184,7 @@ a landing page with both buttons and a QR code.
 | --- | --- |
 | `purposelabstudio.com/go/r?a=<app>&utm_source=…&utm_campaign=…` | Build any one-off tracked link without adding it to the config. |
 | `purposelabstudio.com/go/folio?c=<campaign>` | Short endpoint used by Zolio's own in-app share buttons. |
-| `purposelabstudio.com/go/bplog?c=<campaign>` | Short endpoint used by BPLog's own in-app share buttons. |
+| `purposelabstudio.com/go/bplog?c=<campaign>` | Short endpoint used by BP Log's own in-app share buttons. |
 | `purposelabstudio.com/go/hushly?c=<campaign>` | Short endpoint used by Hushly's own in-app share buttons. |
 | `purposelabstudio.com/go/waterwise?c=<campaign>` | Short endpoint used by WaterWise's own in-app share buttons. |
 | `purposelabstudio.com/go/crumbs?c=<campaign>` | Short endpoint used by Crumbs's own in-app share buttons. |

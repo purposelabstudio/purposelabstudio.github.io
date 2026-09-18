@@ -163,7 +163,7 @@ check(`rss.xml has an <item> per post (${itemCount} vs ${blogPosts.length})`, it
   `${itemCount} items for ${blogPosts.length} posts`);
 
 // 8. Folio App Store links present everywhere expected
-const APPSTORE = 'apps.apple.com/us/app/folio-daily-journal-diary/id6781551692';
+const APPSTORE = 'apps.apple.com/app/zolio-journal-diary-log/id6781551692';
 const GO_FOLIO = '/go/folio-web-app/';
 const stripLd = (html) => html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
 const home8 = read('index.html');
@@ -211,9 +211,9 @@ check('folio bottom direct App Store fallback has provider and campaign attribut
     hasAnchor(folio, /ct=website_folio_cta/, 'ps-folio-apppage-cta-ios'),
   'folio bottom App Store link needs pt, ct, mt, and its own click id');
 {
-  const campaignTokens = [...folio.matchAll(/apps\.apple\.com\/us\/app\/folio-daily-journal-diary\/id6781551692\?pt=129054116&amp;ct=([^&"]+)&amp;mt=8/g)]
+  const campaignTokens = [...folio.matchAll(/apps\.apple\.com\/app\/zolio-journal-diary-log\/id6781551692\?pt=129054116&amp;ct=([^&"]+)&amp;mt=8/g)]
     .map((m) => m[1]);
-  campaignTokens.push(...[...home8.matchAll(/apps\.apple\.com\/us\/app\/folio-daily-journal-diary\/id6781551692\?pt=129054116&amp;ct=([^&"]+)&amp;mt=8/g)]
+  campaignTokens.push(...[...home8.matchAll(/apps\.apple\.com\/app\/zolio-journal-diary-log\/id6781551692\?pt=129054116&amp;ct=([^&"]+)&amp;mt=8/g)]
     .map((m) => m[1]));
   check('surfaced direct App Store links use distinct campaign tokens',
     campaignTokens.length === 3 && new Set(campaignTokens).size === 3,
@@ -347,7 +347,8 @@ for (const [p, pkg] of Object.entries(COMMERCIAL_APP)) {
   const whiteNoise = read('blog/white-noise-baby-sleep-science/index.html');
   const babySleep = read('blog/baby-wont-sleep-through-night/index.html');
   const noiseColours = read('blog/brown-noise-vs-white-noise-vs-pink-noise/index.html');
-  const healthPages = [immediate, byAge, natural, anxiety, whiteNoise, babySleep, noiseColours];
+  const hydration = read('blog/how-much-water-should-i-drink-daily/index.html');
+  const healthPages = [immediate, byAge, natural, anxiety, whiteNoise, babySleep, noiseColours, hydration];
   const visibleText = (html) => html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
 
   for (const [index, html] of healthPages.entries()) {
@@ -497,7 +498,7 @@ for (const p of blogPosts) {
   const home = read('index.html');
   check('home: Studio hero h1', /Small tools for everyday moments/.test(home), 'homepage h1 not Studio-forward');
   check('home: tagged Play hero CTA', /play\.google\.com[^"]*com\.purposelab\.folio[^"]*home-hero/.test(home), 'missing tagged Play hero CTA');
-  check('home: App Store hero CTA', home.includes('apps.apple.com/us/app/folio-daily-journal-diary/id6781551692'), 'missing App Store CTA');
+  check('home: App Store hero CTA', home.includes('apps.apple.com/app/zolio-journal-diary-log/id6781551692'), 'missing App Store CTA');
   check('home: hero CTA block is attributed via /go/folio-web-app/', home.includes('href="/go/folio-web-app/"'), 'homepage hero install CTA is not tracked');
   check('home: QR bridge uses home-qr asset', home.includes('/assets/qr-folio-home.svg'), 'homepage QR asset not referenced');
   check('home: links journaling hub', home.includes('href="/folio/journal/"'), 'homepage missing /folio/journal/ link');
@@ -545,6 +546,18 @@ for (const p of blogPosts) {
 
   check('llms.txt: Zolio featured entity block', /Zolio \(Featured Product\)/.test(llmsTxt), 'missing Zolio featured block in llms.txt');
   check('llms.txt: preserves the Folio former-name association', /formerly Folio|Folio is now Zolio|formerly known as Folio/i.test(llmsTxt), 'llms.txt should keep the Folio→Zolio association for search/AI');
+  check('llms.txt: frames Zolio for a global audience',
+    /Available globally, with English and Hindi localization/.test(llmsTxt) &&
+      /products are available to a global audience/.test(llmsTxt),
+    'llms.txt should match current global positioning');
+  check('Zolio: current App Store canonical listing is used',
+    [home, folio, read('folio/diary/index.html'), llmsTxt].every((html) =>
+      html.includes('apps.apple.com/app/zolio-journal-diary-log/id6781551692')),
+    'one or more surfaced Zolio links use an obsolete App Store slug');
+  check('Zolio: obsolete App Store slug is absent',
+    ![home, folio, read('folio/diary/index.html'), llmsTxt].some((html) =>
+      /folio-daily-journal-diary/.test(html)),
+    'obsolete Folio App Store slug remains');
 
   // HONESTY: website copy must not contradict Zolio's real freemium/Plus model
   check('folio: FAQ does not claim "no in-app purchases"', !/no in-app purchases/i.test(folio), 'false claim: Zolio has Zolio Plus (IAP)');
@@ -570,6 +583,70 @@ for (const p of blogPosts) {
       /Hushly Premium is a one-time unlock/.test(about) &&
       /BP Log has nothing to buy inside it today/.test(about),
     'About pricing must match current product/support wording');
+  check('studio entity: verified Apple developer profile is linked',
+    home.includes('https://apps.apple.com/developer/atul-chaturvedi/id6781551694') &&
+      about.includes('https://apps.apple.com/developer/atul-chaturvedi/id6781551694'),
+    'home and About organization entities should link the Apple developer identity');
+
+  for (const [page, image] of [
+    ['folio/index.html', '/folio/og-share.png'],
+    ['folio/journal/index.html', '/folio/og-share.png'],
+    ['crumbs/index.html', '/crumbs/og-share.png'],
+    ['bplog/index.html', '/bplog/og-share.png'],
+    ['waterwise/index.html', '/waterwise/og-share.png'],
+    ['hushly/index.html', '/hushly/og-share.png'],
+  ]) {
+    const html = read(page);
+    check(`${page}: uses product large social card`,
+      html.includes(`og:image" content="https://purposelabstudio.com${image}"`) &&
+        /twitter:card" content="summary_large_image"/.test(html) &&
+        /og:image:width" content="1200"/.test(html) &&
+        /og:image:height" content="630"/.test(html),
+      `expected ${image} at 1200x630`);
+  }
+
+  const linkConfig = JSON.parse(read('tools/link-config.json'));
+  const crumbs = read('crumbs/index.html');
+  const hushly = read('hushly/index.html');
+  const bpLog = read('bplog/index.html');
+  const waterWise = read('waterwise/index.html');
+  const hydration = read('blog/how-much-water-should-i-drink-daily/index.html');
+  check('Crumbs: generated links use a live web destination',
+    linkConfig.apps.crumbs.android === null &&
+      linkConfig.apps.crumbs.web === 'https://purposelabstudio.com/crumbs/' &&
+      linkConfig.apps.crumbs.default === 'web',
+    'Crumbs must not point at its unpublished Android package');
+  check('Crumbs: schema only advertises the current WhatsApp surface',
+    /"operatingSystem": "WhatsApp"/.test(crumbs) &&
+      !/"operatingSystem": "WhatsApp, Android, iOS"/.test(crumbs),
+    'Crumbs schema advertises unavailable native apps');
+  check('Crumbs: WhatsApp troubleshooting CTA uses the preserved short link',
+    /href="\/go\/crumbs-web-blog\/"/.test(read('blog/message-yourself-on-whatsapp-not-showing/index.html')) &&
+      !/com\.purposelab\.crumbs/.test(read('blog/message-yourself-on-whatsapp-not-showing/index.html')),
+    'article must not link to the unpublished Play package');
+  check('Hushly: schema category matches the health listing',
+    /"applicationCategory": "HealthApplication"/.test(hushly),
+    'Hushly schema category mismatch');
+  check('health product pages: primary guidance is cited',
+    /heart\.org\/en\/health-topics\/high-blood-pressure/.test(bpLog) &&
+      /nap\.nationalacademies\.org\/catalog\/10925/.test(waterWise) &&
+      /publications\.aap\.org\/pediatrics/.test(hushly),
+    'BP Log, WaterWise, and Hushly need primary-source links');
+  check('hydration guide: primary sources and review boundary',
+    /class="sources"/.test(hydration) &&
+      /Not clinician reviewed/.test(hydration) &&
+      /nap\.nationalacademies\.org\/catalog\/10925/.test(hydration),
+    'hydration article must disclose review limits and cite primary guidance');
+  for (const page of [
+    'blog/what-happens-if-someone-reads-your-journal/index.html',
+    'blog/why-journaling-apps-make-you-feel-guilty/index.html',
+  ]) {
+    const html = read(page);
+    check(`${page}: labels publication date and canonical Zolio schema URL`,
+      /class="meta"[^>]*>[^<]*Published/.test(html) &&
+        /"url": "https:\/\/purposelabstudio\.com\/folio\/"/.test(html),
+      'publication label or trailing slash is missing');
+  }
 
   for (const [page, product] of [
     ['waterwise/index.html', 'WaterWise'],
@@ -605,7 +682,9 @@ for (const p of blogPosts) {
     ['hushly/index.html', '2026-09-18'],
     ['support/index.html', '2026-09-18'],
     ['tools/index.html', '2026-09-18'],
+    ['tools/water-intake-calculator/index.html', '2026-09-18'],
     ['waterwise/index.html', '2026-09-18'],
+    ['blog/how-much-water-should-i-drink-daily/index.html', '2026-09-18'],
   ]);
   for (const [page, date] of rewrittenDates) {
     check(`${page}: rewritten dateModified is current`,

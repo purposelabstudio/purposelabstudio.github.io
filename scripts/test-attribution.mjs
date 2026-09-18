@@ -34,6 +34,11 @@ const folioScript = [...folioHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)]
   .map((m) => m[1])
   .find((s) => s.includes('URLSearchParams'));
 check('extracted redirect script from go/folio/index.html', !!folioScript);
+const crumbsHtml = readFileSync(join(ROOT, 'go/crumbs/index.html'), 'utf8');
+const crumbsScript = [...crumbsHtml.matchAll(/<script>([\s\S]*?)<\/script>/g)]
+  .map((m) => m[1])
+  .find((s) => s.includes('URLSearchParams'));
+check('extracted redirect script from go/crumbs/index.html', !!crumbsScript);
 
 /** Run the real redirect script with a mocked device + query, capture the store URL it navigates to. */
 function runRedirect({ search, ua, platform = '', maxTouchPoints = 0, src = script }) {
@@ -52,6 +57,7 @@ function runRedirect({ search, ua, platform = '', maxTouchPoints = 0, src = scri
     Image: function Image() { return { set src(_v) {} }; },
     setTimeout: (fn) => { fn(); },        // fire the redirect synchronously
     encodeURIComponent,
+    URL,
     URLSearchParams,
     Math,
   };
@@ -119,6 +125,12 @@ const IOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)';
 {
   const url = runRedirect({ search: '?c=founding', ua: IOS, src: folioScript });
   check('minimal /go/folio on iOS → ct=share_founding', url === 'https://apps.apple.com/app/id6781551692?pt=129054116&ct=share_founding&mt=8', url);
+}
+{
+  const url = runRedirect({ search: '?c=launch&ref=42', ua: ANDROID, src: crumbsScript });
+  check('minimal /go/crumbs preserves web attribution',
+    url === 'https://purposelabstudio.com/crumbs/?utm_source=share&utm_medium=referral&utm_campaign=launch&ref=42',
+    url);
 }
 
 if (failed) {

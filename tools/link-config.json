@@ -14,7 +14,7 @@
       "default": "android"
     },
     "bplog": {
-      "name": "BPLog",
+      "name": "BP Log",
       "tagline": "Track your blood pressure, simply.",
       "android": "com.purposelab.bplog",
       "ios": null,
@@ -46,12 +46,15 @@
     "crumbs": {
       "name": "Crumbs",
       "tagline": "Your second brain on WhatsApp.",
-      "android": "com.purposelab.crumbs",
+      "android": null,
       "ios": null,
+      "web": "https://purposelabstudio.com/crumbs/",
+      "webLabel": "Open Crumbs",
+      "availability": "Available on WhatsApp",
       "icon": "/crumbs/icon.png",
       "ogImage": "/crumbs/og-share.png",
       "accent": "#6B8E5A",
-      "default": "android"
+      "default": "web"
     }
   },
   "placements": {
