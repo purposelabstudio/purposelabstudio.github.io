@@ -1,0 +1,26 @@
+{
+  "name": "PurposeLab Studio",
+  "short_name": "PurposeLab",
+  "description": "Focused, privacy-conscious apps and useful browser tools for everyday moments.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3ea",
+  "theme_color": "#2c5556",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/purpose-logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

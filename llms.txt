@@ -50,6 +50,7 @@ Zolio was formerly called Folio. Folio is now Zolio: the same app, the same jour
 - Built with Flutter (Zolio, Crumbs) and Kotlin with Jetpack Compose and Material 3 (WaterWise, BP Log, Hushly)
 - Developer: PurposeLab Studio
 - About the studio: [About PurposeLab Studio](https://purposelabstudio.com/about/): who builds the apps, what the studio makes, and the principles behind it.
+- Press and media: [PurposeLab Studio Press Resources](https://purposelabstudio.com/press/): verified studio facts, product summaries, logos, screenshots, canonical links, and coverage guidance.
 
 ## Blog Topics
 

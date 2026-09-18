@@ -36,11 +36,12 @@ const blogPosts = readdirSync(join(ROOT, 'blog'))
   .filter((p) => existsSync(join(ROOT, p)));
 
 const appPages = ['crumbs', 'folio', 'waterwise', 'bplog', 'hushly'].map((a) => `${a}/index.html`);
-const corePages = ['index.html', 'about/index.html', 'support/index.html', 'blog/index.html', '404.html', 'apps/index.html', 'folio/journal/index.html'];
+const corePages = ['index.html', 'about/index.html', 'support/index.html', 'press/index.html', 'blog/index.html', '404.html', 'apps/index.html', 'folio/journal/index.html'];
 const DIARY = 'folio/diary/index.html';
 const toolPages = ['tools/index.html', 'tools/water-intake-calculator/index.html', 'tools/blood-pressure-checker/index.html', 'tools/journal-prompt-generator/index.html', 'tools/white-noise-player/index.html'];
 const commercialPages = ['best-free-blood-pressure-app/index.html', 'best-free-water-reminder-app/index.html', 'best-free-baby-sleep-app/index.html', 'best-free-journal-app/index.html'];
 const allPages = [...corePages, ...appPages, ...blogPosts, DIARY, ...toolPages, ...commercialPages];
+const brandedPages = [...allPages, 'folio/try/index.html', 'folio/showcase/index.html', 'bplog/printable-log/index.html'];
 
 // 1. SEO invariants on every indexable page (404 is noindex, skip canonical there)
 for (const p of allPages) {
@@ -55,6 +56,28 @@ for (const p of allPages) {
 }
 check('blog/rss.xml: contains no em dashes', !/(?:—|&mdash;|&#8212;|&#x2014;)/i.test(read('blog/rss.xml')));
 
+// 1b. Stable, crawlable studio icons replace inline emoji favicons.
+for (const asset of ['favicon.svg', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'icon-192.png', 'purpose-logo-512.png', 'site.webmanifest']) {
+  check(`${asset}: exists`, existsSync(join(ROOT, asset)));
+}
+for (const p of brandedPages) {
+  const html = read(p);
+  check(`${p}: links stable SVG favicon`, /rel="icon" href="\/favicon\.svg" type="image\/svg\+xml"/.test(html));
+  check(`${p}: links ICO fallback`, /rel="icon" href="\/favicon\.ico" sizes="32x32"/.test(html));
+  check(`${p}: links Apple touch icon`, /rel="apple-touch-icon" href="\/apple-touch-icon\.png"/.test(html));
+  check(`${p}: links web manifest`, /rel="manifest" href="\/site\.webmanifest"/.test(html));
+  check(`${p}: contains no inline data-URI favicon`, !/rel="icon" href="data:/i.test(html));
+}
+{
+  let manifest;
+  try { manifest = JSON.parse(read('site.webmanifest')); } catch {}
+  check('site.webmanifest: parses', Boolean(manifest));
+  check('site.webmanifest: identifies PurposeLab Studio', manifest?.name === 'PurposeLab Studio');
+  check('site.webmanifest: includes 192 and 512 pixel icons',
+    manifest?.icons?.some((icon) => icon.sizes === '192x192') &&
+      manifest?.icons?.some((icon) => icon.sizes === '512x512'));
+}
+
 // 2. Every JSON-LD block parses as valid JSON
 for (const p of allPages) {
   const html = read(p);
@@ -65,6 +88,29 @@ for (const p of allPages) {
     check(`${p}: JSON-LD block ${i} valid`, ok, msg);
   }
 }
+
+// 2b. The studio is represented as an online Organization, not a local storefront.
+for (const p of ['index.html', 'about/index.html']) {
+  const html = read(p);
+  check(`${p}: Organization schema has stable logo`, /"logo":\s*"https:\/\/purposelabstudio\.com\/purpose-logo-512\.png"/.test(html));
+  check(`${p}: Organization schema has support ContactPoint`, /"@type":\s*"ContactPoint"[\s\S]*"contactType":\s*"customer support"[\s\S]*"url":\s*"https:\/\/purposelabstudio\.com\/support\/"/.test(html));
+}
+for (const p of allPages) {
+  check(`${p}: does not claim LocalBusiness`, !/"@type":\s*"LocalBusiness"/.test(read(p)));
+}
+check('apps hub: explains platform, privacy, and price differences',
+  /What to check before choosing/.test(read('apps/index.html')) &&
+    /Platform:/.test(read('apps/index.html')) &&
+    /Privacy and storage:/.test(read('apps/index.html')) &&
+    /Price and purpose:/.test(read('apps/index.html')));
+check('tools hub: explains tools are complete without an install',
+  /Use the result on its own/.test(read('tools/index.html')) &&
+    /do not need to install an app/.test(read('tools/index.html')));
+check('press page: publishes verified media assets without invented metrics',
+  /Verified facts and assets/.test(read('press/index.html')) &&
+    /purpose-logo-512\.png/.test(read('press/index.html')) &&
+    /Zolio, formerly Folio/.test(read('press/index.html')) &&
+    !/\b\d+(?:,\d{3})*\+?\s+(?:users|downloads)\b|award-winning/i.test(read('press/index.html')));
 
 // 3. Internal links resolve to a real file
 function resolveInternal(href) {

@@ -56,6 +56,7 @@ ALL_URLS=(
   "https://${HOST}/folio/journal/"
   "https://${HOST}/folio/try/"
   "https://${HOST}/hushly/"
+  "https://${HOST}/press/"
   "https://${HOST}/support/"
   "https://${HOST}/tools/"
   "https://${HOST}/tools/blood-pressure-checker/"

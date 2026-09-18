@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">PurposeLab Studio flask mark</title>
+  <rect width="512" height="512" rx="112" fill="#f7f3ea"/>
+  <circle cx="256" cy="256" r="188" fill="#2c5556"/>
+  <path d="M190 126h132M220 126v100l-76 127c-25 42 5 95 54 95h116c49 0 79-53 54-95l-76-127V126"
+        fill="none" stroke="#fffdf8" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M181 337c45-24 77 18 122-8 18-10 37-12 58-4l20 34c19 32-4 72-42 72H173c-38 0-61-40-42-72l24-40c9 9 17 15 26 18z"
+        fill="#d9a441"/>
+  <circle cx="218" cy="288" r="13" fill="#fffdf8"/>
+  <circle cx="283" cy="269" r="9" fill="#fffdf8"/>
+  <circle cx="315" cy="302" r="12" fill="#fffdf8"/>
+</svg>
