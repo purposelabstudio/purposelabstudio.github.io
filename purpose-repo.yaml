@@ -12,6 +12,7 @@ harness:
   allowedProfiles:
     - core
     - website-maintenance
+    - website-analytics
     - website-growth
     - studio-research
     - content-production
@@ -25,4 +26,3 @@ harness:
     - antigravity
     - agents
   contextBudget: standard
-
